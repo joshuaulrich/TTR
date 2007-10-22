@@ -33,10 +33,10 @@
   for divergences/confirmation.
 }
 \seealso{
-  See \code{\link{chaikin.AD}}.
+  See \code{\link{chaikinAD}}.
 }
 \examples{
-  data(nasdaq)
-  obv <- OBV(nasdaq[,"Close"], nasdaq[,"Volume"])
+  data(ttrc)
+  obv <- OBV(ttrc[,"Close"], ttrc[,"Volume"])
 }
 \keyword{ ts }

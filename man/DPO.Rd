@@ -10,8 +10,8 @@
 }
 \arguments{
   \item{x}{ Price, volume, etc. series to use. }
-  \item{ma}{ A _list_ whose first component is a string containing the moving average
-    function name; additional parameters may also be specified as _named_ components. }
+  \item{ma}{ A \emph{list} whose first component is a string containing the moving average
+    function name; additional parameters may also be specified as \emph{named} components. }
   \item{shift}{ The number of periods to shift the moving average. }
   \item{percent}{ logical; if \code{TRUE}, the percentage difference between the slow and fast moving
     averages is returned, otherwise the difference between the respective averages is returned. }
@@ -37,8 +37,8 @@
   Warning section.  See \code{\link{oscillator}} for other oscillators.
 }
 \examples{
-  data(nasdaq)
-  price.dpo <- DPO(nasdaq[,"Close"])
-  volume.dpo <- DPO(nasdaq[,"Volume"])
+  data(ttrc)
+  price.dpo <- DPO(ttrc[,"Close"])
+  volume.dpo <- DPO(ttrc[,"Volume"])
 }
 \keyword{ ts }

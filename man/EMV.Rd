@@ -12,8 +12,8 @@
 \arguments{
   \item{HL}{ Object able to be coerced to a matrix, which contains a High-Low price series. }
   \item{volume}{ Vector or matrix of volume observations corresponding to the \code{HL} object. }
-  \item{ma}{ A _list_ whose first component is a string containing the moving average function
-    name; additional parameters may also be specified as _named_ components. }
+  \item{ma}{ A \emph{list} whose first component is a string containing the moving average function
+    name; additional parameters may also be specified as \emph{named} components. }
   \item{vol.divisor}{ An increment to make the results larger and easier to work with. }
 }
 \details{
@@ -42,7 +42,7 @@
   Warning section.
 }
 \examples{
-  data(nasdaq)
-  emv <- EMV(nasdaq[,c("High","Low")], nasdaq[,"Volume"])
+  data(ttrc)
+  emv <- EMV(ttrc[,c("High","Low")], ttrc[,"Volume"])
 }
 \keyword{ ts }

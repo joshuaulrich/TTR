@@ -1,4 +1,4 @@
-"chaikin.MF" <-
+"chaikinMF" <-
 function(HLC, volume, n = 20) {
 
   # Chaikin Money Flow
@@ -8,7 +8,7 @@ function(HLC, volume, n = 20) {
   # http://stockcharts.com/education/IndicatorAnalysis/indic_ChaikinMoneyFlow1.html
 
   HLC <- as.matrix(HLC)
-  MF  <- roll.fn(CLV(HLC) * volume, n, FUN="sum") / roll.fn(volume, n, FUN="sum")
+  MF  <- rollFUN(CLV(HLC) * volume, n, FUN="sum") / rollFUN(volume, n, FUN="sum")
 
   return( MF )
 }

@@ -28,8 +28,8 @@ function(HL, n=20) {
   stop("Price series must be either High-Low, or Close")
 
   # Find max and min of price series
-  hmax <- roll.fn(high, n+1, FUN="max")
-  lmin <- roll.fn( low, n+1, FUN="min")
+  hmax <- rollFUN(high, n+1, FUN="max")
+  lmin <- rollFUN( low, n+1, FUN="min")
 
   # Calculate Aroon UP and DOWN
   for(i in n:NROW(HL)) {

@@ -2,7 +2,7 @@
 # calculate rolling functions
 # TO DO: add capability to index "..." args, if possible.
 ######################################################################
-"roll.fn" <-
+"rollFUN" <-
 function(x, n, FUN, ...) {
 
   x  <- as.matrix(x)
@@ -17,7 +17,7 @@ function(x, n, FUN, ...) {
 ######################################################################
 # Calculate a Welles Wilder style sum of a series
 ######################################################################
-"wilder.sum" <-
+"wilderSum" <-
 function(x, n=10) {
 
   x   <- as.vector(x)

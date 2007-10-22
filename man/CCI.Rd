@@ -11,8 +11,8 @@
 \arguments{
   \item{HLC}{ High-Low-Close price series to use.  If only a univariate series is given,
     it will be used.  See details. }
-  \item{ma}{ A _list_ whose first component is a string containing the moving average
-    function name; additional parameters may also be specified as _named_ components. }
+  \item{ma}{ A \emph{list} whose first component is a string containing the moving average
+    function name; additional parameters may also be specified as \emph{named} components. }
   \item{c}{ Constant to apply to the mean deviation. } 
 }
 \details{
@@ -45,7 +45,7 @@
   \code{\link{TDI}}, \code{\link{VHF}} for other indicators that measure trend
   direction/strength. }
 \examples{
-  data(nasdaq)
-  cci <- CCI(nasdaq[,c("High","Low","Close")])
+  data(ttrc)
+  cci <- CCI(ttrc[,c("High","Low","Close")])
 }
 \keyword{ ts }

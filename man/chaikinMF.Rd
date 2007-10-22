@@ -1,5 +1,5 @@
-\name{chaikin.MF}
-\alias{chaikin.MF}
+\name{chaikinMF}
+\alias{chaikinMF}
 \title{ Chaikin Money Flow }
 \description{
   Chaikin Money Flow compares total volume over the last \code{n} time periods to total volume
@@ -7,7 +7,7 @@
   Chaikin.
 }
 \usage{
-  chaikin.MF(HLC, volume, n = 20)
+  chaikinMF(HLC, volume, n = 20)
 }
 \arguments{
   \item{HLC}{ Object able to be coerced to a matrix, which contains High-Low-Close prices. }
@@ -35,10 +35,10 @@
   probable reversal.
 }
 \seealso{
-  See \code{\link{CLV}}, and \code{\link{chaikin.AD}}.
+  See \code{\link{CLV}}, and \code{\link{chaikinAD}}.
 }
 \examples{
-  data(nasdaq)
-  cmf <- chaikin.MF(nasdaq[,c("High","Low","Close")], nasdaq[,"Volume"])
+  data(ttrc)
+  cmf <- chaikinMF(ttrc[,c("High","Low","Close")], ttrc[,"Volume"])
 }
 \keyword{ ts }

@@ -1,12 +1,12 @@
-\name{chaikin.AD}
-\alias{chaikin.AD}
+\name{chaikinAD}
+\alias{chaikinAD}
 \title{ Chaikin Accumulation / Distribution }
 \description{
   The Chaikin Accumulation / Distribution (AD) line is a measure of the money flowing into or
   out of a security.  It is similar to On Balance Volume (OBV).  Developed by Marc Chaikin.
 }
 \usage{
-  chaikin.AD(HLC, volume)
+  chaikinAD(HLC, volume)
 }
 \arguments{
   \item{HLC}{ Object able to be coerced to a matrix, which contains High-Low-Close prices. }
@@ -36,7 +36,7 @@
   See \code{\link{OBV}}, and \code{\link{CLV}}.
 }
 \examples{
-  data(nasdaq)
-  ad <- chaikin.AD(nasdaq[,c("High","Low","Close")], nasdaq[,"Volume"])
+  data(ttrc)
+  ad <- chaikinAD(ttrc[,c("High","Low","Close")], ttrc[,"Volume"])
 }
 \keyword{ ts }

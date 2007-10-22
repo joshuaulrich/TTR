@@ -15,8 +15,8 @@
 }
 \arguments{
   \item{x}{ Series to use; usually price, but can be volume, etc. }
-  \item{ma.slow}{ A _list_ whose first component is a string containing the slow moving average
-    function name; additional parameters may also be specified as _named_ components. }
+  \item{ma.slow}{ A \emph{list} whose first component is a string containing the slow moving average
+    function name; additional parameters may also be specified as \emph{named} components. }
   \item{ma.fast}{ Similar to \code{ma.slow}, but for the fast moving average. }
   \item{ma.sig}{ Similar to \code{ma.slow}, but for the signal line moving average. }
   \item{percent}{ logical; if \code{TRUE}, the percentage difference between the slow and fast moving
@@ -55,10 +55,10 @@
   section.
 }
 \examples{
-  data(nasdaq)
+  data(ttrc)
 
-  macd <- MACD(nasdaq[,"Close"])
-  osc  <- oscillator( nasdaq[,"Close"], ma.slow = list("EMA",n=26),
+  macd <- MACD(ttrc[,"Close"])
+  osc  <- oscillator( ttrc[,"Close"], ma.slow = list("EMA",n=26),
                       ma.fast = list("EMA",n=12), ma.sig = list("EMA", n=9) )
 
   # Should be TRUE

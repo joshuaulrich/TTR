@@ -11,14 +11,14 @@
 \arguments{
   \item{price}{ Price series to use. }
   \item{n}{ A vector of the number of periods to use in the ROC calculations. }
-  \item{ma1}{ A _list_ whose first component is a string containing the moving average
-    function name; additional parameters may also be specified as _named_ components.
+  \item{ma1}{ A \emph{list} whose first component is a string containing the moving average
+    function name; additional parameters may also be specified as \emph{named} components.
     There must be a \code{ma} (not including \code{ma.sig}) for each period in \code{n}. }
   \item{ma2}{ See \code{ma1}. }
   \item{ma3}{ See \code{ma1}. }
   \item{ma4}{ See \code{ma1}. }
-  \item{ma.sig}{ A _list_ whose first component is a string containing the signal moving
-    average function name; additional parameters may also be specified as _named_ components. }
+  \item{ma.sig}{ A \emph{list} whose first component is a string containing the signal moving
+    average function name; additional parameters may also be specified as \emph{named} components. }
   \item{wts}{ A vector the same length as \code{n}, of the weight for each period
     (need not sum to one). }
 }
@@ -52,7 +52,7 @@
   See \code{\link{oscillator}} for other oscillators.
 }
 \examples{
-  data(nasdaq)
-  kst <- KST(nasdaq[,"Close"])
+  data(ttrc)
+  kst <- KST(ttrc[,"Close"])
 }
 \keyword{ ts }

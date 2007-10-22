@@ -35,8 +35,8 @@
 \seealso{ See \code{\link{aroon}}, \code{\link{CCI}}, \code{\link{ADX}}, \code{\link{TDI}}
           for other indicators that measure trend direction/strength. }
 \examples{
-  data(nasdaq)
-  vhf.close <- VHF(nasdaq[,"Close"])
-  vhf.hilow <- VHF(nasdaq[,c("High","Low","Close")])
+  data(ttrc)
+  vhf.close <- VHF(ttrc[,"Close"])
+  vhf.hilow <- VHF(ttrc[,c("High","Low","Close")])
 }
 \keyword{ ts }

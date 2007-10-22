@@ -33,7 +33,7 @@
   (3) When the CMO crosses above/below a moving average of the CMO, it is a buy/sell signal.\cr
 }
 \examples{
-  data(nasdaq)
-  cmo <- CMO(nasdaq[,"Close"])
+  data(ttrc)
+  cmo <- CMO(ttrc[,"Close"])
 }
 \keyword{ ts }

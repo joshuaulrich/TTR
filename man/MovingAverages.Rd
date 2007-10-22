@@ -82,15 +82,15 @@ ZLEMA(x, n=10)
   more data, its output becomes more stable.  See example below.
 }
 \seealso{
-  See \code{\link{wilder.sum}}, which is used in calculating a Welles Wilder type MA.
+  See \code{\link{wilderSum}}, which is used in calculating a Welles Wilder type MA.
 }
 \examples{
-  data(nasdaq)
-    ema.20 <-   EMA(nasdaq[,"Close"], 20)
-    sma.20 <-   SMA(nasdaq[,"Close"], 20)
-   dema.20 <-  DEMA(nasdaq[,"Close"], 20)
-  evwma.20 <- EVWMA(nasdaq[,"Close"], 20)
-  zlema.20 <- ZLEMA(nasdaq[,"Close"], 20)
+  data(ttrc)
+    ema.20 <-   EMA(ttrc[,"Close"], 20)
+    sma.20 <-   SMA(ttrc[,"Close"], 20)
+   dema.20 <-  DEMA(ttrc[,"Close"], 20)
+  evwma.20 <- EVWMA(ttrc[,"Close"], 20)
+  zlema.20 <- ZLEMA(ttrc[,"Close"], 20)
 
   ## Example of short-term instability of EMA
   x <- rnorm(100)

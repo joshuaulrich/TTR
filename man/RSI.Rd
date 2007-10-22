@@ -10,9 +10,9 @@
 }
 \arguments{
   \item{price}{ Price series to use. }
-  \item{ma.up}{ A _list_ whose first component is a string containing the upward price
+  \item{ma.up}{ A \emph{list} whose first component is a string containing the upward price
     movement moving average function name; additional parameters may also be specified
-    as _named_ components. }
+    as \emph{named} components. }
   \item{ma.down}{ Similar to \code{ma.up}, but for the downward price movement moving average. }
 }
 \details{
@@ -44,7 +44,7 @@
   Warning section.  See \code{\link{CMO}} for a variation on RSI.
 }
 \examples{
-  data(nasdaq)
-  rsi <- RSI(nasdaq[,"Close"])
+  data(ttrc)
+  rsi <- RSI(ttrc[,"Close"])
 }
 \keyword{ ts }

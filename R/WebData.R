@@ -1,4 +1,4 @@
-"get.symbols" <-
+"stockSymbols" <-
 function(exchange=c("AMEX","NASDAQ","NYSE"), sort.by=c("Exchange","Symbol"), quiet=FALSE) {
 
   # Many thanks to Ion Georgiadis for helpful suggestions and testing.
@@ -19,7 +19,7 @@ function(exchange=c("AMEX","NASDAQ","NYSE"), sort.by=c("Exchange","Symbol"), qui
   # ~         -> NA (NYSE Only)
 
   symbols  <- NULL
-  symbols.colnames <- c("Name","Symbol","Market.Cap","Exchange")
+  symbols.colnames <- c("Name","Symbol","MarketCap","Exchange")
   exchange <- match.arg(exchange, several.ok=TRUE)
   sort.by  <- match.arg(sort.by, symbols.colnames, several.ok=TRUE)
 
@@ -87,7 +87,7 @@ function(exchange=c("AMEX","NASDAQ","NYSE"), sort.by=c("Exchange","Symbol"), qui
   return(symbols)
 }
 
-"yahoo.data" <-
+"getYahooData" <-
 function(symbol, start, end, freq="daily", type="price", adjust=TRUE, quiet=FALSE) {
 
   # Thank you to Giorgio Beltrame for the URL to download dividends _and_ splits, and
@@ -144,8 +144,8 @@ function(symbol, start, end, freq="daily", type="price", adjust=TRUE, quiet=FALS
       if(freq=="daily") {
 
         # Get price, dividend, and split data from 'beg' to present
-        ohlc   <- yahoo.data(symbol, start, freq="daily", type="price", adjust=FALSE, quiet=TRUE)
-        divspl <- yahoo.data(symbol, start, freq="daily", type="split", adjust=FALSE, quiet=TRUE)
+        ohlc   <- getYahooData(symbol, start, freq="daily", type="price", adjust=FALSE, quiet=TRUE)
+        divspl <- getYahooData(symbol, start, freq="daily", type="split", adjust=FALSE, quiet=TRUE)
         ohlc   <- merge(ohlc, divspl, by.col="Date", all=TRUE)
 
         # Create split adjustment ratio, (always = 1 if no splits exist)

@@ -1,4 +1,4 @@
-"chaikin.AD" <-
+"chaikinAD" <-
 function(HLC, volume) {
 
   # Chaikin Accumulation / Distribution

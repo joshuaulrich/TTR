@@ -13,8 +13,8 @@
 \arguments{
   \item{HLC}{ Object able to be coerced to a matrix, which contains High-Low-Close prices. }
   \item{n}{ Number of periods to use for DX calculation (not ADX calculation). }
-  \item{ma.adx}{ A _list_ whose first component is a string containing the ADX moving average
-    function name; additional parameters may also be specified as _named_ components. }
+  \item{ma.adx}{ A \emph{list} whose first component is a string containing the ADX moving average
+    function name; additional parameters may also be specified as \emph{named} components. }
 }
 \details{
   The \code{DIp}/\code{DIn} (positive/negative) is the percentage of the true range that is up/down.
@@ -51,7 +51,7 @@
   for other indicators that measure trend direction/strength.
 }
 \examples{
-  data(nasdaq)
-  dmi.adx <- DX(nasdaq[,c("High","Low","Close")])
+  data(ttrc)
+  dmi.adx <- DX(ttrc[,c("High","Low","Close")])
 }
 \keyword{ ts }

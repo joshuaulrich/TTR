@@ -1,4 +1,4 @@
-"chaikin.oscillator" <-
+"chaikinOscillator" <-
 function(HLC, volume, ma.slow = list("EMA", n=10), ma.fast = list("EMA", n=3), percent = FALSE) {
 
   # Chaikin Oscillator
@@ -8,7 +8,7 @@ function(HLC, volume, ma.slow = list("EMA", n=10), ma.fast = list("EMA", n=3), p
   # http://stockcharts.com/education/IndicatorAnalysis/indic_ChaikinOscillator.html
 
   HLC <- as.matrix(HLC)
-  AD  <- chaikin.AD(HLC, volume)
+  AD  <- chaikinAD(HLC, volume)
 
   oscillator <- oscillator( AD, ma.slow, ma.fast, ma.sig = NULL, percent )
 

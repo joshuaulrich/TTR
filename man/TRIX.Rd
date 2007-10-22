@@ -11,8 +11,8 @@
 }
 \arguments{
   \item{price}{ Price series to use. }
-  \item{ma1}{ A _list_ whose first component is a string containing the moving average
-    function name; additional parameters may also be specified as _named_ components. }
+  \item{ma1}{ A \emph{list} whose first component is a string containing the moving average
+    function name; additional parameters may also be specified as \emph{named} components. }
   \item{ma2}{ See \code{ma1}. }
   \item{ma3}{ See \code{ma1}. }
   \item{ma.sig}{ Similar to \code{ma1}, but for the signal moving average. }
@@ -45,7 +45,7 @@
   Warning section.
 }
 \examples{
-  data(nasdaq)
-  trix <- TRIX( nasdaq[,"Close"] )
+  data(ttrc)
+  trix <- TRIX( ttrc[,"Close"] )
 }
 \keyword{ ts }

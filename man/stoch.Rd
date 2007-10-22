@@ -13,8 +13,8 @@
   \item{HLC}{ High-Low-Close price series to use.  If only a univariate series is given,
     it will be used.  See details. }
   \item{n.fastK}{ Number of periods for fast \%K (i.e. the number of past periods to use). }
-  \item{ma.fastD}{ A _list_ whose first component is a string containing the fast \%D moving
-    average function name; additional parameters may also be specified as _named_ components. }
+  \item{ma.fastD}{ A \emph{list} whose first component is a string containing the fast \%D moving
+    average function name; additional parameters may also be specified as \emph{named} components. }
   \item{ma.slowD}{ Similar to \code{ma.fastD}, but for the fast \%D moving average. }
 }
 \details{
@@ -51,15 +51,15 @@
   Warning section.  See \code{\link{WPR}} to compare it's results to fast \%K.
 }
 \examples{
-  data(nasdaq)
-  stoch.osc <- stoch(nasdaq[,c("High","Low","Close")])
-  stoch.wpr <- WPR(nasdaq[,c("High","Low","Close")])
+  data(ttrc)
+  stoch.osc <- stoch(ttrc[,c("High","Low","Close")])
+  stoch.wpr <- WPR(ttrc[,c("High","Low","Close")])
 
   plot(tail(stoch.osc[,"fastK"], 100), type="l", main="Fast \%K and Williams \%R",
     ylab="", ylim = range(cbind(stoch.osc, stoch.wpr), na.rm=TRUE) )
   lines(tail(stoch.wpr, 100), col="blue")
   lines(tail(1-stoch.wpr, 100), col="red", lty="dashed")
 
-  stoch.rsi <- stoch( RSI(nasdaq[,"Close"]) )
+  stoch.rsi <- stoch( RSI(ttrc[,"Close"]) )
 }
 \keyword{ ts }

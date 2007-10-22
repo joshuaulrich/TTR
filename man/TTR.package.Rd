@@ -7,18 +7,14 @@
 }
 \description{
   This package contains many of the most popular technical analysis functions, as well
-  as functions to retrieve U.S. stock symbols, and data from the internet.
-
-  First on the wishlist is a plotting function that allows the charting of price, volume,
-  indicators, etc. on one device.  A close second is a better functionality for summarizing
-  the results of technical trading rules.
+  as functions to retrieve U.S. stock symbols, and data from Yahoo Finance.
 }
 \details{
   \tabular{ll}{
     Package: \tab TTR\cr
     Type: \tab Package\cr
-    Version: \tab 0.11\cr
-    Date: \tab 2006-12-31\cr
+    Version: \tab 0.13\cr
+    Date: \tab 2007-09-27\cr
     License: \tab GPL Version 2 or later.\cr
   }
 
@@ -50,33 +46,33 @@ Maintainer: Josh Ulrich
 %--~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
 %--}
 \examples{
-  data(nasdaq)
+  data(ttrc)
 
   # Bollinger Bands
-  bbands <- bbands( nasdaq[,c("High","Low","Close")] )
+  bbands <- bbands( ttrc[,c("High","Low","Close")] )
 
   # Directional Movement Index
-  dmi.adx <- DX(nasdaq[,c("High","Low","Close")])
+  dmi.adx <- DX(ttrc[,c("High","Low","Close")])
 
   # Moving Averages
-  ema <- EMA(nasdaq[,"Close"], n=20)
-  sma <- SMA(nasdaq[,"Close"], n=20)
+  ema <- EMA(ttrc[,"Close"], n=20)
+  sma <- SMA(ttrc[,"Close"], n=20)
 
   # MACD
-  macd <- MACD( nasdaq[,"Close"] )
+  macd <- MACD( ttrc[,"Close"] )
 
   # RSI
-  rsi <- RSI(nasdaq[,"Close"])
+  rsi <- RSI(ttrc[,"Close"])
 
   # Stoichastics
-  stoch.osc <- stoch(nasdaq[,c("High","Low","Close")])
+  stoch.osc <- stoch(ttrc[,c("High","Low","Close")])
 
   ### Note: you must have a working internet connection
   ### for the examples below to work!
 
   # Fetch U.S. symbols from the internet
-  nyse.symbols <- get.symbols("NYSE")
+  nyse.symbols <- stockSymbols("NYSE")
 
   # Fetch Yahoo! Finance data from the internet
-  ibm <- yahoo.data("IBM", 19990404, 20050607)
+  ibm <- getYahooData("IBM", 19990404, 20050607)
 }

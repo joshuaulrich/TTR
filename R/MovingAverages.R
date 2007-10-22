@@ -12,7 +12,7 @@ function(x, n=10) {
   # either NA, 0, or something else for all MA functions.
 
   x   <- as.vector(x)
-  sma <- roll.fn(x, n, FUN="sum") / n
+  sma <- rollFUN(x, n, FUN="sum") / n
 
   return( sma )
 }
@@ -57,11 +57,11 @@ function(x, n=10, wts=1:n) {
   x   <- as.vector(x)
 
   if(NROW(wts)==n) {
-    wma <- roll.fn(x, n, FUN="weighted.mean", w=wts)
+    wma <- rollFUN(x, n, FUN="weighted.mean", w=wts)
   } else
 
   if(NROW(wts)==NROW(x)) {
-    wma <- roll.fn(x*wts, n, FUN="sum") / roll.fn(wts, n, FUN="sum")
+    wma <- rollFUN(x*wts, n, FUN="sum") / rollFUN(wts, n, FUN="sum")
   } else
 
   stop("Length of 'wts' vector must equal length of 'x', or 'n'.")
@@ -98,7 +98,7 @@ function(price, volume, n=10) {
   if(NROW(volume)==1) {
     v.sum <- rep(volume, NROW(price))
   } else
-    v.sum <- roll.fn(volume, n, FUN="sum")
+    v.sum <- rollFUN(volume, n, FUN="sum")
 
   for(i in 1:(NROW(price)-n+1)) {
     j <- i+n-1

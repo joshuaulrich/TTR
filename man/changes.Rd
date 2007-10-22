@@ -28,8 +28,8 @@
 }
 \author{ Josh Ulrich }
 \examples{
-  data(nasdaq)
-  roc <- ROC(nasdaq[,"Close"])
-  mom <- momentum(nasdaq[,"Close"])
+  data(ttrc)
+  roc <- ROC(ttrc[,"Close"])
+  mom <- momentum(ttrc[,"Close"])
 }
 \keyword{ ts }

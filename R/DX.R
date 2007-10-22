@@ -21,10 +21,10 @@ function(HLC, n=14, ma.adx=list("EMA", n=n, wilder=TRUE)) {
   DMIn <- ifelse( dH==dL | (dH< 0 & dL< 0), 0, ifelse( dH <dL, dL, 0 ) )
 
   TR    <- ATR(HLC)[,"tr"]
-  TRsum <- wilder.sum(TR, n=n)
+  TRsum <- wilderSum(TR, n=n)
 
-  DIp <- 100 * wilder.sum(DMIp, n=n) / TRsum
-  DIn <- 100 * wilder.sum(DMIn, n=n) / TRsum
+  DIp <- 100 * wilderSum(DMIp, n=n) / TRsum
+  DIn <- 100 * wilderSum(DMIn, n=n) / TRsum
 
   DX  <- 100 * ( abs(DIp - DIn) / (DIp + DIn) )
 

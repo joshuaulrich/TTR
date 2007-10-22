@@ -49,7 +49,7 @@
 }
 \examples{
   ## Get Data and Indicator ##
-  data(nasdaq)
-  trend <- aroon( nasdaq[,c("High", "Low")], n=20 )
+  data(ttrc)
+  trend <- aroon( ttrc[,c("High", "Low")], n=20 )
 }
 \keyword{ ts }

@@ -11,9 +11,9 @@
 \arguments{
   \item{HLC}{ High-Low-Close price series to use.  If only a univariate series is given,
     it will be used.  See details. }
-  \item{ma}{ A _list_ whose first component is a string containing the moving average
-    function name; additional parameters may also be specified as _named_ components. }
-  \item{sd}{ A _list_ of standard deviation input. }
+  \item{ma}{ A \emph{list} whose first component is a string containing the moving average
+    function name; additional parameters may also be specified as \emph{named} components. }
+  \item{sd}{ A \emph{list} of standard deviation input. }
 }
 \details{
   Bollinger Bands consist of three lines:
@@ -54,8 +54,8 @@
 \examples{
   ## The examples below show the differences between using a High-Low-Close series, and
   ## just a close series when calculating Bollinger Bands.
-  data(nasdaq)
-  bbands.HLC   <- bbands( nasdaq[,c("High","Low","Close")] )
-  bbands.close <- bbands( nasdaq[,"Close"] )
+  data(ttrc)
+  bbands.HLC   <- bbands( ttrc[,c("High","Low","Close")] )
+  bbands.close <- bbands( ttrc[,"Close"] )
 }
 \keyword{ ts }

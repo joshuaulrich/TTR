@@ -1,15 +1,15 @@
 \name{WebData}
 \alias{WebData}
-\alias{yahoo.data}
-\alias{get.symbols}
+\alias{getYahooData}
+\alias{stockSymbols}
 \title{ Fetch Internet Data }
 \description{
   Get investment data from the internet.
 }
 \usage{
-  yahoo.data(symbol, start, end, freq = "daily", type = "price",
+  getYahooData(symbol, start, end, freq = "daily", type = "price",
              adjust = TRUE, quiet = FALSE)
-  get.symbols(exchange = c("AMEX","NASDAQ","NYSE"),
+  stockSymbols(exchange = c("AMEX","NASDAQ","NYSE"),
               sort.by = c("Exchange","Symbol"), quiet = FALSE)
 }
 \arguments{
@@ -30,14 +30,14 @@
     one or more of \dQuote{Name}, \dQuote{Symbol}, \dQuote{Market.Cap}, or \dQuote{Exchange}. }
 }
 \details{
-  \code{yahoo.data} fetches individual stock data from the Yahoo! Finance website.
+  \code{getYahooData} fetches individual stock data from the Yahoo! Finance website.
   It also adjusts price for splits and dividends, and volume for splits.
 
-  \code{get.symbols} fetches instrument symbols from the nasdaq.com website, and
+  \code{stockSymbols} fetches instrument symbols from the nasdaq.com website, and
   adjusts the symbols to be compatible with the Yahoo! Finance website.
 }
 \value{
-  \code{yahoo.data} returns a numeric matrix containing the columns:
+  \code{getYahooData} returns a numeric matrix containing the columns:
   \item{ Date }{ Trade date, in CCYYMMDD format. }
   \item{ Open }{ Open price. }
   \item{ High }{ High price. }
@@ -45,22 +45,22 @@
   \item{ Close }{ Close price. }
   \item{ Volume }{ Volume. }
 
-  \code{get.symbols} returns a character vector containing all the listed symbols for the
+  \code{stockSymbols} returns a character vector containing all the listed symbols for the
   given exchanges.
 }
 \author{ Josh Ulrich }
 \note{
-  The symbols returned by \code{get.symbols} may not be in the format necessary to retrive data
-  using \code{yahoo.data}.
+  The symbols returned by \code{stockSymbols} may not be in the format necessary to retrive data
+  using \code{getYahooData}.
 
-  \code{yahoo.data} has only been tested on daily data.  It isn't known if the function correctly
+  \code{getYahooData} has only been tested on daily data.  It isn't known if the function correctly
   adjusts data for any other frequency.
 }
 \examples{
   ### Note: you must have a working internet
   ### connection for these examples to work!
-  ibm <- yahoo.data("IBM", 19990404, 20050607)
+  ibm <- getYahooData("IBM", 19990404, 20050607)
 
-  nyse.symbols <- get.symbols("NYSE")
+  nyse.symbols <- stockSymbols("NYSE")
 }
 \keyword{ ts }

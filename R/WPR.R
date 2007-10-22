@@ -28,8 +28,8 @@ function(HLC, n=14) {
 
   stop("Price series must be either High-Low-Close, or Close")
 
-  hmax <- roll.fn(high, n, FUN="max")
-  lmin <- roll.fn( low, n, FUN="min")
+  hmax <- rollFUN(high, n, FUN="max")
+  lmin <- rollFUN( low, n, FUN="min")
 
   pct.R <- (hmax - close) / (hmax - lmin)
 

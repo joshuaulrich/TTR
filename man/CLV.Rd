@@ -23,10 +23,10 @@
   \url{http://stockcharts.com/education/IndicatorAnalysis/indic_AccumDistLine.html}\cr
 }
 \seealso{
-  See \code{\link{chaikin.AD}}, which uses CLV.
+  See \code{\link{chaikinAD}}, which uses CLV.
 }
 \examples{
-  data(nasdaq)
-  clv <- CLV(nasdaq[,c("High","Low","Close")])
+  data(ttrc)
+  clv <- CLV(ttrc[,c("High","Low","Close")])
 }
 \keyword{ ts }

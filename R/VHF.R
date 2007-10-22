@@ -27,11 +27,11 @@ function(price, n=28) {
   stop("Price series must be either Close, or High-Low-Close")
 
   # Find highest max, and lowest min of price series
-  hmax  <- roll.fn( high, n, FUN="max")
-  lmin  <- roll.fn(  low, n, FUN="min")
+  hmax  <- rollFUN( high, n, FUN="max")
+  lmin  <- rollFUN(  low, n, FUN="min")
   denom <- momentum(close, n=1, na=0)
 
-  VHF <- ( hmax - lmin ) / roll.fn(denom, n, FUN="sum")
+  VHF <- ( hmax - lmin ) / rollFUN(denom, n, FUN="sum")
 
   return( VHF )
 

@@ -28,8 +28,8 @@ function(HLC, n.fastK=14, ma.fastD=list("SMA", n=3), ma.slowD=ma.fastD) {
 
   stop("Price series must be either High-Low-Close, or Close")
 
-  hmax <- roll.fn(high, n.fastK, FUN="max")
-  lmin <- roll.fn( low, n.fastK, FUN="min")
+  hmax <- rollFUN(high, n.fastK, FUN="max")
+  lmin <- rollFUN( low, n.fastK, FUN="min")
 
   fastK <- (close - lmin) / (hmax - lmin)
   fastD <- do.call( ma.fastD[[1]], c( list(fastK), ma.fastD[-1] ) )

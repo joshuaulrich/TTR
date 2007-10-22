@@ -31,7 +31,7 @@
   See \code{\link{ATR}} and \code{\link{DX}}, which were also developed by Welles Wilder.
 }
 \examples{
-  data(nasdaq)
-  sar <- SAR(nasdaq[,c("High","Low")])
+  data(ttrc)
+  sar <- SAR(ttrc[,c("High","Low")])
 }
 \keyword{ ts }

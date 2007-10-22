@@ -7,12 +7,12 @@ function(price, n=20) {
 
   mom <- momentum(price, n=n, na=0)
 
-  av.1n <- abs( roll.fn(mom, n,   FUN="sum") )
-  am.2n <- roll.fn(abs(mom), n*2, FUN="sum")
-  am.1n <- roll.fn(abs(mom), n  , FUN="sum")
+  av.1n <- abs( rollFUN(mom, n,   FUN="sum") )
+  am.2n <- rollFUN(abs(mom), n*2, FUN="sum")
+  am.1n <- rollFUN(abs(mom), n  , FUN="sum")
 
   tdi <- av.1n - (am.2n - am.1n)
-  di  <- roll.fn(mom, n, FUN="sum")
+  di  <- rollFUN(mom, n, FUN="sum")
 
   return( cbind( tdi,di ) )
 }

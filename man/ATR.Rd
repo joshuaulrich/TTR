@@ -12,8 +12,8 @@
 }
 \arguments{
   \item{HLC}{ Object able to be coerced to a matrix, which contains High-Low-Close prices. }
-  \item{ma}{ A _list_ whose first component is a string containing the moving average function
-             name; additional parameters may also be specified as _named_ components. }
+  \item{ma}{ A \emph{list} whose first component is a string containing the moving average function
+             name; additional parameters may also be specified as \emph{named} components. }
 }
 \details{
   TR incorporates yesterday's close in the calculation (high minus low).  E.g. if
@@ -41,9 +41,9 @@
 \seealso{
   See \code{\link{EMA}}, \code{\link{SMA}}, etc. for moving average options; and note
   Warning section.  See \code{\link{DX}}, which uses true range. 
-  See \code{\link{chaikin.volatility}} for another volatility measure. }
+  See \code{\link{chaikinVolatility}} for another volatility measure. }
 \examples{
-  data(nasdaq)
-  atr <- ATR(nasdaq[,c("High","Low","Close")], ma = list("EMA", n=14, wilder=TRUE))
+  data(ttrc)
+  atr <- ATR(ttrc[,c("High","Low","Close")], ma = list("EMA", n=14, wilder=TRUE))
 }
 \keyword{ ts }

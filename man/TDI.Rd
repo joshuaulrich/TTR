@@ -43,7 +43,7 @@
   for other indicators that measure trend direction/strength.
 }
 \examples{
-  data(nasdaq)
-  tdi <- TDI(nasdaq[,"Close"], n=30)
+  data(ttrc)
+  tdi <- TDI(ttrc[,"Close"], n=30)
 }
 \keyword{ ts }

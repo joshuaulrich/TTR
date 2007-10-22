@@ -1,17 +1,17 @@
-\name{chaikin.volatility}
-\alias{chaikin.volatility}
+\name{chaikinVolatility}
+\alias{chaikinVolatility}
 \title{ Chaikin Volatility }
 \description{
   Chaikin Volatility measures the rate of change of the security's trading range.
   Developed by Marc Chaikin.
 }
 \usage{
-  chaikin.volatility(HL, ma = list("EMA", n=10))
+  chaikinVolatility(HL, ma = list("EMA", n=10))
 }
 \arguments{
   \item{HL}{ Object able to be coerced to a matrix, which contains High-Low prices. }
-  \item{ma}{ A _list_ whose first component is a string containing the moving average
-    function name; additional parameters may also be specified as _named_ components. }
+  \item{ma}{ A \emph{list} whose first component is a string containing the moving average
+    function name; additional parameters may also be specified as \emph{named} components. }
 }
 \details{
   The Chaikin Volatility indicator defines volatility as an increase in the difference
@@ -35,7 +35,7 @@
   Warning section.  See \code{\link{TR}} for another volatility measure.
 }
 \examples{
-  data(nasdaq)
-  volatility <- chaikin.volatility(nasdaq[,c("High","Low")])
+  data(ttrc)
+  volatility <- chaikinVolatility(ttrc[,c("High","Low")])
 }
 \keyword{ ts }

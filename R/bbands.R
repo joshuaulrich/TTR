@@ -25,7 +25,7 @@ function(HLC, ma = list("SMA", n=20), sd = list(FUN="sd", n=2)) {
   mavg  <- do.call( ma[[1]], c( list(HLC), ma[-1] ) )
 
   # Calculate standard deviation by hand to incorporate various MAs
-  sdev   <- roll.fn(HLC, ma$n, FUN=sd$FUN)
+  sdev   <- rollFUN(HLC, ma$n, FUN=sd$FUN)
 
   up     <- mavg + sd$n * sdev
   dn     <- mavg - sd$n * sdev

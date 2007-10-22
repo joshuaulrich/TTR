@@ -1,0 +1,9 @@
+Package: TTR
+Type: Package
+Title: Technical Trading Rules
+Version: 0.12
+Date: 2007-02-27
+Author: Josh Ulrich
+Maintainer: Josh Ulrich <josh.m.ulrich@gmail.com>
+Description: Functions and data to construct technical trading rules with R.
+License: GPL version 2 or later

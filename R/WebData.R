@@ -1,137 +1,271 @@
 "get.symbols" <-
-function(exchange=c("AMEX","NASDAQ","NYSE")) {
+function(exchange=c("AMEX","NASDAQ","NYSE"), sort.by=c("Exchange","Symbol"), quiet=FALSE) {
 
-  y <- NULL
+  # Many thanks to Ion Georgiadis for helpful suggestions and testing.
+
+  # See "NYSE "behind the dot" or Nasdaq 5th-letter codes and other special codes" here:
+  # http://en.wikipedia.org/wiki/Ticker_symbol
+  # http://help.yahoo.com/l/us/yahoo/finance/quotes/quote-02.html
+  # 
+  # AMEX / NYSE Mappings (NASDAQ doesn't need transformation?):
+  # Exchanges -> Yahoo
+  # /WS       -> -WT
+  # /U        -> -U
+  # .[A-Z]    -> NA (special notes/bonds - IG)
+  # :[AP]     -> NA (after-hours / pre-market)
+  # ^         -> -P
+  # /         -> -
+  # $         -> NA (NYSE Only)
+  # ~         -> NA (NYSE Only)
+
+  symbols  <- NULL
+  symbols.colnames <- c("Name","Symbol","Market.Cap","Exchange")
+  exchange <- match.arg(exchange, several.ok=TRUE)
+  sort.by  <- match.arg(sort.by, symbols.colnames, several.ok=TRUE)
 
   for(i in exchange) {
-    if(i=="NASDAQ") url <- "http://www.nasdaq.com/asp/symbols.asp?exchange=Q&start=0" else
-    if(i=="AMEX")   url <- "http://www.nasdaq.com/asp/symbols.asp?exchange=1&start=0" else
-    if(i=="NYSE")   url <- "http://www.nasdaq.com/asp/symbols.asp?exchange=N&start=0" else
-    stop("Please choose exchange of: NASDAQ, AMEX, NYSE")
+    if(!quiet) message("Fetching ",i," symbols...")
+    flush.console()
 
-    nams <- c( scan(url, "", sep=",", skip=1, nlines=1, quiet=TRUE)[1:3], "Exchange" )
-    x    <- do.call( "cbind" , scan(url, list("","","",NULL), sep=",", skip=2, quiet=TRUE) )
-    x    <- cbind( x[-nrow(x),], rep(i,nrow(x)-1) )
-    y    <- rbind( y, x )
-    nams -> colnames(y)
+    # Fetch Symbols
+    if( i=="NASDAQ") {
+      url  <- "http://www.nasdaq.com/asp/symbols.asp?exchange=Q&start=0"
+      exch <- read.csv(url, skip=2, header=FALSE, as.is=TRUE,
+                colClasses=c("character","character","NULL","NULL","character","NULL"))
+    } else
+    if( i=="AMEX") {
+      url  <- "http://www.nasdaq.com/asp/symbols.asp?exchange=1&start=0"
+      exch <- read.csv(url, skip=2, header=FALSE, as.is=TRUE,
+                colClasses=c("character","character","character","NULL"))
+
+      # Transform Symbols to Yahoo format
+      exch[,2] <- gsub("/WS$", "-WT", exch[,2])  # AMEX, NYSE
+      exch[,2] <- gsub("/WS/", "-WT", exch[,2])  # AMEX, NYSE
+      exch[,2] <- gsub("/U",   "-U",  exch[,2])  # AMEX
+      exch[,2] <- gsub("\\^",  "-P",  exch[,2])  # AMEX, NYSE
+      exch[,2] <- gsub("/",    "-",   exch[,2])  # AMEX, NYSE
+
+      # Drop symbols Yahoo doesn't provide
+      drop <- c( grep("\\.", exch[,2]),   # AMEX
+                 grep("\\$", exch[,2]),   # AMEX, NYSE
+                 grep(":",   exch[,2]) )  # AMEX, NYSE
+      if(NROW(drop)!=0) {
+        exch <- exch[-drop,]
+      }
+
+    } else
+    if( i=="NYSE") {
+      url  <- "http://www.nasdaq.com/asp/symbols.asp?exchange=N&start=0"
+      exch <- read.csv(url, skip=2, header=FALSE, as.is=TRUE,
+                colClasses=c("character","character","character","NULL"))
+
+      # Transform Symbols to Yahoo format
+      exch[,2] <- gsub("/WS$", "-WT", exch[,2])  # AMEX, NYSE
+      exch[,2] <- gsub("/WS/", "-WT", exch[,2])  # AMEX, NYSE
+      exch[,2] <- gsub("\\^",  "-P",  exch[,2])  # AMEX, NYSE
+      exch[,2] <- gsub("/",    "-",   exch[,2])  # AMEX, NYSE
+
+      # Drop symbols Yahoo doesn't provide
+      drop <- c( grep("\\$", exch[,2]),   # AMEX
+                 grep(":",   exch[,2]),   # AMEX, NYSE
+                 grep("~",   exch[,2]) )  # AMEX, NYSE
+      if(NROW(drop)!=0) {
+        exch <- exch[-drop,]
+      }
+
+    }
+
+    # Remove last line, create "Exchange" column, and set column names
+    exch    <- cbind( exch[-NROW(exch),], rep(i,NROW(exch)-1), stringsAsFactors=FALSE )
+    colnames(exch) <- symbols.colnames
+    symbols <- rbind( symbols, exch )
   }
-  return( y )
+
+  # Sort
+  symbols <- symbols[do.call("order", symbols[,sort.by]),]
+
+  return(symbols)
 }
-######################################################################################
-#   TO DO:
-######################################################################################
-# There are many AMEX & NYSE tickers that probably should not be returned (preferred
-# shares, warrant, etc.).  Maybe include an option so they will be returned?
-# I don't anticipate using them myself, and I don't think many will be interested in
-# them.
-#
-# See "NYSE "behind the dot" or Nasdaq 5th-letter codes and other special codes" here:
-# http://en.wikipedia.org/wiki/Ticker_symbol
-#
-# I think I need to drop everything matching grep("(\\.|/|\\^|\\:)") EXCEPT _some_
-# of the tickers with an A or B code.  Which shouldn't be dropped?  I'm not sure.
-# I think it's safe to remove all the tickers that do not have any market value.
-#
-# Also, Yahoo no longer tacks the class at the end of the ticker; now they have a
-# "-" seperating the ticker and the class (A or B).
-#
-######################################################################################
-
-
 
 "yahoo.data" <-
-function(symbol, start, end, freq="daily", adjust=c("price","volume"), file=NULL) {
+function(symbol, start, end, freq="daily", type="price", adjust=TRUE, quiet=FALSE) {
 
-  # _Documentation_
+  # Thank you to Giorgio Beltrame for the URL to download dividends _and_ splits, and
+  # for his correct adjustment procedure.
+  # Many thanks to Ion Georgiadis for helpful suggestions and testing.
+
   # symbol:  Character, instrument symbol
-  # start:   Numeric, starting date, in ISO-8601 format as ccyymmdd
-  # end:     Numeric, ending date, in ISO-8601 format as ccyymmdd (default is yesterday)
+  # start:   Numeric, starting date, in ISO-8601 format as ccyymmdd (default
+  #          is series' first date)
+  # end:     Numeric, ending date, in ISO-8601 format as ccyymmdd (default is today)
   # freq:    Character, frequency of data
-  #          either 'daily', 'weekly', 'monthly', or 'dividend' 
-  # file:    Either NULL (default) or a location to save output to specified directory
-  #          as a comma-delimited text file.
-  # adjust:  Logical, adjusts the Open, High, Low, and Close prices for dividends and split,
-  #          and adjusts Volume for dividends and split.
+  #          either 'daily', 'weekly', 'monthly'
+  # type:    Character, either 'price' or 'split'
+  # adjust:  Logical, adjusts the Open, High, Low, and Close prices for dividends and splits,
+  #          and adjusts Volume for dividends.
   #
   #          http://help.yahoo.com/l/us/yahoo/finance/quotes/quote-12.html
+  #          http://ichart.finance.yahoo.com/x?s=MSFT&g=d&y=0&z=30000
+  #
+  # Requires R-2.4.1
 
-  # Check dates:
-  if (missing(start)) start <- as.POSIXlt(Sys.Date()-365) else start <- as.POSIXlt( as.Date( as.character(start), "%Y%m%d" ) )
-  if (missing(end))   end   <- as.POSIXlt(Sys.Date()-  1) else end   <- as.POSIXlt( as.Date( as.character( end ), "%Y%m%d" ) )
+  # Check dates
+  if (missing(start)) {
+    beg <- as.POSIXlt( "1900-01-01" )
+  } else {
+    beg <- as.POSIXlt( as.Date( as.character(start), "%Y%m%d" ) )
+  }
+  if (missing(end)) {
+    end <- as.POSIXlt(Sys.Date())
+  } else {
+    end <- as.POSIXlt( as.Date( as.character( end ), "%Y%m%d" ) )
+  }
 
-  if( start >= end ) stop("Start date >= end date.")
-  if( start >= as.POSIXlt(Sys.Date()) ) stop("Start date is >= today's date.")
+  if( beg > end )                    stop("Start date must be before end date.")
+  if( beg > as.POSIXlt(Sys.Date()) ) stop("Start date is after today's date.")
+
+  # Get freqeucy and type parameters
+  freq <- match.arg( freq, c("daily","weekly","monthly") )
+  type <- match.arg( type, c("price","split") )
+  if(type=="price") {
+    freq.url <- substr(freq,1,1)
+  } else {
+    freq.url <- "v"
+    if(freq!="daily" & !quiet) message("Only freq=\"daily\" data available for type=\"split\".\n",
+                                       "Setting freq=\"daily\"...")
+  }
+
   flush.console()
 
-  # Set freqeucy parameter
-  if( substr(freq,1,2) == "di" )
-    freq <- "v"
-  else
-    freq <- substr(freq,1,1)
+  if(type=="price") {
 
-  # Set up URL
-  url <- paste( "http://ichart.yahoo.com/table.csv?s=" , symbol ,
-                "&a=" , start$mon , "&b=" , start$mday , "&c=", start$year+1900 ,
-                "&d=" , end$mon   , "&e=" , end$mday   , "&f=", end$year+1900   ,
-                "&g=" , freq      , "&ignore=.csv" , sep="" )
+    if(adjust) {
 
-  ohlc <- read.table(url, header=TRUE, sep=",")
-  ohlc$Date <- as.Date(as.character(ohlc$Date), "%d-%b-%y")
-  d.ratio <- ohlc[,7] / ohlc[,5]
-  ohlc <- ohlc[,-7]
+      if(freq=="daily") {
 
-  ### I use the Adj_Close field in the Yahoo data to adjust the data, to aviod the problem of needing all the dividend and split
-  ### data to adjust a portion of the historic data series.  E.g. if a sample of data from the 1980's was desired, and there are
-  ### splits and dividends that occur after the end of the sample, those data would be needed to adjust the sample.
-  ### It's more efficient to simply use the Adj_Close data that's already provided to adjust the prices, and use all the split
-  ### data to make the ratios for each time frame to adjust the volume.
+        # Get price, dividend, and split data from 'beg' to present
+        ohlc   <- yahoo.data(symbol, start, freq="daily", type="price", adjust=FALSE, quiet=TRUE)
+        divspl <- yahoo.data(symbol, start, freq="daily", type="split", adjust=FALSE, quiet=TRUE)
+        ohlc   <- merge(ohlc, divspl, by.col="Date", all=TRUE)
 
-  ### This adjustment algorithm was tested on daily data, does it work on weekly / monthly / yearly data also?
-  if( any(adjust=="price") & freq != "v") {
-
-    ### Adjust price for dividends and splits
-    ohlc[,2:5] <- round( ohlc[,2:5] * d.ratio, 3 )
-  }
-
-  if( any(adjust=="volume") & freq != "v") {
-    ### Adjust volume data for splits
-    # Get split data
-    splt <- scan( paste("http://finance.yahoo.com/q/ta?s=",symbol,sep=""), what="", sep=">", quote="", quiet=TRUE)
-    splt <- gsub("</nobr","",splt[ grep("/nobr",splt) ])
-    splt <- data.frame ( Date   = as.Date( substr(splt,1,9), "%d-%b-%y" ),
-                         Splits = as.numeric( substr(splt,12,12) ) / as.numeric( substr(splt,14,14) ) )
-
-    # Make split ratios & line up with ohlc data
-    for(i in nrow(splt):1) if(i==nrow(splt)) splt$s.ratio[i] <- 1/splt$Splits[i] else splt$s.ratio[i] <- splt$s.ratio[i+1]/splt$Splits[i]
-    splt.locs <- match( ohlc$Date, splt$Date )
-    if( length( na.omit(splt.locs) )==0 ) s.ratio <- rep(1,nrow(ohlc)) else {
-       s.ratio <- NULL
-       for(i in 1:nrow(ohlc)) {
-          if(i==1) s.ratio[i] <- ifelse( max(splt.locs,na.rm=TRUE) == nrow(splt), 1, splt$s.ratio[max(splt.locs,na.rm=TRUE)+1] )
-          else {
-             if(is.na(splt.locs[i-1])) s.ratio[i] <- s.ratio[i-1] else s.ratio[i] <- splt$s.ratio[splt.locs[i-1]]
+        # Create split adjustment ratio, (always = 1 if no splits exist)
+        s.ratio <- rep(1, NROW(ohlc))
+        if( !all( is.na(ohlc$Split) ) ) {
+          # Start loop at most recent data
+          for( i in NROW(ohlc):2 ) {
+            if( is.na( ohlc$Split[i] ) ) {
+              s.ratio[i-1] <- s.ratio[i]
+            } else {
+              s.ratio[i-1] <- s.ratio[i] * ohlc$Split[i]
+            } 
           }
-       }
-    }
-    # Adjust volume for splits
-    ohlc[,6] <- ohlc[,6] * s.ratio
-  }
+        }
 
-  ### Adjust & Order all Dates
-  #splt$Date[ splt$Date > Sys.Date() ] = splt$Date[ splt$Date > Sys.Date() ]-100*365.25
-  #splt$Date[ as.POSIXlt(splt$Date)$year > as.POSIXlt(Sys.Date())$year ] <- splt$Date[ as.POSIXlt(splt$Date)$year > as.POSIXlt(Sys.Date())$year ]-100*365.25
-  ohlc$Date[ as.POSIXlt(ohlc$Date)$year > as.POSIXlt(Sys.Date())$year ] <- ohlc$Date[ as.POSIXlt(ohlc$Date)$year > as.POSIXlt(Sys.Date())$year ]-100*365.25
+        # Un-adjust dividends for Splits
+        ohlc$Div <- ohlc$Adj.Div * ( 1 / s.ratio )
+
+        # Create dividend adjustment ratio, (always = 1 if no dividends exist)
+        d.ratio <- rep(1, NROW(ohlc))
+        if( !all( is.na(ohlc$Adj.Div) ) ) {
+          # Start loop at most recent data
+          for( i in NROW(ohlc):2 ) {
+            if( is.na( ohlc$Adj.Div[i] ) ) {
+              d.ratio[i-1] <- d.ratio[i]
+            } else {
+              d.ratio[i-1] <- d.ratio[i] * ( 1 - ohlc$Div[i] / ohlc$Close[i-1] ) 
+            } 
+          }
+        }
+
+        # Adjust OHLC and volume
+        ohlc$Unadj.Close <- ohlc$Close
+        ohlc$Open   <- ohlc$Open  * d.ratio * s.ratio
+        ohlc$High   <- ohlc$High  * d.ratio * s.ratio
+        ohlc$Low    <- ohlc$Low   * d.ratio * s.ratio
+        ohlc$Close  <- ohlc$Close * d.ratio * s.ratio
+        ohlc$Volume <- ohlc$Volume * ( 1 / d.ratio )
+
+        # Order columns
+        ohlc <- ohlc[,c("Date","Open","High","Low","Close","Volume","Unadj.Close","Div","Split","Adj.Div")]
+
+      } else stop("Only freq=\"daily\" adjusted data is currently supported.")
+      # For other frequencies, get daily data and use a routine to aggregate to desired frequency.
+
+    } else {
+
+    # Construct URL for 'beg' to 'end'
+    url <- paste( "http://ichart.finance.yahoo.com/table.csv?s=", symbol,
+                  "&a=", beg$mon, "&b=", beg$mday, "&c=", beg$year+1900,
+                  "&d=", end$mon, "&e=", end$mday, "&f=", end$year+1900,
+                  "&g=", freq.url, "&ignore=.csv", sep="" )
+
+    # Fetch data
+    ohlc <- read.table(url, header=TRUE, sep=",")
+    ohlc$Date <- as.Date(as.character(ohlc$Date), "%Y-%m-%d")
+    ohlc$Adj.Close <- NULL
+
+    }
+
+  } else {
+
+      if(!quiet) message("Unadjusted and adjusted dividend data are always returned.")
+
+      # Construct URL for 'beg' to 'end'
+      url <- paste( "http://ichart.finance.yahoo.com/x?s=", symbol,
+                    "&a=", beg$mon, "&b=", beg$mday, "&c=", beg$year+1900,
+                    "&d=", end$mon, "&e=", end$mday, "&f=", end$year+1900,
+                    "&g=", freq.url, "&y=0&z=30000", sep="" )
+
+      # Fetch data
+      ohlc <- read.table(url, skip=1, sep=",", fill=TRUE, as.is=TRUE)
+      div  <- data.frame( Date=   ohlc$V2[ohlc$V1=="DIVIDEND"],
+                          Adj.Div=as.numeric(ohlc$V3[ohlc$V1=="DIVIDEND"]),
+                          stringsAsFactors=FALSE )
+      spl  <- data.frame( Date=   ohlc$V2[ohlc$V1=="SPLIT"],
+                          Split=as.character(ohlc$V3[ohlc$V1=="SPLIT"]),
+                          stringsAsFactors=FALSE )
+
+      ohlc <- merge(div, spl, by.col="Date", all=TRUE)
+      ohlc$Date <- as.Date(as.character(ohlc$Date), "%Y%m%d")
+
+      # Create split adjustment ratio, (always = 1 if no splits exist)
+      s.ratio <- rep(1, NROW(ohlc))
+      if(NROW(spl)!=0) {
+        ohlc$Split <- sub(":","/", ohlc$Split)
+        ohlc$Split <- 1 / sapply( parse( text=ohlc$Split ), eval )
+        # Start loop at most recent data
+        for( i in NROW(ohlc):2 ) {
+          if( is.na( ohlc$Split[i] ) ) {
+            s.ratio[i-1] <- s.ratio[i]
+          } else {
+            s.ratio[i-1] <- s.ratio[i] * ohlc$Split[i]
+          } 
+        }
+      }
+
+      # Un-adjust dividends for Splits
+      ohlc$Div <- ohlc$Adj.Div * ( 1 / s.ratio )
+      ohlc$Split <- as.numeric(ohlc$Split)
+
+      # Order data columns
+      ohlc <- ohlc[,c("Date","Div","Split","Adj.Div")]
+
+      # Return (empty) data
+      if(NROW(ohlc)==0) return(ohlc)
+    }
+
+  # Order Dates, and only return requested data (drop 'end' to present)
   ohlc <- ohlc[order(ohlc$Date),]
-  row.names(ohlc) <- rev(row.names(ohlc))
+  row.names(ohlc) <- 1:NROW(ohlc)
+  ohlc <- ohlc[ ( ohlc$Date >= as.Date(beg) & ohlc$Date <= as.Date(end) ), ]
 
   ### Check to see if supplied dates occur in data set
-  if( max(ohlc$Date) != as.Date(end)   ) message("End date out of range, "  , max(ohlc$Date), " is last available date.")
-  if( min(ohlc$Date) != as.Date(start) ) message("Start date out of range, ", min(ohlc$Date), " is first available date.")
+  if( max(ohlc$Date) != as.Date(end) ) {
+    if(!quiet) message("End date out of range, "  , max(ohlc$Date), " is last available date.")
+  }
+  if( min(ohlc$Date) != as.Date(beg) ) {
+    if(!quiet) message("Start date out of range, ", min(ohlc$Date), " is first available date.")
+  }
 
-  ### Need something to account for fields, if I want them... ###
-  #fields <- c("Open","High","Low","Close","Volume","AdjClose")
-
-  # Save data to file, or return as object
-  ### Need something to ensue the file is writeable??? ###
-  if( !is.null(file) ) write.table( ohlc, file.path(file,paste(symbol,".txt",sep="")), row.names=FALSE, col.names=TRUE, sep="," ) else return(ohlc)
+  return(ohlc)
 }

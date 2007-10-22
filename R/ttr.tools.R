@@ -58,12 +58,8 @@ function(price, signals, ...) {
   } else {
     signals <- as.vector(signals)
   }
-  price   <- as.vector(price)
-  gr <- rep(1,NROW(price))
-  dp <- ROC(price, ...)
+  price  <- as.vector(price)
+  growth <- cumprod( 1 + ROC(price, ...) * signals )
 
-  for(i in 2:NROW(dp)) {
-    gr[i] <- gr[i-1] * ( 1 + dp[i] * signals[i] )
-  }
-  return( gr )
+  return( growth )
 }

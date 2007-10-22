@@ -7,20 +7,27 @@
   Get investment data from the internet.
 }
 \usage{
-  yahoo.data(symbol, start, end, freq = "daily", adjust = c("price","volume"), file = NULL)
-  get.symbols(exchange = c("AMEX", "NASDAQ", "NYSE"))
+  yahoo.data(symbol, start, end, freq = "daily", type = "price",
+             adjust = TRUE, quiet = FALSE)
+  get.symbols(exchange = c("AMEX","NASDAQ","NYSE"),
+              sort.by = c("Exchange","Symbol"), quiet = FALSE)
 }
 \arguments{
   \item{symbol}{ Yahoo! Finance instrument symbol. }
-  \item{start}{ Numeric; first date of desired data, in YYYYMMDD format. }
-  \item{end}{ Numeric; last date of desired data, in YYYYMMDD format. }
-  \item{freq}{ Desired data frequency.  One of \dQuote{daily}, \dQuote{monthly},
-    \dQuote{quarterly}, or \dQuote{yearly}. }
-  \item{adjust}{ Character vector containing one or both of \dQuote{price} or \dQuote{volume}.
-    Listed data will be adjusted for splits and dividends. }
-  \item{file}{ Character; if specified, file name to write data to, otherwise data are returned
-    to the calling environment. }
+  \item{start}{ Numeric; first date of desired data, in YYYYMMDD format. 
+    Default is first date of series. }
+  \item{end}{ Numeric; last date of desired data, in YYYYMMDD format. 
+    Default is last date of series. }
+  \item{freq}{ Desired data frequency.  One of \dQuote{daily}, \dQuote{weekly}, 
+    \dQuote{monthly}. }
+  \item{type}{ Type of data to return.  One of \dQuote{price}, or \dQuote{split}.
+    \code{type = "split"} will return both split and dividend data. }
+  \item{adjust}{ Logical; if \code{TRUE}, the Open, High, Low, and Close prices will
+    be adjusted for dividends and splits, and Volume will be adjusted for dividends. }
+  \item{quiet}{ Logical; if \code{TRUE}, status messages will be printed to the console. }
   \item{exchange}{ Character vector of exchange names on which desired instrument symbols are traded. }
+  \item{sort.by}{ Character vector of columns by which returned data will be sorted.  Must be
+    one or more of \dQuote{Name}, \dQuote{Symbol}, \dQuote{Market.Cap}, or \dQuote{Exchange}. }
 }
 \details{
   \code{yahoo.data} fetches individual stock data from the Yahoo! Finance website.

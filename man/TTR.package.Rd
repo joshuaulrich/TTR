@@ -24,7 +24,7 @@
 
   Users will probably be most interested in the following functions:\cr
   \code{\link{bbands}}\cr
-  \code{\link{Changes}}\cr
+  \code{\link{changes}}\cr
   \code{\link{DX}}\cr
   \code{\link{MovingAverages}}\cr
   \code{\link{Oscillators}}\cr

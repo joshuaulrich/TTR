@@ -10,23 +10,17 @@ function(x, n=1, type=c("discrete","continuous"), na=NA) {
 
   x    <- as.vector(x)
   roc  <- vector("numeric", NROW(x))
-
-  if(missing(type))
-    type <- substr(type[1],1,1)  else
-    type <- substr(type,1,1)
+  type <- match.arg(type)
 
   # Discrete changes
-  if(type=="d") {
+  if(type=="discrete") {
     roc <- c( rep(na,n),      x[(1+n):NROW(x)] / x[1:(NROW(x)-n)] -1 )
-  } else
+  }
 
   # Continuous changes
-  if(type=="c") {
+  if(type=="continuous") {
     roc <- c( rep(na,n), log( x[(1+n):NROW(x)] / x[1:(NROW(x)-n)] )  )
-  } else
-
-  stop("Invalid compounding type \n",
-       "Please choose: type = \"continuous\", or type = \"discrete\"")
+  }
 
   return( roc )
 }

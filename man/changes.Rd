@@ -1,5 +1,5 @@
-\name{Changes}
-\alias{Changes}
+\name{changes}
+\alias{changes}
 \alias{ROC}
 \alias{momentum}
 \title{ Rate of Change / Momentum }

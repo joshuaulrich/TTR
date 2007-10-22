@@ -1,46 +1,15 @@
 "ttr.results" <-
-function(beg, end, sig, price) {
+function(price, signals, ...) {
 
-rows= nrow(price)
-tr  = rep(0,rows)
-ind = matrix(1,nrow(price),4)
+tr  <- rep(0, NROW(price))
+ind <- matrix(1,NROW(price),4)
 
-# Make sure beg & end dates fall within dates in price matrix
-if(beg>=end) stop(beg," is greater than ",end,". Specify new date range.\n")
-if(beg > max(price[,1])) stop("Start date, ",beg," is > the last date in ",
-                              "the date range, ",max(price[,1]),".\n")                              
-if(end < min(price[,1])) stop("End date, ",end," is < the first date in ",
-                              "the date range, ",min(price[,1]),".\n")
-if(beg < min(price[,1])) {
-   nbeg = min(price[,1])
-   cat(" Start date,",beg,"lies outside date range. Using",nbeg,"instead.\n")
-   beg=nbeg
-}
-if(end > max(price[,1])) {
-   nend = max(price[,1])
-   cat(" End date,",end,"lies outside date range. Using",nend,"instead.\n")
-   end=nend
-}
-
-# Find start & end dates, and print warning (if necessary)
-if(is.na(match(beg, price[,1]))) {
-   nbeg = min(ifelse(price[,1]>=beg, price[,1],NA), na.rm=T)
-   cat(" Start date,",beg,"not found; using",nbeg,"instead\n")
-   beg=nbeg
-}
-if(is.na(match(end, price[,1]))) {
-   nend = max(ifelse(price[,1]<=end, price[,1],NA), na.rm=T)
-   cat(" End date,",end,"not found; using",nend,"instead\n")
-   end=nend
-}
-
-beg.loc = match(beg, price[,1])  # Start location
-end.loc = match(end, price[,1])  # End location
-
-sig = c(0, sig[1:(length(sig)-1)])
+sig <- c(0, sig[1:(NROW(sig)-1)])
 sig[beg.loc] = 0   # NEED TO DOUBLE CHECK THIS: sig[beg.loc] OR sig[beg.loc-1]???
                    # IF beg.loc-1, THEN beg.loc+1 in FOR LOOP -> beg.loc
-delta = c(NA, price[2:rows,2]/price[1:(rows-1),2]-1)
+returns <- data.frame( dp = ROC( price, type="continuous" ) )
+returns$long.short <- ifelse( signals==1, returns$dp, ifelse( signals==-1, returns$dp*-1, 0 ) )
+returns$
 
 dp     = ifelse(sig==1, delta, 0)
 dp.lm  = dp * 2
@@ -72,7 +41,7 @@ for (i in 1:max(tr)) {
 sigdif = diff(sig, lag=1)
 sigdif = sigdif[beg.loc:end.loc]
 
-wlbsd= 1:length(sigdif)
+wlbsd= 1:NROW(sigdif)
 wbsdi= na.omit(replace(sigdif,ifelse( sigdif!=0,NA,wlbsd),NA))
 wbsds= ifelse(wbsdi>0,1,-1)
 wlgth= ltr*wbsds
@@ -81,7 +50,7 @@ wyrs = as.numeric(as.Date(as.character(end),"%Y%m%d")-
 if(wyrs < 1) wyrs = 1
 
 # Calculate Results
-tpy = tr[length(tr)] / wyrs                         # Trades per year
+tpy = tr[NROW(tr)] / wyrs                         # Trades per year
 atrr1 = 100*((ind[end.loc,1]/ind[beg.loc,1])^(1/wyrs)-1)   # Annulaized Rule Return
 atrr2 = 100*((ind[end.loc,2]/ind[beg.loc,2])^(1/wyrs)-1)   # Annulaized Rule Return
 atrr3 = 100*((ind[end.loc,3]/ind[beg.loc,3])^(1/wyrs)-1)   # Annulaized Rule Return

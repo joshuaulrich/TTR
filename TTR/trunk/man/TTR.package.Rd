@@ -3,7 +3,7 @@
 \alias{TTR}
 \docType{package}
 \title{
-  Functions to create Technical Trading Rules (TTR).
+  Functions to create Technical Trading Rules (TTR)
 }
 \description{
   This package contains many of the most popular technical analysis functions, as well
@@ -13,19 +13,19 @@
   \tabular{ll}{
     Package: \tab TTR\cr
     Type: \tab Package\cr
-    Version: \tab 0.13\cr
-    Date: \tab 2007-09-27\cr
+    Version: \tab 0.13-1\cr
+    Date: \tab 2007-10-23\cr
     License: \tab GPL Version 2 or later.\cr
   }
 
   Users will probably be most interested in the following functions:\cr
-  \code{\link{bbands}}\cr
+  \code{\link{bollingerBands}}\cr
   \code{\link{changes}}\cr
-  \code{\link{DX}}\cr
+  \code{\link{ADX}}\cr
   \code{\link{MovingAverages}}\cr
   \code{\link{Oscillators}}\cr
   \code{\link{RSI}}\cr
-  \code{\link{stoch}}\cr
+  \code{\link{stochastic}}\cr
   \code{\link{WebData}}\cr
 }
 \author{
@@ -49,10 +49,10 @@ Maintainer: Josh Ulrich
   data(ttrc)
 
   # Bollinger Bands
-  bbands <- bbands( ttrc[,c("High","Low","Close")] )
+  bbands <- bollingerBands( ttrc[,c("High","Low","Close")] )
 
   # Directional Movement Index
-  dmi.adx <- DX(ttrc[,c("High","Low","Close")])
+  dmi.adx <- ADX(ttrc[,c("High","Low","Close")])
 
   # Moving Averages
   ema <- EMA(ttrc[,"Close"], n=20)
@@ -64,8 +64,8 @@ Maintainer: Josh Ulrich
   # RSI
   rsi <- RSI(ttrc[,"Close"])
 
-  # Stoichastics
-  stoch.osc <- stoch(ttrc[,c("High","Low","Close")])
+  # Stochastics
+  stoch.osc <- stochastic(ttrc[,c("High","Low","Close")])
 
   ### Note: you must have a working internet connection
   ### for the examples below to work!

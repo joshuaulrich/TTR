@@ -1,14 +1,14 @@
-\name{DX}
-\alias{DX}
-\alias{DI}
+\name{ADX}
 \alias{ADX}
+\alias{DI}
+\alias{DX}
 \title{ Welles Wilder's Directional Movement Index }
 \concept{DMI}
 \description{
   Directional Movement Index; developed by J. Welles Wilder.
 }
 \usage{
-  DX(HLC, n=14, ma.adx=list("EMA", n=n, wilder=TRUE))
+  ADX(HLC, n=14, ma.adx=list("EMA", n=n, wilder=TRUE))
 }
 \arguments{
   \item{HLC}{ Object able to be coerced to a matrix, which contains High-Low-Close prices. }
@@ -52,6 +52,6 @@
 }
 \examples{
   data(ttrc)
-  dmi.adx <- DX(ttrc[,c("High","Low","Close")])
+  dmi.adx <- ADX(ttrc[,c("High","Low","Close")])
 }
 \keyword{ ts }

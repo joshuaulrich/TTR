@@ -1,4 +1,4 @@
-"stoch" <-
+"stochastic" <-
 function(HLC, n.fastK=14, ma.fastD=list("SMA", n=3), ma.slowD=ma.fastD) {
 
   # Stochastics
@@ -37,4 +37,3 @@ function(HLC, n.fastK=14, ma.fastD=list("SMA", n=3), ma.slowD=ma.fastD) {
 
   return( cbind( fastK, fastD, slowD ) )
 }
-

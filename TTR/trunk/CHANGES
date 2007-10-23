@@ -1,0 +1,11 @@
+ TTR version 0.13-1
+ CHANGES FROM TTR version 0.13
+
+- Changed 'bbands()' to 'bollingerBands()'
+
+- Changed 'DX()' to 'ADX()'
+
+- Changed 'stoch()' to 'stochastic()'
+
+- Corrected mis-spellings in documentation.
+

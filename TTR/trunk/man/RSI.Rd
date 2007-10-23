@@ -1,6 +1,6 @@
 \name{RSI}
 \alias{RSI}
-\title{ Relitive Strength Index }
+\title{ Relative Strength Index }
 \description{
   The Relative Strength Index (RSI) calculates a ratio of the recent upward price
   movements to the absolute price movement.  Developed by J. Welles Wilder.
@@ -36,7 +36,7 @@
   Divergence with price may also be useful.  For example, if price is making new highs/lows,
   but RSI is not, it could indicate a reversal.
 
-  You can calculate a stochastic RSI by using the function \code{\link{stoch}} on
+  You can calculate a stochastic RSI by using the function \code{\link{stochastic}} on
   RSI values.
 }
 \seealso{
@@ -48,3 +48,4 @@
   rsi <- RSI(ttrc[,"Close"])
 }
 \keyword{ ts }
+

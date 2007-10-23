@@ -1,4 +1,4 @@
-"DX" <-
+"ADX" <-
 function(HLC, n=14, ma.adx=list("EMA", n=n, wilder=TRUE)) {
 
   # Welles Wilder's Directional Movement Index

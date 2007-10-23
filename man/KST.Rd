@@ -24,7 +24,7 @@
 }
 \details{
   For each day (week, month, etc.), the KST calculates the ROC over several periods.  Those
-  ROCs are smoothed using the given moving averages, then multiplited by their respective
+  ROCs are smoothed using the given moving averages, then multiplied by their respective
   weighting values.  The resulting values are summed for each day (month, week, etc.).
 }
 \value{

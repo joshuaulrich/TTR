@@ -28,7 +28,7 @@
   \url{http://www.fmlabs.com/reference/SAR.htm}\cr
 }
 \seealso{
-  See \code{\link{ATR}} and \code{\link{DX}}, which were also developed by Welles Wilder.
+  See \code{\link{ATR}} and \code{\link{ADX}}, which were also developed by Welles Wilder.
 }
 \examples{
   data(ttrc)

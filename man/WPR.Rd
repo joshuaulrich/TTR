@@ -13,7 +13,7 @@
   \item{n}{ Number of periods to use. }
 }
 \details{
-  If an High-Low-Clsoe series is provided, the indicator is calculated using the high/low
+  If an High-Low-Close series is provided, the indicator is calculated using the high/low
   values.  If a vector is provided, the calculation only uses that series.
 }
 \value{
@@ -28,14 +28,14 @@
   \url{http://stockcharts.com/education/IndicatorAnalysis/indic_williamsR.html}\cr
 }
 \note{ 
-  The William's \%R calculation is similar to Stochastics' fast \%K.
+  The William's \%R calculation is similar to stochastics' fast \%K.
 }
 \seealso{
-  See \code{\link{stoch}}.
+  See \code{\link{stochastic}}.
 }
 \examples{
   data(ttrc)
-  stoch.osc <- stoch(ttrc[,c("High","Low","Close")])
+  stoch.osc <- stochastic(ttrc[,c("High","Low","Close")])
   stoch.wpr <- WPR(ttrc[,c("High","Low","Close")])
 
   plot(tail(stoch.osc[,"fastK"], 100), type="l", main="Fast \%K and Williams \%R",

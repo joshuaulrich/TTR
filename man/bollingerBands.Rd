@@ -1,12 +1,12 @@
-\name{bbands}
-\alias{bbands}
+\name{bollingerBands}
+\alias{bollingerBands}
 \title{ Bollinger Bands }
 \description{
   Bollinger Bands are a way to compare a security's volatility and price levels over
   a period of time.  Developed by John Bollinger.
 }
 \usage{
-  bbands(HLC, ma = list("SMA", n=20), sd = list(FUN="sd", n=2))
+  bollingerBands(HLC, ma = list("SMA", n=20), sd = list(FUN="sd", n=2))
 }
 \arguments{
   \item{HLC}{ High-Low-Close price series to use.  If only a univariate series is given,
@@ -55,7 +55,7 @@
   ## The examples below show the differences between using a High-Low-Close series, and
   ## just a close series when calculating Bollinger Bands.
   data(ttrc)
-  bbands.HLC   <- bbands( ttrc[,c("High","Low","Close")] )
-  bbands.close <- bbands( ttrc[,"Close"] )
+  bbands.HLC   <- bollingerBands( ttrc[,c("High","Low","Close")] )
+  bbands.close <- bollingerBands( ttrc[,"Close"] )
 }
 \keyword{ ts }

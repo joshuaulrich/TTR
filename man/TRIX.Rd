@@ -17,7 +17,7 @@
   \item{ma3}{ See \code{ma1}. }
   \item{ma.sig}{ Similar to \code{ma1}, but for the signal moving average. }
   \item{percent}{ logical; if \code{TRUE}, the rate of change is calculated using the \code{ROC}
-    function, otherwise the the \code{momentum} function is used. }
+    function, otherwise the \code{momentum} function is used. }
 }
 \details{
   The TRIX is calculated as follows:\cr

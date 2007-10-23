@@ -2,7 +2,7 @@
 \alias{chaikinOscillator}
 \title{ Chaikin Oscillator }
 \description{
-  The Chaikin Oscillator is an oscillator applied to the Chaikin Accumulation / Distribuion line.
+  The Chaikin Oscillator is an oscillator applied to the Chaikin Accumulation / Distribution line.
 }
 \usage{
   chaikinOscillator(HLC, volume, ma.slow = list("EMA", n=10),
@@ -19,7 +19,7 @@
     averages is returned, otherwise the difference between the respective averages is returned. }
 }
 \details{
-  The Chaikin Osciallator is calculated similarly to other price oscillators: by subtracting a slow
+  The Chaikin Oscillator is calculated similarly to other price oscillators: by subtracting a slow
   moving average of the A/D line from a fast moving average of the A/D line.
 }
 \value{

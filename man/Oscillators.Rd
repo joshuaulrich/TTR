@@ -45,8 +45,8 @@
   \url{http://stockcharts.com/education/IndicatorAnalysis/indic_priceOscillator.html}\cr
 }
 \note{
-  The MACD is a special case of the general oscillator applied to price.  The MACD funciton
-  is provided for convenience. Time periods for the MACD are often given as 26 and 12, but the
+  The MACD is a special case of the general oscillator applied to price.  The MACD function
+  is provided for convenience. Time periods for the MACD are often given as 26 and 12, but
   the function originally used exponential constants of 0.075 and 0.15, which are closer
   to 25.6667 and 12.3333 periods.
 }

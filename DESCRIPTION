@@ -1,8 +1,8 @@
 Package: TTR
 Type: Package
 Title: Technical Trading Rules
-Version: 0.13
-Date: 2007-09-27
+Version: 0.13-1
+Date: 2007-10-23
 Author: Josh Ulrich
 Maintainer: Josh Ulrich <josh.m.ulrich@gmail.com>
 Description: Functions and data to construct technical trading rules with R.

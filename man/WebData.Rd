@@ -50,7 +50,7 @@
 }
 \author{ Josh Ulrich }
 \note{
-  The symbols returned by \code{stockSymbols} may not be in the format necessary to retrive data
+  The symbols returned by \code{stockSymbols} may not be in the format necessary to retrieve data
   using \code{getYahooData}.
 
   \code{getYahooData} has only been tested on daily data.  It isn't known if the function correctly

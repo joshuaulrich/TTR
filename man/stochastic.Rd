@@ -1,5 +1,7 @@
-\name{stoch}
-\alias{stoch}
+\name{stochastic}
+\alias{stochastic}
+\alias{\%K}
+\alias{\%D}
 \title{ Stochastic Oscillator }
 \description{
   The stochastic oscillator is a momentum indicator that relates the location of each day's
@@ -7,7 +9,7 @@
   Lane in the late 1950s.
 }
 \usage{
-  stoch(HLC, n.fastK=14, ma.fastD=list("SMA", n=3), ma.slowD=ma.fastD)
+  stochastic(HLC, n.fastK=14, ma.fastD=list("SMA", n=3), ma.slowD=ma.fastD)
 }
 \arguments{
   \item{HLC}{ High-Low-Close price series to use.  If only a univariate series is given,
@@ -52,7 +54,7 @@
 }
 \examples{
   data(ttrc)
-  stoch.osc <- stoch(ttrc[,c("High","Low","Close")])
+  stoch.osc <- stochastic(ttrc[,c("High","Low","Close")])
   stoch.wpr <- WPR(ttrc[,c("High","Low","Close")])
 
   plot(tail(stoch.osc[,"fastK"], 100), type="l", main="Fast \%K and Williams \%R",
@@ -60,6 +62,8 @@
   lines(tail(stoch.wpr, 100), col="blue")
   lines(tail(1-stoch.wpr, 100), col="red", lty="dashed")
 
-  stoch.rsi <- stoch( RSI(ttrc[,"Close"]) )
+  stoch.rsi <- stochastic( RSI(ttrc[,"Close"]) )
 }
 \keyword{ ts }
+
+

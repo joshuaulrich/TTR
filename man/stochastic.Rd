@@ -58,7 +58,7 @@
   stoch.wpr <- WPR(ttrc[,c("High","Low","Close")])
 
   plot(tail(stoch.osc[,"fastK"], 100), type="l", main="Fast \%K and Williams \%R",
-    ylab="", ylim = range(cbind(stoch.osc, stoch.wpr), na.rm=TRUE) )
+    ylab="", ylim=range(cbind(stoch.osc, stoch.wpr), na.rm=TRUE) )
   lines(tail(stoch.wpr, 100), col="blue")
   lines(tail(1-stoch.wpr, 100), col="red", lty="dashed")
 

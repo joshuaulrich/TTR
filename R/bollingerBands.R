@@ -1,5 +1,5 @@
 "bollingerBands" <-
-function(HLC, ma = list("SMA", n=20), sd = list(FUN="sd", n=2)) {
+function(HLC, ma=list("SMA", n=20), sd=list(FUN="sd", n=2)) {
 
   # Bollinger Bands
 

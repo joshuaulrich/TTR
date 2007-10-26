@@ -1,5 +1,4 @@
-\name{Oscillators}
-\alias{Oscillators}
+\name{oscillator}
 \alias{oscillator}
 \alias{MACD}
 \title{ Oscillators }
@@ -9,15 +8,15 @@
   probably the MACD, which was developed by Gerald Appel.
 }
 \usage{
-  oscillator(x, ma.slow = list("EMA", n=20), ma.fast = list("EMA", n=10),
-             ma.sig = list("EMA", n=10), percent = FALSE)
+  oscillator(x, ma.fast=list("EMA", n=10), ma.slow=list("EMA", n=20),
+             ma.sig=list("EMA", n=10), percent=FALSE)
         MACD(x)
 }
 \arguments{
   \item{x}{ Series to use; usually price, but can be volume, etc. }
+  \item{ma.fast}{ Similar to \code{ma.slow}, but for the fast moving average. }
   \item{ma.slow}{ A \emph{list} whose first component is a string containing the slow moving average
     function name; additional parameters may also be specified as \emph{named} components. }
-  \item{ma.fast}{ Similar to \code{ma.slow}, but for the fast moving average. }
   \item{ma.sig}{ Similar to \code{ma.slow}, but for the signal line moving average. }
   \item{percent}{ logical; if \code{TRUE}, the percentage difference between the slow and fast moving
     averages is returned, otherwise the difference between the respective averages is returned. }
@@ -27,11 +26,7 @@
   of change between the short MA and the long MA.
 }
 \value{
-  The MACD function returns a matrix containing the columns:
-  \item{ macd }{ The MACD line. }
-  \item{ signal }{ The MACD signal line (a moving average of the MACD). }
-
-  The oscillator function returns a matrix containing the columns:
+  The MACD and oscillator functions return a matrix containing the columns:
   \item{ oscillator }{ The price (volume, etc.) oscillator. }
   \item{ signal }{ The oscillator signal line (a moving average of the oscillator). }
 }
@@ -58,8 +53,8 @@
   data(ttrc)
 
   macd <- MACD(ttrc[,"Close"])
-  osc  <- oscillator( ttrc[,"Close"], ma.slow = list("EMA",n=26),
-                      ma.fast = list("EMA",n=12), ma.sig = list("EMA", n=9) )
+  osc  <- oscillator( ttrc[,"Close"], ma.fast=list("EMA", n=12),
+                      ma.slow=list("EMA", n=26), ma.sig=list("EMA", n=9) )
 
   # Should be TRUE
   identical(macd,osc)

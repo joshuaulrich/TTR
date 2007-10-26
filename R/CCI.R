@@ -1,5 +1,5 @@
 "CCI" <-
-function(HLC, ma = list("SMA", n=20), c=0.015) {
+function(HLC, ma=list("SMA", n=20), c=0.015) {
 
   # Commodity Channel Index
 

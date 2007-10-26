@@ -1,5 +1,5 @@
 "chaikinMF" <-
-function(HLC, volume, n = 20) {
+function(HLC, volume, n=20) {
 
   # Chaikin Money Flow
 

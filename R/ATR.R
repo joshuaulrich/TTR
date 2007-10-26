@@ -1,5 +1,5 @@
 "ATR" <-
-function(HLC, ma = list("EMA", n=14, wilder=TRUE)) {
+function(HLC, ma=list("EMA", n=14, wilder=TRUE)) {
 
   # Average True Range / True Range
 

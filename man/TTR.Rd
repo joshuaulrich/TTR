@@ -1,5 +1,4 @@
-\name{TTR-package}
-\alias{TTR-package}
+\name{TTR}
 \alias{TTR}
 \docType{package}
 \title{
@@ -13,8 +12,8 @@
   \tabular{ll}{
     Package: \tab TTR\cr
     Type: \tab Package\cr
-    Version: \tab 0.13-1\cr
-    Date: \tab 2007-10-23\cr
+    Version: \tab 0.13-2\cr
+    Date: \tab 2007-10-25\cr
     License: \tab GPL Version 2 or later.\cr
   }
 
@@ -23,7 +22,7 @@
   \code{\link{changes}}\cr
   \code{\link{ADX}}\cr
   \code{\link{MovingAverages}}\cr
-  \code{\link{Oscillators}}\cr
+  \code{\link{oscillator}}\cr
   \code{\link{RSI}}\cr
   \code{\link{stochastic}}\cr
   \code{\link{WebData}}\cr

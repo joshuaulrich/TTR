@@ -1,4 +1,4 @@
-\name{ttr.tools}
+\name{TTRtools}
 \alias{growth}
 \alias{rollFUN}
 \alias{lags}
@@ -10,13 +10,13 @@
 \usage{
   growth(price, signals, ...)
   rollFUN(x, n, FUN, ...)
-  lags(x, n = 1)
-  wilderSum(x, n = 10)
+  lags(x, n=1)
+  wilderSum(x, n=10)
 }
 \arguments{
   \item{price}{ Price series to use. }
-  \item{signals}{ Signals to use (defaults to vector of ones).  Use \sQuote{0} for no
-    position, \sQuote{1} for long position, and \sQuote{-1} for short position. }
+  \item{signals}{ Signals to use (defaults to vector of ones).  Use '0' for no
+    position, '1' for long position, and '-1' for short position. }
   \item{x}{ Object able to be coerced to a matrix. }
   \item{n}{ Number of periods to use. }
   \item{FUN}{ Function to calculate over rolling subsets of data. }
@@ -43,7 +43,7 @@
 \author{ Josh Ulrich }
 \note{
   In \code{growth} you can specify the number of periods and type of compounding
-  to use when calculating returns of the price series via the \sQuote{\dots} argument.
+  to use when calculating returns of the price series via the \code{'\dots'} argument.
 }
 %--\examples{
 %--##---- Should be DIRECTLY executable !! ----

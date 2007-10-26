@@ -1,6 +1,6 @@
 "KST" <-
-function(price, n = c(10, 15, 20, 30), ma1 = list("SMA", n=10), ma2 = ma1, ma3 = ma1, 
-         ma4 = list("SMA", n=15), ma.sig = list("SMA", n=10), wts = 1:4) {
+function(price, n=c(10, 15, 20, 30), ma1=list("SMA", n=10), ma2=ma1, ma3=ma1, 
+         ma4=list("SMA", n=15), ma.sig=list("SMA", n=10), wts=1:4) {
 
   # Know Sure Thing
 

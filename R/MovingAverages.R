@@ -17,7 +17,6 @@ function(x, n=10) {
   return( sma )
 }
 
-# -----------------------------------------------------------
 
 "EMA" <-
 function(x, n=10, wilder=FALSE) {
@@ -30,7 +29,7 @@ function(x, n=10, wilder=FALSE) {
   # http://stockcharts.com/education/IndicatorAnalysis/indic_movingAvg.html
 
   x   <- as.vector(x)
-  ema <- as.vector(x)
+  ema <- rep(NA, NROW(x))
 
   if(wilder) ratio <- 1/n
   else       ratio <- 2/(n+1)
@@ -43,7 +42,6 @@ function(x, n=10, wilder=FALSE) {
   return( ema )
 }
 
-# -----------------------------------------------------------
 
 "WMA" <-
 function(x, n=10, wts=1:n) {
@@ -69,7 +67,6 @@ function(x, n=10, wts=1:n) {
   return( wma )
 }
 
-# -----------------------------------------------------------
 
 "DEMA" <-
 function(x, n=10) {
@@ -84,7 +81,6 @@ function(x, n=10) {
   return( dema )
 }
 
-# -----------------------------------------------------------
 
 "EVWMA" <-
 function(price, volume, n=10) {
@@ -93,21 +89,22 @@ function(price, volume, n=10) {
 
   # http://linnsoft.com/tour/techind/evwma.htm
 
-  evwma <- vector("numeric", NROW(price))
+  evwma <- rep(NA, NROW(price))
+  evwma[n-1] <- price[n-1]
 
   if(NROW(volume)==1) {
     v.sum <- rep(volume, NROW(price))
   } else
     v.sum <- rollFUN(volume, n, FUN="sum")
 
-  for(i in 1:(NROW(price)-n+1)) {
-    j <- i+n-1
-    evwma[j] <- ( (v.sum[j]-volume[j])*evwma[j-1] + volume[j]*price[j] ) / v.sum[j]
+  for(i in n:NROW(price)) {
+    j <- i-n+1
+    evwma[i] <- ( (v.sum[i]-volume[i])*evwma[i-1] + volume[i]*price[i] ) / v.sum[i]
   }
   return( evwma )
+
 }
 
-# -----------------------------------------------------------
 
 "ZLEMA" <-
 function(x, n=10) {
@@ -118,7 +115,7 @@ function(x, n=10) {
   # http://linnsoft.com/tour/techind/movAvg.htm
 
   x     <- as.vector(x)
-  zlema <- as.vector(x)
+  zlema <- rep(NA, NROW(x))
 
   ratio <- 2/(n-1)
   lag   <- (n-1)/2

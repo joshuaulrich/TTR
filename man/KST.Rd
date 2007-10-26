@@ -5,8 +5,8 @@
   The Know Sure Thing (KST) is a smooth, summed, rate of change indicator.  Developed by Martin Pring.
 }
 \usage{
-  KST(price, n = c(10, 15, 20, 30), ma1 = list("SMA", n=10), ma2 = ma1, ma3 = ma1, 
-         ma4 = list("SMA", n=15), ma.sig = list("SMA", n=10), wts = 1:4)
+  KST(price, n=c(10, 15, 20, 30), ma1=list("SMA", n=10), ma2=ma1, ma3=ma1, 
+         ma4=list("SMA", n=15), ma.sig=list("SMA", n=10), wts=1:4)
 }
 \arguments{
   \item{price}{ Price series to use. }
@@ -43,7 +43,7 @@
   Because the KST tends to lead price action, look for trend confirmation in the price.
 
   The default arguments are for the daily KST.  There is also the Long-Term KST, with
-  arguments: \code{n = c(9, 12, 18, 24)} - where the periods are months, not days - and the
+  arguments: \code{n=c(9, 12, 18, 24)} - where the periods are months, not days - and the
   moving average periods are 6, 6, 6, and 9 months, respectively.
 }
 \seealso{

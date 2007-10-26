@@ -6,8 +6,8 @@
   Developed by Jack K. Hutson.
 }
 \usage{
-  TRIX(price, ma1 = list("EMA", n=20), ma2 = ma1, ma3 = ma1,
-              ma.sig = list("EMA", n=9), percent = TRUE)
+  TRIX(price, ma1=list("EMA", n=20), ma2=ma1, ma3=ma1,
+              ma.sig=list("EMA", n=9), percent=TRUE)
 }
 \arguments{
   \item{price}{ Price series to use. }

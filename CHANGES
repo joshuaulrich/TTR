@@ -1,11 +1,28 @@
- TTR version 0.13-1
- CHANGES FROM TTR version 0.13
+TTR version 0.13-2
+  Changes from version 0.13-1
 
-- Changed 'bbands()' to 'bollingerBands()'
+- Aligned function argument syntax so there were no spaces around equal signs.
+  E.g. function(x, ma = list("EMA", n=9)) -> function(x, ma=list("EMA", n=9))
 
-- Changed 'DX()' to 'ADX()'
+- Updated WebData.Rd, changes.Rd, and ttrc.Rd to use \code{'foo'} instead of
+  \code{\sQuote{foo}}.
 
-- Changed 'stoch()' to 'stochastic()'
+- Renamed TTR-package.Rd to TTR.Rd
 
-- Corrected mis-spellings in documentation.
+- Renamed ttr.tools.Rd to TTRtools.Rd and ttr.tools.R to TTRtools.R
+
+- Renamed Oscillators.R to oscillator.R
+
+- Renamed Oscillators.Rd to oscillator.Rd and combined MACD and oscillator
+  portions of the \value{} section.
+
+- Changed EVWMA so period n contains the value for periods (i-n+1):n and 
+  so periods 1:(n-2) will be NA.
+
+- Changed EMA so periods 1:n will be NA.
+
+- Changed order of oscillator() arguments from 'ma.slow, ma.fast, ma.sig' to
+  the traditional 'ma.fast, ma.slow, ma.sig'.  Thanks goes to Jeff Ryan.
+
+- The arguments to the chaikinOscillator function were changed as above.
 

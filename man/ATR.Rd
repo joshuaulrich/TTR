@@ -8,7 +8,7 @@
   is a Welles Wilder's style moving average of the TR.  Developed by J. Welles Wilder in 1978.
 }
 \usage{
-  ATR(HLC, ma = list("EMA", n=14, wilder=TRUE))
+  ATR(HLC, ma=list("EMA", n=14, wilder=TRUE))
 }
 \arguments{
   \item{HLC}{ Object able to be coerced to a matrix, which contains High-Low-Close prices. }
@@ -44,6 +44,6 @@
   See \code{\link{chaikinVolatility}} for another volatility measure. }
 \examples{
   data(ttrc)
-  atr <- ATR(ttrc[,c("High","Low","Close")], ma = list("EMA", n=14, wilder=TRUE))
+  atr <- ATR(ttrc[,c("High","Low","Close")], ma=list("EMA", n=14, wilder=TRUE))
 }
 \keyword{ ts }

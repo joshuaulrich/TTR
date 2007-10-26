@@ -5,15 +5,15 @@
   The Chaikin Oscillator is an oscillator applied to the Chaikin Accumulation / Distribution line.
 }
 \usage{
-  chaikinOscillator(HLC, volume, ma.slow = list("EMA", n=10),
-                     ma.fast = list("EMA", n=3), percent=FALSE)
+  chaikinOscillator(HLC, volume, ma.fast=list("EMA", n=3),
+                     ma.slow=list("EMA", n=10), percent=FALSE)
 }
 \arguments{
   \item{HLC}{ Object able to be coerced to a matrix, which contains High-Low-Close prices. }
   \item{volume}{ Vector or matrix of volume observations corresponding to the \code{HLC} object. }
-  \item{ma.slow}{ A \emph{list} whose first component is a string containing the slow moving
-    average function name; additional parameters may also be specified as \emph{named} components. }
   \item{ma.fast}{ A \emph{list} whose first component is a string containing the fast moving
+    average function name; additional parameters may also be specified as \emph{named} components. }
+  \item{ma.slow}{ A \emph{list} whose first component is a string containing the slow moving
     average function name; additional parameters may also be specified as \emph{named} components. }
   \item{percent}{ logical; if \code{TRUE}, the percentage difference between the slow and fast moving
     averages is returned, otherwise the difference between the respective averages is returned. }

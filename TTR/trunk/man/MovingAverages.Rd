@@ -69,7 +69,7 @@ ZLEMA(x, n=10)
 
   Since \code{WMA} can accept a weight vector of length equal to the length of \code{x} or of
   length \code{n}, it can be used as a regular weighted moving average (in the case 
-  \code{wts = 1:n}) or as a moving average weighted by volume, another indicator, etc.
+  \code{wts=1:n}) or as a moving average weighted by volume, another indicator, etc.
 
   For \code{EVWMA}, if \code{volume} is a series, \code{n} should be chosen so the sum of the
   volume for \code{n} periods approximates the total number of outstanding shares for the

@@ -1,6 +1,6 @@
 "oscillator" <-
-function(x, ma.slow = list("EMA", n=20), ma.fast = list("EMA", n=10),
-             ma.sig = list("EMA", n=10), percent = FALSE) {
+function(x, ma.fast=list("EMA", n=10), ma.slow=list("EMA", n=20),
+             ma.sig=list("EMA", n=10), percent=FALSE) {
 
   # Oscillators
 
@@ -41,14 +41,13 @@ function(x, ma.slow = list("EMA", n=20), ma.fast = list("EMA", n=10),
   return( cbind( oscillator, signal ) )
 }
 
-# -----------------------------------------------------------
 
 "MACD" <-
 function(x) {
 
   # Moving Average Convergence/Divergence (MACD)
 
-  oscillator <- oscillator( x, list("EMA",n=26), list("EMA",n=12), list("EMA", n=9) )
+  oscillator <- oscillator( x, list("EMA",n=12), list("EMA",n=26), list("EMA", n=9) )
 
   return( oscillator )
 }

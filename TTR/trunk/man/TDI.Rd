@@ -6,7 +6,7 @@
   Developed by M. H. Pee.
 }
 \usage{
-  TDI(price, n = 20)
+  TDI(price, n=20)
 }
 \arguments{
   \item{price}{ Price series to use. }

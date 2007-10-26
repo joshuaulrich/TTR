@@ -5,7 +5,7 @@
   The Parabolic Stop-and-Reverse calculates a trailing stop.  Developed by J. Welles Wilder.
 }
 \usage{
-  SAR(HL, accel = c(0.02, 0.2))
+  SAR(HL, accel=c(0.02, 0.2))
 }
 \arguments{
   \item{HL}{ Object able to be coerced to a matrix, which contains High-Low prices. }

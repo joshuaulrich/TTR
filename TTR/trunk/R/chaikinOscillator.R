@@ -1,5 +1,5 @@
 "chaikinOscillator" <-
-function(HLC, volume, ma.slow = list("EMA", n=10), ma.fast = list("EMA", n=3), percent = FALSE) {
+function(HLC, volume, ma.fast=list("EMA", n=3), ma.slow=list("EMA", n=10), percent=FALSE) {
 
   # Chaikin Oscillator
 

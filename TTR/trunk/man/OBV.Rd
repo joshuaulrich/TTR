@@ -14,8 +14,8 @@
                  to \code{price} object. }
 }
 \details{
-  OBV is calculated by adding(subtracting) each day's volume to a running cumulative
-  total when the security's price closes higher(lower).
+  OBV is calculated by adding (subtracting) each day's volume to a running cumulative
+  total when the security's price closes higher (lower).
 }
 \value{
   A vector containing the OBV values.

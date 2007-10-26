@@ -6,7 +6,7 @@
   Developed by Adam White.
 }
 \usage{
-  VHF(price, n = 28)
+  VHF(price, n=28)
 }
 \arguments{
   \item{price}{ Object able to be coerced to a matrix, which contains either a Close price

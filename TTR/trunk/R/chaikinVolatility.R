@@ -1,5 +1,5 @@
 "chaikinVolatility" <-
-function(HL, ma = list("EMA", n=10)) {
+function(HL, ma=list("EMA", n=10)) {
 
   # Chaikin Volatility
 

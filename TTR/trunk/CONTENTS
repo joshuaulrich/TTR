@@ -1,4 +1,4 @@
-# TTR version 0.13-1
+# TTR version 0.13-2
 
 ### FUNCTIONS		DESCRIPTIONS ###
 ADX.R	                (Average) Directional Indicators
@@ -27,4 +27,4 @@ TRIX.R	                Triple EMA Rate of Change
 ttr.tools.R	        Rolling Functions, Lags, Growth of $1, Welles Wilder sum
 VHF.R	                Vertical Horizontal Filter
 WebData.R	        Get Symbols from Exchanges, Get Yahoo Finance Data
-WPR.R	                William's Percent R
+WPR.R	                William's Percent R

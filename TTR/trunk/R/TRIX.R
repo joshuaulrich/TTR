@@ -1,6 +1,6 @@
 "TRIX" <-
-function(price, ma1 = list("EMA", n=20), ma2 = ma1, ma3 = ma1,
-              ma.sig = list("EMA", n=9), percent = TRUE) {
+function(price, ma1=list("EMA", n=20), ma2=ma1, ma3=ma1,
+              ma.sig=list("EMA", n=9), percent=TRUE) {
 
   # Triple Smoothed Exponential Oscillator
 

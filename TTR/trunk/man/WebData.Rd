@@ -7,10 +7,10 @@
   Get investment data from the internet.
 }
 \usage{
-  getYahooData(symbol, start, end, freq = "daily", type = "price",
-             adjust = TRUE, quiet = FALSE)
-  stockSymbols(exchange = c("AMEX","NASDAQ","NYSE"),
-              sort.by = c("Exchange","Symbol"), quiet = FALSE)
+  getYahooData(symbol, start, end, freq="daily", type="price",
+             adjust=TRUE, quiet=FALSE)
+  stockSymbols(exchange=c("AMEX","NASDAQ","NYSE"),
+              sort.by=c("Exchange","Symbol"), quiet=FALSE)
 }
 \arguments{
   \item{symbol}{ Yahoo! Finance instrument symbol. }
@@ -18,16 +18,16 @@
     Default is first date of series. }
   \item{end}{ Numeric; last date of desired data, in YYYYMMDD format. 
     Default is last date of series. }
-  \item{freq}{ Desired data frequency.  One of \dQuote{daily}, \dQuote{weekly}, 
-    \dQuote{monthly}. }
-  \item{type}{ Type of data to return.  One of \dQuote{price}, or \dQuote{split}.
-    \code{type = "split"} will return both split and dividend data. }
+  \item{freq}{ Desired data frequency.  One of \code{"daily"}, \code{"weekly"}, 
+    \code{"monthly"}. }
+  \item{type}{ Type of data to return.  One of \code{"price"}, or \code{"split"}.
+    \code{type="split"} will return both split and dividend data. }
   \item{adjust}{ Logical; if \code{TRUE}, the Open, High, Low, and Close prices will
     be adjusted for dividends and splits, and Volume will be adjusted for dividends. }
   \item{quiet}{ Logical; if \code{TRUE}, status messages will be printed to the console. }
   \item{exchange}{ Character vector of exchange names on which desired instrument symbols are traded. }
   \item{sort.by}{ Character vector of columns by which returned data will be sorted.  Must be
-    one or more of \dQuote{Name}, \dQuote{Symbol}, \dQuote{Market.Cap}, or \dQuote{Exchange}. }
+    one or more of \code{"Name"}, \code{"Symbol"}, \code{"Market.Cap"}, or \code{"Exchange"}. }
 }
 \details{
   \code{getYahooData} fetches individual stock data from the Yahoo! Finance website.

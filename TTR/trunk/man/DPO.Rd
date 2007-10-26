@@ -6,7 +6,7 @@
   by subtracting a moving average of the price from the price.
 }
 \usage{
-  DPO(x, ma = list("SMA", n=10), shift = ma$n/2+1, percent = FALSE)
+  DPO(x, ma=list("SMA", n=10), shift=ma$n/2+1, percent=FALSE)
 }
 \arguments{
   \item{x}{ Price, volume, etc. series to use. }

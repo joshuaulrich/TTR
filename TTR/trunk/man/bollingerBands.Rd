@@ -6,7 +6,7 @@
   a period of time.  Developed by John Bollinger.
 }
 \usage{
-  bollingerBands(HLC, ma = list("SMA", n=20), sd = list(FUN="sd", n=2))
+  bollingerBands(HLC, ma=list("SMA", n=20), sd=list(FUN="sd", n=2))
 }
 \arguments{
   \item{HLC}{ High-Low-Close price series to use.  If only a univariate series is given,

@@ -27,7 +27,7 @@ function(price, n=c(10, 15, 20, 30), ma1=list("SMA", n=10), ma2=ma1, ma3=ma1,
 
   for(i in 1:NROW(n)) {
     mai <- get(paste("ma",i,sep=""))
-    roc <- do.call( mai[[1]], c( list( ROC(price, n[i], na=0) ), mai[-1] ) ) * wts[i]
+    roc <- do.call( mai[[1]], c( list( ROC(price, n[i], na=NA) ), mai[-1] ) ) * wts[i]
     ret <- cbind( ret, roc )
   }
 

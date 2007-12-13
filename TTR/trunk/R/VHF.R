@@ -10,7 +10,6 @@ function(price, n=28) {
 
   # Calculation if price series is given
   if(NCOL(price)==1) {
-    message("Using Close price series"); flush.console()
     high  <- price
     low   <- price
     close <- price
@@ -18,7 +17,6 @@ function(price, n=28) {
 
   # Calculation if HLC series is given
   if(NCOL(price)==3) {
-    message("Using High-Low-Close series"); flush.console()
     high  <- price[,1]
     low   <- price[,2]
     close <- price[,3]

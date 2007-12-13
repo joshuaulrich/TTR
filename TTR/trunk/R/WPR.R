@@ -12,7 +12,6 @@ function(HLC, n=14) {
 
   # Calculation if HLC series is given
   if(NCOL(HLC)==3) {
-    message("Using High-Low-Close series"); flush.console()
     high  <- HLC[,1]
     low   <- HLC[,2]
     close <- HLC[,3]
@@ -20,7 +19,6 @@ function(HLC, n=14) {
 
   # Calculation if price vector is given
   if(NCOL(HLC)==1) {
-    message("Using Close price series"); flush.console()
     high  <- HLC
     low   <- HLC
     close <- HLC

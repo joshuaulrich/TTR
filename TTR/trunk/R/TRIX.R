@@ -15,9 +15,9 @@ function(price, ma1=list("EMA", n=20), ma2=ma1, ma3=ma1,
   mavg3 <- do.call( ma3[[1]], c( list(mavg2), ma3[-1] ) )
 
   if(percent) {
-    TRIX <- 100 * ROC(mavg3, n=1, na=0, type="discrete")
+    TRIX <- 100 * ROC(mavg3, n=1, na=NA, type="discrete")
   } else {
-    TRIX <- momentum( mavg3, n=1, na=0 )
+    TRIX <- momentum( mavg3, n=1, na=NA )
   }
 
   signal <- do.call( ma.sig[[1]], c( list(TRIX), ma.sig[-1] ) )

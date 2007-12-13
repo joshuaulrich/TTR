@@ -18,7 +18,7 @@
 }
 \details{
   The EMV is calculated by dividing the midpoint ([high + low]/2) move by the
-  \sQuote{Box Ratio} (volume divided by the high minus low).
+  'Box Ratio' (volume divided by the high minus low).
 }
 \value{
   A matrix containing the columns:

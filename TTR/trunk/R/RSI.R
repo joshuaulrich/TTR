@@ -13,7 +13,7 @@ function(price, ma.up=list("EMA", n=14, wilder=TRUE), ma.down=ma.up) {
   # http://www.fmlabs.com/reference/StochRSI.htm
   # http://stockcharts.com/education/IndicatorAnalysis/indic_stochRSI.html
 
-  up <- momentum(price, n=1, na=100)
+  up <- momentum(price, n=1, na=NA)
   dn <- ifelse(up<0, abs(up), 0)
   up <- ifelse(up>0,     up , 0)
 

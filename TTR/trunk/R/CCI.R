@@ -9,12 +9,10 @@ function(HLC, ma=list("SMA", n=20), c=0.015) {
   # http://stockcharts.com/education/IndicatorAnalysis/indic_CCI.html
 
   if(NCOL(HLC)==1) {
-    message("Using Close/univariate price series."); flush.console()
     HLC <- as.vector(HLC)
   } else
 
   if(NCOL(HLC)==3) {
-    message("Using typical price series."); flush.console()
     HLC <- rowMeans(HLC)
   } else
 

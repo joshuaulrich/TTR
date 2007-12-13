@@ -13,14 +13,12 @@ function(HL, n=20) {
 
   # Calculation if price vector is given
   if(NCOL(HL)==1) {
-    message("Using Close price series"); flush.console()
     high <- HL
     low  <- HL
   } else
 
   # Calculation if HL series is given
   if(NCOL(HL)==2) {
-    message("Using High-Low series"); flush.console()
     high <- HL[,1]
     low  <- HL[,2]
   } else

@@ -11,12 +11,10 @@ function(HLC, ma=list("SMA", n=20), sd=list(FUN="sd", n=2)) {
   # http://stockcharts.com/education/IndicatorAnalysis/indic_BBWidth.htm
 
   if(NCOL(HLC)==1) {
-    message("Using Close/univariate price series."); flush.console()
     HLC <- as.vector(HLC)
   } else
 
   if(NCOL(HLC)==3) {
-    message("Using typical price series."); flush.console()
     HLC <- rowMeans(HLC)
   } else
 

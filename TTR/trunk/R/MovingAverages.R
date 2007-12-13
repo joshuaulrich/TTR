@@ -8,9 +8,6 @@ function(x, n=10) {
   # http://linnsoft.com/tour/techind/movAvg.htm
   # http://stockcharts.com/education/IndicatorAnalysis/indic_movingAvg.html
 
-  # There needs to be options to make the first 'n' obs
-  # either NA, 0, or something else for all MA functions.
-
   x   <- as.vector(x)
   sma <- rollFUN(x, n, FUN="sum") / n
 
@@ -19,7 +16,7 @@ function(x, n=10) {
 
 
 "EMA" <-
-function(x, n=10, wilder=FALSE) {
+function(x, n=10, wilder=FALSE, ratio=NULL) {
 
   # Exponential Moving Average
 
@@ -29,16 +26,35 @@ function(x, n=10, wilder=FALSE) {
   # http://stockcharts.com/education/IndicatorAnalysis/indic_movingAvg.html
 
   x   <- as.vector(x)
-  ema <- rep(NA, NROW(x))
+  
+  # Count NAs and ensure they only appear at beginning of data
+  NAs <- sum( is.na(x) )
+  if( NAs > 0 ) {
+    if( any( !is.na(x[1:NAs]) ) ) stop("Series contains non-leading NAs")
+  }
+  x   <- na.omit(x)
 
-  if(wilder) ratio <- 1/n
-  else       ratio <- 2/(n+1)
+  ema <- rep(1, NROW(x))
+
+  if(is.null(ratio)) {
+    if(wilder) ratio <- 1/n
+    else       ratio <- 2/(n+1)
+  }
 
   ema[n] <- mean(x[1:n])
 
-  for(i in (n+1):NROW(x)) {
-    ema[i] <- x[i] * ratio + ema[i-1] * (1-ratio)
-  }
+  ema <- .Fortran( "ema", n = as.integer(n),
+                          ma = as.double(ema),
+                          x = as.double(x),
+                          ratio = as.double(ratio),
+                          lenma = as.integer(NROW(ema)),
+                          lenx = as.integer(NROW(x)),
+                          PACKAGE = "TTR" )$ma
+
+  # replace 1:(n-1) with NAs and prepend NAs from original data
+  ema[1:(n-1)] <- NA
+  ema <- c( rep( NA, NAs ), ema ) 
+
   return( ema )
 }
 

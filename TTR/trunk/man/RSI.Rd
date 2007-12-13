@@ -17,7 +17,7 @@
 }
 \details{
   The RSI calculation is \code{RSI = 100 - 100 / ( 1 + RS )}, where \code{RS} is the smoothed
-  ratio of \sQuote{average} gains over \sQuote{average} losses.  The \sQuote{averages} aren't true
+  ratio of 'average gains over 'average' losses.  The 'averages' aren't true
   averages, since they're divided by the value of \code{n} not the number of gain/loss periods.
 }
 \value{

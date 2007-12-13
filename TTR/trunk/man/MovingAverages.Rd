@@ -12,7 +12,7 @@
 }
 \usage{
   SMA(x, n=10)
-  EMA(x, n=10, wilder=FALSE)
+  EMA(x, n=10, wilder=FALSE, ratio=NULL)
   WMA(x, n=10, wts=1:n)
  DEMA(x, n=10)
 EVWMA(price, volume, n=10)
@@ -27,6 +27,7 @@ ZLEMA(x, n=10)
     length of \code{x}, or \code{n} (the default). }
   \item{wilder}{ logical; if \code{TRUE}, a Welles Wilder type EMA will be
     calculated; see notes. }
+  \item{ratio}{ A smoothing ratio to use (overrides \code{wilder}) }
 }
 \details{
   SMA calculates the arithmetic mean of the series over the past \code{n} observations.

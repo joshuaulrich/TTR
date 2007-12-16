@@ -1,3 +1,8 @@
+#-------------------------------------------------------------------------#
+# TTR, copyright (C) Joshua M. Ulrich, 2007                               #
+# Distributed under GNU GPL version 3                                     #
+#-------------------------------------------------------------------------#
+
 "chaikinMF" <-
 function(HLC, volume, n=20) {
 
@@ -8,8 +13,11 @@ function(HLC, volume, n=20) {
   # http://stockcharts.com/education/IndicatorAnalysis/indic_ChaikinMoneyFlow1.html
 
   HLC <- as.matrix(HLC)
-  MF  <- rollFUN(CLV(HLC) * volume, n, FUN="sum") / rollFUN(volume, n, FUN="sum")
+
+  clv    <- as.double( CLV(HLC) )
+  volume <- as.double( volume )
+
+  MF <- runSum(clv*volume, n) / runSum(volume, n)
 
   return( MF )
 }
-

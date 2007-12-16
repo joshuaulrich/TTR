@@ -1,6 +1,5 @@
 \name{TTRtools}
 \alias{growth}
-\alias{rollFUN}
 \alias{lags}
 \alias{wilderSum}
 \title{ Miscellaneous Tools }
@@ -9,7 +8,6 @@
 }
 \usage{
   growth(price, signals, ...)
-  rollFUN(x, n, FUN, ...)
   lags(x, n=1)
   wilderSum(x, n=10)
 }
@@ -19,13 +17,10 @@
     position, '1' for long position, and '-1' for short position. }
   \item{x}{ Object able to be coerced to a matrix. }
   \item{n}{ Number of periods to use. }
-  \item{FUN}{ Function to calculate over rolling subsets of data. }
   \item{...}{ Further arguments to be passed from or to other methods. }
 }
 \details{
   \code{growth} calculates the growth of an investment using given prices and signals.
-
-  \code{rollFUN} allows the calculation of rolling functions.
 
   \code{lags} calculates the lags of a given series.
 
@@ -33,8 +28,6 @@
 }
 \value{
   \code{growth} returns a vector of the growth of the investment.
-
-  \code{rollFUN} returns a vector of function results for the rolling subsets of data.
 
   \code{lags} returns a matrix of lagged values of the original vector.
 

@@ -1,3 +1,8 @@
+#-------------------------------------------------------------------------#
+# TTR, copyright (C) Joshua M. Ulrich, 2007                               #
+# Distributed under GNU GPL version 3                                     #
+#-------------------------------------------------------------------------#
+
 "TRIX" <-
 function(price, ma1=list("EMA", n=20), ma2=ma1, ma3=ma1,
               ma.sig=list("EMA", n=9), percent=TRUE) {
@@ -23,5 +28,4 @@ function(price, ma1=list("EMA", n=20), ma2=ma1, ma3=ma1,
   signal <- do.call( ma.sig[[1]], c( list(TRIX), ma.sig[-1] ) )
 
   return( cbind( TRIX, signal ) )
-
 }

@@ -1,9 +1,16 @@
+#-------------------------------------------------------------------------#
+# TTR, copyright (C) Joshua M. Ulrich, 2007                               #
+# Distributed under GNU GPL version 3                                     #
+#-------------------------------------------------------------------------#
+
 "stockSymbols" <-
-function(exchange=c("AMEX","NASDAQ","NYSE"), sort.by=c("Exchange","Symbol"), quiet=FALSE) {
+function(exchange=c("AMEX","NASDAQ","NYSE"),
+         sort.by=c("Exchange","Symbol"), quiet=FALSE) {
 
   # Many thanks to Ion Georgiadis for helpful suggestions and testing.
 
-  # See "NYSE "behind the dot" or Nasdaq 5th-letter codes and other special codes" here:
+  # See "NYSE "behind the dot" or Nasdaq 5th-letter codes and other special
+  # codes" here:
   # http://en.wikipedia.org/wiki/Ticker_symbol
   # http://help.yahoo.com/l/us/yahoo/finance/quotes/quote-02.html
   # 
@@ -87,11 +94,13 @@ function(exchange=c("AMEX","NASDAQ","NYSE"), sort.by=c("Exchange","Symbol"), qui
   return(symbols)
 }
 
+#-------------------------------------------------------------------------#
+
 "getYahooData" <-
 function(symbol, start, end, freq="daily", type="price", adjust=TRUE, quiet=FALSE) {
 
-  # Thank you to Giorgio Beltrame for the URL to download dividends _and_ splits, and
-  # for his correct adjustment procedure.
+  # Thank you to Giorgio Beltrame for the URL to download dividends _and_
+  # splits, and for his correct adjustment procedure.
   # Many thanks to Ion Georgiadis for helpful suggestions and testing.
 
   # symbol:  Character, instrument symbol
@@ -101,8 +110,8 @@ function(symbol, start, end, freq="daily", type="price", adjust=TRUE, quiet=FALS
   # freq:    Character, frequency of data
   #          either 'daily', 'weekly', 'monthly'
   # type:    Character, either 'price' or 'split'
-  # adjust:  Logical, adjusts the Open, High, Low, and Close prices for dividends and splits,
-  #          and adjusts Volume for dividends.
+  # adjust:  Logical, adjusts the Open, High, Low, and Close prices for
+  #          dividends and splits, and adjusts Volume for dividends.
   #
   #          http://help.yahoo.com/l/us/yahoo/finance/quotes/quote-12.html
   #          http://ichart.finance.yahoo.com/x?s=MSFT&g=d&y=0&z=30000
@@ -144,8 +153,10 @@ function(symbol, start, end, freq="daily", type="price", adjust=TRUE, quiet=FALS
       if(freq=="daily") {
 
         # Get price, dividend, and split data from 'beg' to present
-        ohlc   <- getYahooData(symbol, start, freq="daily", type="price", adjust=FALSE, quiet=TRUE)
-        divspl <- getYahooData(symbol, start, freq="daily", type="split", adjust=FALSE, quiet=TRUE)
+        ohlc   <- getYahooData(symbol, start, freq="daily", type="price",
+                    adjust=FALSE, quiet=TRUE)
+        divspl <- getYahooData(symbol, start, freq="daily", type="split",
+                    adjust=FALSE, quiet=TRUE)
         ohlc   <- merge(ohlc, divspl, by.col="Date", all=TRUE)
 
         # Create split adjustment ratio, (always = 1 if no splits exist)
@@ -186,10 +197,13 @@ function(symbol, start, end, freq="daily", type="price", adjust=TRUE, quiet=FALS
         ohlc$Volume <- ohlc$Volume * ( 1 / d.ratio )
 
         # Order columns
-        ohlc <- ohlc[,c("Date","Open","High","Low","Close","Volume","Unadj.Close","Div","Split","Adj.Div")]
+        ohlc <- ohlc[,c("Date","Open","High","Low","Close","Volume",
+                        "Unadj.Close","Div","Split","Adj.Div")]
 
       } else stop("Only freq=\"daily\" adjusted data is currently supported.")
-      # For other frequencies, get daily data and use a routine to aggregate to desired frequency.
+
+      # For other frequencies, get daily data and use a routine to
+      # aggregate to desired frequency.
 
     } else {
 

@@ -1,3 +1,8 @@
+#-------------------------------------------------------------------------#
+# TTR, copyright (C) Joshua M. Ulrich, 2007                               #
+# Distributed under GNU GPL version 3                                     #
+#-------------------------------------------------------------------------#
+
 "WPR" <-
 function(HLC, n=14) {
 
@@ -26,10 +31,10 @@ function(HLC, n=14) {
 
   stop("Price series must be either High-Low-Close, or Close")
 
-  hmax <- rollFUN(high, n, FUN="max")
-  lmin <- rollFUN( low, n, FUN="min")
+  hmax <- runMax(high, n)
+  lmin <- runMin( low, n)
 
-  pct.R <- (hmax - close) / (hmax - lmin)
+  pctR <- (hmax - close) / (hmax - lmin)
 
-  return( pct.R )
+  return( pctR )
 }

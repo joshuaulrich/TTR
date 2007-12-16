@@ -23,7 +23,7 @@
 \value{
   A matrix containing the columns:
   \item{ emv }{ The ease of movement values. }
-  \item{ ma.emv }{ The smoothed (as specified by \code{ma}) ease of movement values. }
+  \item{ emvMA }{ The smoothed (as specified by \code{ma}) ease of movement values. }
 }
 \author{ Josh Ulrich }
 \references{

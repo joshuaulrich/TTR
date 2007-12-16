@@ -6,20 +6,20 @@
   a period of time.  Developed by John Bollinger.
 }
 \usage{
-  bollingerBands(HLC, ma=list("SMA", n=20), sd=list(FUN="sd", n=2))
+  bollingerBands(HLC, ma=list("SMA", n=20), sd=2)
 }
 \arguments{
   \item{HLC}{ High-Low-Close price series to use.  If only a univariate series is given,
     it will be used.  See details. }
   \item{ma}{ A \emph{list} whose first component is a string containing the moving average
     function name; additional parameters may also be specified as \emph{named} components. }
-  \item{sd}{ A \emph{list} of standard deviation input. }
+  \item{sd}{ The number of standard deviations to use. }
 }
 \details{
   Bollinger Bands consist of three lines:
 
   The middle band is generally a 20-period SMA of the typical price ([high + low + close]/3).
-  The upper and lower bands are \code{sd$n} standard deviations (generally 2) above and
+  The upper and lower bands are \code{sd} standard deviations (generally 2) above and
   below the MA.
 
   The middle band is usually calculated using the typical price, but if a univariate series
@@ -30,7 +30,7 @@
   \item{ dn }{ The lower Bollinger Band. }
   \item{ ma }{ The middle Moving Average (see notes). }
   \item{ up }{ The upper Bollinger Band. }
-  \item{ pct.b }{ The \%B calculation. }
+  \item{ pctB }{ The \%B calculation. }
 }
 \author{ Josh Ulrich }
 \references{

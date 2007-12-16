@@ -1,3 +1,8 @@
+#-------------------------------------------------------------------------#
+# TTR, copyright (C) Joshua M. Ulrich, 2007                               #
+# Distributed under GNU GPL version 3                                     #
+#-------------------------------------------------------------------------#
+
 "oscillator" <-
 function(x, ma.fast=list("EMA", n=10), ma.slow=list("EMA", n=20),
              ma.sig=list("EMA", n=10), percent=FALSE) {
@@ -20,9 +25,10 @@ function(x, ma.fast=list("EMA", n=10), ma.slow=list("EMA", n=20),
   # http://www.fmlabs.com/reference/PVO.htm
   # http://www.equis.com/Customer/Resources/TAAZ/Default.aspx?c=3&p=122
 
-  ### WISHLIST:
-  ### Add capability to allow 'ma.slow' and 'ma.fast' to be vectors containing MAs,
-  ### Which would allow the oscillator to be constructed using MAs of different prices.
+  # WISHLIST:
+  # Add capability to allow 'ma.slow' and 'ma.fast' to be vectors
+  # containing MAs, which would allow the oscillator to be constructed
+  # using MAs of different prices.
 
   mavg.slow <- do.call( ma.slow[[1]], c( list( x ), ma.slow[-1] ) )
   mavg.fast <- do.call( ma.fast[[1]], c( list( x ), ma.fast[-1] ) )
@@ -41,13 +47,15 @@ function(x, ma.fast=list("EMA", n=10), ma.slow=list("EMA", n=20),
   return( cbind( oscillator, signal ) )
 }
 
+#-------------------------------------------------------------------------#
 
 "MACD" <-
 function(x) {
 
   # Moving Average Convergence/Divergence (MACD)
 
-  oscillator <- oscillator( x, list("EMA",n=12), list("EMA",n=26), list("EMA", n=9) )
+  oscillator <- oscillator( x, list("EMA",n=12), list("EMA",n=26),
+                            list("EMA", n=9) )
 
   return( oscillator )
 }

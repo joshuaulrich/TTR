@@ -1,3 +1,8 @@
+#-------------------------------------------------------------------------#
+# TTR, copyright (C) Joshua M. Ulrich, 2007                               #
+# Distributed under GNU GPL version 3                                     #
+#-------------------------------------------------------------------------#
+
 "ATR" <-
 function(HLC, ma=list("EMA", n=14, wilder=TRUE)) {
 
@@ -10,13 +15,13 @@ function(HLC, ma=list("EMA", n=14, wilder=TRUE)) {
   # http://stockcharts.com/education/IndicatorAnalysis/indic_ATR.html
 
   HLC <- as.matrix(HLC)
-  close.lag <- c( HLC[1,3], HLC[-nrow(HLC),3] )
+  closeLag <- c( HLC[1,3], HLC[-nrow(HLC),3] )
 
-  true.high <- pmax( HLC[,1], close.lag )
-  true.low  <- pmin( HLC[,2], close.lag )
-  tr        <- true.high - true.low
+  trueHigh <- pmax( HLC[,1], closeLag )
+  trueLow  <- pmin( HLC[,2], closeLag )
+  tr        <- trueHigh - trueLow
 
   atr <- do.call( ma[[1]], c( list(tr), ma[-1] ) )
 
-  return( cbind( tr, atr, true.high, true.low ) )
+  return( cbind( tr, atr, trueHigh, trueLow ) )
 }

@@ -1,3 +1,8 @@
+#-------------------------------------------------------------------------#
+# TTR, copyright (C) Joshua M. Ulrich, 2007                               #
+# Distributed under GNU GPL version 3                                     #
+#-------------------------------------------------------------------------#
+
 "chaikinAD" <-
 function(HLC, volume) {
 
@@ -13,4 +18,3 @@ function(HLC, volume) {
 
   return( ad )
 }
-

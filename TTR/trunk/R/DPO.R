@@ -1,3 +1,8 @@
+#-------------------------------------------------------------------------#
+# TTR, copyright (C) Joshua M. Ulrich, 2007                               #
+# Distributed under GNU GPL version 3                                     #
+#-------------------------------------------------------------------------#
+
 "DPO" <-
 function(x, ma=list("SMA", n=10), shift=ma$n/2+1, percent=FALSE) {
 

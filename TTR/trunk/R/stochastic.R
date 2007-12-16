@@ -1,3 +1,8 @@
+#-------------------------------------------------------------------------#
+# TTR, copyright (C) Joshua M. Ulrich, 2007                               #
+# Distributed under GNU GPL version 3                                     #
+#-------------------------------------------------------------------------#
+
 "stochastic" <-
 function(HLC, n.fastK=14, ma.fastD=list("SMA", n=3), ma.slowD=ma.fastD) {
 
@@ -26,8 +31,8 @@ function(HLC, n.fastK=14, ma.fastD=list("SMA", n=3), ma.slowD=ma.fastD) {
 
   stop("Price series must be either High-Low-Close, or Close")
 
-  hmax <- rollFUN(high, n.fastK, FUN="max")
-  lmin <- rollFUN( low, n.fastK, FUN="min")
+  hmax <- runMax(high, n.fastK)
+  lmin <- runMin( low, n.fastK)
 
   fastK <- (close - lmin) / (hmax - lmin)
   fastD <- do.call( ma.fastD[[1]], c( list(fastK), ma.fastD[-1] ) )
@@ -35,6 +40,8 @@ function(HLC, n.fastK=14, ma.fastD=list("SMA", n=3), ma.slowD=ma.fastD) {
 
   return( cbind( fastK, fastD, slowD ) )
 }
+
+#-------------------------------------------------------------------------#
 
 "SMI" <-
 function(HLC, n=13, ma.slow=list("EMA", n=25), ma.fast=list("EMA", n=2),
@@ -64,8 +71,8 @@ function(HLC, n=13, ma.slow=list("EMA", n=25), ma.fast=list("EMA", n=2),
 
   stop("Price series must be either High-Low-Close, or Close")
 
-  hmax <- rollFUN(high, n, FUN="max")
-  lmin <- rollFUN( low, n, FUN="min")
+  hmax <- runMax(high, n)
+  lmin <- runMin( low, n)
   hmax <- ifelse( is.na(hmax), high, hmax )
   lmin <- ifelse( is.na(lmin),  low, lmin )
 

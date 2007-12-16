@@ -1,28 +1,45 @@
-TTR version 0.13-2
-  Changes from version 0.13-1
+TTR version 0.14-0 - not released
+  Changes from version 0.13-2
 
-- Aligned function argument syntax so there were no spaces around equal signs.
-  E.g. function(x, ma = list("EMA", n=9)) -> function(x, ma=list("EMA", n=9))
+- Removed 'message' function from CCI.R, VHF.R, WPR.R, aroon.R
+  bollingerBands.R, and stochastic.R.
 
-- Updated WebData.Rd, changes.Rd, and ttrc.Rd to use \code{'foo'} instead of
-  \code{\sQuote{foo}}.
+- Added Stochastic Momentum Index (SMI) function and documentation.
 
-- Renamed TTR-package.Rd to TTR.Rd
+- Change \sQuote{x} to 'x' in documentation.
 
-- Renamed ttr.tools.Rd to TTRtools.Rd and ttr.tools.R to TTRtools.R
+- Added EMA Fortran implementation and NA checking/handling and
+  added 'ratio' argument with default = NULL.
 
-- Renamed Oscillators.R to oscillator.R
+- Set na=NA for 'momentum' and 'ROC' functions in files KST.R
+  RSI.R and TDI.R
 
-- Renamed Oscillators.Rd to oscillator.Rd and combined MACD and oscillator
-  portions of the \value{} section.
+- Added copyright information at the top of each file (.R and .f).
 
-- Changed EVWMA so period n contains the value for periods (i-n+1):n and 
-  so periods 1:(n-2) will be NA.
+- Included Fortran implementations of SMA, EMA, WMA, EVWMA, ZLEMA.
 
-- Changed EMA so periods 1:n will be NA.
+- Changed all usage of 'rollFun' to their respective Fortran
+  implementations and removed the 'rollFun' function.  Added functions
+  are 'runSum', 'wilderSum', 'runMin', 'runMax', 'runSumProd', 'runVar'.
 
-- Changed order of oscillator() arguments from 'ma.slow, ma.fast, ma.sig' to
-  the traditional 'ma.fast, ma.slow, ma.sig'.  Thanks goes to Jeff Ryan.
+- Replaced R-based 'wilderSum' function with Fortran implementation.
 
-- The arguments to the chaikinOscillator function were changed as above.
+- Made the below changes to the 'ZLEMA' function:
+   - Add ratio argument with default = NULL.
+   - Non-integer lags are a weighted mean of the two nearest
+     observations, based on thier proximity to the lag value.
+   - Change 'lag = ratio^(-1)' to fully support 'ratio' argument.
 
+- Corrected EVWMA to start at period 'n' instead of 'n-1'.
+
+- Changed the 'bollingerBands' function's 'sd' argument from a list
+  that allows other dispersion functions to simply indicate the
+  number of standard deviations to use.
+
+- Changed 'bollingerBands' %B output value from 'pct.b' to 'pctB'.
+
+- Changed 'WPR' output value from 'pct.R' to 'pctR'.
+
+- Changed 'WPR' MA output value from 'ma.emv' to 'emvMA'.
+
+- Changed 'aroon' output values from 'aroon.xx' to 'aroonXx'.

@@ -1,3 +1,8 @@
+#-------------------------------------------------------------------------#
+# TTR, copyright (C) Joshua M. Ulrich, 2007                               #
+# Distributed under GNU GPL version 3                                     #
+#-------------------------------------------------------------------------#
+
 "RSI" <- 
 function(price, ma.up=list("EMA", n=14, wilder=TRUE), ma.down=ma.up) {
 
@@ -8,7 +13,7 @@ function(price, ma.up=list("EMA", n=14, wilder=TRUE), ma.down=ma.up) {
   # http://linnsoft.com/tour/techind/rsi.htm
   # http://stockcharts.com/education/IndicatorAnalysis/indic_RSI.html
 
-  # Stoichastic RSI
+  # Stochastic RSI
 
   # http://www.fmlabs.com/reference/StochRSI.htm
   # http://stockcharts.com/education/IndicatorAnalysis/indic_stochRSI.html

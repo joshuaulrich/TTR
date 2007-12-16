@@ -1,3 +1,8 @@
+#-------------------------------------------------------------------------#
+# TTR, copyright (C) Joshua M. Ulrich, 2007                               #
+# Distributed under GNU GPL version 3                                     #
+#-------------------------------------------------------------------------#
+
 "aroon" <-
 function(HL, n=20) {
 
@@ -9,7 +14,7 @@ function(HL, n=20) {
   # http://stockcharts.com/education/IndicatorAnalysis/indic-Aroon.htm
 
   HL <- as.matrix(HL)
-  aroon.up <- aroon.dn <- vector("numeric",NROW(HL))
+  aroonUp <- aroonDn <- vector("numeric",NROW(HL))
 
   # Calculation if price vector is given
   if(NCOL(HL)==1) {
@@ -26,16 +31,16 @@ function(HL, n=20) {
   stop("Price series must be either High-Low, or Close")
 
   # Find max and min of price series
-  hmax <- rollFUN(high, n+1, FUN="max")
-  lmin <- rollFUN( low, n+1, FUN="min")
+  hmax <- runMax(high, n+1)
+  lmin <- runMin( low, n+1)
 
   # Calculate Aroon UP and DOWN
   for(i in n:NROW(HL)) {
-    aroon.up[i] <- 100 * ( ( n - (match(hmax[i], high[i:(i-n)])-1) ) / n )
-    aroon.dn[i] <- 100 * ( ( n - (match(lmin[i],  low[i:(i-n)])-1) ) / n )
+    aroonUp[i] <- 100 * ( ( n - (match(hmax[i], high[i:(i-n)])-1) ) / n )
+    aroonDn[i] <- 100 * ( ( n - (match(lmin[i],  low[i:(i-n)])-1) ) / n )
   }
 
-  oscillator <- aroon.up - aroon.dn
+  oscillator <- aroonUp - aroonDn
 
-  return( cbind( aroon.up, aroon.dn, oscillator ) )
+  return( cbind( aroonUp, aroonDn, oscillator ) )
 }

@@ -16,7 +16,7 @@
   WMA(x, n=10, wts=1:n)
  DEMA(x, n=10)
 EVWMA(price, volume, n=10)
-ZLEMA(x, n=10)
+ZLEMA(x, n=10, ratio=NULL)
 }
 \arguments{
   \item{x}{ Vector to be averaged. }
@@ -27,7 +27,7 @@ ZLEMA(x, n=10)
     length of \code{x}, or \code{n} (the default). }
   \item{wilder}{ logical; if \code{TRUE}, a Welles Wilder type EMA will be
     calculated; see notes. }
-  \item{ratio}{ A smoothing ratio to use (overrides \code{wilder}) }
+  \item{ratio}{ A smoothing/decay ratio to use (overrides \code{wilder} in EMA) }
 }
 \details{
   SMA calculates the arithmetic mean of the series over the past \code{n} observations.
@@ -35,16 +35,17 @@ ZLEMA(x, n=10)
   EMA calculates an exponentially-weighted mean, giving more weight to recent observations.
   See Warning section below.
 
-  WMA is similar to an EMA, but with linear weighting, if the length of \code{wts} is equal to
-  \code{n}.  If the length of \code{wts} is equal to the length of \code{x}, the WMA will the
-  values of \code{wts} as weights.
+  WMA is similar to an EMA, but with linear weighting if the length of \code{wts} is equal to
+  \code{n}.  If the length of \code{wts} is equal to the length of \code{x}, the WMA will
+  use the values of \code{wts} as weights.
 
   DEMA is calculated as: \code{DEMA = 2 * EMA(x,n) - EMA(EMA(x,n),n)}.
 
   EVWMA uses volume to define the period of the MA.
 
   ZLEMA is similar to an EMA, as it gives more weight to recent observations, but attempts to
-  remove lag by subtracting data prior to \code{(n-1)/2} periods to minimize the cumulative effect.
+  remove lag by subtracting data prior to \code{(n-1)/2} periods (default) to minimize
+  the cumulative effect.
 }
 \value{
   \item{SMA}{ Simple moving average. }
@@ -93,7 +94,7 @@ ZLEMA(x, n=10)
   evwma.20 <- EVWMA(ttrc[,"Close"], 20)
   zlema.20 <- ZLEMA(ttrc[,"Close"], 20)
 
-  ## Example of short-term instability of EMA
+  ## Example of short-term instability of EMA (and other indicators mentioned above)
   x <- rnorm(100)
   tail( EMA(x[90:100],10), 1 )
   tail( EMA(x[70:100],10), 1 )

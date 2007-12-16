@@ -1,3 +1,8 @@
+#-------------------------------------------------------------------------#
+# TTR, copyright (C) Joshua M. Ulrich, 2007                               #
+# Distributed under GNU GPL version 3                                     #
+#-------------------------------------------------------------------------#
+
 "chaikinOscillator" <-
 function(HLC, volume, ma.fast=list("EMA", n=3), ma.slow=list("EMA", n=10), percent=FALSE) {
 

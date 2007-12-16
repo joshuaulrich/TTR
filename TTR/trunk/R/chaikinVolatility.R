@@ -1,3 +1,8 @@
+#-------------------------------------------------------------------------#
+# TTR, copyright (C) Joshua M. Ulrich, 2007                               #
+# Distributed under GNU GPL version 3                                     #
+#-------------------------------------------------------------------------#
+
 "chaikinVolatility" <-
 function(HL, ma=list("EMA", n=10)) {
 
@@ -13,4 +18,3 @@ function(HL, ma=list("EMA", n=10)) {
 
   return( volatility )
 }
-

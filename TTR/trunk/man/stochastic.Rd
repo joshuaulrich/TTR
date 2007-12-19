@@ -11,8 +11,11 @@
   Developed by William Blau in 1993.
 }
 \usage{
-  stochastic(HLC, n.fastK=14, ma.fastD=list("SMA", n=3), ma.slowD=ma.fastD)
-  SMI(HLC, n=13, ma.slow=list("EMA", n=25), ma.fast=list("EMA", n=2), ma.sig=list("EMA", n=9))
+  stochastic(HLC, n.fastK=14, ma.fastD=list("SMA", n=3),
+                  ma.slowD=ma.fastD)
+
+  SMI(HLC, n=13, ma.slow=list("EMA", n=25),
+           ma.fast=list("EMA", n=2), ma.sig=list("EMA", n=9))
 }
 \arguments{
   \item{HLC}{ High-Low-Close price series to use.  If only a univariate series is given,
@@ -77,8 +80,9 @@
   stochOSC <- stochastic(ttrc[,c("High","Low","Close")])
   stochWPR <- WPR(ttrc[,c("High","Low","Close")])
 
-  plot(tail(stochOSC[,"fastK"], 100), type="l", main="Fast \%K and Williams \%R",
-    ylab="", ylim=range(cbind(stochOSC, stochWPR), na.rm=TRUE) )
+  plot(tail(stochOSC[,"fastK"], 100), type="l",
+      main="Fast \%K and Williams \%R", ylab="",
+      ylim=range(cbind(stochOSC, stochWPR), na.rm=TRUE) )
   lines(tail(stochWPR, 100), col="blue")
   lines(tail(1-stochWPR, 100), col="red", lty="dashed")
 

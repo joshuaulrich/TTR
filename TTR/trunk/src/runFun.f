@@ -13,6 +13,7 @@ c     oa  : output array
 c     loa : length of output array
 c
       subroutine runsum(ia, lia, n, oa, loa)
+      implicit none
 
       integer lia, n, loa, i
       double precision ia(lia), oa(loa)
@@ -33,6 +34,7 @@ c     oa  : output array
 c     loa : length of output array
 c
       subroutine wilder(ia, lia, n, oa, loa)
+      implicit none
 
       integer lia, n, loa, i
       double precision ia(lia), oa(loa)
@@ -56,6 +58,7 @@ c     loa  : length of output array
 c     lmin : window minimum
 c
       subroutine runmin(ia, lia, n, oa, loa)
+      implicit none
 
       integer lia, n, loa, i, j
       double precision ia(lia), oa(loa), lmin
@@ -87,6 +90,7 @@ c     loa  : length of output array
 c     lmax : window maximum
 c
       subroutine runmax(ia, lia, n, oa, loa)
+      implicit none
 
       integer lia, n, loa, i, j
       double precision ia(lia), oa(loa), lmax
@@ -102,38 +106,6 @@ c
    20 continue
 
         oa(i) = lmax
-
-   10 continue
-      end
-c
-c     Calculate a running/rolling SUM of PRODUCTS
-c     (Not very elegant, but _much_ faster
-c     than a pure R implementation)
-c
-c     ia1  : input array #1
-c     ia2  : input array #2
-c     lia  : length of input arrays
-c     n    : size of window
-c     oa   : output array
-c     loa  : length of output array
-c     prod : window product
-c
-      subroutine runSP(ia1, ia2, lia, n, oa, loa)
-
-      integer lia, n, loa, i, j
-      double precision ia1(lia), ia2(lia), oa(loa)
-      
-      do 10 i=n,lia
-
-        prod = ia1(i) * ia2(i)
-
-        do 20 j=i-n+1,i-1
-          
-          prod = prod + ( ia1(j) * ia2(j) )
-
-   20 continue
-
-        oa(i) = prod
 
    10 continue
       end

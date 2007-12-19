@@ -6,6 +6,7 @@
 \alias{DEMA}
 \alias{EVWMA}
 \alias{ZLEMA}
+\alias{MA}
 \title{ Moving Averages }
 \description{
   Calculate various moving averages (MA) of a series.
@@ -94,7 +95,8 @@ ZLEMA(x, n=10, ratio=NULL)
   evwma.20 <- EVWMA(ttrc[,"Close"], 20)
   zlema.20 <- ZLEMA(ttrc[,"Close"], 20)
 
-  ## Example of short-term instability of EMA (and other indicators mentioned above)
+  ## Example of short-term instability of EMA
+  ## (and other indicators mentioned above)
   x <- rnorm(100)
   tail( EMA(x[90:100],10), 1 )
   tail( EMA(x[70:100],10), 1 )

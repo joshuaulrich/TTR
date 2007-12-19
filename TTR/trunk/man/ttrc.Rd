@@ -12,7 +12,7 @@
 \format{
   The format is:
   \tabular{lll}{
-    Date: \tab Class 'Date' num [1:5550] \tab 5480 5481 5482 5485 5486 ...\cr
+    Date: \tab Class 'Date' \tab 5480 5481 5482 5485 5486 ...\cr
     Open: \tab num \tab 3.18 3.09 3.11 3.09 3.10 ...\cr
     High: \tab num \tab 3.18 3.15 3.12 3.12 3.12 ...\cr
     Low: \tab num \tab 3.08 3.09 3.08 3.07 3.08 ...\cr

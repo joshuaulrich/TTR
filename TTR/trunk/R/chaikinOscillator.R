@@ -15,7 +15,7 @@ function(HLC, volume, ma.fast=list("EMA", n=3), ma.slow=list("EMA", n=10), perce
   HLC <- as.matrix(HLC)
   AD  <- chaikinAD(HLC, volume)
 
-  oscillator <- oscillator( AD, ma.slow, ma.fast, ma.sig = NULL, percent )
+  oscillator <- MACD( AD, ma.slow, ma.fast, ma.sig = NULL, percent )
 
   return( oscillator )
 }

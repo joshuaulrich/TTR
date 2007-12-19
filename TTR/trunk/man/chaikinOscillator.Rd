@@ -42,6 +42,7 @@
 }
 \examples{
   data(ttrc)
-  oscillator <- chaikinOscillator(ttrc[,c("High","Low","Close")], ttrc[,"Volume"])
+  oscillator <- chaikinOscillator(ttrc[,c("High","Low","Close")],
+                                  ttrc[,"Volume"])
 }
 \keyword{ ts }

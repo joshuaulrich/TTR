@@ -44,6 +44,7 @@
   See \code{\link{chaikinVolatility}} for another volatility measure. }
 \examples{
   data(ttrc)
-  atr <- ATR(ttrc[,c("High","Low","Close")], ma=list("EMA", n=14, wilder=TRUE))
+  atr <- ATR(ttrc[,c("High","Low","Close")],
+             ma=list("EMA", n=14, wilder=TRUE))
 }
 \keyword{ ts }

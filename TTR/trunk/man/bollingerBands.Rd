@@ -52,10 +52,11 @@
   Warning section.
 }
 \examples{
-  ## The examples below show the differences between using a High-Low-Close series, and
-  ## just a close series when calculating Bollinger Bands.
+  ## The examples below show the differences between using a
+  ## High-Low-Close series, and just a close series when
+  ## calculating Bollinger Bands.
   data(ttrc)
-  bbands.HLC   <- bollingerBands( ttrc[,c("High","Low","Close")] )
+  bbands.HLC <- bollingerBands( ttrc[,c("High","Low","Close")] )
   bbands.close <- bollingerBands( ttrc[,"Close"] )
 }
 \keyword{ ts }

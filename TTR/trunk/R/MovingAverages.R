@@ -130,7 +130,7 @@ function(x, n=10, wts=1:n) {
   } else
 
   if(NROW(wts)==NROW(x)) {
-     ma <- runSumProd(x, wts, n) / runSum(wts, n)
+     ma <- runSum(x*wts, n) / runSum(wts, n)
   } else
     stop("Length of 'wts' vector must equal length of 'x', or 'n'.")
 

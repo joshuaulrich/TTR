@@ -3,7 +3,7 @@
 # Distributed under GNU GPL version 3                                     #
 #-------------------------------------------------------------------------#
 
-"chaikinMF" <-
+"CMF" <-
 function(HLC, volume, n=20) {
 
   # Chaikin Money Flow
@@ -17,7 +17,7 @@ function(HLC, volume, n=20) {
   clv    <- as.double( CLV(HLC) )
   volume <- as.double( volume )
 
-  MF <- runSum(clv*volume, n) / runSum(volume, n)
+  cmf <- runSum(clv*volume, n) / runSum(volume, n)
 
-  return( MF )
+  return( cmf )
 }

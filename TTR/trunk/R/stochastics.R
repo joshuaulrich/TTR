@@ -3,7 +3,7 @@
 # Distributed under GNU GPL version 3                                     #
 #-------------------------------------------------------------------------#
 
-"stochastic" <-
+"stoch" <-
 function(HLC, n.fastK=14, ma.fastD=list("SMA", n=3), ma.slowD=ma.fastD) {
 
   # Stochastics

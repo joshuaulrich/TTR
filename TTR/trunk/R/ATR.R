@@ -15,11 +15,11 @@ function(HLC, ma=list("EMA", n=14, wilder=TRUE)) {
   # http://stockcharts.com/education/IndicatorAnalysis/indic_ATR.html
 
   HLC <- as.matrix(HLC)
-  closeLag <- c( HLC[1,3], HLC[-nrow(HLC),3] )
+  closeLag <- c( HLC[1,3], HLC[-NROW(HLC),3] )
 
   trueHigh <- pmax( HLC[,1], closeLag )
   trueLow  <- pmin( HLC[,2], closeLag )
-  tr        <- trueHigh - trueLow
+  tr       <- trueHigh - trueLow
 
   atr <- do.call( ma[[1]], c( list(tr), ma[-1] ) )
 

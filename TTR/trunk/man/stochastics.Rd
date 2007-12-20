@@ -1,9 +1,11 @@
-\name{stochastic}
+\name{stochastics}
+\alias{stochastics}
 \alias{stochastic}
+\alias{stoch}
 \alias{SMI}
 \alias{\%K}
 \alias{\%D}
-\title{ Stochastic Oscillator }
+\title{ Stochastic Oscillator / Stochastic Momentum Index }
 \description{
   The stochastic oscillator is a momentum indicator that relates the location of each day's
   close relative to the high/low range over the past \code{n} periods.  Developed by George C.
@@ -11,7 +13,7 @@
   Developed by William Blau in 1993.
 }
 \usage{
-  stochastic(HLC, n.fastK=14, ma.fastD=list("SMA", n=3),
+  stoch(HLC, n.fastK=14, ma.fastD=list("SMA", n=3),
                   ma.slowD=ma.fastD)
 
   SMI(HLC, n=13, ma.slow=list("EMA", n=25),
@@ -33,7 +35,7 @@
     average function name; additional parameters may also be specified as \emph{named} components. }
 }
 \details{
-  If an High-Low-Close series is provided, the indicator is calculated using the high/low
+  If a High-Low-Close series is provided, the indicator is calculated using the high/low
   values.  If a vector is provided, the calculation only uses that series.  This allows
   stochastics to be calculated for: (1) series that have no HLC definition (e.g. foreign
   exchange), and (2) stochastic indicators (e.g. stochastic RSI - see examples).
@@ -77,7 +79,7 @@
 }
 \examples{
   data(ttrc)
-  stochOSC <- stochastic(ttrc[,c("High","Low","Close")])
+  stochOSC <- stoch(ttrc[,c("High","Low","Close")])
   stochWPR <- WPR(ttrc[,c("High","Low","Close")])
 
   plot(tail(stochOSC[,"fastK"], 100), type="l",
@@ -86,8 +88,6 @@
   lines(tail(stochWPR, 100), col="blue")
   lines(tail(1-stochWPR, 100), col="red", lty="dashed")
 
-  stochRSI <- stochastic( RSI(ttrc[,"Close"]) )
+  stochRSI <- stoch( RSI(ttrc[,"Close"]) )
 }
 \keyword{ ts }
-
-

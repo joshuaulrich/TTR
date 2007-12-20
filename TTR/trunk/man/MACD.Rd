@@ -1,11 +1,11 @@
-\name{oscillator}
-\alias{oscillator}
+\name{MACD}
 \alias{MACD}
-\title{ Oscillators }
+\title{ MACD Oscillator }
 \description{
-  The oscillators documented in this page compare a fast moving average (MA) of
-  a series with a slow MA of the same series.  The most popular price oscillator is
-  probably the MACD, which was developed by Gerald Appel.
+  The MACD was developed by Gerald Appel and is probably the most popular price oscillator.
+  The MACD function documented in this page compares a fast moving average (MA) of
+  a series with a slow MA of the same series.  It can be used as a generic oscillator
+  for any univariate series, not only price.
 }
 \usage{
   MACD(x, ma.fast=list("EMA", n=12), ma.slow=list("EMA", n=26),

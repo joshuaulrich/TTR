@@ -49,7 +49,7 @@
 \seealso{
   See \code{\link{EMA}}, \code{\link{SMA}}, etc. for moving average options; and note
   Warning section.  See \code{\link{ROC}} for the rate-of-change function.
-  See \code{\link{oscillator}} for other oscillators.
+  See \code{\link{MACD}} for a generic oscillator.
 }
 \examples{
   data(ttrc)

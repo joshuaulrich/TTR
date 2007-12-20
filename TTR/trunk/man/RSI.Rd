@@ -36,7 +36,7 @@
   Divergence with price may also be useful.  For example, if price is making new highs/lows,
   but RSI is not, it could indicate a reversal.
 
-  You can calculate a stochastic RSI by using the function \code{\link{stochastic}} on
+  You can calculate a stochastic RSI by using the function \code{\link{stoch}} on
   RSI values.
 }
 \seealso{

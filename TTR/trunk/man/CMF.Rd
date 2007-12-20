@@ -1,5 +1,5 @@
-\name{chaikinMF}
-\alias{chaikinMF}
+\name{CMF}
+\alias{CMF}
 \title{ Chaikin Money Flow }
 \description{
   Chaikin Money Flow compares total volume over the last \code{n} time periods to total volume
@@ -7,7 +7,7 @@
   Chaikin.
 }
 \usage{
-  chaikinMF(HLC, volume, n = 20)
+  CMF(HLC, volume, n = 20)
 }
 \arguments{
   \item{HLC}{ Object able to be coerced to a matrix, which contains High-Low-Close prices. }
@@ -39,6 +39,6 @@
 }
 \examples{
   data(ttrc)
-  cmf <- chaikinMF(ttrc[,c("High","Low","Close")], ttrc[,"Volume"])
+  cmf <- CMF(ttrc[,c("High","Low","Close")], ttrc[,"Volume"])
 }
 \keyword{ ts }

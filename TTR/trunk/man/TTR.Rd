@@ -12,9 +12,9 @@
   \tabular{ll}{
     Package: \tab TTR\cr
     Type: \tab Package\cr
-    Version: \tab 0.13-2\cr
-    Date: \tab 2007-10-25\cr
-    License: \tab GPL Version 2 or later.\cr
+    Version: \tab 0.14-0\cr
+    Date: \tab 2007-12-25\cr
+    License: \tab GPL Version 3 or later.\cr
   }
 
   Users will probably be most interested in the following functions:\cr
@@ -22,9 +22,9 @@
   \code{\link{changes}}\cr
   \code{\link{ADX}}\cr
   \code{\link{MovingAverages}}\cr
-  \code{\link{oscillator}}\cr
+  \code{\link{MACD}}\cr
   \code{\link{RSI}}\cr
-  \code{\link{stochastic}}\cr
+  \code{\link{stoch}}\cr
   \code{\link{WebData}}\cr
 }
 \author{
@@ -51,7 +51,7 @@ Maintainer: Josh Ulrich
   bbands <- bollingerBands( ttrc[,c("High","Low","Close")] )
 
   # Directional Movement Index
-  dmi.adx <- ADX(ttrc[,c("High","Low","Close")])
+  adx <- ADX(ttrc[,c("High","Low","Close")])
 
   # Moving Averages
   ema <- EMA(ttrc[,"Close"], n=20)
@@ -64,13 +64,13 @@ Maintainer: Josh Ulrich
   rsi <- RSI(ttrc[,"Close"])
 
   # Stochastics
-  stoch.osc <- stochastic(ttrc[,c("High","Low","Close")])
+  stochOsc <- stoch(ttrc[,c("High","Low","Close")])
 
   ### Note: you must have a working internet connection
   ### for the examples below to work!
 
   # Fetch U.S. symbols from the internet
-  nyse.symbols <- stockSymbols("NYSE")
+  nyseSymbols <- stockSymbols("NYSE")
 
   # Fetch Yahoo! Finance data from the internet
   ibm <- getYahooData("IBM", 19990404, 20050607)

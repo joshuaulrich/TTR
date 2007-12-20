@@ -31,17 +31,17 @@
   The William's \%R calculation is similar to stochastics' fast \%K.
 }
 \seealso{
-  See \code{\link{stochastic}}.
+  See \code{\link{stoch}}.
 }
 \examples{
   data(ttrc)
-  stoch.osc <- stochastic(ttrc[,c("High","Low","Close")])
-  stoch.wpr <- WPR(ttrc[,c("High","Low","Close")])
+  stochOsc <- stoch(ttrc[,c("High","Low","Close")])
+  stochWPR<- WPR(ttrc[,c("High","Low","Close")])
 
-  plot(tail(stoch.osc[,"fastK"], 100), type="l",
+  plot(tail(stochOsc[,"fastK"], 100), type="l",
       main="Fast \%K and Williams \%R", ylab="",
-      ylim=range(cbind(stoch.osc, stoch.wpr), na.rm=TRUE) )
-  lines(tail(stoch.wpr, 100), col="blue")
-  lines(tail(1-stoch.wpr, 100), col="red", lty="dashed")
+      ylim=range(cbind(stochOsc, stochWPR), na.rm=TRUE) )
+  lines(tail(stochWPR, 100), col="blue")
+  lines(tail(1-stochWPR, 100), col="red", lty="dashed")
 }
 \keyword{ ts }

@@ -156,3 +156,90 @@ function(x, n=10, sample=TRUE) {
 
   return(result)
 }
+
+#-------------------------------------------------------------------------#
+
+"runMedian" <-
+function(x, n=10, low=FALSE, high=FALSE) {
+
+  x   <- as.vector(x)
+
+  if( n < 1 | n > NROW(x) ) stop("Invalid 'n'")
+
+  # Count NAs, ensure they're only at beginning of data, then remove.
+  NAs <- sum( is.na(x) )
+  if( NAs > 0 ) {
+    if( any( is.na(x[-(1:NAs)]) ) ) stop("Series contains non-leading NAs")
+  }
+  x   <- na.omit(x)
+
+  # Initialize result vector 
+  result <- rep(0,NROW(x))
+
+  # Call Fortran routine
+  result <- .Fortran( "runmedian",
+                   ia = as.double(x),
+                   n = as.integer(n),
+                   oa = double(NROW(x)),
+                   la = as.integer(NROW(x)),
+                   ver = as.integer(version),
+                   PACKAGE = "TTR" )$oa
+
+  # Replace 1:(n-1) with NAs and prepend NAs from original data
+  result[1:(n-1)] <- NA
+  result <- c( rep( NA, NAs ), result )
+
+  return( result )
+}
+#-------------------------------------------------------------------------#
+
+"runMAD" <-
+function(x, n=10, center=runMedian(x, n), stat="median",
+         constant=1.4826, low=FALSE, high=FALSE) {
+
+  x   <- as.vector(x)
+
+  if( n < 1 | n > NROW(x) ) stop("Invalid 'n'")
+
+  # Count NAs, ensure they're only at beginning of data, then remove.
+  NAs <- sum( is.na(x) )
+  if( NAs > 0 ) {
+    if( any( is.na(x[-(1:NAs)]) ) ) stop("Series contains non-leading NAs")
+  }
+  x   <- na.omit(x)
+  center[1:(n-1)] <- 0
+
+  # Initialize result vector 
+  result <- rep(0,NROW(x))
+
+  # Mean or Median absolute deviation?
+  median <- match.arg(stat, c("mean","median"))
+  median <- switch( stat, median=TRUE, mean=FALSE )
+
+  # 'version' = f( low, high )
+  if( low && high )
+    stop("'low' and 'high' cannot be both TRUE")
+  version <- 0
+  if( low )  version <- -1
+  if( high )  version <- 1
+
+
+  # Call Fortran routine
+  result <- .Fortran( "runMAD",
+                   rs = as.double(x),
+                   cs = as.double(center),
+                   la = as.integer(NROW(x)),
+                   n = as.integer(n),
+                   oa = as.double(result),
+                   stat = as.integer(median),
+                   ver = as.integer(version),
+                   PACKAGE = "TTR" )$oa
+
+  if( median ) result <- result * constant
+
+  # Replace 1:(n-1) with NAs and prepend NAs from original data
+  result[1:(n-1)] <- NA
+  result <- c( rep( NA, NAs ), result )
+
+  return( result )
+}

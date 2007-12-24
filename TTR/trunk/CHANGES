@@ -43,3 +43,34 @@ TTR version 0.14-0 - not released
 - Changed 'WPR' MA output value from 'ma.emv' to 'emvMA'.
 
 - Changed 'aroon' output values from 'aroon.xx' to 'aroonXx'.
+
+- Removed runSP/runSumProd function, since runSum(x*x) does the
+  same thing as runSumProd(x,x).
+
+- Added "implicit none" to every Fortran subroutine.
+
+- Removed all DOS EOL characters via 'vim +"argdo set ff=unix" +wqa *'
+
+- Changed documentation so "Usage", "Examples" section are a max of
+  ~65-70 characters wide; it now prints better in plain text help.
+
+- Removed 'oscillator' function and transferred functionality
+  to 'MACD' function.
+
+- Removed remnants of 'oscillator' function.
+
+- Removed chaikinOscillator, since it can be created via
+  MACD( chaikinAD ).
+
+- Renamed 'chaikinMF' to 'CMF'.
+
+- Renamed 'stochastic' to 'stoch'.
+
+- Added 'williamsAD' function and documentation.
+
+- Added Fortran-based routines, 'runMedian' and 'runMAD', with their R
+  functions and documentation.
+
+- Changed 'CCI' to use 'runMAD'.
+
+- Added Fortran PSAR routine.

@@ -213,6 +213,48 @@ c
 c
 c---------------------------------------------------------------------
 c
+c     Calculate a running/rolling Covariance
+c
+c     rs1   : input - raw series (1)
+c     avg1  : input - average of rs1
+c     rs2   : input - raw series (2)
+c     avg2  : input - average of rs2
+c     la    : length of input arrays
+c     n     : size of window
+c     oa    : output array
+c     cov   : covariance
+c     samp  : sample (1=true)
+c
+      subroutine runCov(rs1, avg1, rs2, avg2, la, n, samp, oa)
+      implicit none
+
+      integer la, n, i, j, k, l, samp
+      double precision rs1(la), avg1(la), rs2(la), avg2(la)
+      double precision oa(la), cov
+      
+      do 10 i=n,la
+        j = i-n+1
+
+          cov = 0.0D0
+
+        do 20 k=1,n
+          
+          l = j+k-1
+          cov = ( rs1(l)-avg1(i) ) * ( rs2(l)-avg2(i) ) + cov
+
+   20 continue
+          
+          if( samp .EQ. 1 ) then
+            oa(i) = cov / (n-1)
+          else
+            oa(i) = cov / n
+          endif
+
+   10 continue
+      end
+c
+c---------------------------------------------------------------------
+c
 c     v : input array
 c     n : number of observations
 c     a : array of indicies of v in ascending order

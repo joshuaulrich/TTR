@@ -143,16 +143,10 @@ function(x, n=10) {
 
 #-------------------------------------------------------------------------#
 
-"runVar" <-
-function(x, n=10, sample=TRUE) {
+"runMean" <-
+function(x, n=10) {
 
-  x <- as.double( as.vector(x) )
-
-  result <- runSum(x*x, n)/n - (runSum(x, n)/n)^2
-
-  if(sample) {
-    result <- result * n/(n+1)
-  }
+  result <- runSum(x, n) / n
 
   return(result)
 }
@@ -191,6 +185,84 @@ function(x, n=10, low=FALSE, high=FALSE) {
 
   return( result )
 }
+
+#-------------------------------------------------------------------------#
+
+"runCov" <-
+function(x, y, n=10, use="all.obs", sample=TRUE) {
+
+  x   <- as.vector(x)
+  y   <- as.vector(y)
+
+  if( n < 1 | n > NROW(x) ) stop("Invalid 'n'")
+
+  # "all.obs", "complete.obs", "pairwise.complete.obs"
+
+  # Count NAs, ensure they're only at beginning of data, then remove.
+  NAs <- sum( is.na(x) )
+  if( NAs > 0 ) {
+    if( any( is.na(x[-(1:NAs)]) ) ) stop("Series contains non-leading NAs")
+  }
+  x   <- na.omit(x)
+  
+  xCenter <- runSum(x, n)/n
+  xCenter[1:(n-1)] <- 0
+  yCenter <- runSum(y, n)/n
+  yCenter[1:(n-1)] <- 0
+
+  # Initialize result vector 
+  result <- rep(0,NROW(x))
+
+  # Call Fortran routine
+  result <- .Fortran( "runCov",
+                   rs1 = as.double(x),
+                   avg1 = as.double(xCenter),
+                   rs2 = as.double(y),
+                   avg2 = as.double(yCenter),
+                   la = as.integer(NROW(x)),
+                   n = as.integer(n),
+                   samp = as.integer(sample),
+                   oa = as.double(result),
+                   PACKAGE = "TTR" )$oa
+
+  # Replace 1:(n-1) with NAs and prepend NAs from original data
+  result[1:(n-1)] <- NA
+  result <- c( rep( NA, NAs ), result )
+
+  return( result )
+}
+
+#-------------------------------------------------------------------------#
+
+"runCor" <-
+function(x, y, n=10, use="all.obs", sample=TRUE) {
+
+  result <- runCov(x, y, n, use=use, sample=sample ) /
+            ( runSD(x, n, sample=sample) * runSD(y, n, sample=sample) )
+
+  return( result )
+}
+
+#-------------------------------------------------------------------------#
+
+"runVar" <-
+function(x, n=10, sample=TRUE) {
+
+  result <- runCov(x, x, n, use="all.obs", sample=sample)
+
+  return( result )
+}
+
+#-------------------------------------------------------------------------#
+
+"runSD" <-
+function(x, n=10, sample=TRUE) {
+
+  result <- sqrt( runCov(x, x, n, use="all.obs", sample=sample) )
+
+  return( result )
+}
+
 #-------------------------------------------------------------------------#
 
 "runMAD" <-

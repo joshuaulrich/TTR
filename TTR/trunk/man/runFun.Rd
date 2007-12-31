@@ -1,9 +1,14 @@
 \name{runFun}
+\alias{runFun}
 \alias{runSum}
 \alias{runMin}
 \alias{runMax}
-\alias{runVar}
+\alias{runMean}
 \alias{runMedian}
+\alias{runCov}
+\alias{runCor}
+\alias{runVar}
+\alias{runSD}
 \alias{runMAD}
 \title{ Analysis of Running/Rolling/Moving Windows }
 \description{
@@ -13,15 +18,21 @@
   runSum(x, n=10)
   runMin(x, n=10)
   runMax(x, n=10)
-  runVar(x, n=10, sample=TRUE)
+  runMean(x, n=10)
   runMedian(x, n=10, low=FALSE, high=FALSE)
+  runCov(x, y, n=10, use="all.obs", sample=TRUE)
+  runCor(x, y, n=10, use="all.obs", sample=TRUE)
+  runVar(x, n=10, sample=TRUE)
+  runSD(x, n=10, sample=TRUE)
   runMAD(x, n=10, center=runMedian(x, n), stat="median",
          constant=1.4826, low=FALSE, high=FALSE)
 }
 \arguments{
   \item{x}{ Object able to be coerced to a matrix. }
+  \item{y}{ Object able to be coerced to a matrix. }
   \item{n}{ Number of periods to use in the window. }
-  \item{sample}{ Logical, sample variance if \code{TRUE}, population otherwise. }
+  \item{sample}{ Logical, sample covariance if \code{TRUE} (denominator of \code{n-1}) }
+  \item{use}{ Only \code{"all.obs"} currently implemented. }
   \item{low}{ Logical, if \code{TRUE}, compute the 'low-median'; i.e., take the
     smaller of the two middle values for even sample sizes. }
   \item{high}{ Logical, if \code{TRUE}, compute the 'high-median'; i.e., take the
@@ -34,28 +45,26 @@
 }
 \details{
   \code{runSum} calculates sums over a moving window.
-
   \code{runMin} calculates minimums over a moving window.
-
   \code{runMax} calculates maximums over a moving window.
-
-  \code{runVar} calculates variance over a moving window.
-
+  \code{runMean} calculates means over a moving window (provided for convenience).
   \code{runMedian} calculates medians over a moving window.
-
+  \code{runCov} calculates covariances over a moving window.
+  \code{runCor} calculates correlations over a moving window.
+  \code{runVar} calculates variances over a moving window.
+  \code{runSD} calculates standard deviations over a moving window (provided for convenience).
   \code{runMAD} calculates median/mean absolute deviations over a moving window.
 }
 \value{
   \code{runSum} returns sums over a n-period moving window.
-
   \code{runMin} returns minimums over a n-period moving window.
-
   \code{runMax} returns maximums over a n-period moving window.
-
-  \code{runVar} returns variance over a n-period moving window.
-
+  \code{runMean} returns means over a n-period moving window.
   \code{runMedian} returns medians over a n-period moving window.
-
+  \code{runCov} returns covariances over a n-period moving window.
+  \code{runCor} returns correlations over a n-period moving window.
+  \code{runVar} returns variances over a n-period moving window.
+  \code{runSD} returns standard deviations over a n-period moving window.
   \code{runMAD} returns median/mean absolute deviations over a n-period moving window.
 }
 \author{ Josh Ulrich }

@@ -18,12 +18,13 @@
   }
 
   Users will probably be most interested in the following functions:\cr
+  \code{\link{ADX}}\cr
   \code{\link{bollingerBands}}\cr
   \code{\link{changes}}\cr
-  \code{\link{ADX}}\cr
   \code{\link{MovingAverages}}\cr
   \code{\link{MACD}}\cr
   \code{\link{RSI}}\cr
+  \code{\link{runFun}}\cr
   \code{\link{stoch}}\cr
   \code{\link{WebData}}\cr
 }
@@ -33,7 +34,7 @@ Josh Ulrich
 Maintainer: Josh Ulrich
 }
 \references{
-  The following site(s) were used to code/document this package:\cr
+  The following sites were used to code/document this package:\cr
   \url{http://www.fmlabs.com/reference/default.htm}\cr
   \url{http://www.equis.com/Customer/Resources/TAAZ/?p=0}\cr
   \url{http://www.linnsoft.com/tour/technicalindicators.htm}\cr

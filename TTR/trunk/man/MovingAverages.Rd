@@ -31,20 +31,20 @@ ZLEMA(x, n=10, ratio=NULL)
   \item{ratio}{ A smoothing/decay ratio to use (overrides \code{wilder} in EMA) }
 }
 \details{
-  SMA calculates the arithmetic mean of the series over the past \code{n} observations.
+  \code{SMA} calculates the arithmetic mean of the series over the past \code{n} observations.
 
-  EMA calculates an exponentially-weighted mean, giving more weight to recent observations.
+  \code{EMA} calculates an exponentially-weighted mean, giving more weight to recent observations.
   See Warning section below.
 
-  WMA is similar to an EMA, but with linear weighting if the length of \code{wts} is equal to
+  \code{WMA} is similar to an EMA, but with linear weighting if the length of \code{wts} is equal to
   \code{n}.  If the length of \code{wts} is equal to the length of \code{x}, the WMA will
   use the values of \code{wts} as weights.
 
-  DEMA is calculated as: \code{DEMA = 2 * EMA(x,n) - EMA(EMA(x,n),n)}.
+  \code{DEMA} is calculated as: \code{DEMA = 2 * EMA(x,n) - EMA(EMA(x,n),n)}.
 
-  EVWMA uses volume to define the period of the MA.
+  \code{EVWMA} uses volume to define the period of the MA.
 
-  ZLEMA is similar to an EMA, as it gives more weight to recent observations, but attempts to
+  \code{ZLEMA} is similar to an EMA, as it gives more weight to recent observations, but attempts to
   remove lag by subtracting data prior to \code{(n-1)/2} periods (default) to minimize
   the cumulative effect.
 }

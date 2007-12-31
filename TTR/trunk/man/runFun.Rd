@@ -43,29 +43,29 @@
     absolute deviation or mean absolute deviation, respectively.) }
   \item{constant}{ Scale factor applied to approximate the standard deviation. }
 }
-\details{
-  \code{runSum} calculates sums over a moving window.
-  \code{runMin} calculates minimums over a moving window.
-  \code{runMax} calculates maximums over a moving window.
-  \code{runMean} calculates means over a moving window (provided for convenience).
-  \code{runMedian} calculates medians over a moving window.
-  \code{runCov} calculates covariances over a moving window.
-  \code{runCor} calculates correlations over a moving window.
-  \code{runVar} calculates variances over a moving window.
-  \code{runSD} calculates standard deviations over a moving window (provided for convenience).
-  \code{runMAD} calculates median/mean absolute deviations over a moving window.
-}
+%\details{
+%  \code{runSum} calculates sums over a moving window.
+%  \code{runMin} calculates minimums over a moving window.
+%  \code{runMax} calculates maximums over a moving window.
+%  \code{runMean} calculates means over a moving window (provided for convenience).
+%  \code{runMedian} calculates medians over a moving window.
+%  \code{runCov} calculates covariances over a moving window.
+%  \code{runCor} calculates correlations over a moving window.
+%  \code{runVar} calculates variances over a moving window.
+%  \code{runSD} calculates standard deviations over a moving window (provided for convenience).
+%  \code{runMAD} calculates median/mean absolute deviations over a moving window.
+%}
 \value{
-  \code{runSum} returns sums over a n-period moving window.
-  \code{runMin} returns minimums over a n-period moving window.
-  \code{runMax} returns maximums over a n-period moving window.
-  \code{runMean} returns means over a n-period moving window.
-  \code{runMedian} returns medians over a n-period moving window.
-  \code{runCov} returns covariances over a n-period moving window.
-  \code{runCor} returns correlations over a n-period moving window.
-  \code{runVar} returns variances over a n-period moving window.
-  \code{runSD} returns standard deviations over a n-period moving window.
-  \code{runMAD} returns median/mean absolute deviations over a n-period moving window.
+  \item{runSum} returns sums over a n-period moving window.
+  \item{runMin} returns minimums over a n-period moving window.
+  \item{runMax} returns maximums over a n-period moving window.
+  \item{runMean} returns means over a n-period moving window.
+  \item{runMedian} returns medians over a n-period moving window.
+  \item{runCov} returns covariances over a n-period moving window.
+  \item{runCor} returns correlations over a n-period moving window.
+  \item{runVar} returns variances over a n-period moving window.
+  \item{runSD} returns standard deviations over a n-period moving window.
+  \item{runMAD} returns median/mean absolute deviations over a n-period moving window.
 }
 \author{ Josh Ulrich }
 %\note{

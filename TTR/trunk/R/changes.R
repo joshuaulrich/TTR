@@ -4,7 +4,7 @@
 #-------------------------------------------------------------------------#
 
 "ROC" <-
-function(x, n=1, type=c("discrete","continuous"), na=NA) {
+function(x, n=1, type=c("continuous","discrete"), na=NA) {
 
   # Rate of Change
 

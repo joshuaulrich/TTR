@@ -8,7 +8,7 @@ function(x, n=10) {
 
   x   <- as.vector(x)
 
-  if( n < 1 | n > NROW(x) ) stop("Invalid 'n'")
+  if( n < 1 || n > NROW(x) ) stop("Invalid 'n'")
 
   # Count NAs, ensure they're only at beginning of data, then remove.
   NAs <- sum( is.na(x) )
@@ -44,7 +44,7 @@ function(x, n=10) {
 
   x   <- as.vector(x)
 
-  if( n < 1 | n > NROW(x) ) stop("Invalid 'n'")
+  if( n < 1 || n > NROW(x) ) stop("Invalid 'n'")
 
   # Count NAs, ensure they're only at beginning of data, then remove.
   NAs <- sum( is.na(x) )
@@ -78,7 +78,7 @@ function(x, n=10) {
 
   x   <- as.vector(x)
 
-  if( n < 1 | n > NROW(x) ) stop("Invalid 'n'")
+  if( n < 1 || n > NROW(x) ) stop("Invalid 'n'")
 
   # Count NAs, ensure they're only at beginning of data, then remove.
   NAs <- sum( is.na(x) )
@@ -113,7 +113,7 @@ function(x, n=10) {
 
   x   <- as.vector(x)
   
-  if( n < 1 | n > NROW(x) ) stop("Invalid 'n'")
+  if( n < 1 || n > NROW(x) ) stop("Invalid 'n'")
 
   # Count NAs, ensure they're only at beginning of data, then remove.
   NAs <- sum( is.na(x) )
@@ -158,7 +158,7 @@ function(x, n=10, low=FALSE, high=FALSE) {
 
   x   <- as.vector(x)
 
-  if( n < 1 | n > NROW(x) ) stop("Invalid 'n'")
+  if( n < 1 || n > NROW(x) ) stop("Invalid 'n'")
 
   # Count NAs, ensure they're only at beginning of data, then remove.
   NAs <- sum( is.na(x) )
@@ -191,19 +191,20 @@ function(x, n=10, low=FALSE, high=FALSE) {
 "runCov" <-
 function(x, y, n=10, use="all.obs", sample=TRUE) {
 
-  x   <- as.vector(x)
-  y   <- as.vector(y)
+  xy <- cbind( as.vector(x), as.vector(y) )
 
-  if( n < 1 | n > NROW(x) ) stop("Invalid 'n'")
+  if( n < 1 || n > NROW(x) ) stop("Invalid 'n'")
 
   # "all.obs", "complete.obs", "pairwise.complete.obs"
 
   # Count NAs, ensure they're only at beginning of data, then remove.
-  NAs <- sum( is.na(x) )
+  xNAs <- sum( is.na(x) )
+  yNAs <- sum( is.na(y) )
+  NAs <- max( xNAs, yNAs )
   if( NAs > 0 ) {
-    if( any( is.na(x[-(1:NAs)]) ) ) stop("Series contains non-leading NAs")
+    if( any( is.na(xy[-(1:NAs),]) ) ) stop("Series contain non-leading NAs")
   }
-  x   <- na.omit(x)
+  xy <- na.omit(xy)
   
   xCenter <- runSum(x, n)/n
   xCenter[1:(n-1)] <- 0
@@ -211,7 +212,7 @@ function(x, y, n=10, use="all.obs", sample=TRUE) {
   yCenter[1:(n-1)] <- 0
 
   # Initialize result vector 
-  result <- rep(0,NROW(x))
+  result <- rep(0,NROW(xy))
 
   # Call Fortran routine
   result <- .Fortran( "runCov",
@@ -271,7 +272,7 @@ function(x, n=10, center=runMedian(x, n), stat="median",
 
   x   <- as.vector(x)
 
-  if( n < 1 | n > NROW(x) ) stop("Invalid 'n'")
+  if( n < 1 || n > NROW(x) ) stop("Invalid 'n'")
 
   # Count NAs, ensure they're only at beginning of data, then remove.
   NAs <- sum( is.na(x) )

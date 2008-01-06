@@ -4,7 +4,7 @@
 #-------------------------------------------------------------------------#
 
 "RSI" <- 
-function(price, ma.up=list("EMA", n=14, wilder=TRUE), ma.down=ma.up) {
+function(price, n=14, maType="EMA", wilder=TRUE, ...) {
 
   # Relative Strength Index
 
@@ -22,10 +22,41 @@ function(price, ma.up=list("EMA", n=14, wilder=TRUE), ma.down=ma.up) {
   dn <- ifelse(up<0, abs(up), 0)
   up <- ifelse(up>0,     up , 0)
 
-  mavg.up <- do.call( ma.up[[1]]  , c( list(up), ma.up[-1]   ) )
-  mavg.dn <- do.call( ma.down[[1]], c( list(dn), ma.down[-1] ) )
+  # If necessary, combine 'wilder' formal default with `...' arg(s)
+  if( missing(maType) && missing(wilder) ) {
+    maArgs <- list(n=n, wilder=TRUE)
+  } else
+  if( !missing(wilder) ) {
+    maArgs <- list(n=n, wilder=wilder, ...)
+  } else
+    maArgs <- list(n=n, ...)
 
-  rsi <- 100 * mavg.up / ( mavg.up + mavg.dn )
+  # Case of two different 'maType's for both MAs.
+  # e.g. RSI(price, n=14, maType=list(maUp=list(EMA,ratio=1/5), maDown=list(WMA,wts=1:10)) )
+  if( is.list(maType) ) {
+
+    # If MA function has 'n' arg, see if it's populated in maType;
+    # if it isn't, populate it with RSI's formal 'n'
+    if( !is.null( formals(maType[[1]])$n ) && is.null( maType[[1]]$n ) ) {
+      maType[[1]]$n <- n
+    }
+    if( !is.null( formals(maType[[2]])$n ) && is.null( maType[[2]]$n ) ) {
+      maType[[2]]$n <- n
+    }
+    
+    mavgUp <- do.call( maType[[1]][[1]], c( list(up), maType[[1]][-1] ) )
+    mavgDn <- do.call( maType[[2]][[1]], c( list(dn), maType[[2]][-1] ) )
+  }
+  
+  # Case of one 'maType' for both MAs.
+  # e.g. RSI(price, n=14, maType="WMA", wts=volume )
+  else {
+  
+    mavgUp <- do.call( maType, c( list(up), maArgs ) )
+    mavgDn <- do.call( maType, c( list(dn), maArgs ) )
+  }
+
+  rsi <- 100 * mavgUp / ( mavgUp + mavgDn )
 
   return( rsi )
 }

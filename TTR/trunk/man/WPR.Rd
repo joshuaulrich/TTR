@@ -1,6 +1,6 @@
 \name{WPR}
 \alias{WPR}
-\title{ William's % R }
+\title{ William's \%R }
 \description{
   William's \% R.
 }

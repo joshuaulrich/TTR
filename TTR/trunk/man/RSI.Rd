@@ -6,14 +6,17 @@
   movements to the absolute price movement.  Developed by J. Welles Wilder.
 }
 \usage{
-  RSI(price, ma.up=list("EMA", n=14, wilder=TRUE), ma.down=ma.up)
+  RSI(price, n=14, maType="EMA", wilder=TRUE, ...)
 }
 \arguments{
   \item{price}{ Price series to use. }
-  \item{ma.up}{ A \emph{list} whose first component is a string containing the upward price
-    movement moving average function name; additional parameters may also be specified
-    as \emph{named} components. }
-  \item{ma.down}{ Similar to \code{ma.up}, but for the downward price movement moving average. }
+  \item{n}{ Number of periods for moving averages. }
+  \item{maType}{ Either: \cr(1) A function or a string naming the function to be called, or\cr
+    (2) a \emph{list} with the first component like (1) above, and additional parameters
+    specified as \emph{named} components.  See Examples. }
+  \item{wilder}{ \emph{Only used for the default case.}  If \code{TRUE}, a Welles Wilder type EMA
+    will be calculated. }
+  \item{...}{ Other arguments to be passed to the MA function (maType case (1) above). }
 }
 \details{
   The RSI calculation is \code{RSI = 100 - 100 / ( 1 + RS )}, where \code{RS} is the smoothed
@@ -45,7 +48,18 @@
 }
 \examples{
   data(ttrc)
-  rsi <- RSI(ttrc[,"Close"])
+  price <- ttrc[,"Close"]
+
+  # Default case
+  rsi <- RSI(price)
+
+  # Case of one 'maType' for both MAs
+  rsiMA1 <- RSI(price, n=14, maType="WMA", wts=ttrc[,"Volume"])
+
+  # Case of two different 'maType's for both MAs
+  rsiMA2 <- RSI(price, n=14, maType=list(maUp=list(EMA,ratio=1/5),
+                maDown=list(WMA,wts=1:10)))
+
 }
 \keyword{ ts }
 

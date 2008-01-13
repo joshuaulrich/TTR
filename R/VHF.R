@@ -1,3 +1,8 @@
+#-------------------------------------------------------------------------#
+# TTR, copyright (C) Joshua M. Ulrich, 2007                               #
+# Distributed under GNU GPL version 3                                     #
+#-------------------------------------------------------------------------#
+
 "VHF" <-
 function(price, n=28) {
 
@@ -10,7 +15,6 @@ function(price, n=28) {
 
   # Calculation if price series is given
   if(NCOL(price)==1) {
-    message("Using Close price series"); flush.console()
     high  <- price
     low   <- price
     close <- price
@@ -18,7 +22,6 @@ function(price, n=28) {
 
   # Calculation if HLC series is given
   if(NCOL(price)==3) {
-    message("Using High-Low-Close series"); flush.console()
     high  <- price[,1]
     low   <- price[,2]
     close <- price[,3]
@@ -27,12 +30,11 @@ function(price, n=28) {
   stop("Price series must be either Close, or High-Low-Close")
 
   # Find highest max, and lowest min of price series
-  hmax  <- rollFUN( high, n, FUN="max")
-  lmin  <- rollFUN(  low, n, FUN="min")
+  hmax  <- runMax( high, n)
+  lmin  <- runMin(  low, n)
   denom <- momentum(close, n=1, na=0)
 
-  VHF <- ( hmax - lmin ) / rollFUN(denom, n, FUN="sum")
+  VHF <- ( hmax - lmin ) / runSum(denom, n)
 
   return( VHF )
-
 }

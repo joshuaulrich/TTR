@@ -1,10 +1,15 @@
-"oscillator" <-
-function(x, ma.fast=list("EMA", n=10), ma.slow=list("EMA", n=20),
-             ma.sig=list("EMA", n=10), percent=FALSE) {
+#-------------------------------------------------------------------------#
+# TTR, copyright (C) Joshua M. Ulrich, 2007                               #
+# Distributed under GNU GPL version 3                                     #
+#-------------------------------------------------------------------------#
+
+"MACD" <-
+function(x, ma.fast=list("EMA", n=12), ma.slow=list("EMA", n=26),
+             ma.sig=list("EMA", n=9), percent=FALSE) {
 
   # Oscillators
 
-  # MACD
+  # Moving Average Convergence/Divergence (MACD)
   # http://www.fmlabs.com/reference/MACD.htm
   # http://www.equis.com/Customer/Resources/TAAZ/?c=3&p=66
   # http://linnsoft.com/tour/techind/macd.htm
@@ -20,34 +25,24 @@ function(x, ma.fast=list("EMA", n=10), ma.slow=list("EMA", n=20),
   # http://www.fmlabs.com/reference/PVO.htm
   # http://www.equis.com/Customer/Resources/TAAZ/Default.aspx?c=3&p=122
 
-  ### WISHLIST:
-  ### Add capability to allow 'ma.slow' and 'ma.fast' to be vectors containing MAs,
-  ### Which would allow the oscillator to be constructed using MAs of different prices.
+  # WISHLIST:
+  # Add capability to allow 'ma.slow' and 'ma.fast' to be vectors
+  # containing MAs, which would allow the oscillator to be constructed
+  # using MAs of different prices.
 
   mavg.slow <- do.call( ma.slow[[1]], c( list( x ), ma.slow[-1] ) )
   mavg.fast <- do.call( ma.fast[[1]], c( list( x ), ma.fast[-1] ) )
 
   if(percent) {
-    oscillator <- 100 * ( mavg.fast / mavg.slow - 1 )
+    macd <- 100 * ( mavg.fast / mavg.slow - 1 )
   } else {
-    oscillator <- mavg.fast - mavg.slow
+    macd <- mavg.fast - mavg.slow
   }
 
   if(is.null(ma.sig)) {
     signal <- NULL
   } else
-    signal <- do.call( ma.sig[[1]], c( list( oscillator ), ma.sig[-1] ) )
+    signal <- do.call( ma.sig[[1]], c( list( macd ), ma.sig[-1] ) )
 
-  return( cbind( oscillator, signal ) )
-}
-
-
-"MACD" <-
-function(x) {
-
-  # Moving Average Convergence/Divergence (MACD)
-
-  oscillator <- oscillator( x, list("EMA",n=12), list("EMA",n=26), list("EMA", n=9) )
-
-  return( oscillator )
+  return( cbind( macd, signal ) )
 }

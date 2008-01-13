@@ -1,3 +1,8 @@
+#-------------------------------------------------------------------------#
+# TTR, copyright (C) Joshua M. Ulrich, 2007                               #
+# Distributed under GNU GPL version 3                                     #
+#-------------------------------------------------------------------------#
+
 "WPR" <-
 function(HLC, n=14) {
 
@@ -12,7 +17,6 @@ function(HLC, n=14) {
 
   # Calculation if HLC series is given
   if(NCOL(HLC)==3) {
-    message("Using High-Low-Close series"); flush.console()
     high  <- HLC[,1]
     low   <- HLC[,2]
     close <- HLC[,3]
@@ -20,7 +24,6 @@ function(HLC, n=14) {
 
   # Calculation if price vector is given
   if(NCOL(HLC)==1) {
-    message("Using Close price series"); flush.console()
     high  <- HLC
     low   <- HLC
     close <- HLC
@@ -28,10 +31,10 @@ function(HLC, n=14) {
 
   stop("Price series must be either High-Low-Close, or Close")
 
-  hmax <- rollFUN(high, n, FUN="max")
-  lmin <- rollFUN( low, n, FUN="min")
+  hmax <- runMax(high, n)
+  lmin <- runMin( low, n)
 
-  pct.R <- (hmax - close) / (hmax - lmin)
+  pctR <- (hmax - close) / (hmax - lmin)
 
-  return( pct.R )
+  return( pctR )
 }

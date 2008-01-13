@@ -1,5 +1,10 @@
+#-------------------------------------------------------------------------#
+# TTR, copyright (C) Joshua M. Ulrich, 2007                               #
+# Distributed under GNU GPL version 3                                     #
+#-------------------------------------------------------------------------#
+
 "ROC" <-
-function(x, n=1, type=c("discrete","continuous"), na=NA) {
+function(x, n=1, type=c("continuous","discrete"), na=NA) {
 
   # Rate of Change
 
@@ -25,7 +30,7 @@ function(x, n=1, type=c("discrete","continuous"), na=NA) {
   return( roc )
 }
 
-# -----------------------------------------------------------
+#-------------------------------------------------------------------------#
 
 "momentum" <-
 function(x, n=1, na=NA) {

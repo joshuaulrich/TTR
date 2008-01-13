@@ -1,3 +1,8 @@
+#-------------------------------------------------------------------------#
+# TTR, copyright (C) Joshua M. Ulrich, 2007                               #
+# Distributed under GNU GPL version 3                                     #
+#-------------------------------------------------------------------------#
+
 "CMO" <-
 function(x, n=14) {
 
@@ -9,8 +14,8 @@ function(x, n=14) {
   dn <- ifelse(up<0, abs(up), 0)
   up <- ifelse(up>0,     up , 0)
 
-  up <- rollFUN(up, n, FUN="sum")
-  dn <- rollFUN(dn, n, FUN="sum")
+  up <- runSum(up, n)
+  dn <- runSum(dn, n)
 
   cmo <- 100 * (up-dn)/(up+dn)
   return( cmo )

@@ -1,39 +1,12 @@
-######################################################################
-# calculate rolling functions
-# TO DO: add capability to index "..." args, if possible.
-######################################################################
-"rollFUN" <-
-function(x, n, FUN, ...) {
+#-------------------------------------------------------------------------#
+# TTR, copyright (C) Joshua M. Ulrich, 2007                               #
+# Distributed under GNU GPL version 3                                     #
+#-------------------------------------------------------------------------#
 
-  x  <- as.matrix(x)
-  xr <- rep(NA,NROW(x))
-
-  for(i in n:NROW(xr)) {
-    xr[i] <- do.call( FUN, list( x[(i-n+1):i,], ... ) )
-  }
-  return( xr )
-}
-
-######################################################################
-# Calculate a Welles Wilder style sum of a series
-######################################################################
-"wilderSum" <-
-function(x, n=10) {
-
-  x   <- as.vector(x)
-  sum <- x
-
-  for(i in 2:NROW(x)) {
-    sum[i] <- x[i] + sum[i-1] * (n-1)/n
-  }
-  return( sum )
-}
-
-######################################################################
-# Calculate lags of a series
-######################################################################
 "lags" <-
 function(x, n=1) {
+
+  # Calculate lags of a series
 
   x <- as.matrix(x)
   if( is.null(colnames(x)) ) colnames(x) <- paste("V",1:ncol(x),sep="")
@@ -47,11 +20,11 @@ function(x, n=1) {
   return( out )
 }
 
-######################################################################
-# Calculate growth of $1 for a series of returns (and signals).
-######################################################################
+#-------------------------------------------------------------------------#
 "growth" <-
 function(price, signals, ...) {
+
+  # Calculate growth of $1 for a series of returns (and signals).
 
   if(missing(signals)) {
     signals <- rep(1,NROW(price))

@@ -5,8 +5,8 @@
   The Know Sure Thing (KST) is a smooth, summed, rate of change indicator.  Developed by Martin Pring.
 }
 \usage{
-  KST(price, n=c(10, 15, 20, 30), ma1=list("SMA", n=10), ma2=ma1, ma3=ma1, 
-         ma4=list("SMA", n=15), ma.sig=list("SMA", n=10), wts=1:4)
+  KST(price, n=c(10, 15, 20, 30), ma1=list("SMA", n=10), ma2=ma1,
+      ma3=ma1, ma4=list("SMA", n=15), ma.sig=list("SMA", n=10), wts=1:4)
 }
 \arguments{
   \item{price}{ Price series to use. }
@@ -49,7 +49,7 @@
 \seealso{
   See \code{\link{EMA}}, \code{\link{SMA}}, etc. for moving average options; and note
   Warning section.  See \code{\link{ROC}} for the rate-of-change function.
-  See \code{\link{oscillator}} for other oscillators.
+  See \code{\link{MACD}} for a generic oscillator.
 }
 \examples{
   data(ttrc)

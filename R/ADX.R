@@ -1,3 +1,8 @@
+#-------------------------------------------------------------------------#
+# TTR, copyright (C) Joshua M. Ulrich, 2007                               #
+# Distributed under GNU GPL version 3                                     #
+#-------------------------------------------------------------------------#
+
 "ADX" <-
 function(HLC, n=14, ma.adx=list("EMA", n=n, wilder=TRUE)) {
 

@@ -1,3 +1,8 @@
+#-------------------------------------------------------------------------#
+# TTR, copyright (C) Joshua M. Ulrich, 2007                               #
+# Distributed under GNU GPL version 3                                     #
+#-------------------------------------------------------------------------#
+
 "chaikinVolatility" <-
 function(HL, ma=list("EMA", n=10)) {
 
@@ -9,8 +14,7 @@ function(HL, ma=list("EMA", n=10)) {
   HL   <- as.matrix(HL)
   mavg <- do.call( ma[[1]], c( list(HL[,1]-HL[,2]), ma[-1] ) )
 
-  volatility <- ROC( mavg, ma$n )
+  volatility <- ROC( mavg, ma$n, type="discrete" )
 
   return( volatility )
 }
-

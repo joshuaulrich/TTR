@@ -18,12 +18,12 @@
 }
 \details{
   The EMV is calculated by dividing the midpoint ([high + low]/2) move by the
-  \sQuote{Box Ratio} (volume divided by the high minus low).
+  'Box Ratio' (volume divided by the high minus low).
 }
 \value{
   A matrix containing the columns:
   \item{ emv }{ The ease of movement values. }
-  \item{ ma.emv }{ The smoothed (as specified by \code{ma}) ease of movement values. }
+  \item{ emvMA }{ The smoothed (as specified by \code{ma}) ease of movement values. }
 }
 \author{ Josh Ulrich }
 \references{

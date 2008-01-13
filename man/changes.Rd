@@ -8,13 +8,13 @@
   Calculate the (rate of) change of a series over \code{n} periods.
 }
 \usage{
-  ROC(x, n=1, type=c("discrete", "continuous"), na=NA)
+  ROC(x, n=1, type=c("continuous", "discrete"), na=NA)
   momentum(x, n=1, na=NA)
 }
 \arguments{
   \item{x}{ Price, volume, etc. series to use. }
   \item{n}{ Number of periods to use. }
-  \item{type}{ Compounding type; either \code{"discrete"} (the default) or \code{"continuous"}. }
+  \item{type}{ Compounding type; either \code{"continuous"} (the default) or \code{"discrete"}. }
   \item{na}{ How should periods prior to \code{n} be represented?  Default is \code{NA}. }
 }
 \details{

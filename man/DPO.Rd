@@ -34,7 +34,7 @@
 }
 \seealso{
   See \code{\link{EMA}}, \code{\link{SMA}}, etc. for moving average options; and note
-  Warning section.  See \code{\link{oscillator}} for other oscillators.
+  Warning section.  See \code{\link{MACD}} for a general oscillator.
 }
 \examples{
   data(ttrc)

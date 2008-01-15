@@ -4,7 +4,7 @@
 #-------------------------------------------------------------------------#
 
 "CCI" <-
-function(HLC, ma=list("SMA", n=20), c=0.015) {
+function(HLC, n=20, maType="SMA", c=0.015, ...) {
 
   # Commodity Channel Index
 
@@ -23,8 +23,8 @@ function(HLC, ma=list("SMA", n=20), c=0.015) {
 
   stop("Price series must be either High-Low-Close, or Close/univariate.")
 
-  mavg  <- do.call( ma[[1]], c( list(HLC), ma[-1] ) )
-  meanDev <- runMAD( HLC, ma$n, center=mavg, stat="mean" )
+  mavg  <- do.call( maType, c( list(HLC), list(...) ) )
+  meanDev <- runMAD( HLC, n, center=mavg, stat="mean" )
 
   cci <- ( HLC - mavg ) / ( c * meanDev )
 

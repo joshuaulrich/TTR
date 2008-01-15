@@ -8,13 +8,15 @@
   Directional Movement Index; developed by J. Welles Wilder.
 }
 \usage{
-  ADX(HLC, n=14, ma.adx=list("EMA", n=n, wilder=TRUE))
+  ADX(HLC, n=14, maType="EMA", wilder=TRUE, ...)
 }
 \arguments{
   \item{HLC}{ Object able to be coerced to a matrix, which contains High-Low-Close prices. }
   \item{n}{ Number of periods to use for DX calculation (not ADX calculation). }
-  \item{ma.adx}{ A \emph{list} whose first component is a string containing the ADX moving average
-    function name; additional parameters may also be specified as \emph{named} components. }
+  \item{maType}{ A function or a string naming the function to be called. }
+  \item{wilder}{ \emph{Only used for the default case.}  If \code{TRUE}, a Welles Wilder type EMA
+    will be calculated. }
+  \item{...}{ Other arguments to be passed to the MA function of \code{maType}. }
 }
 \details{
   The \code{DIp}/\code{DIn} (positive/negative) is the percentage of the true range that is up/down.

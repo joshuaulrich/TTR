@@ -8,12 +8,15 @@
   is a Welles Wilder's style moving average of the TR.  Developed by J. Welles Wilder in 1978.
 }
 \usage{
-  ATR(HLC, ma=list("EMA", n=14, wilder=TRUE))
+  ATR(HLC, n=14, maType="EMA", wilder=TRUE, ...)
 }
 \arguments{
   \item{HLC}{ Object able to be coerced to a matrix, which contains High-Low-Close prices. }
-  \item{ma}{ A \emph{list} whose first component is a string containing the moving average function
-             name; additional parameters may also be specified as \emph{named} components. }
+  \item{n}{ Number of periods for moving average. }
+  \item{maType}{ A function or a string naming the function to be called. }
+  \item{wilder}{ \emph{Only used for the default case.}  If \code{TRUE}, a Welles Wilder type EMA
+    will be calculated. }
+  \item{...}{ Other arguments to be passed to the MA function \code{maType}. }
 }
 \details{
   TR incorporates yesterday's close in the calculation (high minus low).  E.g. if
@@ -45,6 +48,6 @@
 \examples{
   data(ttrc)
   atr <- ATR(ttrc[,c("High","Low","Close")],
-             ma=list("EMA", n=14, wilder=TRUE))
+             n=14, maType="EMA", wilder=TRUE)
 }
 \keyword{ ts }

@@ -16,7 +16,7 @@
     specified as \emph{named} components.  See Examples. }
   \item{wilder}{ \emph{Only used for the default case.}  If \code{TRUE}, a Welles Wilder type EMA
     will be calculated. }
-  \item{...}{ Other arguments to be passed to the MA function (maType case (1) above). }
+  \item{...}{ Other arguments to be passed to the \code{maType} function in case (1) above. }
 }
 \details{
   The RSI calculation is \code{RSI = 100 - 100 / ( 1 + RS )}, where \code{RS} is the smoothed

@@ -13,26 +13,25 @@
   Developed by William Blau in 1993.
 }
 \usage{
-  stoch(HLC, n.fastK=14, ma.fastD=list("SMA", n=3),
-                  ma.slowD=ma.fastD)
+  stoch(HLC, nFastK=14, nFastD=3, nSlowD=3, maType="SMA", ...)
 
-  SMI(HLC, n=13, ma.slow=list("EMA", n=25),
-           ma.fast=list("EMA", n=2), ma.sig=list("EMA", n=9))
+  SMI(HLC, n=13, nFast=2, nSlow=25, nSig=9, maType="EMA", ...)
 }
 \arguments{
   \item{HLC}{ High-Low-Close price series to use.  If only a univariate series is given,
     it will be used.  See details. }
   \item{n}{ Number of periods to use. }
-  \item{n.fastK}{ Number of periods for fast \%K (i.e. the number of past periods to use). }
-  \item{ma.fastD}{ A \emph{list} whose first component is a string containing the fast \%D moving
-    average function name; additional parameters may also be specified as \emph{named} components. }
-  \item{ma.slowD}{ Similar to \code{ma.fastD}, but for the fast \%D moving average. }
-  \item{ma.fast}{ A \emph{list} whose first component is a string containing the fast moving
-    average function name; additional parameters may also be specified as \emph{named} components. }
-  \item{ma.slow}{ A \emph{list} whose first component is a string containing the slow moving
-    average function name; additional parameters may also be specified as \emph{named} components. }
-  \item{ma.sig}{ A \emph{list} whose first component is a string containing the signal moving
-    average function name; additional parameters may also be specified as \emph{named} components. }
+  \item{nFastK}{ Number of periods for fast \%K (i.e. the number of past periods to use). }
+  \item{nFastD}{ Number of periods for fast \%D (i.e. the number smoothing periods to apply
+    to fast \%K). }
+  \item{nSlowD}{ Number of periods for slow \%D (i.e. the number smoothing periods to apply
+    to fast \%D). }
+  % What are the correct terms to describe these arguments???
+  \item{nFast}{ Number of periods for initial smoothing. }
+  \item{nSlow}{ Number of periods for double smoothing. }
+  \item{nSig}{ Number of periods for signal line. }
+  \item{maType}{ A function or a string naming the function to be called. }
+  \item{...}{ Other arguments to be passed to the \code{maType} function. }  
 }
 \details{
   If a High-Low-Close series is provided, the indicator is calculated using the high/low

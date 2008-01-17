@@ -16,7 +16,7 @@
   \item{maType}{ A function or a string naming the function to be called. }
   \item{wilder}{ \emph{Only used for the default case.}  If \code{TRUE}, a Welles Wilder type EMA
     will be calculated. }
-  \item{...}{ Other arguments to be passed to the MA function of \code{maType}. }
+  \item{...}{ Other arguments to be passed to the \code{maType} function. }
 }
 \details{
   The \code{DIp}/\code{DIn} (positive/negative) is the percentage of the true range that is up/down.

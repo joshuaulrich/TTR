@@ -1,6 +1,7 @@
 OPEN WISHES:
 
-- Ability to handle and return other class structures (e.g. zoo, ts).
+- Better handling of multiple moving average formals than current
+  maType=list() implementation.
 
 - Functionality to summarize results of technical trading rules.
   (via PerformanceAnalytics?)
@@ -8,7 +9,9 @@ OPEN WISHES:
 
 GRANTED WISHES:
 
+- Ability to handle and return other class structures (e.g. zoo, ts).
+  GRANTED: 'xts' does all this, and more!
+
 - A plotting function that allows charting price, volume, indicators,
   etc. on one device.
-  UPDATE: This solution is provided in quantmod.
-
+  GRANTED: quantmod provides an excellent solution.

@@ -4,7 +4,7 @@
 #-------------------------------------------------------------------------#
 
 "bollingerBands" <-
-function(HLC, ma=list("SMA", n=20), sd=2) {
+function(HLC, n=20, maType="SMA", sd=2, ...) {
 
   # Bollinger Bands
 
@@ -25,10 +25,11 @@ function(HLC, ma=list("SMA", n=20), sd=2) {
 
   stop("Price series must be either High-Low-Close, or Close/univariate.")
 
-  mavg  <- do.call( ma[[1]], c( list(HLC), ma[-1] ) )
+  maArgs <- list(n=n, ...)
+  mavg  <- do.call( maType, c( list(HLC), maArgs ) )
 
   # Calculate standard deviation by hand to incorporate various MAs
-  sdev   <- sqrt( runVar(HLC, ma$n) )
+  sdev   <- sqrt( runVar(HLC, n) )
 
   up     <- mavg + sd * sdev
   dn     <- mavg - sd * sdev

@@ -14,7 +14,7 @@
   \item{n}{ Number of periods for moving average. }
   \item{maType}{ A function or a string naming the function to be called. }
   \item{c}{ Constant to apply to the mean deviation. }
-  \item{...}{ Other arguments to be passed to the MA function \code{maType}. }
+  \item{...}{ Other arguments to be passed to the \code{maType} function. }
 }
 \details{
   CCI relates the current price and the average of price over \code{n} periods. The CCI

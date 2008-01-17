@@ -23,7 +23,8 @@ function(HLC, n=20, maType="SMA", c=0.015, ...) {
 
   stop("Price series must be either High-Low-Close, or Close/univariate.")
 
-  mavg  <- do.call( maType, c( list(HLC), list(...) ) )
+  maArgs <- list(n=n, ...)
+  mavg  <- do.call( maType, c( list(HLC), maArgs ) )
   meanDev <- runMAD( HLC, n, center=mavg, stat="mean" )
 
   cci <- ( HLC - mavg ) / ( c * meanDev )

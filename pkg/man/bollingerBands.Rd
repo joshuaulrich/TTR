@@ -6,14 +6,15 @@
   a period of time.  Developed by John Bollinger.
 }
 \usage{
-  bollingerBands(HLC, ma=list("SMA", n=20), sd=2)
+  bollingerBands(HLC, n=20, maType="SMA", sd=2, ...)
 }
 \arguments{
   \item{HLC}{ High-Low-Close price series to use.  If only a univariate series is given,
     it will be used.  See details. }
-  \item{ma}{ A \emph{list} whose first component is a string containing the moving average
-    function name; additional parameters may also be specified as \emph{named} components. }
+  \item{n}{ Number of periods for moving average. }
+  \item{maType}{ A function or a string naming the function to be called. }
   \item{sd}{ The number of standard deviations to use. }
+  \item{...}{ Other arguments to be passed to the \code{maType} function. }
 }
 \details{
   Bollinger Bands consist of three lines:

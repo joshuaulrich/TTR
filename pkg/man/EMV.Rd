@@ -7,14 +7,15 @@
   by Richard W. Arms, Jr.
 }
 \usage{
-  EMV(HL, volume, ma=list("SMA", n=9), vol.divisor=10000)
+  EMV(HL, volume, n=9, maType="SMA", vol.divisor=10000, ...)
 }
 \arguments{
   \item{HL}{ Object able to be coerced to a matrix, which contains a High-Low price series. }
   \item{volume}{ Vector or matrix of volume observations corresponding to the \code{HL} object. }
-  \item{ma}{ A \emph{list} whose first component is a string containing the moving average function
-    name; additional parameters may also be specified as \emph{named} components. }
+  \item{n}{ Number of periods for moving average. }
+  \item{maType}{ A function or a string naming the function to be called. }
   \item{vol.divisor}{ An increment to make the results larger and easier to work with. }
+  \item{...}{ Other arguments to be passed to the \code{maType} function. }
 }
 \details{
   The EMV is calculated by dividing the midpoint ([high + low]/2) move by the

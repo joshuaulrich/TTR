@@ -7,7 +7,7 @@
   Various functions that may be useful in designing technical trading rules.
 }
 \usage{
-  growth(price, signals, ...)
+  growth(price, signals, \dots)
   lags(x, n=1)
   wilderSum(x, n=10)
 }
@@ -17,7 +17,7 @@
     position, '1' for long position, and '-1' for short position. }
   \item{x}{ Object able to be coerced to a matrix. }
   \item{n}{ Number of periods to use. }
-  \item{...}{ Further arguments to be passed from or to other methods. }
+  \item{\dots}{ Further arguments to be passed from or to other methods. }
 }
 \details{
   \code{growth} calculates the growth of an investment using given prices and signals.

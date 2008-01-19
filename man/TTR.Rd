@@ -19,7 +19,7 @@
 
   Users will probably be most interested in the following functions:\cr
   \code{\link{ADX}}\cr
-  \code{\link{bollingerBands}}\cr
+  \code{\link{BBands}}\cr
   \code{\link{changes}}\cr
   \code{\link{MovingAverages}}\cr
   \code{\link{MACD}}\cr
@@ -49,7 +49,7 @@ Maintainer: Josh Ulrich
   data(ttrc)
 
   # Bollinger Bands
-  bbands <- bollingerBands( ttrc[,c("High","Low","Close")] )
+  bbands <- BBands( ttrc[,c("High","Low","Close")] )
 
   # Directional Movement Index
   adx <- ADX(ttrc[,c("High","Low","Close")])

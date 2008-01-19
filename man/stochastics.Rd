@@ -13,9 +13,9 @@
   Developed by William Blau in 1993.
 }
 \usage{
-  stoch(HLC, nFastK=14, nFastD=3, nSlowD=3, maType="SMA", ...)
+  stoch(HLC, nFastK=14, nFastD=3, nSlowD=3, maType="SMA", \dots)
 
-  SMI(HLC, n=13, nFast=2, nSlow=25, nSig=9, maType="EMA", ...)
+  SMI(HLC, n=13, nFast=2, nSlow=25, nSig=9, maType="EMA", \dots)
 }
 \arguments{
   \item{HLC}{ High-Low-Close price series to use.  If only a univariate series is given,
@@ -30,8 +30,10 @@
   \item{nFast}{ Number of periods for initial smoothing. }
   \item{nSlow}{ Number of periods for double smoothing. }
   \item{nSig}{ Number of periods for signal line. }
-  \item{maType}{ A function or a string naming the function to be called. }
-  \item{...}{ Other arguments to be passed to the \code{maType} function. }  
+  \item{maType}{ Either: \cr(1) A function or a string naming the function to be called, or\cr
+    (2) a \emph{list} with the first component like (1) above, and additional parameters
+    specified as \emph{named} components.  See Examples. }
+  \item{\dots}{ Other arguments to be passed to the \code{maType} function in case (1) above. }
 }
 \details{
   If a High-Low-Close series is provided, the indicator is calculated using the high/low

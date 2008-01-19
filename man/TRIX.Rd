@@ -6,22 +6,22 @@
   Developed by Jack K. Hutson.
 }
 \usage{
-  TRIX(price, ma1=list("EMA", n=20), ma2=ma1, ma3=ma1,
-              ma.sig=list("EMA", n=9), percent=TRUE)
+  TRIX(price, n=20, nSig=9, maType="EMA", percent=TRUE, \dots)
 }
 \arguments{
   \item{price}{ Price series to use. }
-  \item{ma1}{ A \emph{list} whose first component is a string containing the moving average
-    function name; additional parameters may also be specified as \emph{named} components. }
-  \item{ma2}{ See \code{ma1}. }
-  \item{ma3}{ See \code{ma1}. }
-  \item{ma.sig}{ Similar to \code{ma1}, but for the signal moving average. }
+  \item{n}{ Number of periods for moving average. }
+  \item{nSig}{ Number of periods for signal line moving average. }
+  \item{maType}{ Either: \cr(1) A function or a string naming the function to be called, or\cr
+    (2) a \emph{list} with the first component like (1) above, and additional parameters
+    specified as \emph{named} components.  See Examples. }
   \item{percent}{ logical; if \code{TRUE}, the rate of change is calculated using the \code{ROC}
     function, otherwise the \code{momentum} function is used. }
+  \item{\dots}{ Other arguments to be passed to the \code{maType} function in case (1) above. }
 }
 \details{
   The TRIX is calculated as follows:\cr
-  3MA = \code{ma3}( \code{ma2}( \code{ma1}(\code{price}) ) )\cr
+  3MA = \code{MA}( \code{MA}( \code{MA}(\code{price}) ) )\cr
   trix = 100 * [ 3MA(t) / 3MA(t-1) - 1 ]
 }
 \value{

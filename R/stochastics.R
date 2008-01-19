@@ -111,13 +111,13 @@ function(HLC, n=13, nFast=2, nSlow=25, nSig=9, maType="EMA", ...) {
     # If MA function has 'n' arg, see if it's populated in maType;
     # if it isn't, populate it with function's formal 'n'
     if( !is.null( formals(maType[[1]])$n ) && is.null( maType[[1]]$n ) ) {
-      maType[[1]]$n <- n
+      maType[[1]]$n <- nFast
     }
     if( !is.null( formals(maType[[2]])$n ) && is.null( maType[[2]]$n ) ) {
-      maType[[2]]$n <- n
+      maType[[2]]$n <- nSlow
     }
     if( !is.null( formals(maType[[3]])$n ) && is.null( maType[[3]]$n ) ) {
-      maType[[3]]$n <- n
+      maType[[3]]$n <- nSig
     }
     
     num1 <- do.call( maType[[1]], c( list(Cdiff ), maType[[1]][-1] ) )
@@ -134,13 +134,13 @@ function(HLC, n=13, nFast=2, nSlow=25, nSig=9, maType="EMA", ...) {
   # e.g. SMI(price, 13, 2, 25, 9, maType="WMA", wts=volume )
   else {
   
-    num1 <- do.call( maType[[1]], c( list(Cdiff ), maType[[1]][-1] ) )
-    den1 <- do.call( maType[[1]], c( list(HLdiff), maType[[1]][-1] ) )
-    num2 <- do.call( maType[[2]], c( list( num1 ), maType[[2]][-1] ) )
-    den2 <- do.call( maType[[2]], c( list( den1 ), maType[[2]][-1] ) )
+    num1 <- do.call( maType, c( list(Cdiff ), list(n=nSlow, ... ) ) )
+    den1 <- do.call( maType, c( list(HLdiff), list(n=nSlow, ... ) ) )
+    num2 <- do.call( maType, c( list( num1 ), list(n=nFast, ... ) ) )
+    den2 <- do.call( maType, c( list( den1 ), list(n=nFast, ... ) ) )
   
     SMI <- 100 * ( num2 / ( den2 / 2 ) )
-    signal <- do.call( maType[[3]], c( list(SMI), maType[[3]][-1] ) )
+    signal <- do.call( maType, c( list(SMI), list(n=nSig, ... ) ) )
 
   }
 

@@ -4,8 +4,7 @@
 #-------------------------------------------------------------------------#
 
 "MACD" <-
-function(x, ma.fast=list("EMA", n=12), ma.slow=list("EMA", n=26),
-             ma.sig=list("EMA", n=9), percent=FALSE) {
+function(x, nFast=12, nSlow=26, nSig=9, maType="EMA", percent=TRUE, ...) {
 
   # Oscillators
 
@@ -30,19 +29,44 @@ function(x, ma.fast=list("EMA", n=12), ma.slow=list("EMA", n=26),
   # containing MAs, which would allow the oscillator to be constructed
   # using MAs of different prices.
 
-  mavg.slow <- do.call( ma.slow[[1]], c( list( x ), ma.slow[-1] ) )
-  mavg.fast <- do.call( ma.fast[[1]], c( list( x ), ma.fast[-1] ) )
+  # Case of two different 'maType's for both MAs.
+  if( is.list(maType) ) {
 
+    # If MA function has 'n' arg, see if it's populated in maType;
+    # if it isn't, populate it with function's formal 'n'
+    if( !is.null( formals(maType[[1]])$n ) && is.null( maType[[1]]$n ) ) {
+      maType[[1]]$n <- nFast
+    }
+    if( !is.null( formals(maType[[2]])$n ) && is.null( maType[[2]]$n ) ) {
+      maType[[2]]$n <- nSlow
+    }
+    if( !is.null( formals(maType[[3]])$n ) && is.null( maType[[3]]$n ) ) {
+      maType[[3]]$n <- nSig
+    }
+    
+    mavg.slow <- do.call( maType[[1]][[1]], c( list(x), maType[[1]][-1] ) )
+    mavg.fast <- do.call( maType[[2]][[1]], c( list(x), maType[[2]][-1] ) )
+
+  }
+  
+  # Case of one 'maType' for both MAs.
+  else {
+  
+    mavg.fast <- do.call( maType, c( list(x), list(n=nFast, ...) ) )
+    mavg.slow <- do.call( maType, c( list(x), list(n=nSlow, ...) ) )
+
+  }
+  
   if(percent) {
     macd <- 100 * ( mavg.fast / mavg.slow - 1 )
   } else {
     macd <- mavg.fast - mavg.slow
   }
 
-  if(is.null(ma.sig)) {
-    signal <- NULL
+  if( is.list(maType) ) {
+    signal <- do.call( maType[[3]][[1]], c( list( macd ), maType[[3]][-1] ) )
   } else
-    signal <- do.call( ma.sig[[1]], c( list( macd ), ma.sig[-1] ) )
+    signal <- do.call( maType, c( list( macd ), list(n=nSig, ...) ) )
 
   return( cbind( macd, signal ) )
 }

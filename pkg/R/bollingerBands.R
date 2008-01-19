@@ -3,7 +3,7 @@
 # Distributed under GNU GPL version 3                                     #
 #-------------------------------------------------------------------------#
 
-"bollingerBands" <-
+"BBands" <-
 function(HLC, n=20, maType="SMA", sd=2, ...) {
 
   # Bollinger Bands

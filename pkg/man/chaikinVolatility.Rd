@@ -6,13 +6,13 @@
   Developed by Marc Chaikin.
 }
 \usage{
-  chaikinVolatility(HL, n=10, maType="EMA", ...)
+  chaikinVolatility(HL, n=10, maType="EMA", \dots)
 }
 \arguments{
   \item{HL}{ Object able to be coerced to a matrix, which contains High-Low prices. }
   \item{n}{ Number of periods for moving average. }
   \item{maType}{ A function or a string naming the function to be called. }
-  \item{...}{ Other arguments to be passed to the \code{maType} function. }
+  \item{\dots}{ Other arguments to be passed to the \code{maType} function. }
 }
 \details{
   The Chaikin Volatility indicator defines volatility as an increase in the difference

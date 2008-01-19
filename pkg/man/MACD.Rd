@@ -8,17 +8,19 @@
   for any univariate series, not only price.
 }
 \usage{
-  MACD(x, ma.fast=list("EMA", n=12), ma.slow=list("EMA", n=26),
-             ma.sig=list("EMA", n=9), percent=FALSE)
+  MACD(x, nFast=12, nSlow=26, nSig=9, maType="EMA", percent=TRUE, \dots)
 }
 \arguments{
   \item{x}{ Series to use; usually price, but can be volume, etc. }
-  \item{ma.fast}{ A \emph{list} whose first component is a string containing the fast moving average
-    function name; additional parameters may also be specified as \emph{named} components. }
-  \item{ma.slow}{ Similar to \code{ma.fast}, but for the fast moving average. }
-  \item{ma.sig}{ Similar to \code{ma.fast}, but for the signal line moving average. }
+  \item{nFast}{ Number of periods for fast moving average. }
+  \item{nSlow}{ Number of periods for slow moving average. }
+  \item{nSig}{ Number of periods for signal moving average. }
+  \item{maType}{ Either: \cr (1) A function or a string naming the function to be called, or\cr
+    (2) a \emph{list} with the first component like (1) above, and additional parameters
+    specified as \emph{named} components.  See Examples. }
   \item{percent}{ logical; if \code{TRUE}, the percentage difference between the fast and slow moving
     averages is returned, otherwise the difference between the respective averages is returned. }
+  \item{\dots}{ Other arguments to be passed to the \code{maType} function in case (1) above. }
 }
 \details{
   The MACD function either subtracts the fast MA from the slow MA, or finds the rate
@@ -51,9 +53,7 @@
 \examples{
   data(ttrc)
 
-  macd  <- MACD( ttrc[,"Close"], ma.fast=list("EMA", n=12),
-                                 ma.slow=list("EMA", n=26),
-                                 ma.sig =list("EMA", n= 9) )
+  macd  <- MACD( ttrc[,"Close"], 12, 26, 9, maType="EMA" )
 
 }
 \keyword{ ts }

@@ -37,15 +37,13 @@ function(price, n=14, maType="EMA", wilder=TRUE, ...) {
 
     # If MA function has 'n' arg, see if it's populated in maType;
     # if it isn't, populate it with RSI's formal 'n'
-    if( !is.null( formals(maType[[1]])$n ) && is.null( maType[[1]]$n ) ) {
-      maType[[1]]$n <- n
+    for(i in 1:length(maType)) {
+      if( !is.null( formals(maType[[i]])$n ) && is.null( maType[[i]]$n ) ) {
+        maType[[i]]$n <- n
+      }
+      mavgUp <- do.call( maType[[1]][[1]], c( list(up), maType[[1]][-1] ) )
+      mavgDn <- do.call( maType[[2]][[1]], c( list(dn), maType[[2]][-1] ) )
     }
-    if( !is.null( formals(maType[[2]])$n ) && is.null( maType[[2]]$n ) ) {
-      maType[[2]]$n <- n
-    }
-    
-    mavgUp <- do.call( maType[[1]][[1]], c( list(up), maType[[1]][-1] ) )
-    mavgDn <- do.call( maType[[2]][[1]], c( list(dn), maType[[2]][-1] ) )
   }
   
   # Case of one 'maType' for both MAs.

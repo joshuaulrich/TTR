@@ -8,7 +8,7 @@
   is a Welles Wilder's style moving average of the TR.  Developed by J. Welles Wilder in 1978.
 }
 \usage{
-  ATR(HLC, n=14, maType="EMA", wilder=TRUE, ...)
+  ATR(HLC, n=14, maType="EMA", wilder=TRUE, \dots)
 }
 \arguments{
   \item{HLC}{ Object able to be coerced to a matrix, which contains High-Low-Close prices. }
@@ -16,7 +16,7 @@
   \item{maType}{ A function or a string naming the function to be called. }
   \item{wilder}{ \emph{Only used for the default case.}  If \code{TRUE}, a Welles Wilder type EMA
     will be calculated. }
-  \item{...}{ Other arguments to be passed to the \code{maType} function. }
+  \item{\dots}{ Other arguments to be passed to the \code{maType} function. }
 }
 \details{
   TR incorporates yesterday's close in the calculation (high minus low).  E.g. if

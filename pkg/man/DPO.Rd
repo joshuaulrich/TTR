@@ -6,7 +6,7 @@
   by subtracting a moving average of the price from the price.
 }
 \usage{
-  DPO(x, n=10, maType="SMA", shift=n/2+1, percent=FALSE, ...)
+  DPO(x, n=10, maType="SMA", shift=n/2+1, percent=FALSE, \dots)
 }
 \arguments{
   \item{x}{ Price, volume, etc. series to use. }
@@ -15,7 +15,7 @@
   \item{shift}{ The number of periods to shift the moving average. }
   \item{percent}{ logical; if \code{TRUE}, the percentage difference between the slow and fast moving
     averages is returned, otherwise the difference between the respective averages is returned. }
-  \item{...}{ Other arguments to be passed to the \code{maType} function. }
+  \item{\dots}{ Other arguments to be passed to the \code{maType} function. }
 }
 \details{
   The Detrended Price shows cycles and overbought / oversold conditions. Note the calculation

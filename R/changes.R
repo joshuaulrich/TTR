@@ -15,15 +15,15 @@ function(x, n=1, type=c("continuous","discrete"), na=NA) {
 
   x    <- as.vector(x)
   roc  <- vector("numeric", NROW(x))
-  type <- match.arg(type)
+  #type <- match.arg(type) match.arg only works with 1 arg cleanly -jar
 
   # Discrete changes
-  if(type=="discrete") {
+  if(type[1]=="discrete") {
     roc <- c( rep(na,n),      x[(1+n):NROW(x)] / x[1:(NROW(x)-n)] -1 )
   }
 
   # Continuous changes
-  if(type=="continuous") {
+  if(type[1]=="continuous") {
     roc <- c( rep(na,n), log( x[(1+n):NROW(x)] / x[1:(NROW(x)-n)] )  )
   }
 

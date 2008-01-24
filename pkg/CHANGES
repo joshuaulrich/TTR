@@ -1,76 +1,107 @@
-TTR version 0.14-0 - not released
+TTR version 0.14-0
   Changes from version 0.13-2
 
-- Removed 'message' function from CCI.R, VHF.R, WPR.R, aroon.R
-  bollingerBands.R, and stochastic.R.
 
-- Added Stochastic Momentum Index (SMI) function and documentation.
+New Features:
 
-- Change \sQuote{x} to 'x' in documentation.
+- Changed MA-type args and updated documentation for: RSIm ADX, ATR,
+  CCI, DPO, EMV, RSI, BBands, chaikinVolatility, stoch, SMI, TRIX,
+  MACD, and KST
 
-- Added EMA Fortran implementation and NA checking/handling and
-  added 'ratio' argument with default = NULL.
+- Added Stochastic Momentum Index (SMI) and williamsAD functions
+  and documentation
 
-- Set na=NA for 'momentum' and 'ROC' functions in files KST.R
-  RSI.R and TDI.R
+- Added Fortran implementations of SMA, EMA, WMA, EVWMA, ZLEMA, PSAR
 
-- Added copyright information at the top of each file (.R and .f).
+- Added NA checking/handling for many functions
 
-- Included Fortran implementations of SMA, EMA, WMA, EVWMA, ZLEMA.
+- Added 'ratio' argument to EMA with default=NULL
 
 - Changed all usage of 'rollFun' to their respective Fortran
-  implementations and removed the 'rollFun' function.  Added functions
-  are 'runSum', 'wilderSum', 'runMin', 'runMax', 'runSumProd', 'runVar'.
+  implementations and removed the 'rollFun' function.  Added Fortran
+  based functions are: runSum, wilderSum, runMin, runMax, runMean,
+  runCov, runCor, runVar, runSD, runMedian, runMAD
 
-- Replaced R-based 'wilderSum' function with Fortran implementation.
 
-- Made the below changes to the 'ZLEMA' function:
-   - Add ratio argument with default = NULL.
+Changes:
+
+- Changed 'CCI' to use 'runMAD'
+
+- Set 'na=NA' for 'momentum' and 'ROC' functions in files KST.R,
+  RSI.R, and TDI.R, and changed 'ROC' to use 'type="discrete"'
+  in 'chaikinVolatility.R'
+
+- Changed default 'type' of 'ROC' to 'continuous'
+
+- Made the following changes to the 'ZLEMA' function:
+   - Add ratio argument with default = NULL
    - Non-integer lags are a weighted mean of the two nearest
-     observations, based on thier proximity to the lag value.
-   - Change 'lag = ratio^(-1)' to fully support 'ratio' argument.
+     observations, based on thier proximity to the lag value
+   - Change 'lag = ratio^(-1)' to fully support 'ratio' argument
 
-- Corrected EVWMA to start at period 'n' instead of 'n-1'.
-
-- Changed the 'bollingerBands' function's 'sd' argument from a list
+- Changed the 'BBands' function's 'sd' argument from a list
   that allows other dispersion functions to simply indicate the
-  number of standard deviations to use.
+  number of standard deviations to use
 
-- Changed 'bollingerBands' %B output value from 'pct.b' to 'pctB'.
+- Changed 'BBands' %B output value from 'pct.b' to 'pctB'
 
-- Changed 'WPR' output value from 'pct.R' to 'pctR'.
+- Changed 'WPR' output value from 'pct.R' to 'pctR'
 
-- Changed 'WPR' MA output value from 'ma.emv' to 'emvMA'.
+- Changed 'WPR' MA output value from 'ma.emv' to 'emvMA'
 
-- Changed 'aroon' output values from 'aroon.xx' to 'aroonXx'.
+- Changed 'aroon' output values from 'aroon.xx' to 'aroonXx'
 
-- Removed runSP/runSumProd function, since runSum(x*x) does the
-  same thing as runSumProd(x,x).
+- Renamed:
+    'chaikinMF' to 'CMF'
+    'stochastic' to 'stoch'
+    'bollingerBands' to 'BBands'
 
-- Added "implicit none" to every Fortran subroutine.
+- Added NAMESPACE 
+
+- Added copyright information at the top of each file (.R and .f)
 
 - Removed all DOS EOL characters via 'vim +"argdo set ff=unix" +wqa *'
 
-- Changed documentation so "Usage", "Examples" section are a max of
-  ~65-70 characters wide; it now prints better in plain text help.
+
+Deprecated/Defunct:
 
 - Removed 'oscillator' function and transferred functionality
-  to 'MACD' function.
-
-- Removed remnants of 'oscillator' function.
+  to 'MACD' function
 
 - Removed chaikinOscillator, since it can be created via
-  MACD( chaikinAD ).
+  MACD( chaikinAD )
 
-- Renamed 'chaikinMF' to 'CMF'.
 
-- Renamed 'stochastic' to 'stoch'.
+Bug Fixes:
 
-- Added 'williamsAD' function and documentation.
+- match.arg(type) in ROC changed to simple subsetting of type
 
-- Added Fortran-based routines, 'runMedian' and 'runMAD', with their R
-  functions and documentation.
+- Changed trailing zeros to trailing NAs in DPO
 
-- Changed 'CCI' to use 'runMAD'.
+- Fixed 'WMA' bug that allowed 'x' and 'wts' vectors to have different
+  length if either series had leading NAs (similar to EVWMA function)
 
-- Added Fortran PSAR routine.
+- Fixed 'runCov' bug that allowed 'x' and 'y' vectors to have different
+  length if either series had leading NAs (similar to EVWMA function)
+
+- Corrected EVWMA to start at period 'n' instead of 'n-1'
+
+- Removed 'message' function from CCI.R, VHF.R, WPR.R, aroon.R
+  bollingerBands.R, and stochastics.R
+
+- Change \sQuote{x} to 'x' in documentation
+
+- Changed documentation so "Usage", "Examples" section are a max of
+  ~65-70 characters wide; it now prints better in plain text help
+
+- Updated "detail" section of 'MovingAverages.Rd' via enclosing
+  function names in "\code{}" brackets
+
+- Changed "title" section of 'WPR.Rd' to remove unnecessary "\"
+
+- Removed "detail" section from 'runFun.Rd' and replaced "\code{}"
+  brackets in "value" section with "\item{}" brackets
+
+- Changed "site(s)" to "sites" in "references" section of "TTR.Rd",
+  and included "runFun" in list of interesting functions
+

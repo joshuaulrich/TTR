@@ -9,11 +9,11 @@ function(x, n=1) {
   # Calculate lags of a series
 
   x <- as.matrix(x)
-  if( is.null(colnames(x)) ) colnames(x) <- paste("V",1:ncol(x),sep="")
+  if( is.null(colnames(x)) ) colnames(x) <- paste("V",1:NCOL(x),sep="")
 
   out <- embed(x, lag+1)
   if(lag==1)     lag.names <- 1      else
-  if(ncol(x)==1) lag.names <- 1:lag  else  lag.names <- rep(1:lag,ncol(x))
+  if(NCOL(x)==1) lag.names <- 1:lag  else  lag.names <- rep(1:lag,NCOL(x))
 
   colnames(out) <- c( colnames(x), paste(colnames(x), sort(lag.names), sep=".") )
 

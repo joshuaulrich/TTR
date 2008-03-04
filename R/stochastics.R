@@ -16,14 +16,14 @@ function(HLC, nFastK=14, nFastD=3, nSlowD=3, maType="SMA", ...) {
   HLC <- as.matrix(HLC)
 
   # Calculation if HLC series is given
-  if(ncol(HLC)==3) {
+  if(NCOL(HLC)==3) {
     high  <- HLC[,1]
     low   <- HLC[,2]
     close <- HLC[,3]
   } else
 
   # Calculation if price vector is given
-  if(ncol(HLC)==1) {
+  if(NCOL(HLC)==1) {
     high  <- HLC
     low   <- HLC
     close <- HLC

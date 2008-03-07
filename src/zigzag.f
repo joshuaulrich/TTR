@@ -114,4 +114,9 @@ c
       endif
 
    10 continue
+c
+c     Set final values
+c     
+      zz(refpos) = refval
+      zz(infpos) = infval
       end

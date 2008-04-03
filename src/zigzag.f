@@ -9,45 +9,49 @@ c
 c     iha   : input array of high prices
 c     ila   : input array of low prices
 c     la    : length of arrays
-c     minch : minimum change to cause a zig/zag
-c     ch    : logical % (1) or $ (0) change?
-c     minch : The minimum change amount
+c     ch    : minimum change to cause a zig/zag
+c     pct   : logical, % (1) or $ (0) change
+c     rtr   : logical, retrace (1) or absolute (0) change
+c     lex   : logical, last (1) or first (0) extreme value
 c     zz    : Zig/Zag vector
+c
 c     refpos: Reference (first) price position
 c     refval: Reference (first) price value
 c     infpos: Inflection (second) price position
 c     infval: Inflection (second) price value
-c     Xmin  : [L]ocal and [E]xtreme minimums
-c     Xmax  : [L]ocal and [E]xtreme maximums
+c     *min  : [L]ocal and [E]xtreme minimums
+c     *max  : [L]ocal and [E]xtreme maximums
 c
-      subroutine zigzag(iha, ila, la, minch, ch, zz)
+      subroutine zigzag(iha, ila, la, ch, pct, rtr, lex, zz)
       implicit none
 
-      integer la, i, ch, refpos, infpos, sig
+      integer la, pct, rtr, lex, i, refpos, infpos, sig
       double precision iha(la), ila(la), zz(la)
-      double precision refval, infval, minch
+      double precision refval, infval, ch, one, two
       double precision lmin, lmax, emin, emax
 c
 c     Initialize values
 c
-      refval = (iha(1) + ila(1)) / 2
-      infval = refval
+      one = (iha(1) + ila(1)) / 2
+      two = (iha(2) + ila(2)) / 2
+      refval = one
+      infval = two
       refpos = 1
-      infpos = 1
+      infpos = 2
       sig = 0
 c
 c     Begin Loop
 c
       do 10 i=2,la
 
-      if( ch .EQ. 1 ) then
-c     If % change given
-          emin = infval * ( 1 - minch )
-          emax = infval * ( 1 + minch )
+      if( pct .EQ. 1 ) then
+c     If % change given (absolute move)
+          emin = infval * ( 1 - ch )
+          emax = infval * ( 1 + ch )
       else
-c     If $ change given
-          emin = infval - minch
-          emax = infval + minch
+c     If $ change given (only absolute moves make sense)
+          emin = infval - ch
+          emax = infval + ch
       endif
 c
 c     Find local maximum and minimum
@@ -56,14 +60,25 @@ c
       lmin = MIN( infval, ila(i) )
 c
 c     Find first trend
+c
       if( sig .EQ. 0 ) then
-c         Confirmed Downtrend
-          if( lmin .LE. emin ) then
-              sig = -1
-          endif
-c         Confirmed Uptrend
-          if( lmax .GE. emax ) then
-              sig = 1
+          if( rtr .EQ. 1 ) then
+c         Retrace prior move
+              if( two .GE. one ) then
+                  sig = 1
+              else
+                  sig = -1
+              endif
+          else
+c         Absolute move
+              if( lmin .LE. emin ) then
+c             Confirmed Downtrend
+                  sig = -1
+              endif
+              if( lmax .GE. emax ) then
+c             Confirmed Uptrend
+                  sig = 1
+              endif
           endif
       endif
 c
@@ -73,9 +88,24 @@ c
 c
 c         New Minimum
 c
-          if( ila(i) .LE. lmin ) then
-              infval = lmin
-              infpos = i
+          if( ila(i) .EQ. lmin ) then
+c             Last Extreme
+              if( lex .EQ. 1 ) then
+                  infval = ila(i)
+                  infpos = i
+              else
+c             First Extreme
+                  if( ila(i) .NE. ila(i-1) ) then
+                      infval = ila(i)
+                      infpos = i
+                  endif
+              endif
+          endif
+c
+c         Retrace prior move
+c
+          if( rtr .EQ. 1 ) then
+              emax = infval + ((refval - infval) * ch)
           endif
 c
 c         Trend Reversal
@@ -96,9 +126,24 @@ c
 c
 c         New Maximum
 c
-          if( iha(i) .GE. lmax ) then
-              infval = lmax
-              infpos = i
+          if( iha(i) .EQ. lmax ) then
+c             Last Extreme
+              if( lex .EQ. 1 ) then
+                  infval = iha(i)
+                  infpos = i
+              else
+c             First Extreme
+                  if( iha(i) .NE. iha(i-1) ) then
+                      infval = iha(i)
+                      infpos = i
+                  endif
+              endif
+          endif
+c
+c         Retrace prior move
+c
+          if( rtr .EQ. 1 ) then
+              emin = infval - ((infval - refval) * ch)
           endif
 c
 c         Trend Reversal

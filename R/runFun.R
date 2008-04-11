@@ -154,7 +154,7 @@ function(x, n=10) {
 #-------------------------------------------------------------------------#
 
 "runMedian" <-
-function(x, n=10, low=FALSE, high=FALSE) {
+function(x, n=10, non.unique="mean") {
 
   x   <- as.vector(x)
 
@@ -167,6 +167,10 @@ function(x, n=10, low=FALSE, high=FALSE) {
   }
   x   <- na.omit(x)
 
+  # Non-unique median
+  non.unique <- match.arg(non.unique, c('mean','max','min'))
+  non.unique <- switch( non.unique, mean=0, max=1, min=-1 )
+  
   # Initialize result vector 
   result <- rep(0,NROW(x))
 
@@ -176,7 +180,7 @@ function(x, n=10, low=FALSE, high=FALSE) {
                    n = as.integer(n),
                    oa = double(NROW(x)),
                    la = as.integer(NROW(x)),
-                   ver = as.integer(version),
+                   ver = as.integer(non.unique),
                    PACKAGE = "TTR" )$oa
 
   # Replace 1:(n-1) with NAs and prepend NAs from original data
@@ -268,7 +272,7 @@ function(x, n=10, sample=TRUE) {
 
 "runMAD" <-
 function(x, n=10, center=runMedian(x, n), stat="median",
-         constant=1.4826, low=FALSE, high=FALSE) {
+         constant=1.4826, non.unique="mean") {
 
   x   <- as.vector(x)
 
@@ -289,14 +293,10 @@ function(x, n=10, center=runMedian(x, n), stat="median",
   median <- match.arg(stat, c("mean","median"))
   median <- switch( stat, median=TRUE, mean=FALSE )
 
-  # 'version' = f( low, high )
-  if( low && high )
-    stop("'low' and 'high' cannot be both TRUE")
-  version <- 0
-  if( low )  version <- -1
-  if( high )  version <- 1
-
-
+  # Non-unique median
+  non.unique <- match.arg(non.unique, c('mean','max','min'))
+  non.unique <- switch( non.unique, mean=0, max=1, min=-1 )
+  
   # Call Fortran routine
   result <- .Fortran( "runMAD",
                    rs = as.double(x),
@@ -305,7 +305,7 @@ function(x, n=10, center=runMedian(x, n), stat="median",
                    n = as.integer(n),
                    oa = as.double(result),
                    stat = as.integer(median),
-                   ver = as.integer(version),
+                   ver = as.integer(non.unique),
                    PACKAGE = "TTR" )$oa
 
   if( median ) result <- result * constant

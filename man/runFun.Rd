@@ -19,13 +19,13 @@
   runMin(x, n=10)
   runMax(x, n=10)
   runMean(x, n=10)
-  runMedian(x, n=10, low=FALSE, high=FALSE)
+  runMedian(x, n=10, non.unique="mean")
   runCov(x, y, n=10, use="all.obs", sample=TRUE)
   runCor(x, y, n=10, use="all.obs", sample=TRUE)
   runVar(x, n=10, sample=TRUE)
   runSD(x, n=10, sample=TRUE)
   runMAD(x, n=10, center=runMedian(x, n), stat="median",
-         constant=1.4826, low=FALSE, high=FALSE)
+         constant=1.4826, non.unique="mean")
 }
 \arguments{
   \item{x}{ Object able to be coerced to a matrix. }
@@ -33,10 +33,8 @@
   \item{n}{ Number of periods to use in the window. }
   \item{sample}{ Logical, sample covariance if \code{TRUE} (denominator of \code{n-1}) }
   \item{use}{ Only \code{"all.obs"} currently implemented. }
-  \item{low}{ Logical, if \code{TRUE}, compute the 'low-median'; i.e., take the
-    smaller of the two middle values for even sample sizes. }
-  \item{high}{ Logical, if \code{TRUE}, compute the 'high-median'; i.e., take the
-    larger of the two middle values for even sample sizes. }
+  \item{non.unique}{ One of 'mean', 'max', or 'min'; which compute their respective
+    statistics for the two middle values of even-sized samples. }
   \item{center}{ The values to use as the measure of central tendency, around
     which to calculate deviations. }
   \item{stat}{ Statistic to calculate, one of 'median' or 'mean' (e.g. median

@@ -4,7 +4,7 @@
 #-------------------------------------------------------------------------#
 
 "ZigZag" <- 
-function(HL, change=10, percent=TRUE, retrace=FALSE, lastExtreme=TRUE ) {
+function( HL, change=10, percent=TRUE, retrace=FALSE, lastExtreme=TRUE ) {
 
   # Zig Zag Indicator
   # Adapted from Alberto Santini's code

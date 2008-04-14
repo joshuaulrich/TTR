@@ -27,15 +27,13 @@ c
 
       integer la, pct, rtr, lex, i, refpos, infpos, sig
       double precision iha(la), ila(la), zz(la)
-      double precision refval, infval, ch, one, two
+      double precision refval, infval, ch
       double precision lmin, lmax, emin, emax
 c
 c     Initialize values
 c
-      one = (iha(1) + ila(1)) / 2
-      two = (iha(2) + ila(2)) / 2
-      refval = one
-      infval = two
+      refval = (iha(1) + ila(1)) / 2
+      infval = (iha(2) + ila(2)) / 2
       refpos = 1
       infpos = 2
       sig = 0
@@ -64,7 +62,7 @@ c
       if( sig .EQ. 0 ) then
           if( rtr .EQ. 1 ) then
 c         Retrace prior move
-              if( two .GE. one ) then
+              if( infval .GE. refval ) then
                   sig = 1
               else
                   sig = -1
@@ -117,6 +115,7 @@ c
               infval = iha(i)
               infpos = i
               sig = 1
+              GO TO 10
           endif
       endif
 c
@@ -155,6 +154,7 @@ c
               infval = ila(i)
               infpos = i
               sig = -1
+              GO TO 10
           endif
       endif
 

@@ -1,0 +1,58 @@
+"volatility" <-
+function(OHLC, n=10, calc="close", N=260, ...) {
+  
+  # Choose an arg name that doesn't clash with ROC's 'type' arg
+  calc <- match.arg(calc,
+            c("close","garman.klass","parkinson","rogers.satchell"))
+  
+  # s       Volatility
+  # N       Number of closing prices in a year
+  # n       Number of historical prices used for the volatility estimate
+  # ci      The closing price on the ith day
+  # ri      Log return on the ith day
+
+  # Historical Close-to-Close Volatility
+  # http://www.sitmo.com/eq/172
+  if( calc=="close" ) {
+    r <- ROC( OHLC[,4], 1, ... )
+    rBar <- runSum( r, n-1 ) / (n-1)
+    s <- sqrt( N/(n-2) * runSum( (r-rBar)^2 , n-1 ) )
+  }
+
+  # Historical Open-High-Low-Close Volatility: Garman Klass
+  # http://www.sitmo.com/eq/402
+  if( calc=="garman.klass" ) {
+    s <- sqrt( N/n * runSum( .5 * log(OHLC[,2]/OHLC[,3])^2 -
+               (2*log(2)-1) * log(OHLC[,4]/OHLC[,1])^2 , n ) )
+  }
+
+  if( calc=="parkinson" ) {
+    # Historical High-Low Volatility: Parkinson
+    # http://www.sitmo.com/eq/173
+    s <- sqrt( N/(4*n*log(2)) * runSum( log(OHLC[,2]/OHLC[,3])^2, n ) )
+  }
+
+  if( calc=="rogers.satchell" ) {
+    # Historical Open-High-Low-Close Volatility: Rogers Satchell
+    # http://www.sitmo.com/eq/414
+    s <- sqrt( N/n * runSum(
+               log(OHLC[,2]/OHLC[,4]) * log(OHLC[,2]/OHLC[,1]) +
+               log(OHLC[,3]/OHLC[,4]) * log(OHLC[,3]/OHLC[,1]), n ) )
+  }
+
+  #if( calc=="garman.klass.yang.zhang" ) {
+    # Historical Open-High-Low-Close Volatility: Garman and Klass (Yang Zhang)
+    # http://www.sitmo.com/eq/409
+    #s <- sqrt( N/n * runSum( .5 * log(OHLC[,2]/OHLC[,3])^2 -
+               #(2*log(2)-1) * log(OHLC[,4]/OHLC[,1])^2 , n) )
+    #s <- sqrt( Z/n * runSum( log(op/cl[-1])^2 + .5*log(hi/lo)^2 -
+                     #(2*log(2)-1)*log(cl/op)^2 ) )
+  #}
+
+  #if( calc=="yang.zhang" ) {
+    # Historical Open-High-Low-Close Volatility: Yang Zhang
+    # http://www.sitmo.com/eq/417
+  #}
+
+  return(s)
+}

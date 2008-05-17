@@ -6,7 +6,7 @@
 "runSum" <-
 function(x, n=10) {
 
-  x   <- as.vector(x)
+  x <- use.xts(x, error=FALSE)
 
   if( n < 1 || n > NROW(x) ) stop("Invalid 'n'")
 
@@ -14,8 +14,8 @@ function(x, n=10) {
   NAs <- sum( is.na(x) )
   if( NAs > 0 ) {
     if( any( is.na(x[-(1:NAs)]) ) ) stop("Series contains non-leading NAs")
+    x <- x[-(1:NAs)]
   }
-  x   <- na.omit(x)
 
   # Initialize result vector 
   result <- rep(0,NROW(x))
@@ -34,7 +34,8 @@ function(x, n=10) {
   result[1:(n-1)] <- NA
   result <- c( rep( NA, NAs ), result )
 
-  return( result )
+  # Convert back to original class
+  reclass(result, x)
 }
 
 #-------------------------------------------------------------------------#
@@ -42,7 +43,7 @@ function(x, n=10) {
 "wilderSum" <-
 function(x, n=10) {
 
-  x   <- as.vector(x)
+  x <- use.xts(x, error=FALSE)
 
   if( n < 1 || n > NROW(x) ) stop("Invalid 'n'")
 
@@ -50,8 +51,8 @@ function(x, n=10) {
   NAs <- sum( is.na(x) )
   if( NAs > 0 ) {
     if( any( is.na(x[-(1:NAs)]) ) ) stop("Series contains non-leading NAs")
+    x <- x[-(1:NAs)]
   }
-  x   <- na.omit(x)
 
   # Initialize result vector 
   result <- x
@@ -68,7 +69,8 @@ function(x, n=10) {
   result[1:(n-1)] <- NA
   result <- c( rep( NA, NAs ), result )
 
-  return( result )
+  # Convert back to original class
+  reclass(result, x)
 }
 
 #-------------------------------------------------------------------------#
@@ -76,7 +78,7 @@ function(x, n=10) {
 "runMin" <-
 function(x, n=10) {
 
-  x   <- as.vector(x)
+  x <- use.xts(x, error=FALSE)
 
   if( n < 1 || n > NROW(x) ) stop("Invalid 'n'")
 
@@ -84,8 +86,8 @@ function(x, n=10) {
   NAs <- sum( is.na(x) )
   if( NAs > 0 ) {
     if( any( is.na(x[-(1:NAs)]) ) ) stop("Series contains non-leading NAs")
+    x <- x[-(1:NAs)]
   }
-  x   <- na.omit(x)
 
   # Initialize result vector 
   result <- rep(0,NROW(x))
@@ -103,7 +105,8 @@ function(x, n=10) {
   result[1:(n-1)] <- NA
   result <- c( rep( NA, NAs ), result )
 
-  return( result )
+  # Convert back to original class
+  reclass(result, x)
 }
 
 #-------------------------------------------------------------------------#
@@ -111,7 +114,7 @@ function(x, n=10) {
 "runMax" <-
 function(x, n=10) {
 
-  x   <- as.vector(x)
+  x <- use.xts(x, error=FALSE)
   
   if( n < 1 || n > NROW(x) ) stop("Invalid 'n'")
 
@@ -119,8 +122,8 @@ function(x, n=10) {
   NAs <- sum( is.na(x) )
   if( NAs > 0 ) {
     if( any( is.na(x[-(1:NAs)]) ) ) stop("Series contains non-leading NAs")
+    x <- x[-(1:NAs)]
   }
-  x   <- na.omit(x)
 
   # Initialize result vector 
   result <- rep(0,NROW(x))
@@ -138,7 +141,8 @@ function(x, n=10) {
   result[1:(n-1)] <- NA
   result <- c( rep( NA, NAs ), result )
 
-  return( result )
+  # Convert back to original class
+  reclass(result, x)
 }
 
 #-------------------------------------------------------------------------#
@@ -156,7 +160,7 @@ function(x, n=10) {
 "runMedian" <-
 function(x, n=10, non.unique="mean") {
 
-  x   <- as.vector(x)
+  x <- use.xts(x, error=FALSE)
 
   if( n < 1 || n > NROW(x) ) stop("Invalid 'n'")
 
@@ -164,8 +168,8 @@ function(x, n=10, non.unique="mean") {
   NAs <- sum( is.na(x) )
   if( NAs > 0 ) {
     if( any( is.na(x[-(1:NAs)]) ) ) stop("Series contains non-leading NAs")
+    x <- x[-(1:NAs)]
   }
-  x   <- na.omit(x)
 
   # Non-unique median
   non.unique <- match.arg(non.unique, c('mean','max','min'))
@@ -187,7 +191,8 @@ function(x, n=10, non.unique="mean") {
   result[1:(n-1)] <- NA
   result <- c( rep( NA, NAs ), result )
 
-  return( result )
+  # Convert back to original class
+  reclass(result, x)
 }
 
 #-------------------------------------------------------------------------#
@@ -207,8 +212,8 @@ function(x, y, n=10, use="all.obs", sample=TRUE) {
   NAs <- max( xNAs, yNAs )
   if( NAs > 0 ) {
     if( any( is.na(xy[-(1:NAs),]) ) ) stop("Series contain non-leading NAs")
+    xy <- xy[-(1:NAs)]
   }
-  xy <- na.omit(xy)
   
   xCenter <- runSum(x, n)/n
   xCenter[1:(n-1)] <- 0
@@ -274,7 +279,7 @@ function(x, n=10, sample=TRUE) {
 function(x, n=10, center=runMedian(x, n), stat="median",
          constant=1.4826, non.unique="mean") {
 
-  x   <- as.vector(x)
+  x <- use.xts(x, error=FALSE)
 
   if( n < 1 || n > NROW(x) ) stop("Invalid 'n'")
 
@@ -282,8 +287,8 @@ function(x, n=10, center=runMedian(x, n), stat="median",
   NAs <- sum( is.na(x) )
   if( NAs > 0 ) {
     if( any( is.na(x[-(1:NAs)]) ) ) stop("Series contains non-leading NAs")
+    x <- x[-(1:NAs)]
   }
-  x   <- na.omit(x)
   center[1:(n-1)] <- 0
 
   # Initialize result vector 
@@ -314,5 +319,6 @@ function(x, n=10, center=runMedian(x, n), stat="median",
   result[1:(n-1)] <- NA
   result <- c( rep( NA, NAs ), result )
 
-  return( result )
+  # Convert back to original class
+  reclass(result, x)
 }

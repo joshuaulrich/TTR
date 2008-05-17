@@ -5,6 +5,7 @@ Version: 0.14-0
 Date: 2008-01-23
 Author: Josh Ulrich
 Maintainer: Josh Ulrich <josh.m.ulrich@gmail.com>
+Depends: xts
 Enhances: quantmod
 Description: Functions and data to construct technical trading rules with R.
 License: GPL-3

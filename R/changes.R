@@ -13,21 +13,30 @@ function(x, n=1, type=c("continuous","discrete"), na=NA) {
   # http://linnsoft.com/tour/techind/roc.htm
   # http://stockcharts.com/education/IndicatorAnalysis/indic_ROC.htm
 
-  x    <- as.vector(x)
-  roc  <- vector("numeric", NROW(x))
+  x <- try.xts(x, error=FALSE)
   type <- match.arg(type)
 
-  # Discrete changes
-  if(type=="discrete") {
-    roc <- c( rep(na,n),      x[(1+n):NROW(x)] / x[1:(NROW(x)-n)] -1 )
+  if(is.xts(x)) {
+    if(type=="discrete") {
+      roc <- c( rep(na,n), x/lag(x,-n)-1 )
+    }
+    # Continuous changes
+    if(type=="continuous") {
+      roc <- c( rep(na,n), log( x/lag(x,-n) ) )
+    }
+    # Convert back to original class
+    reclass(roc, x)
+  } else {
+    # Discrete changes
+    if(type=="discrete") {
+      roc <- c( rep(na,n), x[(1+n):NROW(x)] / x[1:(NROW(x)-n)] -1 )
+    }
+    # Continuous changes
+    if(type=="continuous") {
+      roc <- c( rep(na,n), log( x[(1+n):NROW(x)] / x[1:(NROW(x)-n)] )  )
+    }
+    return(roc)
   }
-
-  # Continuous changes
-  if(type=="continuous") {
-    roc <- c( rep(na,n), log( x[(1+n):NROW(x)] / x[1:(NROW(x)-n)] )  )
-  }
-
-  return( roc )
 }
 
 #-------------------------------------------------------------------------#
@@ -40,8 +49,8 @@ function(x, n=1, na=NA) {
   # http://www.fmlabs.com/reference/Momentum.htm
   # http://www.equis.com/Customer/Resources/TAAZ/?c=3&p=95
   # http://linnsoft.com/tour/techind/momentum.htm
-
+  
+  x <- try.xts(x, error=FALSE)
   mom <- c( rep(na, n), diff(x, n) )
-
-  return( mom )
+  reclass(mom,x)
 }

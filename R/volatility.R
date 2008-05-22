@@ -1,6 +1,8 @@
 "volatility" <-
 function(OHLC, n=10, calc="close", N=260, ...) {
-  
+
+  OHLC <- try.xts(OHLC, error=FALSE)
+
   # Choose an arg name that doesn't clash with ROC's 'type' arg
   calc <- match.arg(calc,
             c("close","garman.klass","parkinson","rogers.satchell"))
@@ -54,5 +56,5 @@ function(OHLC, n=10, calc="close", N=260, ...) {
     # http://www.sitmo.com/eq/417
   #}
 
-  return(s)
+  reclass(s,OHLC)
 }

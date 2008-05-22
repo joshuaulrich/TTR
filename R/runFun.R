@@ -30,12 +30,12 @@ function(x, n=10) {
                    loa = as.integer(NROW(result)),
                    PACKAGE = "TTR" )$oa
 
+  # Convert back to original class
+  reclass(result, x)
+
   # Replace 1:(n-1) with NAs and prepend NAs from original data
   result[1:(n-1)] <- NA
   result <- c( rep( NA, NAs ), result )
-
-  # Convert back to original class
-  reclass(result, x)
 }
 
 #-------------------------------------------------------------------------#
@@ -65,12 +65,12 @@ function(x, n=10) {
                    loa = as.integer(NROW(result)),
                    PACKAGE = "TTR" )$oa
 
+  # Convert back to original class
+  reclass(result, x)
+
   # Replace 1:(n-1) with NAs and prepend NAs from original data
   result[1:(n-1)] <- NA
   result <- c( rep( NA, NAs ), result )
-
-  # Convert back to original class
-  reclass(result, x)
 }
 
 #-------------------------------------------------------------------------#
@@ -101,12 +101,12 @@ function(x, n=10) {
                    loa = as.integer(NROW(result)),
                    PACKAGE = "TTR" )$oa
 
+  # Convert back to original class
+  reclass(result, x)
+
   # Replace 1:(n-1) with NAs and prepend NAs from original data
   result[1:(n-1)] <- NA
   result <- c( rep( NA, NAs ), result )
-
-  # Convert back to original class
-  reclass(result, x)
 }
 
 #-------------------------------------------------------------------------#
@@ -137,12 +137,12 @@ function(x, n=10) {
                    loa = as.integer(NROW(result)),
                    PACKAGE = "TTR" )$oa
 
+  # Convert back to original class
+  reclass(result, x)
+
   # Replace 1:(n-1) with NAs and prepend NAs from original data
   result[1:(n-1)] <- NA
   result <- c( rep( NA, NAs ), result )
-
-  # Convert back to original class
-  reclass(result, x)
 }
 
 #-------------------------------------------------------------------------#
@@ -187,12 +187,12 @@ function(x, n=10, non.unique="mean") {
                    ver = as.integer(non.unique),
                    PACKAGE = "TTR" )$oa
 
+  # Convert back to original class
+  reclass(result, x)
+
   # Replace 1:(n-1) with NAs and prepend NAs from original data
   result[1:(n-1)] <- NA
   result <- c( rep( NA, NAs ), result )
-
-  # Convert back to original class
-  reclass(result, x)
 }
 
 #-------------------------------------------------------------------------#
@@ -315,10 +315,10 @@ function(x, n=10, center=runMedian(x, n), stat="median",
 
   if( median ) result <- result * constant
 
+  # Convert back to original class
+  reclass(result, x)
+
   # Replace 1:(n-1) with NAs and prepend NAs from original data
   result[1:(n-1)] <- NA
   result <- c( rep( NA, NAs ), result )
-
-  # Convert back to original class
-  reclass(result, x)
 }

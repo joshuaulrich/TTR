@@ -6,7 +6,7 @@
 "runSum" <-
 function(x, n=10) {
 
-  x <- use.xts(x, error=FALSE)
+  x <- try.xts(x, error=FALSE)
 
   if( n < 1 || n > NROW(x) ) stop("Invalid 'n'")
 
@@ -44,7 +44,7 @@ function(x, n=10) {
 "wilderSum" <-
 function(x, n=10) {
 
-  x <- use.xts(x, error=FALSE)
+  x <- try.xts(x, error=FALSE)
 
   if( n < 1 || n > NROW(x) ) stop("Invalid 'n'")
 
@@ -77,7 +77,7 @@ function(x, n=10) {
 "runMin" <-
 function(x, n=10) {
 
-  x <- use.xts(x, error=FALSE)
+  x <- try.xts(x, error=FALSE)
 
   if( n < 1 || n > NROW(x) ) stop("Invalid 'n'")
 
@@ -114,7 +114,7 @@ function(x, n=10) {
 "runMax" <-
 function(x, n=10) {
 
-  x <- use.xts(x, error=FALSE)
+  x <- try.xts(x, error=FALSE)
   
   if( n < 1 || n > NROW(x) ) stop("Invalid 'n'")
 
@@ -161,7 +161,7 @@ function(x, n=10) {
 "runMedian" <-
 function(x, n=10, non.unique="mean") {
 
-  x <- use.xts(x, error=FALSE)
+  x <- try.xts(x, error=FALSE)
 
   if( n < 1 || n > NROW(x) ) stop("Invalid 'n'")
 
@@ -199,8 +199,8 @@ function(x, n=10, non.unique="mean") {
 "runCov" <-
 function(x, y, n=10, use="all.obs", sample=TRUE) {
 
-  x <- use.xts(x, error=FALSE)
-  y <- use.xts(y, error=FALSE)
+  x <- try.xts(x, error=FALSE)
+  y <- try.xts(y, error=FALSE)
   if(is.xts(x) && is.xts(y)) {
     xy <- cbind(x,y)
   } else {
@@ -284,7 +284,7 @@ function(x, n=10, sample=TRUE) {
 function(x, n=10, center=runMedian(x, n), stat="median",
          constant=1.4826, non.unique="mean") {
 
-  x <- use.xts(x, error=FALSE)
+  x <- try.xts(x, error=FALSE)
 
   if( n < 1 || n > NROW(x) ) stop("Invalid 'n'")
 

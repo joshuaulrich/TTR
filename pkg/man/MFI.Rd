@@ -43,7 +43,7 @@
   See \code{\link{OBV}} and \code{\link{CMF}}.
 }
 \examples{
-  %data(ttrc)
-  %obv <- OBV(ttrc[,"Close"], ttrc[,"Volume"])
+  data(ttrc)
+  mfi <- MFI(ttrc[,c("High","Low","Close")], ttrc[,"Volume"])
 }
 \keyword{ ts }

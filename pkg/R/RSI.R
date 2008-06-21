@@ -4,7 +4,7 @@
 #-------------------------------------------------------------------------#
 
 "RSI" <- 
-function(price, n=14, maType="EMA", wilder=TRUE, ...) {
+function(price, n=14, maType, ...) {
 
   # Relative Strength Index
 
@@ -22,14 +22,12 @@ function(price, n=14, maType="EMA", wilder=TRUE, ...) {
   dn <- ifelse(up<0, abs(up), 0)
   up <- ifelse(up>0,     up , 0)
 
-  # If necessary, combine 'wilder' formal default with `...' arg(s)
-  if( missing(maType) && missing(wilder) ) {
-    maArgs <- list(n=n, wilder=TRUE)
-  } else
-  if( !missing(wilder) ) {
-    maArgs <- list(n=n, wilder=wilder, ...)
-  } else
-    maArgs <- list(n=n, ...)
+  maArgs <- list(n=n, ...)
+  # Default Welles Wilder EMA
+  if(missing(maType)) {
+    maType <- 'EMA'
+    maArgs$wilder <- TRUE
+  }
 
   # Case of two different 'maType's for both MAs.
   # e.g. RSI(price, n=14, maType=list(maUp=list(EMA,ratio=1/5), maDown=list(WMA,wts=1:10)) )

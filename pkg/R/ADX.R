@@ -4,7 +4,7 @@
 #-------------------------------------------------------------------------#
 
 "ADX" <-
-function(HLC, n=14, maType="EMA", wilder=TRUE, ...) {
+function(HLC, n=14, maType, ...) {
 
   # Welles Wilder's Directional Movement Index
 
@@ -33,14 +33,13 @@ function(HLC, n=14, maType="EMA", wilder=TRUE, ...) {
 
   DX  <- 100 * ( abs(DIp - DIn) / (DIp + DIn) )
 
-  # If necessary, combine 'wilder' formal default with `...' arg(s)
-  if( missing(maType) && missing(wilder) ) {
-    maArgs <- list(n=n, wilder=TRUE)
-  } else
-  if( !missing(wilder) ) {
-    maArgs <- list(n=n, wilder=wilder, ...)
-  } else
-    maArgs <- list(n=n, ...)
+  maArgs <- list(n=n, ...)
+  
+  # Default Welles Wilder EMA
+  if(missing(maType)) {
+    maType <- 'EMA'
+    maArgs$wilder <- TRUE
+  }
 
   ADX <- do.call( maType, c( list(DX), maArgs ) )
 

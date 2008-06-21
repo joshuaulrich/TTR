@@ -6,7 +6,7 @@
   movements to the absolute price movement.  Developed by J. Welles Wilder.
 }
 \usage{
-  RSI(price, n=14, maType="EMA", wilder=TRUE, \dots)
+  RSI(price, n=14, maType, \dots)
 }
 \arguments{
   \item{price}{ Price series to use. }
@@ -14,8 +14,6 @@
   \item{maType}{ Either: \cr(1) A function or a string naming the function to be called, or\cr
     (2) a \emph{list} with the first component like (1) above, and additional parameters
     specified as \emph{named} components.  See Examples. }
-  \item{wilder}{ \emph{Only used for the default case.}  If \code{TRUE}, a Welles Wilder type EMA
-    will be calculated. }
   \item{\dots}{ Other arguments to be passed to the \code{maType} function in case (1) above. }
 }
 \details{

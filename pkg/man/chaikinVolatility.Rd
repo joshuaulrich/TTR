@@ -6,7 +6,7 @@
   Developed by Marc Chaikin.
 }
 \usage{
-  chaikinVolatility(HL, n=10, maType="EMA", \dots)
+  chaikinVolatility(HL, n=10, maType, \dots)
 }
 \arguments{
   \item{HL}{ Object able to be coerced to a matrix, which contains High-Low prices. }

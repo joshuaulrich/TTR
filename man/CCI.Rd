@@ -6,7 +6,7 @@
   The Commodity Channel Index (CCI) attempts to identify starting and ending trends.
 }
 \usage{
-  CCI(HLC, n=20, maType="SMA", c=0.015, \dots)
+  CCI(HLC, n=20, maType, c=0.015, \dots)
 }
 \arguments{
   \item{HLC}{ High-Low-Close price series to use.  If only a univariate series is given,

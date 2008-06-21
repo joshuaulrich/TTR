@@ -8,14 +8,12 @@
   Directional Movement Index; developed by J. Welles Wilder.
 }
 \usage{
-  ADX(HLC, n=14, maType="EMA", wilder=TRUE, \dots)
+  ADX(HLC, n=14, maType, \dots)
 }
 \arguments{
   \item{HLC}{ Object able to be coerced to a matrix, which contains High-Low-Close prices. }
   \item{n}{ Number of periods to use for DX calculation (not ADX calculation). }
   \item{maType}{ A function or a string naming the function to be called. }
-  \item{wilder}{ \emph{Only used for the default case.}  If \code{TRUE}, a Welles Wilder type EMA
-    will be calculated. }
   \item{\dots}{ Other arguments to be passed to the \code{maType} function. }
 }
 \details{

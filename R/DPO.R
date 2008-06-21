@@ -4,7 +4,7 @@
 #-------------------------------------------------------------------------#
 
 "DPO" <-
-function(x, n=10, maType="SMA", shift=n/2+1, percent=FALSE, ...) {
+function(x, n=10, maType, shift=n/2+1, percent=FALSE, ...) {
 
   # De-Trended Price Oscillator
 
@@ -14,6 +14,11 @@ function(x, n=10, maType="SMA", shift=n/2+1, percent=FALSE, ...) {
   x <- as.vector(x)
 
   maArgs <- list(n=n, ...)
+  # Default MA
+  if(missing(maType)) {
+    maType <- 'SMA'
+  }
+
   mavg <- do.call( maType, c( list(x), maArgs ) )
   mavg <- c( mavg[-c(1:shift)], rep(NA, shift) )
 

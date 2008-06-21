@@ -6,7 +6,7 @@
   Developed by Jack K. Hutson.
 }
 \usage{
-  TRIX(price, n=20, nSig=9, maType="EMA", percent=TRUE, \dots)
+  TRIX(price, n=20, nSig=9, maType, percent=TRUE, \dots)
 }
 \arguments{
   \item{price}{ Price series to use. }

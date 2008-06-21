@@ -7,7 +7,7 @@
   a period of time.  Developed by John Bollinger.
 }
 \usage{
-  BBands(HLC, n=20, maType="SMA", sd=2, \dots)
+  BBands(HLC, n=20, maType, sd=2, \dots)
 }
 \arguments{
   \item{HLC}{ High-Low-Close price series to use.  If only a univariate series is given,

@@ -4,7 +4,7 @@
 #-------------------------------------------------------------------------#
 
 "EMV" <-
-function(HL, volume, n=9, maType="SMA", vol.divisor=10000, ...) {
+function(HL, volume, n=9, maType, vol.divisor=10000, ...) {
 
   # Arms' Ease of Movement Value
 
@@ -21,6 +21,11 @@ function(HL, volume, n=9, maType="SMA", vol.divisor=10000, ...) {
   emv    <- momentum(mid, n=1, na=NA) / ( volume / ( HL[,1] - HL[,2] ) )
 
   maArgs <- list(n=n, ...)
+  # Default MA
+  if(missing(maType)) {
+    maType <- 'SMA'
+  }
+
   maEMV <- do.call( maType, c( list(emv), maArgs ) )
 
   return( cbind( emv, maEMV ) )

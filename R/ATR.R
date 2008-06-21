@@ -4,7 +4,7 @@
 #-------------------------------------------------------------------------#
 
 "ATR" <-
-function(HLC, n=14, maType="EMA", wilder=TRUE, ...) {
+function(HLC, n=14, maType, ...) {
 
   # Average True Range / True Range
 
@@ -21,14 +21,13 @@ function(HLC, n=14, maType="EMA", wilder=TRUE, ...) {
   trueLow  <- pmin( HLC[,2], closeLag )
   tr       <- trueHigh - trueLow
 
-  # If necessary, combine 'wilder' formal default with `...' arg(s)
-  if( missing(maType) && missing(wilder) ) {
-    maArgs <- list(n=n, wilder=TRUE)
-  } else
-  if( !missing(wilder) ) {
-    maArgs <- list(n=n, wilder=wilder, ...)
-  } else
-    maArgs <- list(n=n, ...)
+  maArgs <- list(n=n, ...)
+  
+  # Default Welles Wilder EMA
+  if(missing(maType)) {
+    maType <- 'EMA'
+    maArgs$wilder <- TRUE
+  }
 
   atr <- do.call( maType, c( list(tr), maArgs ) )
 

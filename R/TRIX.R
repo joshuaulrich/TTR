@@ -4,7 +4,7 @@
 #-------------------------------------------------------------------------#
 
 "TRIX" <-
-function(price, n=20, nSig=9, maType="EMA", percent=TRUE, ...) {
+function(price, n=20, nSig=9, maType, percent=TRUE, ...) {
 
   # Triple Smoothed Exponential Oscillator
 
@@ -14,6 +14,11 @@ function(price, n=20, nSig=9, maType="EMA", percent=TRUE, ...) {
   # http://stockcharts.com/education/IndicatorAnalysis/indic_trix.htm
 
   price  <- as.matrix(price)
+
+  # Default MA
+  if(missing(maType)) {
+    maType <- 'EMA'
+  }
 
   # Case of two different 'maType's for both MAs.
   if( is.list(maType) ) {

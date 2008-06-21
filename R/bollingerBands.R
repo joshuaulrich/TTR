@@ -4,7 +4,7 @@
 #-------------------------------------------------------------------------#
 
 "BBands" <-
-function(HLC, n=20, maType="SMA", sd=2, ...) {
+function(HLC, n=20, maType, sd=2, ...) {
 
   # Bollinger Bands
 
@@ -26,6 +26,11 @@ function(HLC, n=20, maType="SMA", sd=2, ...) {
   stop("Price series must be either High-Low-Close, or Close/univariate.")
 
   maArgs <- list(n=n, ...)
+  # Default MA
+  if(missing(maType)) {
+    maType <- 'SMA'
+  }
+
   mavg  <- do.call( maType, c( list(HLC), maArgs ) )
 
   # Calculate standard deviation by hand to incorporate various MAs

@@ -8,7 +8,7 @@
   for any univariate series, not only price.
 }
 \usage{
-  MACD(x, nFast=12, nSlow=26, nSig=9, maType="EMA", percent=TRUE, \dots)
+  MACD(x, nFast=12, nSlow=26, nSig=9, maType, percent=TRUE, \dots)
 }
 \arguments{
   \item{x}{ Series to use; usually price, but can be volume, etc. }

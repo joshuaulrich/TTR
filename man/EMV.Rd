@@ -7,7 +7,7 @@
   by Richard W. Arms, Jr.
 }
 \usage{
-  EMV(HL, volume, n=9, maType="SMA", vol.divisor=10000, \dots)
+  EMV(HL, volume, n=9, maType, vol.divisor=10000, \dots)
 }
 \arguments{
   \item{HL}{ Object able to be coerced to a matrix, which contains a High-Low price series. }

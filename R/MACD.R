@@ -4,7 +4,7 @@
 #-------------------------------------------------------------------------#
 
 "MACD" <-
-function(x, nFast=12, nSlow=26, nSig=9, maType="EMA", percent=TRUE, ...) {
+function(x, nFast=12, nSlow=26, nSig=9, maType, percent=TRUE, ...) {
 
   # Oscillators
 
@@ -28,6 +28,11 @@ function(x, nFast=12, nSlow=26, nSig=9, maType="EMA", percent=TRUE, ...) {
   # Add capability to allow 'ma.slow' and 'ma.fast' to be vectors
   # containing MAs, which would allow the oscillator to be constructed
   # using MAs of different prices.
+
+  # Default MA
+  if(missing(maType)) {
+    maType <- 'EMA'
+  }
 
   # Case of two different 'maType's for both MAs.
   if( is.list(maType) ) {

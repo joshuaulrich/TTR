@@ -13,9 +13,9 @@
   Developed by William Blau in 1993.
 }
 \usage{
-  stoch(HLC, nFastK=14, nFastD=3, nSlowD=3, maType="SMA", \dots)
+  stoch(HLC, nFastK=14, nFastD=3, nSlowD=3, maType, bounded=TRUE, \dots)
 
-  SMI(HLC, n=13, nFast=2, nSlow=25, nSig=9, maType="EMA", \dots)
+  SMI(HLC, n=13, nFast=2, nSlow=25, nSig=9, maType, bounded=TRUE, \dots)
 }
 \arguments{
   \item{HLC}{ High-Low-Close price series to use.  If only a univariate series is given,
@@ -33,6 +33,7 @@
   \item{maType}{ Either: \cr(1) A function or a string naming the function to be called, or\cr
     (2) a \emph{list} with the first component like (1) above, and additional parameters
     specified as \emph{named} components.  See Examples. }
+  \item{bounded}{ Logical, should current period's values be used in the calculation? }
   \item{\dots}{ Other arguments to be passed to the \code{maType} function in case (1) above. }
 }
 \details{

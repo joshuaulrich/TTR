@@ -5,7 +5,7 @@
 
 "KST" <-
 function(price, n=c(10,10,10,15), nROC=c(10,15,20,30), nSig=9,
-         maType="SMA", wts=1:NROW(n), ...) {
+         maType, wts=1:NROW(n), ...) {
 
   # Know Sure Thing
 
@@ -30,6 +30,11 @@ function(price, n=c(10,10,10,15), nROC=c(10,15,20,30), nSig=9,
 
   price <- as.vector(price)
   ret <- NULL
+
+  # Default MA
+  if(missing(maType)) {
+    maType <- 'SMA'
+  }
 
   # Case of two different 'maType's for both MAs.
   if( is.list(maType) ) {

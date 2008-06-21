@@ -6,7 +6,7 @@
 }
 \usage{
   KST(price, n=c(10,10,10,15), nROC=c(10,15,20,30), nSig=9,
-         maType="SMA", wts=1:NROW(n), \dots)
+         maType, wts=1:NROW(n), \dots)
 }
 \arguments{
   \item{price}{ Price series to use. }

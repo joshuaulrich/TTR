@@ -4,7 +4,7 @@
 #-------------------------------------------------------------------------#
 
 "chaikinVolatility" <-
-function(HL, n=10, maType="EMA", ...) {
+function(HL, n=10, maType, ...) {
 
   # Chaikin Volatility
 
@@ -14,6 +14,11 @@ function(HL, n=10, maType="EMA", ...) {
   HL   <- as.matrix(HL)
 
   maArgs <- list(n=n, ...)
+  # Default MA
+  if(missing(maType)) {
+    maType <- 'EMA'
+  }
+
   mavg <- do.call( maType, c( list(HL[,1]-HL[,2]), maArgs ) )
 
   volatility <- ROC( mavg, n, type="discrete" )

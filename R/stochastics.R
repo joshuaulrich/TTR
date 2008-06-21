@@ -4,7 +4,7 @@
 #-------------------------------------------------------------------------#
 
 "stoch" <-
-function(HLC, nFastK=14, nFastD=3, nSlowD=3, maType="SMA", ...) {
+function(HLC, nFastK=14, nFastD=3, nSlowD=3, maType, bounded=TRUE, ...) {
 
   # Stochastics
 
@@ -31,11 +31,20 @@ function(HLC, nFastK=14, nFastD=3, nSlowD=3, maType="SMA", ...) {
 
   stop("Price series must be either High-Low-Close, or Close")
 
-  hmax <- runMax(high, nFastK)
-  lmin <- runMin( low, nFastK)
+  if(bounded) {
+    hmax <- runMax(high, nFastK)
+    lmin <- runMin( low, nFastK)
+  } else {
+    hmax <- runMax(c(high[1],high[-NROW(HLC)]), nFastK)
+    lmin <- runMax(c( low[1], low[-NROW(HLC)]), nFastK)
+  }
 
   fastK <- (close - lmin) / (hmax - lmin)
 
+  if(missing(maType)) {
+    maType <- 'SMA'
+  }
+  
   # Case of two different 'maType's for both MAs.
   # e.g. stoch(price, 14, 3, 3,
   #           maType=list(maUp=list(EMA,ratio=1/5), maDown=list(WMA,wts=1:10)) )
@@ -69,7 +78,7 @@ function(HLC, nFastK=14, nFastD=3, nSlowD=3, maType="SMA", ...) {
 #-------------------------------------------------------------------------#
 
 "SMI" <-
-function(HLC, n=13, nFast=2, nSlow=25, nSig=9, maType="EMA", ...) {
+function(HLC, n=13, nFast=2, nSlow=25, nSig=9, maType, bounded=TRUE, ...) {
 
   # Stochastic Momentum Index
   # Not Validated
@@ -95,14 +104,23 @@ function(HLC, n=13, nFast=2, nSlow=25, nSig=9, maType="EMA", ...) {
 
   stop("Price series must be either High-Low-Close, or Close")
 
-  hmax <- runMax(high, n)
-  lmin <- runMin( low, n)
+  if(bounded) {
+    hmax <- runMax(high, n)
+    lmin <- runMin( low, n)
+  } else {
+    hmax <- runMax(c(high[1],high[-NROW(HLC)]), n)
+    lmin <- runMax(c( low[1], low[-NROW(HLC)]), n)
+  }
   hmax <- ifelse( is.na(hmax), high, hmax )
   lmin <- ifelse( is.na(lmin),  low, lmin )
 
   HLdiff <- hmax - lmin
   Cdiff  <- close - ( hmax + lmin ) / 2
 
+  if(missing(maType)) {
+    maType <- 'EMA'
+  }
+  
   # Case of two different 'maType's for both MAs.
   # e.g. SMI(price, 13, 2, 25, 9,
   #           maType=list(maUp=list(EMA,ratio=1/5), maDown=list(WMA,wts=1:10)) )

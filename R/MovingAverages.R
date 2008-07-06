@@ -13,20 +13,8 @@ function(x, n=10) {
   # http://linnsoft.com/tour/techind/movAvg.htm
   # http://stockcharts.com/education/IndicatorAnalysis/indic_movingAvg.html
 
-  # Count NAs, ensure they're only at beginning of data, then remove.
-  NAs <- sum( is.na(x) )
-  if( NAs > 0 ) {
-    if( any( is.na(x[-(1:NAs)]) ) )
-      stop("Series contains non-leading NAs")
-  }
-  x   <- na.omit(x)
+  ma <- runMean( x, n )
 
-  ma <- runSum( x, n ) / n
-
-  # replace 1:(n-1) with NAs and prepend NAs from original data
-  ma[1:(n-1)] <- NA
-  ma <- c( rep( NA, NAs ), ma ) 
-  
   return(ma)
 }
 
@@ -42,19 +30,15 @@ function (x, n=10, wilder=FALSE, ratio=NULL) {
   # http://linnsoft.com/tour/techind/movAvg.htm
   # http://stockcharts.com/education/IndicatorAnalysis/indic_movingAvg.html
 
-  x   <- as.vector(x)
+  x <- try.xts(x, error=FALSE)
   
   # Count NAs, ensure they're only at beginning of data, then remove.
-  NAs <- sum( is.na(x) )
-  if( NAs > 0 ) {
-    if( any( is.na(x[-(1:NAs)]) ) )
-      stop("Series contains non-leading NAs")
-  }
-  x   <- na.omit(x)
+  # Avoid na.omit() because it will cause problems for reclass()
+  x.na <- naCheck(x, n)
 
   # Initialize ma vector
-  ma <- rep(1, NROW(x))
-  ma[n] <- mean(x[1:n])
+  ma <- rep(1, NROW(x.na$nonNA))
+  ma[x.na$beg] <- mean(x[x.na$nonNA[1]:x.na$beg])
 
   # Determine decay ratio
   if(is.null(ratio)) {
@@ -63,19 +47,20 @@ function (x, n=10, wilder=FALSE, ratio=NULL) {
   }
 
   # Call Fortran routine
-  ma <- .Fortran( "ema", ia = as.double(x),
-                         lia = as.integer(NROW(x)),
+  ma <- .Fortran( "ema", ia = as.double(x[x.na$nonNA]),
+                         lia = as.integer(NROW(x.na$nonNA)),
                          n = as.integer(n),
-                         oa = as.double(ma),
-                         loa = as.integer(NROW(ma)),
+                         oa = as.double(ma[x.na$nonNA]),
+                         loa = as.integer(NROW(x.na$nonNA)),
                          ratio = as.double(ratio),
                          PACKAGE = "TTR" )$oa
 
-  # replace 1:(n-1) with NAs and prepend NAs from original data
-  ma[1:(n-1)] <- NA
-  ma <- c( rep( NA, NAs ), ma ) 
+  # Replace 1:(n-1) with NAs and prepend NAs from original data
+  is.na(ma) <- c(1:(n-1))
+  ma <- c( rep( NA, x.na$NAs ), ma ) 
   
-  return(ma)
+  # Convert back to original class
+  reclass(ma, x)
 }
 
 #-------------------------------------------------------------------------#
@@ -87,7 +72,6 @@ function(x, n=10) {
 
   # http://www.fmlabs.com/reference/DEMA.htm
 
-  x <- as.vector(x)
   dema <- 2 * EMA(x,n) - EMA(EMA(x,n),n)
 
   return( dema )

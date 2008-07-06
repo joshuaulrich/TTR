@@ -36,3 +36,22 @@ function(price, signals, ...) {
 
   return( growth )
 }
+
+#-------------------------------------------------------------------------#
+
+'naCheck' <-
+function(x, n) {
+
+  # Ensure NAs are only at beginning of data.
+  NAs <- sum(is.na(x))
+  if( NAs > 0 ) {
+    if( any( is.na(x[-(1:NAs)]) ) ) stop("Series contains non-leading NAs")
+  }
+  
+  res <- list()
+  res$NAs <- NAs
+  res$nonNA <- (1+NAs):NROW(x)
+  res$beg <- n+NAs
+
+  return(res)
+}

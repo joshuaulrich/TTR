@@ -10,7 +10,7 @@ function(x, n=14) {
 
   # http://www.fmlabs.com/reference/CMO.htm
 
-  up <- momentum(x, n=1, na=100)
+  up <- momentum(x, n=1)
   dn <- ifelse(up<0, abs(up), 0)
   up <- ifelse(up>0,     up , 0)
 

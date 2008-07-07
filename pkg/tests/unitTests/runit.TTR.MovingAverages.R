@@ -2,61 +2,74 @@
 # RUnit tests TTR moving averages
 #
 
-# test reclass works and throws error
-# test xtsAttributes, both CLASS and USER
-# test all.equal(CLASS) and !all.equal(CLASS) cases
-
-# Create datums :)
+# Create input data
 data(ttrc)
+rownames(ttrc) <- ttrc$Date
+ttrc$Date <- NULL
 
-# create raw 'xts' object
-xtsX <- xts( sample_matrix, order.by=date.index )
-# create 'matrix' object
-xtsM <- as.xts( sample_matrix )
-# create 'data.frame' object
-xtsDF <- as.xts( data.frame(sample_matrix) )
-# create 'zoo' object
-xtsZ <- as.xts( zoo(sample_matrix, date.index) )
-# create 'its' object
-xtsI <- as.xts( its(sample_matrix) )
-# create 'irts' object
-xtsIR <- as.xts( irts(as.POSIXct(date.index), sample_matrix) )
-# create 'ts' object
-xts.ts <- as.xts( ts(sample_matrix, start=as.numeric(date.index)[1]) )
-# create 'timeSeries' object
-xts.TS <- as.xts( timeSeries(sample_matrix, charvec=date.index) )
+input <- list( all=ttrc[1:250,], top=ttrc[1:250,], mid=ttrc[1:250,] )
+input$top[1:10,] <- NA
+input$mid[9:20,] <- NA
+
+# Load output data
+load('output.MA.rda')
 
 #################################################
-# everything :)
+
+# Simple Moving Average
 test.SMA <- function() {
-  # Separate 'Date' and 'POSIXt' index
-  ccD <- cbind( xtsZ[,1:2],
-                xts.ts[,3:4] )
-  ccP1 <- cbind( xtsM[,1],
-                 xtsDF[,2],
-                 xtsI[,3],
-                 xtsIR[,4] )
-  ccP2 <- cbind( xtsM[,1],
-                 xtsDF[,2],
-                 xtsIR[,3],
-                 xts.TS[,4] )
-  checkIdentical(ccP1, ccP2)
-  checkIdentical(ccD, xtsX)
+  checkEqualsNumeric( SMA(input$all$Close), output$allSMA )
+  checkEqualsNumeric( SMA(input$top$Close), output$topSMA )
+  checkException( SMA(input$mid$Close) )
 }
 
-test.rbind_xts <- function() {
-  # Separate 'Date' and 'POSIXt' index
-  rrD <- rbind( xtsZ[c(s1,s2),],
-                xts.ts[c(s3,s4),] )
-  rrP1 <- rbind( xtsM[s1,],
-                 xtsDF[s2,],
-                 xtsI[s3,],
-                 xtsIR[s4,] )
-  rrP2 <- rbind( xtsM[s1,],
-                 xtsDF[s2,],
-                 xtsIR[s3,],
-                 xts.TS[s4,] )
-  checkIdentical(rrP1, rrP2)
-  checkIdentical(rrD, xtsX)
+# Exponential Moving Average
+test.EMA <- function() {
+  checkEqualsNumeric( EMA(input$all$Close), output$allEMA )
+  checkEqualsNumeric( EMA(input$top$Close), output$topEMA )
+  checkException( EMA(input$mid$Close) )
 }
 
+# Exponential Moving Average, Wilder ratio
+test.EMA.wilder <- function() {
+  checkEqualsNumeric( EMA(input$all$Close, wilder=TRUE), output$allEMAwilder )
+  checkEqualsNumeric( EMA(input$top$Close, wilder=TRUE), output$topEMAwilder )
+  checkException( EMA(input$mid$Close, wilder=TRUE) )
+}
+
+# Double-Exponential Moving Average
+test.DEMA <- function() {
+  checkEqualsNumeric( DEMA(input$all$Close), output$allDEMA )
+  checkEqualsNumeric( DEMA(input$top$Close), output$topDEMA )
+  checkException( DEMA(input$mid$Close) )
+}
+
+# Weighted Moving Average, 1:n
+test.WMA <- function() {
+  checkEqualsNumeric( WMA(input$all$Close), output$allWMA )
+  checkEqualsNumeric( WMA(input$top$Close), output$topWMA )
+  checkException( WMA(input$mid$Close) )
+  checkException( WMA(input$all$Close, wts=1) )
+}
+
+# Weighted Moving Average, Volume
+test.WMAvol <- function() {
+  checkEqualsNumeric( WMA(input$all$Close, wts=input$all$Volume), output$allWMAvol )
+  checkEqualsNumeric( WMA(input$top$Close, wts=input$top$Volume), output$topWMAvol )
+  checkException( WMA(input$all$Close, wts=input$mid$Volume) )
+}
+
+# Exponential, Volume-Weighted Moving Average
+test.EVWMA <- function() {
+  checkEqualsNumeric( EVWMA(input$all$Close, input$all$Volume), output$allEVWMA )
+  checkEqualsNumeric( EVWMA(input$top$Close, input$top$Volume), output$topEVWMA )
+  checkException( EVWMA(input$mid$Close, input$mid$Volume) )
+  checkException( EVWMA(input$all$Close) )
+}
+
+# Zero-Lag Exponential Moving Average
+test.ZLEMA <- function() {
+  checkEqualsNumeric( ZLEMA(input$all$Close), output$allZLEMA )
+  checkEqualsNumeric( ZLEMA(input$top$Close), output$topZLEMA )
+  checkException( ZLEMA(input$mid$Close) )
+}

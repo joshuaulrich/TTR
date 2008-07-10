@@ -29,17 +29,21 @@ function(HL, accel=c(.02,.2)) {
   # accel = c( long = c( 0.02, 0.2 ), short = long )
 
   HL <- as.matrix(HL)
+  HL.na <- naCheck(HL, 0)
 
   # Initialize necessary vector
-  sar <- rep(0,NROW(HL))
+  sar <- rep(0,NROW(HL.na$nonNA))
 
-  sar <- .Fortran("psar", iha = as.double( HL[,1] ),
-                          ila = as.double( HL[,2] ),
-                          la  = as.integer( NROW( HL ) ),
+  sar <- .Fortran("psar", iha = as.double( HL[HL.na$nonNA,1] ),
+                          ila = as.double( HL[HL.na$nonNA,2] ),
+                          la  = as.integer( NROW( HL.na$nonNA ) ),
                           af  = as.double( accel[1] ),
                           maf = as.double( accel[2] ),
-                          sar = as.double( sar ),
+                          sar = as.double( sar[] ),
                           PACKAGE = "TTR" )$sar
+  
+  # Prepend NAs from original data
+  sar <- c( rep( NA, HL.na$NAs ), sar ) 
 
   return( sar )
 }

@@ -37,7 +37,7 @@ function (x, n=10, wilder=FALSE, ratio=NULL) {
   x.na <- naCheck(x, n)
 
   # Initialize ma vector
-  ma <- rep(1, NROW(x.na$nonNA))
+  ma <- rep(1, NROW(x))
   ma[x.na$beg] <- mean(x[x.na$nonNA[1]:x.na$beg])
 
   # Determine decay ratio

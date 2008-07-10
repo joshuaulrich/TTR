@@ -12,7 +12,7 @@ input$top[1:10,] <- NA
 input$mid[9:20,] <- NA
 
 # Load output data
-load('output.runFun.rda')
+load('unitTests/output.runFun.rda')
 
 #################################################
 

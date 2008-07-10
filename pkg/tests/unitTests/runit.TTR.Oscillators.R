@@ -16,7 +16,7 @@ input$top[1:10,] <- NA
 input$mid[9:20,] <- NA
 
 # Load output data
-load('output.Oscillators.rda')
+load('unitTests/output.Oscillators.rda')
 
 #################################################
 

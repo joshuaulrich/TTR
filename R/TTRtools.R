@@ -40,7 +40,7 @@ function(price, signals, ...) {
 #-------------------------------------------------------------------------#
 
 'naCheck' <-
-function(x, n) {
+function(x, n=0) {
 
   # Ensure NAs are only at beginning of data.
   if(is.null(dim(x)[2])) {
@@ -60,5 +60,5 @@ function(x, n) {
   res$nonNA <- (1+NAs):NROW(x)
   res$beg <- n+NAs
 
-  return(res)
+  invisible(res)
 }

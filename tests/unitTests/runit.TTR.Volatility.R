@@ -49,3 +49,9 @@ test.rogers.satchell <- function() {
   checkException( volatility(input$mid[,c('Open','High','Low','Close')],calc='rogers.satchell') )
 }
 
+# Chaikin Volatility
+test.chaikin <- function() {
+  checkEqualsNumeric( chaikinVolatility(input$all[,c('High','Low')]), output$allChaikin )
+  #checkEqualsNumeric( chaikinVolatility(input$top[,c('Open','High','Low','Close')],calc='rogers.satchell'), output$topRS )
+  #checkException( volatility(input$mid[,c('Open','High','Low','Close')],calc='rogers.satchell') )
+}

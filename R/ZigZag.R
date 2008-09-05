@@ -47,7 +47,8 @@ function( HL, change=10, percent=TRUE, retrace=FALSE, lastExtreme=TRUE ) {
                            rtr = as.integer( retrace ),
                            lex = as.integer( lastExtreme ),
                            zz  = as.double( zz ),
-                           PACKAGE = "TTR" )$zz
+                           PACKAGE = "TTR",
+                           DUP = FALSE )$zz
   
   # Interpolate results
   zz <- ifelse( zz==0, NA, zz )

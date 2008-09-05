@@ -53,7 +53,8 @@ function (x, n=10, wilder=FALSE, ratio=NULL) {
                          oa = as.double(ma[x.na$nonNA]),
                          loa = as.integer(NROW(x.na$nonNA)),
                          ratio = as.double(ratio),
-                         PACKAGE = "TTR" )$oa
+                         PACKAGE = "TTR",
+                         DUP = FALSE )$oa
 
   # Replace 1:(n-1) with NAs and prepend NAs from original data
   is.na(ma) <- c(1:(n-1))
@@ -119,7 +120,8 @@ function(x, n=10, wts=1:n) {
                            n = as.integer(n),
                            oa = as.double(x),
                            loa = as.integer(NROW(x)),
-                           PACKAGE = "TTR" )$oa
+                           PACKAGE = "TTR",
+                           DUP = FALSE )$oa
    
   } else {
     
@@ -179,7 +181,8 @@ function(price, volume, n=10) {
                            n = as.integer(n),
                            oa = as.double(ma),
                            loa = as.integer(NROW(ma)),
-                           PACKAGE = "TTR" )$oa
+                           PACKAGE = "TTR",
+                           DUP = FALSE )$oa
 
   # replace 1:(n-1) with NAs and prepend NAs from original data
   ma[1:(n-1)] <- NA
@@ -224,7 +227,8 @@ function (x, n=10, ratio=NULL) {
                            oa = as.double(ma),
                            loa = as.integer(NROW(ma)),
                            ratio = as.double(ratio),
-                           PACKAGE = "TTR" )$oa
+                           PACKAGE = "TTR",
+                           DUP = FALSE )$oa
 
   # replace 1:(n-1) with NAs and prepend NAs from original data
   ma[1:(n-1)] <- NA

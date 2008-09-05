@@ -40,7 +40,8 @@ function(HL, accel=c(.02,.2)) {
                           af  = as.double( accel[1] ),
                           maf = as.double( accel[2] ),
                           sar = as.double( sar[] ),
-                          PACKAGE = "TTR" )$sar
+                          PACKAGE = "TTR",
+                          DUP = FALSE )$sar
   
   # Prepend NAs from original data
   sar <- c( rep( NA, HL.na$NAs ), sar ) 

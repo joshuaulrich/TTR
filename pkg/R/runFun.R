@@ -29,7 +29,8 @@ function(x, n=10) {
                    n = as.integer(n),
                    oa = as.double(result[beg:NROW(x)]),
                    loa = as.integer(len),
-                   PACKAGE = "TTR" )$oa
+                   PACKAGE = "TTR",
+                   DUP = FALSE )$oa
 
   # Replace 1:(n-1) with NAs and prepend NAs from original data
   is.na(result) <- c(1:(n-1))
@@ -62,7 +63,8 @@ function(x, n=10) {
                    n   = as.integer(n),
                    oa  = as.double(x[beg:NROW(x)]),
                    loa = as.integer(len),
-                   PACKAGE = "TTR" )$oa
+                   PACKAGE = "TTR",
+                   DUP = FALSE )$oa
 
   # Replace 1:(n-1) with NAs and prepend NAs from original data
   is.na(result) <- c(1:(n-1))
@@ -99,7 +101,8 @@ function(x, n=10) {
                    n = as.integer(n),
                    oa = as.double(result[beg:NROW(x)]),
                    loa = as.integer(len),
-                   PACKAGE = "TTR" )$oa
+                   PACKAGE = "TTR",
+                   DUP = FALSE )$oa
 
   # Replace 1:(n-1) with NAs and prepend NAs from original data
   is.na(result) <- c(1:(n-1))
@@ -136,7 +139,8 @@ function(x, n=10) {
                    n = as.integer(n),
                    oa = as.double(result[beg:NROW(x)]),
                    loa = as.integer(len),
-                   PACKAGE = "TTR" )$oa
+                   PACKAGE = "TTR",
+                   DUP = FALSE )$oa
 
   # Replace 1:(n-1) with NAs and prepend NAs from original data
   is.na(result) <- c(1:(n-1))
@@ -184,7 +188,8 @@ function(x, n=10, non.unique="mean") {
                    oa = double(len),
                    la = as.integer(len),
                    ver = as.integer(non.unique),
-                   PACKAGE = "TTR" )$oa
+                   PACKAGE = "TTR",
+                   DUP = FALSE )$oa
 
   # Replace 1:(n-1) with NAs and prepend NAs from original data
   is.na(result) <- c(1:(n-1))
@@ -236,7 +241,8 @@ function(x, y, n=10, use="all.obs", sample=TRUE) {
                    n = as.integer(n),
                    samp = as.integer(sample),
                    oa = double(len),
-                   PACKAGE = "TTR" )$oa
+                   PACKAGE = "TTR",
+                   DUP = FALSE )$oa
 
   # Replace 1:(n-1) with NAs and prepend NAs from original data
   is.na(result) <- c(1:(n-1))
@@ -314,7 +320,8 @@ function(x, n=10, center=runMedian(x, n), stat="median",
                    oa = double(len),                    # output array
                    stat = as.integer(median),           # center statistic
                    ver = as.integer(non.unique),        # median type
-                   PACKAGE = "TTR" )$oa
+                   PACKAGE = "TTR",
+                   DUP = FALSE )$oa
 
   if( median ) result <- result * constant
 

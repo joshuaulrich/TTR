@@ -121,7 +121,7 @@ function(x, n=10, wts=1:n) {
                            oa = as.double(x),
                            loa = as.integer(NROW(x)),
                            PACKAGE = "TTR",
-                           DUP = FALSE )$oa
+                           DUP = TRUE )$oa
    
   } else {
     
@@ -228,7 +228,7 @@ function (x, n=10, ratio=NULL) {
                            loa = as.integer(NROW(ma)),
                            ratio = as.double(ratio),
                            PACKAGE = "TTR",
-                           DUP = FALSE )$oa
+                           DUP = TRUE )$oa
 
   # replace 1:(n-1) with NAs and prepend NAs from original data
   ma[1:(n-1)] <- NA

@@ -9,12 +9,13 @@
 }
 \usage{
   ROC(x, n=1, type=c("continuous", "discrete"), na=NA)
-  momentum(x, n=1, na=NA)
+  momentum(x, n=1, na.pad=TRUE)
 }
 \arguments{
   \item{x}{ Price, volume, etc. series to use. }
   \item{n}{ Number of periods to use. }
   \item{type}{ Compounding type; either \code{"continuous"} (the default) or \code{"discrete"}. }
+  \item{na.pad}{ Should periods prior to \code{n} be appended?  Default is \code{TRUE}. }
   \item{na}{ How should periods prior to \code{n} be represented?  Default is \code{NA}. }
 }
 \details{

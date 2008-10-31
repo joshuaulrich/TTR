@@ -86,10 +86,10 @@ c
       
       do 10 i=n,lia
 
-        num = ia(i) * wts(n)
-        den = wts(n)
+         num = 0.0D0
+         den = 0.0D0
 
-        do 20 j=i-n+1,i-1
+        do 20 j=i-n+1,i
           
           num = num + ( ia(j) * wts(n-i+j) )
           den = den + wts(n-i+j)

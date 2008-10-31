@@ -42,7 +42,7 @@ function(x, n=1, type=c("continuous","discrete"), na=NA) {
 #-------------------------------------------------------------------------#
 
 "momentum" <-
-function(x, n=1, na=NA) {
+function(x, n=1, na.pad=TRUE) {
 
   # Momentum
 
@@ -51,6 +51,14 @@ function(x, n=1, na=NA) {
   # http://linnsoft.com/tour/techind/momentum.htm
   
   x <- try.xts(x, error=FALSE)
-  mom <- c( rep(na, n), diff(x, n) )
+  if(is.xts(x)) {
+    mom <- diff(x,n,na.pad=na.pad)
+  } else {
+    NAs <- NULL
+    if(na.pad) {
+      NAs <- rep(NA,n)
+    }
+    mom <- c( NAs, diff(x, n) )
+  }
   reclass(mom,x)
 }

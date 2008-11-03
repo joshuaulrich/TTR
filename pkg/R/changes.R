@@ -4,7 +4,7 @@
 #-------------------------------------------------------------------------#
 
 "ROC" <-
-function(x, n=1, type=c("continuous","discrete"), na=NA) {
+function(x, n=1, type=c("continuous","discrete"), na.pad=TRUE) {
 
   # Rate of Change
 
@@ -18,22 +18,26 @@ function(x, n=1, type=c("continuous","discrete"), na=NA) {
 
   if(is.xts(x)) {
     if(type=="discrete") {
-      roc <- c( rep(na,n), x/lag(x,-n)-1 )
+      roc <- x / lag(x,n,na.pad=na.pad) - 1
     }
-    # Continuous changes
+    # Continuous change
     if(type=="continuous") {
-      roc <- c( rep(na,n), log( x/lag(x,-n) ) )
+      roc <- diff(log(x),n,na.pad=na.pad)
     }
     # Convert back to original class
     reclass(roc, x)
   } else {
+    NAs <- NULL
+    if(na.pad) {
+      NAs <- rep(NA,n)
+    }
     # Discrete changes
     if(type=="discrete") {
-      roc <- c( rep(na,n), x[(1+n):NROW(x)] / x[1:(NROW(x)-n)] -1 )
+      roc <- c( NAs, x[-1] / x[-NROW(x)] - 1 )
     }
     # Continuous changes
     if(type=="continuous") {
-      roc <- c( rep(na,n), log( x[(1+n):NROW(x)] / x[1:(NROW(x)-n)] )  )
+      roc <- c( NAs, diff(log(x),n) )
     }
     return(roc)
   }

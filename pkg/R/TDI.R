@@ -4,20 +4,22 @@
 #-------------------------------------------------------------------------#
 
 "TDI" <-
-function(price, n=20) {
+function(price, n=20, multiple=2) {
 
   # Trend Detection Index
 
   # http://www.linnsoft.com/tour/techind/tdi.htm
 
-  mom <- momentum(price, n=n, na=0)
+  mom <- momentum(price, n, na.pad=TRUE)
+  mom[is.na(mom)] <- 0
 
-  av.1n <- abs( runSum(mom, n  ) )
-  am.2n <- runSum(abs(mom), n*2)
-  am.1n <- runSum(abs(mom), n  )
-
-  tdi <- av.1n - (am.2n - am.1n)
   di  <- runSum(mom, n)
+  abs.di <- abs(di)
+
+  abs.mom.2n <- runSum(abs(mom), n*multiple)
+  abs.mom.1n <- runSum(abs(mom), n  )
+
+  tdi <- abs.di - (abs.mom.2n - abs.mom.1n)
 
   return( cbind( tdi,di ) )
 }

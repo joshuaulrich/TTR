@@ -18,7 +18,7 @@ function(HL, volume, n=9, maType, vol.divisor=10000, ...) {
   mid     <- ( HL[,1] + HL[,2] ) / 2
   volume  <- volume / vol.divisor
 
-  emv    <- momentum(mid, n=1, na=NA) / ( volume / ( HL[,1] - HL[,2] ) )
+  emv    <- momentum(mid, n=1, na.pad=TRUE) / ( volume / ( HL[,1] - HL[,2] ) )
 
   maArgs <- list(n=n, ...)
   # Default MA

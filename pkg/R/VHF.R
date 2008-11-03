@@ -11,7 +11,7 @@ function(price, n=28) {
   # http://www.fmlabs.com/reference/VHF.htm
   # http://www.equis.com/Customer/Resources/TAAZ?c=3&p=119
 
-  price <- as.matrix(price)
+  #price <- as.matrix(price)
 
   # Calculation if price series is given
   if(NCOL(price)==1) {
@@ -32,7 +32,7 @@ function(price, n=28) {
   # Find highest max, and lowest min of price series
   hmax  <- runMax( high, n)
   lmin  <- runMin(  low, n)
-  denom <- momentum(close, n=1, na=0)
+  denom <- momentum(close, n=1, na.pad=TRUE)
 
   VHF <- ( hmax - lmin ) / runSum(denom, n)
 

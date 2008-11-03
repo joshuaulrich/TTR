@@ -13,7 +13,7 @@ function(price, n=20, nSig=9, maType, percent=TRUE, ...) {
   # http://www.linnsoft.com/tour/techind/trix.htm
   # http://stockcharts.com/education/IndicatorAnalysis/indic_trix.htm
 
-  price  <- as.matrix(price)
+  #price  <- as.matrix(price)
 
   # Default MA
   if(missing(maType)) {
@@ -54,9 +54,9 @@ function(price, n=20, nSig=9, maType, percent=TRUE, ...) {
   }
 
   if(percent) {
-    TRIX <- 100 * ROC(mavg3, n=1, na=NA, type="discrete")
+    TRIX <- 100 * ROC(mavg3, n=1, na.pad=TRUE, type="discrete")
   } else {
-    TRIX <- momentum( mavg3, n=1, na=NA )
+    TRIX <- momentum( mavg3, n=1, na.pad=TRUE )
   }
   
   if( is.list(maType) ) {

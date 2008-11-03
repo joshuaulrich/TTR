@@ -28,7 +28,7 @@ function(price, n=c(10,10,10,15), nROC=c(10,15,20,30), nSig=9,
   if( !all.equal(NROW(n), NROW(wts), NROW(nROC)) )
     stop("'n', 'nROC', and 'wts' must be the same length.")
 
-  price <- as.vector(price)
+  #price <- as.vector(price)
   ret <- NULL
 
   # Default MA
@@ -45,7 +45,7 @@ function(price, n=c(10,10,10,15), nROC=c(10,15,20,30), nSig=9,
       if( !is.null( formals(maType[[i]])$n ) && is.null( maType[[i]]$n ) ) {
         maType[[i]]$n <- n[i]
       }
-      roc <- ROC(price, nROC[i], na=NA)
+      roc <- ROC(price, nROC[i], na.pad=TRUE)
       ma.roc <- do.call( maType[[i]][[1]], c( list(roc), maType[[i]][-1] ) ) * wts[i]
       ret <- cbind( ret, ma.roc )
     }
@@ -56,7 +56,7 @@ function(price, n=c(10,10,10,15), nROC=c(10,15,20,30), nSig=9,
   else {
   
     for(i in 1:NROW(n)) {
-      roc <- ROC(price, nROC[i], na=NA)
+      roc <- ROC(price, nROC[i], na.pad=TRUE)
       ma.roc <- do.call( maType, c( list(roc), list(n=n[i], ...) ) ) * wts[i]
       ret <- cbind( ret, ma.roc )
     }

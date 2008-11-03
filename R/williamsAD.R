@@ -14,7 +14,7 @@ function(HLC) {
   HLC <- as.matrix(HLC)
 
   # Calculate change in close, and true high/low
-  dCl <- momentum(HLC[,3], 1, na=0)
+  dCl <- momentum(HLC[,3], 1, na.pad=TRUE)
   atr <- ATR(HLC)
   
   # Calculate AD

@@ -14,11 +14,12 @@ function(HLC, n=14, maType, ...) {
   # http://www.linnsoft.com/tour/techind/trueRange.htm
   # http://stockcharts.com/education/IndicatorAnalysis/indic_ATR.html
 
-  HLC <- as.matrix(HLC)
-  closeLag <- c( HLC[1,3], HLC[-NROW(HLC),3] )
+  HLC <- try.xts(HLC, error=FALSE)
+  
+  closeLag <- c( NA, HLC[-NROW(HLC),3] )
 
-  trueHigh <- pmax( HLC[,1], closeLag )
-  trueLow  <- pmin( HLC[,2], closeLag )
+  trueHigh <- pmax( HLC[,1], closeLag, na.rm=FALSE )
+  trueLow  <- pmin( HLC[,2], closeLag, na.rm=FALSE )
   tr       <- trueHigh - trueLow
 
   maArgs <- list(n=n, ...)
@@ -31,5 +32,8 @@ function(HLC, n=14, maType, ...) {
 
   atr <- do.call( maType, c( list(tr), maArgs ) )
 
-  return( cbind( tr, atr, trueHigh, trueLow ) )
+  # Convert back to original class
+  result <- cbind( tr, atr, trueHigh, trueLow )
+  colnames(result) <- c('tr','atr','trueHigh','trueLow')
+  reclass( result, HLC )
 }

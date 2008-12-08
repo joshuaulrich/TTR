@@ -16,7 +16,11 @@ function(HLC, n=14, maType, ...) {
 
   HLC <- try.xts(HLC, error=FALSE)
   
-  closeLag <- c( NA, HLC[-NROW(HLC),3] )
+  if(is.xts(HLC)) {
+    closeLag <- lag(HLC[,3])
+  } else {
+    closeLag <- c( NA, HLC[-NROW(HLC),3] )
+  }
 
   trueHigh <- pmax( HLC[,1], closeLag, na.rm=FALSE )
   trueLow  <- pmin( HLC[,2], closeLag, na.rm=FALSE )

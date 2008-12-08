@@ -18,9 +18,9 @@ function(HLC, n=14, maType, ...) {
   # http://linnsoft.com/tour/techind/adxr.htm
   # http://stockcharts.com/education/IndicatorAnalysis/indic_ADX.html
 
-  HLC <- as.matrix(HLC)
-  dH  <- HLC[,1] - c(0, HLC[-NROW(HLC),1])
-  dL  <- c(0, HLC[-NROW(HLC),2]) - HLC[,2]
+  HLC <- try.xts(HLC, error=FALSE)
+  dH  <- momentum(HLC[,1])
+  dL  <- -momentum(HLC[,2])
 
   DMIp <- ifelse( dH==dL | (dH< 0 & dL< 0), 0, ifelse( dH >dL, dH, 0 ) )
   DMIn <- ifelse( dH==dL | (dH< 0 & dL< 0), 0, ifelse( dH <dL, dL, 0 ) )

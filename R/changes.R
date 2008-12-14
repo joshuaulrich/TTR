@@ -33,7 +33,7 @@ function(x, n=1, type=c("continuous","discrete"), na.pad=TRUE) {
     }
     # Discrete changes
     if(type=="discrete") {
-      roc <- c( NAs, x[-1] / x[-NROW(x)] - 1 )
+      roc <- c( NAs, x[(n+1):NROW(x)] / x[1:(NROW(x)-n)] - 1 )
     }
     # Continuous changes
     if(type=="continuous") {

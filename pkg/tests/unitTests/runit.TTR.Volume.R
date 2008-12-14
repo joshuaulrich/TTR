@@ -11,9 +11,17 @@ data(ttrc)
 rownames(ttrc) <- ttrc$Date
 ttrc$Date <- NULL
 
-input <- list( all=ttrc[1:250,], top=ttrc[1:250,], mid=ttrc[1:250,] )
-input$top[1:10,] <- NA
-input$mid[9:20,] <- NA
+#input <- list( all=ttrc[1:250,], top=ttrc[1:250,], mid=ttrc[1:250,] )
+#input$top[1:10,] <- NA
+#input$mid[9:20,] <- NA
+
+iAll <- as.matrix(ttrc[1:250,])
+iTop <- iAll; iTop[1:10,] <- NA
+iMid <- iAll; iMid[9:20,] <- NA
+
+hl  <- c('High','Low')
+hlc <- c('High','Low','Close')
+cl  <- 'Close'
 
 # Load output data
 load('unitTests/output.volume.rda')
@@ -22,43 +30,48 @@ load('unitTests/output.volume.rda')
 
 # On Balance Volume
 test.OBV <- function() {
-  checkEqualsNumeric( OBV(input$all$Close, input$all$Volume), output$allOBV )
-  #checkEqualsNumeric( OBV(input$top$Close, input$top$Volume), output$topOBV )
-  #checkException( OBV(input$mid$Close, input$mid$Volume) )
-  #checkException( OBV(input$all$Close, input$mid$Volume) )
-  #checkException( OBV(input$mid$Close, input$all$Volume) )
+  checkEqualsNumeric( OBV(iAll[,cl], iAll[,'Volume']), output$allOBV )
+  #checkEqualsNumeric( OBV(iTop[,cl], iTop[,'Volume']), output$topOBV )
+  #checkException( OBV(iMid[,cl], iMid[,'Volume']) )
+  #checkException( OBV(iAll[,cl], iMid[,'Volume']) )
+  #checkException( OBV(iMid[,cl], iAll[,'Volume']) )
 }
 
 # Chaikin Accumulation / Distribution
 test.chaikinAD <- function() {
-  checkEqualsNumeric( chaikinAD(input$all[,c('High','Low','Close')], input$all$Volume), output$allChaikinAD )
-  #checkEqualsNumeric( chaikinAD(input$top[,c('High','Low','Close')], input$top$Volume), output$topChaikinAD )
-  #checkException( chaikinAD(input$mid[,c('High','Low','Close')], input$mid$Volume) )
-  #checkException( chaikinAD(input$all[,c('High','Low','Close')], input$mid$Volume) )
-  #checkException( chaikinAD(input$mid[,c('High','Low','Close')], input$all$Volume) )
+  checkEqualsNumeric( chaikinAD(iAll[,hlc], iAll[,'Volume']), output$allChaikinAD )
+  #checkEqualsNumeric( chaikinAD(iTop[,hlc], iTop[,'Volume']), output$topChaikinAD )
+  #checkException( chaikinAD(iMid[,hlc], iMid[,'Volume']) )
+  #checkException( chaikinAD(iAll[,hlc], iMid[,'Volume']) )
+  #checkException( chaikinAD(iMid[,hlc], iAll[,'Volume']) )
 }
 
 # Chaikin Money Flow
 test.CMF <- function() {
-  checkEqualsNumeric( CMF(input$all[,c('High','Low','Close')], input$all$Volume), output$allCMF )
-  checkEqualsNumeric( CMF(input$top[,c('High','Low','Close')], input$top$Volume), output$topCMF )
-  checkException( CMF(input$mid[,c('High','Low','Close')], input$mid$Volume) )
-  checkException( CMF(input$all[,c('High','Low','Close')], input$mid$Volume) )
-  checkException( CMF(input$mid[,c('High','Low','Close')], input$all$Volume) )
+  checkEqualsNumeric( CMF(iAll[,hlc], iAll[,'Volume']), output$allCMF )
+  checkEqualsNumeric( CMF(iTop[,hlc], iTop[,'Volume']), output$topCMF )
+  checkException( CMF(iMid[,hlc], iMid[,'Volume']) )
+  checkException( CMF(iAll[,hlc], iMid[,'Volume']) )
+  checkException( CMF(iMid[,hlc], iAll[,'Volume']) )
 }
 
 # Money Flow Index
 test.MFI <- function() {
-  checkEqualsNumeric( MFI(input$all[,c('High','Low','Close')], input$all$Volume), output$allMFI )
-  checkEqualsNumeric( MFI(input$top[,c('High','Low','Close')], input$top$Volume), output$topMFI )
-  checkException( MFI(input$mid[,c('High','Low','Close')], input$mid$Volume) )
-  checkException( MFI(input$all[,c('High','Low','Close')], input$mid$Volume) )
-  checkException( MFI(input$mid[,c('High','Low','Close')], input$all$Volume) )
+  checkEqualsNumeric( MFI(iAll[,hlc], iAll[,'Volume']), output$allMFI )
+  checkEqualsNumeric( MFI(iTop[,hlc], iTop[,'Volume']), output$topMFI )
+  checkException( MFI(iMid[,hlc], iMid[,'Volume']) )
+  checkException( MFI(iAll[,hlc], iMid[,'Volume']) )
+  checkException( MFI(iMid[,hlc], iAll[,'Volume']) )
 }
 
 # Williams' Accumulation / Distribution
 test.williamsAD <- function() {
-  checkEqualsNumeric( williamsAD(input$all[,c('High','Low','Close')]), output$allWilliamsAD )
-  #checkEqualsNumeric( williamsAD(input$top[,c('High','Low','Close')]), output$topWilliamsAD )
-  #checkException( williamsAD(input$mid[,c('High','Low','Close')]) )
+  # non-xts
+  ia <- iAll[,hlc]
+  it <- iTop[,hlc]
+  im <- iMid[,hlc]
+  rownames(ia) <- rownames(it) <- rownames(im) <- NULL
+  checkEqualsNumeric( williamsAD(ia), output$allWilliamsAD )
+  #checkEqualsNumeric( williamsAD(iTop[,hlc]), output$topWilliamsAD )
+  #checkException( williamsAD(iMid[,hlc]) )
 }

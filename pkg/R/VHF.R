@@ -11,7 +11,7 @@ function(price, n=28) {
   # http://www.fmlabs.com/reference/VHF.htm
   # http://www.equis.com/Customer/Resources/TAAZ?c=3&p=119
 
-  #price <- as.matrix(price)
+  price <- try.xts(price, error=FALSE)
 
   # Calculation if price series is given
   if(NCOL(price)==1) {
@@ -36,5 +36,5 @@ function(price, n=28) {
 
   VHF <- ( hmax - lmin ) / runSum(denom, n)
 
-  return( VHF )
+  reclass(VHF, price)
 }

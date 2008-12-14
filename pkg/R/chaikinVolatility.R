@@ -11,7 +11,7 @@ function(HL, n=10, maType, ...) {
   # http://www.fmlabs.com/reference/ChaikinVolatility.htm
   # http://www.equis.com/Customer/Resources/TAAZ/Default.aspx?c=3&p=120
 
-  HL   <- as.matrix(HL)
+  HL <- try.xts(HL, error=FALSE)
 
   maArgs <- list(n=n, ...)
   # Default MA
@@ -23,5 +23,5 @@ function(HL, n=10, maType, ...) {
 
   volatility <- ROC( mavg, n, type="discrete" )
 
-  return( volatility )
+  reclass(volatility, HL)
 }

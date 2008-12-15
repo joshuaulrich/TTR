@@ -8,10 +8,13 @@ function(HL, n=10) {
 
   # Donchian Channel
 
-  # Thanks to Jeff Ryan for the code
-  # (so blame him if it doesn't work)
+  # http://www.linnsoft.com/tour/techind/donch.htm
+
   high <- runMax(HL[,1],n)
   low <- runMin(HL[,2],n)
+  mid <- (high+low)/2
+
+  result <- cbind(high,mid,low)
   
-  return(cbind(high,low))
+  return(result)
 }

@@ -10,11 +10,11 @@ function(HLC) {
 
   # http://stockcharts.com/education/IndicatorAnalysis/indic_AccumDistLine.html
 
-  HLC <- as.matrix(HLC)
+  HLC <- try.xts(HLC, error=FALSE)
   clv <- ((HLC[,3]-HLC[,2]) - (HLC[,1]-HLC[,3])) / (HLC[,1]-HLC[,2])
 
   # Account for H=L=C
   clv[is.nan(clv)] <- 0
 
-  return( clv )
+  reclass( clv, HLC )
 }

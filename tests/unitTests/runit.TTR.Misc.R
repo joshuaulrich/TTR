@@ -15,6 +15,14 @@ input <- list( all=ttrc[1:250,], top=ttrc[1:250,], mid=ttrc[1:250,] )
 input$top[1:10,] <- NA
 input$mid[9:20,] <- NA
 
+iAll <- as.matrix(ttrc[1:250,])
+iTop <- iAll; iTop[1:10,] <- NA
+iMid <- iAll; iMid[9:20,] <- NA
+
+hl  <- c('High','Low')
+hlc <- c('High','Low','Close')
+cl  <- 'Close'
+
 # Load output data
 load('unitTests/output.misc.rda')
 
@@ -38,8 +46,8 @@ test.momentum <- function() {
 
 # Close Location Value
 test.CLV <- function() {
-  checkEqualsNumeric( CLV(input$all[,c('High','Low','Close')]), output$allCLV )
-  checkEqualsNumeric( CLV(input$top[,c('High','Low','Close')]), output$topCLV )
+  checkEqualsNumeric( CLV(iAll[,hlc]), output$allCLV )
+  checkEqualsNumeric( CLV(iTop[,hlc]), output$topCLV )
 }
 
 # Arms' Ease of Movement

@@ -13,15 +13,18 @@ function(HLC, n=20, maType, c=0.015, ...) {
   # http://www.linnsoft.com/tour/techind/cci.htm
   # http://stockcharts.com/education/IndicatorAnalysis/indic_CCI.html
 
-  if(NCOL(HLC)==1) {
-    HLC <- as.vector(HLC)
-  } else
+  HLC <- try.xts(HLC, error=FALSE)
 
   if(NCOL(HLC)==3) {
-    HLC <- rowMeans(HLC)
+    if(is.xts(HLC)) {
+      HLC <- xts(rowMeans(HLC),index(HLC))
+    } else {
+      HLC <- rowMeans(HLC)
+    }
   } else
-
-  stop("Price series must be either High-Low-Close, or Close/univariate.")
+  if(NCOL(HLC)!=1) {
+    stop("Price series must be either High-Low-Close, or Close/univariate.")
+  }
 
   maArgs <- list(n=n, ...)
   # Default MA
@@ -34,5 +37,5 @@ function(HLC, n=20, maType, c=0.015, ...) {
 
   cci <- ( HLC - mavg ) / ( c * meanDev )
 
-  return( cci )
+  reclass(cci, HLC)
 }

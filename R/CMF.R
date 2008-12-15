@@ -12,12 +12,15 @@ function(HLC, volume, n=20) {
   # http://www.linnsoft.com/tour/techind/cmf.htm
   # http://stockcharts.com/education/IndicatorAnalysis/indic_ChaikinMoneyFlow1.html
 
-  HLC <- as.matrix(HLC)
+  HLC <- try.xts(HLC, error=FALSE)
+  volume <- try.xts(volume, error=FALSE)
 
-  clv    <- as.double( CLV(HLC) )
-  volume <- as.double( volume )
+  if(!(is.xts(HLC) && is.xts(volume))) {
+    clv <- CLV(as.matrix(HLC))
+    volume <- as.matrix(volume)
+  }
 
   cmf <- runSum(clv*volume, n) / runSum(volume, n)
 
-  return( cmf )
+  reclass(cmf, HLC)
 }

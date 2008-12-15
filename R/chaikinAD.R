@@ -13,8 +13,19 @@ function(HLC, volume) {
   # http://www.linnsoft.com/tour/techind/acc_dis.htm
   # http://stockcharts.com/education/IndicatorAnalysis/indic_AccumDistLine.html
 
-  HLC <- as.matrix(HLC)
-  ad  <- cumsum( CLV(HLC) * volume )
+  HLC <- try.xts(HLC, error=FALSE)
+  volume <- try.xts(volume, error=FALSE)
 
-  return( ad )
+  if(!(is.xts(HLC) && is.xts(volume))) {
+    HLC <- as.matrix(HLC)
+    volume <- as.matrix(volume)
+  }
+
+  ad  <- CLV(HLC) * volume
+
+  ad.na <- naCheck(ad)
+  ad <- cumsum( ad[ad.na$nonNA] )
+  ad <- c( rep( NA, ad.na$NAs ), ad )
+
+  reclass(ad, HLC)
 }

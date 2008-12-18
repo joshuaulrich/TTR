@@ -28,5 +28,8 @@ function(HL, volume, n=9, maType, vol.divisor=10000, ...) {
 
   maEMV <- do.call( maType, c( list(emv), maArgs ) )
 
-  return( cbind( emv, maEMV ) )
+  result <- cbind(emv,maEMV)
+  colnames(result) <- c('emv','maEMV')
+  
+  return( result )
 }

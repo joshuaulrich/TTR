@@ -29,31 +29,47 @@ load('unitTests/output.misc.rda')
 #################################################
 
 # Rate-of-Change
-test.ROC <- function() {
-  checkEqualsNumeric( ROC(input$all$Close, type='continuous'), output$allROCc )
+test.ROC.continuous <- function() {
+  roc <- ROC(input$all$Close, type='continuous')
+  checkEqualsNumeric( roc, output$allROCc )
+  checkEquals( attributes(roc), attributes(output$allROCc) )
   #checkEqualsNumeric( ROC(input$top$Close, type='continuous'), output$topROCc )
-  checkEqualsNumeric( ROC(input$all$Close, type='discrete'), output$allROCd )
-  #checkEqualsNumeric( ROC(input$top$Close, type='discrete'), output$topROCd )
   #checkException( ROC(input$mid$Close) )
+}
+test.ROC.discrete <- function() {
+  roc <- ROC(input$all$Close, type='discrete')
+  checkEqualsNumeric( roc, output$allROCd )
+  checkEquals( attributes(roc), attributes(output$allROCd) )
+  #checkEqualsNumeric( ROC(input$top$Close, type='discrete'), output$topROCd )
 }
 
 # Momentum
 test.momentum <- function() {
-  checkEqualsNumeric( momentum(input$all$Close), output$allMom )
+  mom <- momentum(input$all$Close)
+  checkEqualsNumeric( mom, output$allMom )
+  checkEquals( attributes(mom), attributes(output$allMom) )
   #checkEqualsNumeric( momentum(input$top$Close), output$topMom )
   #checkException( momentum(input$mid$Close) )
 }
 
 # Close Location Value
 test.CLV <- function() {
-  checkEqualsNumeric( CLV(iAll[,hlc]), output$allCLV )
-  checkEqualsNumeric( CLV(iTop[,hlc]), output$topCLV )
+  ia <- iAll[,hlc];  rownames(ia) <- NULL
+  it <- iTop[,hlc];  rownames(it) <- NULL
+  checkEqualsNumeric( CLV(ia), output$allCLV )
+  checkEquals( attributes(CLV(ia)), attributes(output$allCLV) )
+  checkEqualsNumeric( CLV(it), output$topCLV )
+  checkEquals( attributes(CLV(it)), attributes(output$topCLV) )
 }
 
 # Arms' Ease of Movement
 test.EMV <- function() {
-  checkEqualsNumeric( EMV(input$all[,c('High','Low')], input$all$Volume), output$allEMV )
-  #checkEqualsNumeric( EMV(input$top[,c('High','Low')], input$top$Volume), output$topEMV )
+  emv.all <- EMV(input$all[,c('High','Low')], input$all$Volume)
+  checkEqualsNumeric( emv.all, output$allEMV )
+  checkEquals( attributes(emv.all), attributes(output$allEMV) )
+  #emv.top<- EMV(input$top[,c('High','Low')], input$top$Volume)
+  #checkEqualsNumeric( emv.top, output$topEMV )
+  #checkEquals( attributes(emv.top), attributes(output$topEMV) )
   #checkException( EMV(input$mid[,c('High','Low')], input$mid$Volume) )
   #checkException( EMV(input$all[,c('High','Low')], input$mid$Volume) )
   #checkException( EMV(input$mid[,c('High','Low')], input$all$Volume) )
@@ -62,6 +78,7 @@ test.EMV <- function() {
 # Know Sure Thing
 test.KST <- function() {
   checkEqualsNumeric( KST(input$all$Close), output$allKST )
+  checkEquals( attributes(KST(input$all$Close)), attributes(output$allKST) )
   #checkEqualsNumeric( KST(input$top$Close), output$topKST )
   #checkException( KST(input$mid$Close) )
 }

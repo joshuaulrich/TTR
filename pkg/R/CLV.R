@@ -16,5 +16,6 @@ function(HLC) {
   # Account for H=L=C
   clv[is.nan(clv)] <- 0
 
+  if(is.xts(clv)) colnames(clv) <- 'clv'
   reclass( clv, HLC )
 }

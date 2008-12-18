@@ -12,9 +12,21 @@ function(price, volume) {
   # http://www.equis.com/Customer/Resources/TAAZ?c=3&p=82
   # http://linnsoft.com/tour/techind/obVol.htm
   # http://stockcharts.com/education/IndicatorAnalysis/indic-obv.htm
+  
+  price <- try.xts(price, error=FALSE)
+  volume <- try.xts(volume, error=FALSE)
 
-  price <- as.vector(price)
-  obv   <- cumsum( ifelse( c( 1, ROC(price, n=1)[-1] ) > 0, volume, -volume ) )
+  if(!(is.xts(price) && is.xts(volume))) {
+    price <- as.vector(price)
+    volume <- as.vector(volume)
+  }
+  obv <- c( volume[1], ifelse( ROC(price) > 0, volume, -volume )[-1] )
+  obv <- cumsum( obv )
 
-  return( obv )
+  if(is.xts(obv)) {
+    obv <- xts(obv,index(price))
+    colnames(obv) <- 'obv'
+  }
+  
+  reclass( obv, price )
 }

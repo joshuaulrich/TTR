@@ -15,6 +15,14 @@ function(HL, volume, n=9, maType, vol.divisor=10000, ...) {
   if( missing(HL) | missing(volume) )
     stop("High-Low matrix (HL) and volume vector must be specified.")
 
+  HL <- try.xts(HL, error=FALSE)
+  volume <- try.xts(volume, error=FALSE)
+
+  if(!(is.xts(HL) && is.xts(volume))) {
+    HL <- as.matrix(HL)
+    volume <- as.matrix(volume)
+  }
+
   mid     <- ( HL[,1] + HL[,2] ) / 2
   volume  <- volume / vol.divisor
 

@@ -29,15 +29,23 @@ test.BBands <- function() {
 
 # SAR
 test.SAR <- function() {
-  checkEqualsNumeric( SAR(input$all[,c('High','Low')]), output$allSAR )
-  checkEqualsNumeric( SAR(input$top[,c('High','Low')]), output$topSAR )
-  checkException( SAR(input$mid[,c('High','Low')]) )
+  ia <- input$all[,c('High','Low')]
+  it <- input$top[,c('High','Low')]
+  im <- input$mid[,c('High','Low')]
+  rownames(ia) <- rownames(it) <- rownames(im) <- NULL
+  checkEqualsNumeric( SAR(ia), output$allSAR )
+  checkEqualsNumeric( SAR(it), output$topSAR )
+  checkException( SAR(im) )
 }
 
 # Zig Zag
 test.ZigZag <- function() {
-  checkEqualsNumeric( ZigZag(input$all[,c('High','Low')]), output$allZZ )
-  checkEqualsNumeric( ZigZag(input$top[,c('High','Low')]), output$topZZ )
-  checkException( ZigZag(input$mid[,c('High','Low')]) )
+  ia <- input$all[,c('High','Low')]
+  it <- input$top[,c('High','Low')]
+  im <- input$mid[,c('High','Low')]
+  rownames(ia) <- rownames(it) <- rownames(im) <- NULL
+  checkEqualsNumeric( ZigZag(ia), output$allZZ )
+  checkEqualsNumeric( ZigZag(it), output$topZZ )
+  checkException( ZigZag(im) )
 }
 

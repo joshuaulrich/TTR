@@ -15,6 +15,7 @@ function( HL, change=10, percent=TRUE, retrace=FALSE, lastExtreme=TRUE ) {
   # http://www.equis.com/Customer/Resources/TAAZ/?c=3&p=127
   # http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:zigzag
 
+  HL <- try.xts(HL, error=FALSE)
   HL.na <- naCheck(HL,0)
   
   # Calculation if HL series is given
@@ -57,6 +58,6 @@ function( HL, change=10, percent=TRUE, retrace=FALSE, lastExtreme=TRUE ) {
   # Prepend NAs from original data
   zz <- c( rep( NA, HL.na$NAs ), zz ) 
 
-  return( zz )
+  reclass( zz, HL )
 }
 

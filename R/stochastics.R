@@ -13,8 +13,6 @@ function(HLC, nFastK=14, nFastD=3, nSlowD=3, maType, bounded=TRUE, ...) {
   # http://linnsoft.com/tour/techind/stoc.htm
   # http://stockcharts.com/education/IndicatorAnalysis/indic_stochasticOscillator.html
 
-  HLC <- as.matrix(HLC)
-
   # Calculation if HLC series is given
   if(NCOL(HLC)==3) {
     high  <- HLC[,1]
@@ -85,8 +83,6 @@ function(HLC, n=13, nFast=2, nSlow=25, nSig=9, maType, bounded=TRUE, ...) {
 
   # http://www.fmlabs.com/reference/default.htm?url=SMI.htm
   # The median in the SMI formula on the above site is incorrect.
-
-  HLC <- as.matrix(HLC)
 
   # Calculation if HLC series is given
   if(ncol(HLC)==3) {

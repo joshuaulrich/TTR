@@ -28,7 +28,7 @@ function(HL, accel=c(.02,.2)) {
   # accel factors for long/short.
   # accel = c( long = c( 0.02, 0.2 ), short = long )
 
-  HL <- as.matrix(HL)
+  HL <- try.xts(HL, error=FALSE)
   HL.na <- naCheck(HL, 0)
 
   # Initialize necessary vector
@@ -46,5 +46,5 @@ function(HL, accel=c(.02,.2)) {
   # Prepend NAs from original data
   sar <- c( rep( NA, HL.na$NAs ), sar ) 
 
-  return( sar )
+  reclass( sar, HL )
 }

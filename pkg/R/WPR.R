@@ -13,8 +13,6 @@ function(HLC, n=14) {
   # http://linnsoft.com/tour/techind/willR.htm
   # http://stockcharts.com/education/IndicatorAnalysis/indic_williamsR.html
 
-  HLC <- as.matrix(HLC)
-
   # Calculation if HLC series is given
   if(NCOL(HLC)==3) {
     high  <- HLC[,1]

@@ -17,7 +17,9 @@ function(HLC, n=20, maType, c=0.015, ...) {
 
   if(NCOL(HLC)==3) {
     if(is.xts(HLC)) {
+      xa <- xcoredata(HLC)
       HLC <- xts(rowMeans(HLC),index(HLC))
+      xcoredata(HLC) <- xa
     } else {
       HLC <- rowMeans(HLC)
     }

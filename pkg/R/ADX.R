@@ -43,5 +43,8 @@ function(HLC, n=14, maType, ...) {
 
   ADX <- do.call( maType, c( list(DX), maArgs ) )
 
-  return( cbind( DIp, DIn, DX, ADX ) )
+  result <- cbind( DIp, DIn, DX, ADX )
+  colnames(result) <- c( "DIp", "DIn", "DX", "ADX" )
+
+  reclass(result, HLC)
 }

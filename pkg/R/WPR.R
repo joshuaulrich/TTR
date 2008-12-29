@@ -13,6 +13,8 @@ function(HLC, n=14) {
   # http://linnsoft.com/tour/techind/willR.htm
   # http://stockcharts.com/education/IndicatorAnalysis/indic_williamsR.html
 
+  HLC <- try.xts(HLC, error=FALSE)
+  
   # Calculation if HLC series is given
   if(NCOL(HLC)==3) {
     high  <- HLC[,1]
@@ -34,5 +36,5 @@ function(HLC, n=14) {
 
   pctR <- (hmax - close) / (hmax - lmin)
 
-  return( pctR )
+  reclass( pctR, HLC )
 }

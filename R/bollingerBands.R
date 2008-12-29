@@ -19,7 +19,9 @@ function(HLC, n=20, maType, sd=2, ...) {
 
   if(NCOL(HLC)==3) {
     if(is.xts(HLC)) {
+      xa <- xcoredata(HLC)
       HLC <- xts(rowMeans(HLC),index(HLC))
+      xcoredata(HLC) <- xa
     } else {
       HLC <- rowMeans(HLC)
     }
@@ -44,5 +46,6 @@ function(HLC, n=20, maType, sd=2, ...) {
   pctB  <- (HLC - dn) / (up - dn)
 
   res <- cbind(dn, mavg, up, pctB)
+  colnames(res) <- c("dn", "mavg", "up", "pctB")
   reclass(res, HLC)
 }

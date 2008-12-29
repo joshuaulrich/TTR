@@ -22,9 +22,18 @@ load('unitTests/output.overlays.rda')
 
 # Bollinger Bands
 test.BBands <- function() {
-  checkEqualsNumeric( BBands(input$all[,c('High','Low','Close')]), output$allBBands )
-  checkEqualsNumeric( BBands(input$top[,c('High','Low','Close')]), output$topBBands )
-  checkException( BBands(input$mid[,c('High','Low','Close')]) )
+  ia <- input$all[,c('High','Low','Close')]
+  it <- input$top[,c('High','Low','Close')]
+  im <- input$mid[,c('High','Low')]
+  rownames(ia) <- rownames(it) <- NULL
+  oa <- BBands(ia)
+  ot <- BBands(it)
+  rownames(oa) <- rownames(ot) <- rownames(input$all)
+  checkEqualsNumeric( oa, output$allBBands )
+  checkEquals( attributes(oa), attributes(output$allBBands) )
+  checkEqualsNumeric( ot, output$topBBands )
+  checkEquals( attributes(ot), attributes(output$topBBands) )
+  checkException( BBands(im) )
 }
 
 # SAR
@@ -34,7 +43,9 @@ test.SAR <- function() {
   im <- input$mid[,c('High','Low')]
   rownames(ia) <- rownames(it) <- rownames(im) <- NULL
   checkEqualsNumeric( SAR(ia), output$allSAR )
+  checkEqualsNumeric( attributes(SAR(ia)), attributes(output$allSAR) )
   checkEqualsNumeric( SAR(it), output$topSAR )
+  checkEqualsNumeric( attributes(SAR(it)), attributes(output$topSAR) )
   checkException( SAR(im) )
 }
 
@@ -45,7 +56,9 @@ test.ZigZag <- function() {
   im <- input$mid[,c('High','Low')]
   rownames(ia) <- rownames(it) <- rownames(im) <- NULL
   checkEqualsNumeric( ZigZag(ia), output$allZZ )
+  checkEquals( attributes(ZigZag(ia)), attributes(output$allZZ) )
   checkEqualsNumeric( ZigZag(it), output$topZZ )
+  checkEquals( attributes(ZigZag(it)), attributes(output$topZZ) )
   checkException( ZigZag(im) )
 }
 

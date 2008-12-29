@@ -13,6 +13,8 @@ function(HLC, nFastK=14, nFastD=3, nSlowD=3, maType, bounded=TRUE, ...) {
   # http://linnsoft.com/tour/techind/stoc.htm
   # http://stockcharts.com/education/IndicatorAnalysis/indic_stochasticOscillator.html
 
+  HLC <- try.xts(HLC, error=FALSE)
+
   # Calculation if HLC series is given
   if(NCOL(HLC)==3) {
     high  <- HLC[,1]
@@ -70,7 +72,10 @@ function(HLC, nFastK=14, nFastD=3, nSlowD=3, maType, bounded=TRUE, ...) {
 
   }
 
-  return( cbind( fastK, fastD, slowD ) )
+  result <- cbind( fastK, fastD, slowD )
+  colnames(result) <- c( "fastK", "fastD", "slowD" )
+
+  reclass(result, HLC)
 }
 
 #-------------------------------------------------------------------------#

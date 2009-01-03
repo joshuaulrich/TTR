@@ -12,8 +12,8 @@
   \tabular{ll}{
     Package: \tab TTR\cr
     Type: \tab Package\cr
-    Version: \tab 0.14-0\cr
-    Date: \tab 2008-01-23\cr
+    Version: \tab 0.2\cr
+    Date: \tab 2009-01-05\cr
     License: \tab GPL Version 3 or later.\cr
   }
 

@@ -1,12 +1,26 @@
-#-------------------------------------------------------------------------#
-# TTR, copyright (C) Joshua M. Ulrich, 2007                               #
-# Distributed under GNU GPL version 3                                     #
-#-------------------------------------------------------------------------#
+#
+#   TTR: Technical Trading Rules
+#
+#   Copyright (C) 2007-2008  Joshua M. Ulrich
+#
+#   This program is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation, either version 3 of the License, or
+#   (at your option) any later version.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
 
 "runSum" <-
 function(x, n=10) {
 
-  x <- try.xts(x, error=FALSE)
+  x <- try.xts(x, error=as.matrix)
 
   if( n < 1 || n > NROW(x) ) stop("Invalid 'n'")
 
@@ -45,7 +59,7 @@ function(x, n=10) {
 "wilderSum" <-
 function(x, n=10) {
 
-  x <- try.xts(x, error=FALSE)
+  x <- try.xts(x, error=as.matrix)
 
   if( n < 1 || n > NROW(x) ) stop("Invalid 'n'")
 
@@ -79,7 +93,7 @@ function(x, n=10) {
 "runMin" <-
 function(x, n=10) {
 
-  x <- try.xts(x, error=FALSE)
+  x <- try.xts(x, error=as.matrix)
 
   if( n < 1 || n > NROW(x) ) stop("Invalid 'n'")
 
@@ -117,7 +131,7 @@ function(x, n=10) {
 "runMax" <-
 function(x, n=10) {
 
-  x <- try.xts(x, error=FALSE)
+  x <- try.xts(x, error=as.matrix)
   
   if( n < 1 || n > NROW(x) ) stop("Invalid 'n'")
 
@@ -165,7 +179,7 @@ function(x, n=10) {
 "runMedian" <-
 function(x, n=10, non.unique="mean") {
 
-  x <- try.xts(x, error=FALSE)
+  x <- try.xts(x, error=as.matrix)
 
   if( n < 1 || n > NROW(x) ) stop("Invalid 'n'")
 
@@ -204,8 +218,8 @@ function(x, n=10, non.unique="mean") {
 "runCov" <-
 function(x, y, n=10, use="all.obs", sample=TRUE) {
 
-  x <- try.xts(x, error=FALSE)
-  y <- try.xts(y, error=FALSE)
+  x <- try.xts(x, error=as.matrix)
+  y <- try.xts(y, error=as.matrix)
   if(is.xts(x) && is.xts(y)) {
     xy <- cbind(x,y)
   } else {
@@ -290,7 +304,7 @@ function(x, n=10, sample=TRUE) {
 function(x, n=10, center=runMedian(x, n), stat="median",
          constant=1.4826, non.unique="mean") {
 
-  x <- try.xts(x, error=FALSE)
+  x <- try.xts(x, error=as.matrix)
 
   if( n < 1 || n > NROW(x) ) stop("Invalid 'n'")
 

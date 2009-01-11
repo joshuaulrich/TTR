@@ -15,7 +15,8 @@ input <- list( all=ttrc[1:250,], top=ttrc[1:250,], mid=ttrc[1:250,] )
 input$top[1:10,] <- NA
 input$mid[9:20,] <- NA
 
-iAll <- as.matrix(ttrc[1:250,])
+#iAll <- as.matrix(ttrc[1:250,])
+iAll <- ttrc[1:250,]
 iTop <- iAll; iTop[1:10,] <- NA
 iMid <- iAll; iMid[9:20,] <- NA
 
@@ -30,7 +31,7 @@ load('unitTests/output.misc.rda')
 
 # Rate-of-Change
 test.ROC.continuous <- function() {
-  roc <- ROC(input$all$Close, type='continuous')
+  roc <- ROC(iAll[,cl], type='continuous')
   checkEqualsNumeric( roc, output$allROCc )
   checkEquals( attributes(roc), attributes(output$allROCc) )
   #checkEqualsNumeric( ROC(input$top$Close, type='continuous'), output$topROCc )
@@ -56,6 +57,8 @@ test.momentum <- function() {
 test.CLV <- function() {
   ia <- iAll[,hlc];  rownames(ia) <- NULL
   it <- iTop[,hlc];  rownames(it) <- NULL
+  oa <- as.data.frame(output$allCLV); rownames(oa) <- rownames(ia)
+  ot <- as.data.frame(output$topCLV); rownames(ot) <- rownames(it)
   checkEqualsNumeric( CLV(ia), output$allCLV )
   checkEquals( attributes(CLV(ia)), attributes(output$allCLV) )
   checkEqualsNumeric( CLV(it), output$topCLV )

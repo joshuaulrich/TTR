@@ -9,7 +9,7 @@
 }
 \arguments{
   \item{HL}{ Object able to be coerced to a matrix, which contains High-Low prices. }
-  \item{accel}{ accel[1]: Acceleration factor.\craccel[2]: Maximum acceleration factor. }
+  \item{accel}{ accel[1]: Acceleration factor.\cr accel[2]: Maximum acceleration factor. }
 }
 \details{
   The calculation for the SAR is quite complex.  See the URLs in the references section

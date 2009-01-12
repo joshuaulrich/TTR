@@ -37,7 +37,7 @@
   adjusts the symbols to be compatible with the Yahoo! Finance website.
 }
 \value{
-  \code{getYahooData} returns a numeric matrix containing the columns:
+  \code{getYahooData} returns an xts object containing the columns:
   \item{ Date }{ Trade date, in CCYYMMDD format. }
   \item{ Open }{ Open price. }
   \item{ High }{ High price. }

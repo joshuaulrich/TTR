@@ -11,7 +11,7 @@
   volatility(OHLC, n=10, calc="close", N=260, \dots)
 }
 \arguments{
-  \item{OHLC}{ Object able to be coerced to a matrix, which contains Open-High-Low-Close prices. }
+  \item{OHLC}{ Object that is coercible to xts or matrix and contains Open-High-Low-Close prices. }
   \item{n}{ Number of periods for the volatility estimate. }
   \item{calc}{ The calculation (type) of estimator to use. }
   \item{N}{ Number of periods per year. }

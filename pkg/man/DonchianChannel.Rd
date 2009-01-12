@@ -10,7 +10,7 @@
   DonchianChannel(HL, n=10)
 }
 \arguments{
-  \item{HL}{ High-Low price series to use. }
+  \item{HL}{ Object that is coercible to xts or matrix and contains High-Low prices. }
   \item{n}{ Number of periods for moving average. }
 }
 \details{
@@ -22,9 +22,9 @@
 }
 \value{
   A matrix containing the columns:
-  \item{ high }{ The lower Bollinger Band. }
-  \item{ mid }{ The middle Moving Average (see notes). }
-  \item{ low }{ The upper Bollinger Band. }
+  \item{ high }{ The highest high series. }
+  \item{ mid }{ The average of \code{high} and \code{low}. }
+  \item{ low }{ The lowest low series. }
 }
 \author{ Josh Ulrich }
 \references{

@@ -10,7 +10,7 @@
   CMF(HLC, volume, n = 20)
 }
 \arguments{
-  \item{HLC}{ Object able to be coerced to a matrix, which contains High-Low-Close prices. }
+  \item{HLC}{ Object that is coercible to xts or matrix and contains High-Low-Close prices. }
   \item{volume}{ Vector or matrix of volume observations corresponding to the \code{HLC} object. }
   \item{n}{ Number of periods to use. }
 }

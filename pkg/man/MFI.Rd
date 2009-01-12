@@ -9,8 +9,8 @@
   MFI(HLC, volume, n=14)
 }
 \arguments{
-  \item{HLC}{ High-Low-Close price series to use.  If only a univariate
-    series is given, it will be used.  See details. }
+  \item{HLC}{ Object that is coercible to xts or matrix and contains High-Low-Close prices.
+  If only a univariate series is given, it will be used.  See details. }
   \item{volume}{ Vector or matrix of volume observations corresponding
     to \code{HLC} object. }
   \item{n}{ Number of periods to use. }

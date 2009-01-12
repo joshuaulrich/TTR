@@ -18,8 +18,8 @@
   SMI(HLC, n=13, nFast=2, nSlow=25, nSig=9, maType, bounded=TRUE, \dots)
 }
 \arguments{
-  \item{HLC}{ High-Low-Close price series to use.  If only a univariate series is given,
-    it will be used.  See details. }
+  \item{HLC}{ Object that is coercible to xts or matrix and contains High-Low-Close prices.
+   If only a univariate series is given, it will be used.  See details. }
   \item{n}{ Number of periods to use. }
   \item{nFastK}{ Number of periods for fast \%K (i.e. the number of past periods to use). }
   \item{nFastD}{ Number of periods for fast \%D (i.e. the number smoothing periods to apply

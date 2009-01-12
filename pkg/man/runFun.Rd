@@ -28,8 +28,8 @@
          constant=1.4826, non.unique="mean")
 }
 \arguments{
-  \item{x}{ Object able to be coerced to a matrix. }
-  \item{y}{ Object able to be coerced to a matrix. }
+  \item{x}{ Object coercible to xts or matrix. }
+  \item{y}{ Object coercible to xts or matrix. }
   \item{n}{ Number of periods to use in the window. }
   \item{sample}{ Logical, sample covariance if \code{TRUE} (denominator of \code{n-1}) }
   \item{use}{ Only \code{"all.obs"} currently implemented. }

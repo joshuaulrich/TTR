@@ -11,7 +11,8 @@
   MACD(x, nFast=12, nSlow=26, nSig=9, maType, percent=TRUE, \dots)
 }
 \arguments{
-  \item{x}{ Series to use; usually price, but can be volume, etc. }
+  \item{x}{ Object that is coercible to xts or matrix; usually price,
+    but can be volume, etc. }
   \item{nFast}{ Number of periods for fast moving average. }
   \item{nSlow}{ Number of periods for slow moving average. }
   \item{nSig}{ Number of periods for signal moving average. }

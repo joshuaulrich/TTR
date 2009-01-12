@@ -12,7 +12,7 @@
   momentum(x, n=1, na.pad=TRUE)
 }
 \arguments{
-  \item{x}{ Price, volume, etc. series to use. }
+  \item{x}{ Price, volume, etc. series that is coercible to xts or matrix. }
   \item{n}{ Number of periods to use. }
   \item{type}{ Compounding type; either \code{"continuous"} (the default) or \code{"discrete"}. }
   \item{na.pad}{ Should periods prior to \code{n} be appended?  Default is \code{TRUE}. }

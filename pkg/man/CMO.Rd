@@ -8,7 +8,7 @@
   CMO(x, n=14)
 }
 \arguments{
-  \item{x}{ Price, volume, etc. series to use. }
+  \item{x}{ Price, volume, etc. series that is coercible to xts or matrix. }
   \item{n}{ Number of periods to use. }
 }
 \details{

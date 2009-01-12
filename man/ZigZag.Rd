@@ -11,7 +11,7 @@
   ZigZag( HL, change=10, percent=TRUE, retrace=FALSE, lastExtreme=TRUE )
 }
 \arguments{
-  \item{HL}{ Object able to be coerced to a matrix, which contains either a High-Low price
+  \item{HL}{ Object that is coercible to xts or matrix and contains either a High-Low price
     series, or a Close price series. }
   \item{change}{ Minimum price movement, either in dollars or percent (see \code{percent}). }
   \item{percent}{ Use percentage or dollar change? }

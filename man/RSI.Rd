@@ -9,7 +9,7 @@
   RSI(price, n=14, maType, \dots)
 }
 \arguments{
-  \item{price}{ Price series to use. }
+  \item{price}{ Price series that is coercible to xts or matrix. }
   \item{n}{ Number of periods for moving averages. }
   \item{maType}{ Either: \cr(1) A function or a string naming the function to be called, or\cr
     (2) a \emph{list} with the first component like (1) above, and additional parameters

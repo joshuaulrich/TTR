@@ -10,7 +10,7 @@
   EMV(HL, volume, n=9, maType, vol.divisor=10000, \dots)
 }
 \arguments{
-  \item{HL}{ Object able to be coerced to a matrix, which contains a High-Low price series. }
+  \item{HL}{ Object that is coercible to xts or matrix and contains High-Low prices. }
   \item{volume}{ Vector or matrix of volume observations corresponding to the \code{HL} object. }
   \item{n}{ Number of periods for moving average. }
   \item{maType}{ A function or a string naming the function to be called. }

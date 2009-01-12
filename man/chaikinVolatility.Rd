@@ -9,7 +9,7 @@
   chaikinVolatility(HL, n=10, maType, \dots)
 }
 \arguments{
-  \item{HL}{ Object able to be coerced to a matrix, which contains High-Low prices. }
+  \item{HL}{ Object that is coercible to xts or matrix and contains High-Low prices. }
   \item{n}{ Number of periods for moving average. }
   \item{maType}{ A function or a string naming the function to be called. }
   \item{\dots}{ Other arguments to be passed to the \code{maType} function. }

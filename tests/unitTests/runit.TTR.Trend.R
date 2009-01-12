@@ -94,16 +94,22 @@ test.CCI <- function() {
 
 # Trend Detection Index
 test.TDI <- function() {
-  checkEqualsNumeric( TDI(iAll[,cl]), output$allTDI )
-  checkEquals( attributes(TDI(iAll[,cl])), attributes(output$allTDI) )
+  ia <- iAll[,cl]
+  it <- iTop[,cl]
+  names(ia) <- names(it) <- NULL
+  checkEqualsNumeric( TDI(ia), output$allTDI )
+  checkEquals( attributes(TDI(ia)), attributes(output$allTDI) )
   #checkEqualsNumeric( TDI(iTop[,cl]), output$topTDI )
   #checkException( TDI(iMid[,cl]) )
 }
 
 # Vertical Horizontal Filter
 test.VHF <- function() {
-  checkEqualsNumeric( VHF(iAll[,cl]), output$allVHF )
-  checkEquals( attributes(VHF(iAll[,cl])), attributes(output$allVHF) )
+  ia <- iAll[,cl]
+  it <- iTop[,cl]
+  names(ia) <- names(it) <- NULL
+  checkEqualsNumeric( VHF(ia), output$allVHF )
+  checkEquals( attributes(VHF(ia)), attributes(output$allVHF) )
   #checkEqualsNumeric( VHF(iTop[,cl]), output$topVHF )
   #checkException( VHF(iMid[,cl] )
 }

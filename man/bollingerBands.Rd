@@ -10,8 +10,8 @@
   BBands(HLC, n=20, maType, sd=2, \dots)
 }
 \arguments{
-  \item{HLC}{ High-Low-Close price series to use.  If only a univariate series is given,
-    it will be used.  See details. }
+  \item{HLC}{ Object that is coercible to xts or matrix and contains High-Low-Close prices.
+   If only a univariate series is given, it will be used.  See details. }
   \item{n}{ Number of periods for moving average. }
   \item{maType}{ A function or a string naming the function to be called. }
   \item{sd}{ The number of standard deviations to use. }

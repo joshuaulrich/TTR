@@ -9,7 +9,7 @@
   VHF(price, n=28)
 }
 \arguments{
-  \item{price}{ Object able to be coerced to a matrix, which contains either a Close price
+  \item{price}{ Object that is coercible to xts or matrix and contains a Close price
     series, or a High-Low-Close price series. }
   \item{n}{ Number of periods to use. }
 }

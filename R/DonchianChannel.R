@@ -24,9 +24,20 @@ function(HL, n=10) {
 
   # http://www.linnsoft.com/tour/techind/donch.htm
 
-  high <- runMax(HL[,1],n)
-  low <- runMin(HL[,2],n)
-  mid <- (high+low)/2
+  if(!(NCOL(HL) %in% c(1,2))) {
+    stop("Price series must be either High-Low, or Close/univariate.")
+  }
+  if(NCOL(HL)==2) {
+      hi <- HL[,1]
+      lo <- HL[,2]
+  } else {
+      hi <- HL
+      lo <- HL
+  }
+
+  high <- runMax(hi,n)
+  low  <- runMin(lo,n)
+  mid  <- (high+low)/2
 
   result <- cbind(high,mid,low)
   

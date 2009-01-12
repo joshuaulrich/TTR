@@ -11,7 +11,7 @@
   ADX(HLC, n=14, maType, \dots)
 }
 \arguments{
-  \item{HLC}{ Object able to be coerced to a matrix, which contains High-Low-Close prices. }
+  \item{HLC}{ Object that is coercible to xts or matrix and contains High-Low-Close prices. }
   \item{n}{ Number of periods to use for DX calculation (not ADX calculation). }
   \item{maType}{ A function or a string naming the function to be called. }
   \item{\dots}{ Other arguments to be passed to the \code{maType} function. }

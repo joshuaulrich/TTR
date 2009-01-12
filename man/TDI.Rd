@@ -9,7 +9,7 @@
   TDI(price, n=20, multiple=2)
 }
 \arguments{
-  \item{price}{ Price series to use. }
+  \item{price}{ Price series that is coercible to xts or matrix. }
   \item{n}{ Number of periods to use. }
   \item{multiple}{ Multiple used to calculate (2). }
 }

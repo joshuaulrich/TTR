@@ -9,7 +9,7 @@
   TRIX(price, n=20, nSig=9, maType, percent=TRUE, \dots)
 }
 \arguments{
-  \item{price}{ Price series to use. }
+  \item{price}{ Price series that is coercible to xts or matrix. }
   \item{n}{ Number of periods for moving average. }
   \item{nSig}{ Number of periods for signal line moving average. }
   \item{maType}{ Either: \cr(1) A function or a string naming the function to be called, or\cr

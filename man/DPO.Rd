@@ -9,7 +9,7 @@
   DPO(x, n=10, maType, shift=n/2+1, percent=FALSE, \dots)
 }
 \arguments{
-  \item{x}{ Price, volume, etc. series to use. }
+  \item{x}{ Price, volume, etc. series that is coercible to xts or matrix. }
   \item{n}{ Number of periods for moving average. }
   \item{maType}{ A function or a string naming the function to be called. }
   \item{shift}{ The number of periods to shift the moving average. }

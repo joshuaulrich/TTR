@@ -36,7 +36,8 @@
   drift, but assumed no opening jump.
 }
 \value{
-  A vector containing the chosen volatility estimator values.
+  A object of the same class as \code{OHLC} or a vector (if \code{try.xts}
+  fails) containing the chosen volatility estimator values.
 }
 \author{ Josh Ulrich }
 \references{

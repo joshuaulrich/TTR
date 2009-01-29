@@ -28,7 +28,8 @@
   of change between the fast MA and the slow MA.
 }
 \value{
-  The MACD function returns a matrix containing the columns:
+  A object of the same class as \code{x} or a matrix (if \code{try.xts}
+  fails) containing the columns:
   \item{ macd }{ The price (volume, etc.) oscillator. }
   \item{ signal }{ The oscillator signal line (a moving average of the oscillator). }
 }

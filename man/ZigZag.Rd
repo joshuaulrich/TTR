@@ -25,8 +25,8 @@
   patterns clearer.  It's more a visual tool than an indicator.
 }
 \value{
-  A vector containing the columns:
-  \item{ zigzag }{ The Zig Zag indicator. }
+  A object of the same class as \code{HL} or a vector (if \code{try.xts}
+  fails) containing the Zig Zag indicator.
 }
 \author{ Josh Ulrich }
 \references{

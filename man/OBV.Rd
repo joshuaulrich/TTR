@@ -18,7 +18,8 @@
   total when the security's price closes higher (lower).
 }
 \value{
-  A vector containing the OBV values.
+  A object of the same class as \code{price} and \code{volume} or a vector
+  (if \code{try.xts} fails) containing the OBV values.
 }
 \author{ Josh Ulrich }
 \references{

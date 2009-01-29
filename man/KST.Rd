@@ -26,7 +26,8 @@
   weighting values.  The resulting values are summed for each day (month, week, etc.).
 }
 \value{
-  A vector containing the Know Sure Thing values.
+  A object of the same class as \code{price} or a vector (if \code{try.xts}
+  fails) containing the Know Sure Thing values.
 }
 \author{ Josh Ulrich }
 \references{

@@ -19,7 +19,8 @@
   point when you would close a long position and open a short position or vice versa.
 }
 \value{
-  A vector containing the Parabolic Stop and Reverse values.
+  A object of the same class as \code{HL} or a vector (if \code{try.xts}
+  fails) containing the Parabolic Stop and Reverse values.
 }
 \author{ Josh Ulrich }
 \references{

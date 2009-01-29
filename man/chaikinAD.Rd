@@ -18,7 +18,8 @@
   by the close location value (CLV).
 }
 \value{
-  A vector containing the accumulation / distribution values.
+  A object of the same class as \code{HLC} and \code{volume} or a vector
+  (if \code{try.xts} fails) containing the accumulation / distribution values.
 }
 \author{ Josh Ulrich }
 \references{

@@ -17,7 +17,8 @@
   values.  If a vector is provided, the calculation only uses that series.
 }
 \value{
-  A vector containing the William's \%R values.
+  A object of the same class as \code{HLC} or a vector (if \code{try.xts}
+  fails) containing the William's \%R values.
 }
 \author{ Josh Ulrich }
 \references{

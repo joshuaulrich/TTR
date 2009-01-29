@@ -26,7 +26,8 @@
   it will be used instead.
 }
 \value{
-  A vector containing the MFI values.
+  A object of the same class as \code{HLC} and \code{volume} or a vector
+  (if \code{try.xts} fails) containing the MFI values.
 }
 \author{ Josh Ulrich }
 \references{

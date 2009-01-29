@@ -22,7 +22,8 @@
   Aroon up (down) to decrease by (1 / \code{n}) x 100.
 }
 \value{
-  A matrix containing the columns:
+  A object of the same class as \code{HL} or a matrix (if \code{try.xts}
+  fails) containing the columns:
   \item{ aroonUp }{ The Aroon up indicator. }
   \item{ aroonDn }{ The Aroon down indicator. }
   \item{ oscillator }{ The Aroon oscillator (\code{aroonUp - aroonDn}). }

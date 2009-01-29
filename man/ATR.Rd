@@ -24,7 +24,8 @@
   The ATR is a component of the Welles Wilder Directional Movement Index (\code{DX}, \code{ADX}).
 }
 \value{
-  A matrix containing the columns:
+  A object of the same class as \code{HLC} or a matrix (if \code{try.xts}
+  fails) containing the columns:
   \item{ tr }{ The true range of the series. }
   \item{ atr }{ The average (as specified by \code{ma}) true range of the series. }
   \item{ true.high }{ The true high of the series. }

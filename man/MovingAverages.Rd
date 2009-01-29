@@ -50,6 +50,8 @@ ZLEMA(x, n=10, ratio=NULL)
   the cumulative effect.
 }
 \value{
+  A object of the same class as \code{x} or \code{price} or a vector
+  (if \code{try.xts} fails) containing the columns:
   \item{SMA}{ Simple moving average. }
   \item{EMA}{ Exponential moving average. }
   \item{WMA}{ Weighted moving average. }

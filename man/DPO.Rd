@@ -22,7 +22,8 @@
   shifts the results \code{shift} periods, so the last \code{shift} periods will be zero.
 }
 \value{
-  A vector containing the DPO values.
+  A object of the same class as \code{x} or a vector (if \code{try.xts}
+  fails) containing the DPO values.
 }
 \author{ Josh Ulrich }
 \references{

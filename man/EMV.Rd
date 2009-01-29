@@ -22,7 +22,8 @@
   'Box Ratio' (volume divided by the high minus low).
 }
 \value{
-  A matrix containing the columns:
+  A object of the same class as \code{HL} and \code{volume} or a matrix
+  (if \code{try.xts} fails) containing the columns:
   \item{ emv }{ The ease of movement values. }
   \item{ emvMA }{ The smoothed (as specified by \code{ma}) ease of movement values. }
 }

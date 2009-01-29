@@ -26,7 +26,8 @@
   (e.g. Close, Weighted Close, Median Price, etc.) is provided, it will be used instead.
 }
 \value{
-  A vector containing the CCI values.
+  A object of the same class as \code{HLC} or a vector (if \code{try.xts}
+  fails) containing the CCI values.
 }
 \author{ Josh Ulrich }
 \references{

@@ -16,7 +16,8 @@
   account.
 }
 \value{
-  A vector containing the accumulation / distribution values.
+  A object of the same class as \code{HLC} or a vector (if \code{try.xts}
+  fails) containing the accumulation / distribution values.
 }
 \author{ Josh Ulrich }
 \references{

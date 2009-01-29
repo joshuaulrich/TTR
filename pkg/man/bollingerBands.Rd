@@ -28,7 +28,8 @@
   (e.g. Close, Weighted Close, Median Price, etc.) is provided, it will be used instead.
 }
 \value{
-  A matrix containing the columns:
+  A object of the same class as \code{HLC} or a matrix (if \code{try.xts}
+  fails) containing the columns:
   \item{ dn }{ The lower Bollinger Band. }
   \item{ ma }{ The middle Moving Average (see notes). }
   \item{ up }{ The upper Bollinger Band. }

@@ -20,7 +20,8 @@
   The \code{DIp}/\code{DIn} (positive/negative) is the percentage of the true range that is up/down.
 }
 \value{
-  A matrix containing the columns:
+  A object of the same class as \code{HLC} or a matrix (if \code{try.xts}
+  fails) containing the columns:
   \item{ DIp }{ The positive Direction Index. }
   \item{ DIn }{ The negative Direction Index. }
   \item{ DX }{ The Direction Index. }

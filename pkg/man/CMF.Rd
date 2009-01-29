@@ -20,7 +20,8 @@
   \code{n} periods.
 }
 \value{
-  A vector containing the Chaikin Money Flow values.
+  A object of the same class as \code{HLC} and \code{volume} or a vector
+  (if \code{try.xts} fails) containing the Chaikin Money Flow values.
 }
 \author{ Josh Ulrich }
 \references{

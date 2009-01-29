@@ -22,7 +22,8 @@
   averages, since they're divided by the value of \code{n} not the number of gain/loss periods.
 }
 \value{
-  A vector containing the RSI values.
+  A object of the same class as \code{price} or a vector (if \code{try.xts}
+  fails) containing the RSI values.
 }
 \author{ Josh Ulrich }
 \references{

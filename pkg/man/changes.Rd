@@ -23,9 +23,9 @@
   while the momentum indicator simply provides the difference.
 }
 \value{
-  \code{ROC} returns a vector containing the rate-of-change (or return) values.
-
-  \code{momentum} returns a vector containing the differenced price series.
+  A object of the same class as \code{x} or a vector (if \code{try.xts}
+  fails) containing the rate-of-change (or return) values for \code{ROC}
+  or a vector containing the differenced price series for \code{momentum}.
 }
 \author{ Josh Ulrich }
 \examples{

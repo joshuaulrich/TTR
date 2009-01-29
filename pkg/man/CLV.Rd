@@ -15,7 +15,8 @@
   if the CLV is 0, the close is directly between the high and low.
 }
 \value{
-  A vector containg the Close Location Values of a High-Low-Close price series.
+  A object of the same class as \code{HLC} or a vector (if \code{try.xts}
+  fails) containing the Close Location Values of a High-Low-Close price series.
 }
 \author{ Josh Ulrich }
 \references{

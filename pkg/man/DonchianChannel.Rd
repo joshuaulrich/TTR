@@ -21,7 +21,8 @@
   The middle line is the average of the top and bottom lines.
 }
 \value{
-  A matrix containing the columns:
+  A object of the same class as \code{HL} or a matrix (if \code{try.xts}
+  fails) containing the columns:
   \item{ high }{ The highest high series. }
   \item{ mid }{ The average of \code{high} and \code{low}. }
   \item{ low }{ The lowest low series. }

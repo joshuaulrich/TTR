@@ -19,7 +19,8 @@
   between the high and low.
 }
 \value{
-  A vector containing the Chaikin Volatility values.
+  A object of the same class as \code{HL} or a vector (if \code{try.xts}
+  fails) containing the Chaikin Volatility values.
 }
 \author{ Josh Ulrich }
 \references{

@@ -19,7 +19,8 @@
   sum of the close price changes.
 }
 \value{
-  A vector containing the VHF values.
+  A object of the same class as \code{price} or a vector (if \code{try.xts}
+  fails) containing the VHF values.
 }
 \author{ Josh Ulrich }
 \references{

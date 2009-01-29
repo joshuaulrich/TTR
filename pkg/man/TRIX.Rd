@@ -25,7 +25,8 @@
   trix = 100 * [ 3MA(t) / 3MA(t-1) - 1 ]
 }
 \value{
-  A vector containing the TRIX values.
+  A object of the same class as \code{price} or a vector (if \code{try.xts}
+  fails) containing the TRIX values.
 }
 \author{ Josh Ulrich }
 \references{

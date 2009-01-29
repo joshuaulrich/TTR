@@ -27,7 +27,8 @@
   See URL in references section for further details.
 }
 \value{
-  A matrix containing the columns:
+  A object of the same class as \code{price} or a matrix (if \code{try.xts}
+  fails) containing the columns:
   \item{ tdi }{ The Trend Detection Index. }
   \item{ di }{ The Direction Indicator. }
 }

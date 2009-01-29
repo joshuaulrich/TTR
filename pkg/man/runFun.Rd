@@ -54,6 +54,8 @@
 %  \code{runMAD} calculates median/mean absolute deviations over a moving window.
 %}
 \value{
+  A object of the same class as \code{x} and \code{y} or a vector
+  (if \code{try.xts} fails).
   \item{runSum}{returns sums over a n-period moving window.}
   \item{runMin}{returns minimums over a n-period moving window.}
   \item{runMax}{returns maximums over a n-period moving window.}

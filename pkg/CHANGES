@@ -1,107 +1,74 @@
-TTR version 0.14-0
-  Changes from version 0.13-2
+TTR version 0.2
+  Changes from version 0.14-0
 
 
-New Features:
+NEW FEATURES:
 
-- Changed MA-type args and updated documentation for: RSIm ADX, ATR,
-  CCI, DPO, EMV, RSI, BBands, chaikinVolatility, stoch, SMI, TRIX,
-  MACD, and KST
+- Added the zig zag indicator: ZigZag()
 
-- Added Stochastic Momentum Index (SMI) and williamsAD functions
-  and documentation
+- Added volatility estimators/indicators: volatility(), with
+  the following calculations
+  - Close-to-Close
+  - Garman Klass
+  - Parkinson
+  - Rogers Satchell
 
-- Added Fortran implementations of SMA, EMA, WMA, EVWMA, ZLEMA, PSAR
+- Added Money Flow Index: MFI()
 
-- Added NA checking/handling for many functions
-
-- Added 'ratio' argument to EMA with default=NULL
-
-- Changed all usage of 'rollFun' to their respective Fortran
-  implementations and removed the 'rollFun' function.  Added Fortran
-  based functions are: runSum, wilderSum, runMin, runMax, runMean,
-  runCov, runCor, runVar, runSD, runMedian, runMAD
+- Added Donchian channel: DonchianChannel()
 
 
-Changes:
+CHANGES:
 
-- Changed 'CCI' to use 'runMAD'
+- All functions now use xts internally, adding support for all major
+  time series classes.  If try.xts() fails on the input object(s),
+  they will be converted to a matrix and a matrix object will be
+  returned.
 
-- Set 'na=NA' for 'momentum' and 'ROC' functions in files KST.R,
-  RSI.R, and TDI.R, and changed 'ROC' to use 'type="discrete"'
-  in 'chaikinVolatility.R'
+- Added 'bounded' arg to stoch() and SMI(), which includes the current
+  period in the calculation.
 
-- Changed default 'type' of 'ROC' to 'continuous'
+- Added naCheck() and implemented it in the moving average functions.
 
-- Made the following changes to the 'ZLEMA' function:
-   - Add ratio argument with default = NULL
-   - Non-integer lags are a weighted mean of the two nearest
-     observations, based on thier proximity to the lag value
-   - Change 'lag = ratio^(-1)' to fully support 'ratio' argument
+- Moved maType argument default values from function formals to
+  function body for the following functions:
+    ADX, ATR, CCI, DPO, EMV, KST, MACD, RSI, TRIX, BBands,
+    chaikinVolatility, stoch, SMI
 
-- Changed the 'BBands' function's 'sd' argument from a list
-  that allows other dispersion functions to simply indicate the
-  number of standard deviations to use
+- momentum() in CMO() no longer sets na=100
 
-- Changed 'BBands' %B output value from 'pct.b' to 'pctB'
+- Replaced 'na' argument in momentum() and ROC() with 'na.pad'
 
-- Changed 'WPR' output value from 'pct.R' to 'pctR'
+- Added 'multiple' argument to TDI(), allowing more user control
 
-- Changed 'WPR' MA output value from 'ma.emv' to 'emvMA'
+- getYahooData() now returns an xts object
 
-- Changed 'aroon' output values from 'aroon.xx' to 'aroonXx'
+- Added colnames to output for ADX, EMV, and CLV (for xts)
 
-- Renamed:
-    'chaikinMF' to 'CMF'
-    'stochastic' to 'stoch'
-    'bollingerBands' to 'BBands'
+- Added unit tests using the RUnit package
+  - Used checkEquals on object attributes as well as values
 
-- Added NAMESPACE 
+- Removed .First.lib function and added .onLoad with package version.
 
-- Added copyright information at the top of each file (.R and .f)
+
 
 - Removed all DOS EOL characters via 'vim +"argdo set ff=unix" +wqa *'
 
 
-Deprecated/Defunct:
+BUG FIXES:
 
-- Removed 'oscillator' function and transferred functionality
-  to 'MACD' function
+- Corrected NaN replacement in CLV()
 
-- Removed chaikinOscillator, since it can be created via
-  MACD( chaikinAD )
+- Corrected williamsAD(): AD=0 if C(t)=C(t-1)
 
+- Corrected runMedian() and runMAD().  The argument controlling
+  which type of median to calculate for even-numbered samples
+  wasn't being passed to the Fortran routine.
 
-Bug Fixes:
+- aroon() calculation starts at period n+1, instead of n
 
-- match.arg(type) in ROC changed to simple subsetting of type
+- Added NA to first element of closeLag of ATR()
 
-- Changed trailing zeros to trailing NAs in DPO
+- Corrected BBands() and CCI() for rowMeans use on xts objects
 
-- Fixed 'WMA' bug that allowed 'x' and 'wts' vectors to have different
-  length if either series had leading NAs (similar to EVWMA function)
-
-- Fixed 'runCov' bug that allowed 'x' and 'y' vectors to have different
-  length if either series had leading NAs (similar to EVWMA function)
-
-- Corrected EVWMA to start at period 'n' instead of 'n-1'
-
-- Removed 'message' function from CCI.R, VHF.R, WPR.R, aroon.R
-  bollingerBands.R, and stochastics.R
-
-- Change \sQuote{x} to 'x' in documentation
-
-- Changed documentation so "Usage", "Examples" section are a max of
-  ~65-70 characters wide; it now prints better in plain text help
-
-- Updated "detail" section of 'MovingAverages.Rd' via enclosing
-  function names in "\code{}" brackets
-
-- Changed "title" section of 'WPR.Rd' to remove unnecessary "\"
-
-- Removed "detail" section from 'runFun.Rd' and replaced "\code{}"
-  brackets in "value" section with "\item{}" brackets
-
-- Changed "site(s)" to "sites" in "references" section of "TTR.Rd",
-  and included "runFun" in list of interesting functions
-
+- Made changes to Rd files to pass R CMD check on R-devel (2.9.0)

@@ -2,11 +2,11 @@ Package: TTR
 Type: Package
 Title: Technical Trading Rules
 Version: 0.2
-Revision: 63
-Date: 2009-01-05
+Revision: 65
+Date: 2009-01-29
 Author: Josh Ulrich
 Maintainer: Josh Ulrich <josh.m.ulrich@gmail.com>
-Depends: xts (>= 0.6.3)
+Depends: xts (>= 0.6.4)
 Enhances: quantmod
 Description: Functions and data to construct technical trading rules with R.
 License: GPL-3

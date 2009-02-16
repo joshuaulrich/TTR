@@ -1,0 +1,74 @@
+TTR version 0.2
+  Changes from version 0.14-0
+
+
+NEW FEATURES:
+
+- Added the zig zag indicator: ZigZag()
+
+- Added volatility estimators/indicators: volatility(), with
+  the following calculations
+  - Close-to-Close
+  - Garman Klass
+  - Parkinson
+  - Rogers Satchell
+
+- Added Money Flow Index: MFI()
+
+- Added Donchian channel: DonchianChannel()
+
+
+CHANGES:
+
+- All functions now use xts internally, adding support for all major
+  time series classes.  If try.xts() fails on the input object(s),
+  they will be converted to a matrix and a matrix object will be
+  returned.
+
+- Added 'bounded' arg to stoch() and SMI(), which includes the current
+  period in the calculation.
+
+- Added naCheck() and implemented it in the moving average functions.
+
+- Moved maType argument default values from function formals to
+  function body for the following functions:
+    ADX, ATR, CCI, DPO, EMV, KST, MACD, RSI, TRIX, BBands,
+    chaikinVolatility, stoch, SMI
+
+- momentum() in CMO() no longer sets na=100
+
+- Replaced 'na' argument in momentum() and ROC() with 'na.pad'
+
+- Added 'multiple' argument to TDI(), allowing more user control
+
+- getYahooData() now returns an xts object
+
+- Added colnames to output for ADX, EMV, and CLV (for xts)
+
+- Added unit tests using the RUnit package
+  - Used checkEquals on object attributes as well as values
+
+- Removed .First.lib function and added .onLoad with package version.
+
+
+
+- Removed all DOS EOL characters via 'vim +"argdo set ff=unix" +wqa *'
+
+
+BUG FIXES:
+
+- Corrected NaN replacement in CLV()
+
+- Corrected williamsAD(): AD=0 if C(t)=C(t-1)
+
+- Corrected runMedian() and runMAD().  The argument controlling
+  which type of median to calculate for even-numbered samples
+  wasn't being passed to the Fortran routine.
+
+- aroon() calculation starts at period n+1, instead of n
+
+- Added NA to first element of closeLag of ATR()
+
+- Corrected BBands() and CCI() for rowMeans use on xts objects
+
+- Made changes to Rd files to pass R CMD check on R-devel (2.9.0)

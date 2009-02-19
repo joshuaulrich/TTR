@@ -24,7 +24,8 @@ function(OHLC, n=10, calc="close", N=260, ...) {
 
   # Choose an arg name that doesn't clash with ROC's 'type' arg
   calc <- match.arg(calc,
-            c("close","garman.klass","parkinson","rogers.satchell"))
+            c("close","garman.klass","parkinson",
+              "rogers.satchell","gk.yz","yang.zhang"))
   
   # s       Volatility
   # N       Number of closing prices in a year
@@ -61,19 +62,47 @@ function(OHLC, n=10, calc="close", N=260, ...) {
                log(OHLC[,3]/OHLC[,4]) * log(OHLC[,3]/OHLC[,1]), n ) )
   }
 
+  if( calc=="gk.yz" ) {
   #if( calc=="garman.klass.yang.zhang" ) {
     # Historical Open-High-Low-Close Volatility: Garman and Klass (Yang Zhang)
     # http://www.sitmo.com/eq/409
-    #s <- sqrt( N/n * runSum( .5 * log(OHLC[,2]/OHLC[,3])^2 -
-               #(2*log(2)-1) * log(OHLC[,4]/OHLC[,1])^2 , n) )
-    #s <- sqrt( Z/n * runSum( log(op/cl[-1])^2 + .5*log(hi/lo)^2 -
-                     #(2*log(2)-1)*log(cl/op)^2 ) )
-  #}
+    if(is.xts(OHLC)) {
+      Cl1 <- lag(OHLC[,4])
+    } else {
+      Cl1 <- c( NA, OHLC[-NROW(OHLC),4] )
+    }
+    s <- sqrt( N/n * runSum(
+               log(OHLC[,1]/Cl1)^2 +
+               .5 * log(OHLC[,2]/OHLC[,3])^2 -
+               (2*log(2)-1) * log(OHLC[,4]/OHLC[,1])^2 , n) )
 
-  #if( calc=="yang.zhang" ) {
+    #s <- sqrt( Z/n * runSum(
+    #          log(op/cl[-1])^2 +
+    #          .5*log(hi/lo)^2 -
+    #          (2*log(2)-1)*log(cl/op)^2 ) )
+  }
+
+  if( calc=="yang.zhang" ) {
     # Historical Open-High-Low-Close Volatility: Yang Zhang
     # http://www.sitmo.com/eq/417
-  #}
+    if(is.xts(OHLC)) {
+      Cl1 <- lag(OHLC[,4])
+    } else {
+      Cl1 <- c( NA, OHLC[-NROW(OHLC),4] )
+    }
+    
+    dots <- list(...)
+    if(is.null(dots$k)) {
+      k <- 0.34 / ( 1 + (n+1)/(n-1) )
+    }
+
+    s2o  <- N/(n-1) * runSum( log(OHLC[,1]/Cl1) -
+                1/n * runSum( log(OHLC[,1]/Cl1),n) ) ^ 2
+    s2c  <- N/(n-1) * runSum( log(OHLC[,4]/OHLC[,1]) -
+                1/n * runSum( log(OHLC[,4]/OHLC[,1]),n) ) ^ 2
+    s2rs <- volatility(OHLC=OHLC, n=n, calc="rogers.satchell", N=N, ...)
+    s <- s2o + k*s2c + (1-k)*s2rs
+  }
 
   reclass(s,OHLC)
 }

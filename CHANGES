@@ -51,10 +51,6 @@ CHANGES:
 - Removed .First.lib function and added .onLoad with package version.
 
 
-
-- Removed all DOS EOL characters via 'vim +"argdo set ff=unix" +wqa *'
-
-
 BUG FIXES:
 
 - Corrected NaN replacement in CLV()

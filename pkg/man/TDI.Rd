@@ -45,8 +45,8 @@
 }
 \seealso{
   See \code{\link{aroon}}, \code{\link{CCI}}, \code{\link{ADX}},
-  \code{\link{VHF}} for other indicators that measure trend
-  direction/strength.
+  \code{\link{VHF}}, \code{\link{GMMA}} for other indicators that
+  measure trend direction/strength.
 }
 \examples{
   data(ttrc)

@@ -33,8 +33,11 @@
   (the default).  If HLC prices are given, the function calculates the max/min using the
   high/low prices (added for flexibility).
 }
-\seealso{ See \code{\link{aroon}}, \code{\link{CCI}}, \code{\link{ADX}}, \code{\link{TDI}}
-          for other indicators that measure trend direction/strength. }
+\seealso{
+  See \code{\link{aroon}}, \code{\link{CCI}}, \code{\link{ADX}},
+  \code{\link{TDI}}, code{\link{GMMA}} for other indicators that measure
+  trend direction/strength.
+}
 \examples{
   data(ttrc)
   vhf.close <- VHF(ttrc[,"Close"])

@@ -48,7 +48,8 @@
 \seealso{
   See \code{\link{EMA}}, \code{\link{SMA}}, etc. for moving average options; and note
   Warning section.  The DX calculation uses \code{\link{ATR}}.
-  See \code{\link{aroon}}, \code{\link{CCI}}, \code{\link{TDI}}, \code{\link{VHF}}
+  See \code{\link{aroon}}, \code{\link{CCI}}, \code{\link{TDI}},
+  \code{\link{VHF}}, code{\link{GMMA}}
   for other indicators that measure trend direction/strength.
 }
 \examples{

@@ -175,35 +175,10 @@ function(symbol, start, end, freq="daily", type="price", adjust=TRUE, quiet=FALS
         
         # If there are no div/spl, then ohlc is a zero-width xts object
         if(NROW(divspl) != 0) {
-
-          # Create split adjustment ratio, (always = 1 if no splits exist)
-          s.ratio <- rep(1, NROW(ohlc))
-          if( !all( is.na(ohlc[,'Split']) ) ) {
-            # Start loop at most recent data
-            for( i in NROW(ohlc):2 ) {
-              if( is.na( ohlc[i,'Split'] ) ) {
-                s.ratio[i-1] <- s.ratio[i]
-              } else {
-                s.ratio[i-1] <- s.ratio[i] * ohlc[i,'Split']
-              } 
-            }
-          }
-
-          # Un-adjust dividends for Splits
-          ohlc[,'Div'] <- ohlc[,'Adj.Div'] * ( 1 / s.ratio )
-
-          # Create dividend adjustment ratio, (always = 1 if no dividends exist)
-          d.ratio <- rep(1, NROW(ohlc))
-          if( !all( is.na(ohlc[,'Adj.Div']) ) ) {
-            # Start loop at most recent data
-            for( i in NROW(ohlc):2 ) {
-              if( is.na( ohlc[i,'Adj.Div'] ) ) {
-                d.ratio[i-1] <- d.ratio[i]
-              } else {
-                d.ratio[i-1] <- d.ratio[i] * ( 1 - coredata(ohlc[i,'Div'])[1] / coredata(ohlc[i-1,'Close'])[1] ) 
-              } 
-            }
-          }
+          
+          adj <- adjSplitDiv(ohlc[,'Split'],ohlc[,'Div'],ohlc[,'Close'])
+          s.ratio <- adj[,1]
+          d.ratio <- adj[,2]
 
           # Adjust OHLC and volume
           cn <- colnames(ohlc)
@@ -265,31 +240,23 @@ function(symbol, start, end, freq="daily", type="price", adjust=TRUE, quiet=FALS
       ohlc <- merge(div, spl, by.col="Date", all=TRUE)
       ohlc[,'Date'] <- as.Date(as.character(ohlc[,'Date']), "%Y%m%d")
 
+
       # Create split adjustment ratio, (always = 1 if no splits exist)
-      s.ratio <- rep(1, NROW(ohlc))
-      if(NROW(spl)!=0) {
-        ohlc[,'Split'] <- sub(":","/", ohlc[,'Split'])
-        ohlc[,'Split'] <- 1 / sapply( parse( text=ohlc[,'Split'] ), eval )
-        # Start loop at most recent data
-        for( i in NROW(ohlc):2 ) {
-          if( is.na( ohlc[i,'Split'] ) ) {
-            s.ratio[i-1] <- s.ratio[i]
-          } else {
-            s.ratio[i-1] <- s.ratio[i] * ohlc[i,'Split']
-          } 
-        }
-      }
-
-      # Un-adjust dividends for Splits
-      ohlc[,'Div'] <- ohlc[,'Adj.Div'] * ( 1 / s.ratio )
-      ohlc[,'Split'] <- as.numeric(ohlc[,'Split'])
-
-      # Order data columns
-      ohlc <- ohlc[,c("Date","Div","Split","Adj.Div")]
+      ohlc[,'Split'] <- sub(":","/", ohlc[,'Split'])
+      ohlc[,'Split'] <- 1 / sapply( parse( text=ohlc[,'Split'] ), eval )
 
       ohlc <- ohlc[order(ohlc[,1]),]
       ohlc <- xts(ohlc[,-1], as.POSIXct(as.character(ohlc[,1])))
-      
+      s.ratio <- adjSplitDiv(ohlc[,'Split'])[,1]
+
+      # Un-adjust dividends for Splits
+      ohlc <- cbind(ohlc,ohlc[,'Adj.Div'] * ( 1 / s.ratio ))
+      colnames(ohlc)[3] <- "Div"
+      ohlc[,'Split'] <- as.numeric(ohlc[,'Split'])
+
+      # Order data columns
+      ohlc <- ohlc[,c("Div","Split","Adj.Div")]
+
       # Return (empty) data
       if(NROW(ohlc)==0) return(ohlc)
     }

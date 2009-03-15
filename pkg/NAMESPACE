@@ -2,6 +2,7 @@
 useDynLib(TTR)
 
 # User visible TTR functions
+export(adjSplitDiv)
 export(ADX)
 export(aroon)
 export(ATR)

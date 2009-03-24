@@ -214,7 +214,7 @@ function(symbol, start, end, freq="daily", type="price", adjust=TRUE, quiet=FALS
     ohlc <- read.table(url, header=TRUE, sep=",")
     ohlc[,'Adj.Close'] <- NULL
     ohlc <- ohlc[order(ohlc[,"Date"]),]
-    ohlc <- xts(ohlc[,-1], as.POSIXct(as.character(ohlc[,1]), format="%Y-%m-%d"))
+    ohlc <- xts(ohlc[,-1], as.POSIXct(as.character(ohlc[,1])))
 
     }
 

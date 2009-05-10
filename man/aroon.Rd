@@ -46,7 +46,7 @@
 }
 \seealso{
   See \code{\link{CCI}}, \code{\link{ADX}}, \code{\link{TDI}},
-  \code{\link{VHF}}, code{\link{GMMA}}
+  \code{\link{VHF}}, \code{\link{GMMA}}
   for other indicators that measure trend direction/strength.
 }
 \examples{

@@ -238,8 +238,11 @@ function(symbol, start, end, freq="daily", type="price", adjust=TRUE, quiet=FALS
                           stringsAsFactors=FALSE )
 
       ohlc <- merge(div, spl, by.col="Date", all=TRUE)
+      
+      # Return (empty) data
+      if(NROW(ohlc)==0) return(ohlc)
+      
       ohlc[,'Date'] <- as.Date(as.character(ohlc[,'Date']), "%Y%m%d")
-
 
       # Create split adjustment ratio, (always = 1 if no splits exist)
       ohlc[,'Split'] <- sub(":","/", ohlc[,'Split'])
@@ -247,7 +250,7 @@ function(symbol, start, end, freq="daily", type="price", adjust=TRUE, quiet=FALS
 
       ohlc <- ohlc[order(ohlc[,1]),]
       ohlc <- xts(ohlc[,-1], as.POSIXct(as.character(ohlc[,1])))
-      s.ratio <- adjSplitDiv(ohlc[,'Split'])[,1]
+      s.ratio <- adjSplitDiv(split=ohlc[,'Split'])[,1]
 
       # Un-adjust dividends for Splits
       ohlc <- cbind(ohlc,ohlc[,'Adj.Div'] * ( 1 / s.ratio ))
@@ -256,9 +259,6 @@ function(symbol, start, end, freq="daily", type="price", adjust=TRUE, quiet=FALS
 
       # Order data columns
       ohlc <- ohlc[,c("Div","Split","Adj.Div")]
-
-      # Return (empty) data
-      if(NROW(ohlc)==0) return(ohlc)
     }
 
   # Only return requested data

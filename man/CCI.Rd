@@ -44,7 +44,7 @@
 \seealso{
   See \code{\link{EMA}}, \code{\link{SMA}}, etc. for moving average options;
   and note Warning section.  See \code{\link{aroon}}, \code{\link{ADX}},
-  \code{\link{TDI}}, \code{\link{VHF}}, code{\link{GMMA}} for other
+  \code{\link{TDI}}, \code{\link{VHF}}, \code{\link{GMMA}} for other
   indicators that measure trend direction/strength.
 }
 \examples{

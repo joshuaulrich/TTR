@@ -250,10 +250,15 @@ function(symbol, start, end, freq="daily", type="price", adjust=TRUE, quiet=FALS
 
       ohlc <- ohlc[order(ohlc[,1]),]
       ohlc <- xts(ohlc[,-1], as.POSIXct(as.character(ohlc[,1])))
-      s.ratio <- adjSplitDiv(split=ohlc[,'Split'])[,1]
+
+      if( all(is.na(ohlc[,'Split'])) ) {
+        s.ratio <- rep(1,NROW(ohlc))
+      } else {
+        s.ratio <- adjSplitDiv(split=ohlc[,'Split'])[,1]
+      }
 
       # Un-adjust dividends for Splits
-      ohlc <- cbind(ohlc,ohlc[,'Adj.Div'] * ( 1 / s.ratio ))
+      ohlc <- cbind(ohlc,ohlc[,"Adj.Div"] * ( 1 / s.ratio ))
       colnames(ohlc)[3] <- "Div"
       ohlc[,'Split'] <- as.numeric(ohlc[,'Split'])
 

@@ -91,6 +91,12 @@
   lines(tail(stochWPR, 100), col="blue")
   lines(tail(1-stochWPR, 100), col="red", lty="dashed")
 
+  stoch2MA <- stoch( ttrc[,c("High","Low","Close")],
+      maType=list(list(SMA), list(EMA, wilder=TRUE)) )
+
+  SMI3MA <- SMI(ttrc[,c("High","Low","Close")],
+      maType=list(list(SMA), list(EMA, wilder=TRUE), list(SMA)) )
+
   stochRSI <- stoch( RSI(ttrc[,"Close"]) )
 }
 \keyword{ ts }

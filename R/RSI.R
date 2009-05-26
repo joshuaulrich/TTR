@@ -47,6 +47,13 @@ function(price, n=14, maType, ...) {
   # e.g. RSI(price, n=14, maType=list(maUp=list(EMA,ratio=1/5), maDown=list(WMA,wts=1:10)) )
   if( is.list(maType) ) {
 
+    # Make sure maType is a list of lists
+    maTypeInfo <- sapply(maType,is.list)
+    if( !(all(maTypeInfo) && length(maTypeInfo) == 2) ) {
+      stop("If \'maType\' is a list, you must specify\n ",
+      "*two* MAs (see Examples section of ?RSI)")
+    }
+    
     # If MA function has 'n' arg, see if it's populated in maType;
     # if it isn't, populate it with RSI's formal 'n'
     for(i in 1:length(maType)) {

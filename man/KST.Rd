@@ -29,7 +29,7 @@
   A object of the same class as \code{price} or a vector (if \code{try.xts}
   fails) containing the Know Sure Thing values.
 }
-\author{ Josh Ulrich }
+\author{ Joshua Ulrich }
 \references{
   The following site(s) were used to code/document this indicator:\cr
   \url{http://www.pring.com/index.html}\cr

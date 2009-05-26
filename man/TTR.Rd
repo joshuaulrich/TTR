@@ -29,9 +29,9 @@
   \code{\link{WebData}}\cr
 }
 \author{
-Josh Ulrich
+Joshua Ulrich
 
-Maintainer: Josh Ulrich
+Maintainer: Joshua Ulrich
 }
 \references{
   The following sites were used to code/document this package:\cr

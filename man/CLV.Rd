@@ -18,7 +18,7 @@
   A object of the same class as \code{HLC} or a vector (if \code{try.xts}
   fails) containing the Close Location Values of a High-Low-Close price series.
 }
-\author{ Josh Ulrich }
+\author{ Joshua Ulrich }
 \references{
   The following site(s) were used to code/document this indicator:\cr
   \url{http://stockcharts.com/education/IndicatorAnalysis/indic_AccumDistLine.html}\cr

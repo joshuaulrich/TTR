@@ -28,7 +28,7 @@
   A object of the same class as \code{HL} or a vector (if \code{try.xts}
   fails) containing the Zig Zag indicator.
 }
-\author{ Josh Ulrich }
+\author{ Joshua Ulrich }
 \references{
   The following site(s) were used to code/document this indicator:\cr
   \url{http://www.fmlabs.com/reference/default.htm?url=ZigZag.htm}\cr

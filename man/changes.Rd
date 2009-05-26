@@ -27,7 +27,7 @@
   fails) containing the rate-of-change (or return) values for \code{ROC}
   or a vector containing the differenced price series for \code{momentum}.
 }
-\author{ Josh Ulrich }
+\author{ Joshua Ulrich }
 \examples{
   data(ttrc)
   roc <- ROC(ttrc[,"Close"])

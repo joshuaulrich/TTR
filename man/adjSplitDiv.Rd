@@ -25,7 +25,7 @@
   \item{ Split }{ The split adjustment ratio. }
   \item{ Div }{ The dividend adjustment ratio. }
 }
-\author{ Josh Ulrich }
+\author{ Joshua Ulrich }
 %\note{
 %  If only splits are given, the ratio will only be as long as the split vector
 %  If splits/close are given, the ratio will be as long as the close vector

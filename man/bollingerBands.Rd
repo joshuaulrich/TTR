@@ -35,7 +35,7 @@
   \item{ up }{ The upper Bollinger Band. }
   \item{ pctB }{ The \%B calculation. }
 }
-\author{ Josh Ulrich }
+\author{ Joshua Ulrich }
 \references{
   The following site(s) were used to code/document this indicator:\cr
   \url{http://www.fmlabs.com/reference/Bollinger.htm}\cr

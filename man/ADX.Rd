@@ -27,7 +27,7 @@
   \item{ DX }{ The Direction Index. }
   \item{ ADX }{ The Average Direction Index (trend strength). }
 }
-\author{ Josh Ulrich }
+\author{ Joshua Ulrich }
 \references{
   The following site(s) were used to code/document this indicator:\cr
   \url{http://www.fmlabs.com/reference/DI.htm}\cr

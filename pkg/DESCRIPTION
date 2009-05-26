@@ -4,8 +4,8 @@ Title: Technical Trading Rules
 Version: 0.2-1
 Revision: 73
 Date: 2009-02-11
-Author: Josh Ulrich
-Maintainer: Josh Ulrich <josh.m.ulrich@gmail.com>
+Author: Joshua Ulrich
+Maintainer: Joshua Ulrich <josh.m.ulrich@gmail.com>
 Depends: xts (>= 0.6.4)
 Enhances: quantmod
 Description: Functions and data to construct technical trading rules with R.

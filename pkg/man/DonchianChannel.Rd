@@ -27,7 +27,7 @@
   \item{ mid }{ The average of \code{high} and \code{low}. }
   \item{ low }{ The lowest low series. }
 }
-\author{ Josh Ulrich }
+\author{ Joshua Ulrich }
 \references{
   The following site(s) were used to code/document this indicator:\cr
   \url{http://www.linnsoft.com/tour/techind/donch.htm}\cr

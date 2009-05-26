@@ -27,7 +27,7 @@
   \item{ emv }{ The ease of movement values. }
   \item{ emvMA }{ The smoothed (as specified by \code{ma}) ease of movement values. }
 }
-\author{ Josh Ulrich }
+\author{ Joshua Ulrich }
 \references{
   The following site(s) were used to code/document this indicator:\cr
   \url{http://www.fmlabs.com/reference/ArmsEMV.htm}\cr

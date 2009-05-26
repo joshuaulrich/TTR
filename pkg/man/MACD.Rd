@@ -33,7 +33,7 @@
   \item{ macd }{ The price (volume, etc.) oscillator. }
   \item{ signal }{ The oscillator signal line (a moving average of the oscillator). }
 }
-\author{ Josh Ulrich }
+\author{ Joshua Ulrich }
 \references{
   The following site(s) were used to code/document this indicator:\cr
   \url{http://www.fmlabs.com/reference/MACD.htm}\cr

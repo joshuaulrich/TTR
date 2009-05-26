@@ -59,7 +59,7 @@ ZLEMA(x, n=10, ratio=NULL)
   \item{EVWMA}{ Elastic, volume-weighted moving average. }
   \item{ZLEMA}{ Zero lag exponential moving average. }
 }
-\author{ Josh Ulrich }
+\author{ Joshua Ulrich }
 \references{
   The following site(s) were used to code/document this indicator:\cr
   \url{http://www.fmlabs.com/reference/ExpMA.htm}\cr

@@ -51,7 +51,7 @@
   \item{ SMI }{ Stochastic Momentum Index }
   \item{ signal }{ Stochastic Momentum Index signal line }
 }
-\author{ Josh Ulrich }
+\author{ Joshua Ulrich }
 \references{
   The following site(s) were used to code/document these indicators:\cr
   Stochastic Oscillator:\cr

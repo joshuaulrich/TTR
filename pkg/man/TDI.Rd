@@ -32,7 +32,7 @@
   \item{ tdi }{ The Trend Detection Index. }
   \item{ di }{ The Direction Indicator. }
 }
-\author{ Josh Ulrich }
+\author{ Joshua Ulrich }
 \references{
   The following site(s) were used to code/document this indicator:\cr
   \url{http://www.linnsoft.com/tour/techind/tdi.htm}\cr

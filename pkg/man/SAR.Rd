@@ -22,7 +22,7 @@
   A object of the same class as \code{HL} or a vector (if \code{try.xts}
   fails) containing the Parabolic Stop and Reverse values.
 }
-\author{ Josh Ulrich }
+\author{ Joshua Ulrich }
 \references{
   The following site(s) were used to code/document this indicator:\cr
   \url{http://www.linnsoft.com/tour/techind/sar.htm}\cr

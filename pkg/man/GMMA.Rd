@@ -28,7 +28,7 @@
   A object of the same class as \code{x} or \code{price} or a vector
   (if \code{try.xts} fails) containing the Guppy Multiple Moving Average.
 }
-\author{ Josh Ulrich }
+\author{ Joshua Ulrich }
 \references{
   The following site(s) were used to code/document this indicator:\cr
   \url{http://www.investopedia.com/terms/g/guppy-multiple-moving-average.asp}\cr

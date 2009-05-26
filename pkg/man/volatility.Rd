@@ -51,7 +51,7 @@
   A object of the same class as \code{OHLC} or a vector (if \code{try.xts}
   fails) containing the chosen volatility estimator values.
 }
-\author{ Josh Ulrich }
+\author{ Joshua Ulrich }
 \references{
   The following site(s) were used to code/document these indicators:\cr\cr
   Close-to-Close Volatility (\code{close}):\cr

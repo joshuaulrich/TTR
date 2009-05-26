@@ -19,7 +19,7 @@
   A object of the same class as \code{HLC} or a vector (if \code{try.xts}
   fails) containing the accumulation / distribution values.
 }
-\author{ Josh Ulrich }
+\author{ Joshua Ulrich }
 \references{
   The following site(s) were used to code/document this indicator:\cr
   \url{http://www.fmlabs.com/reference/WilliamsAD.htm}\cr

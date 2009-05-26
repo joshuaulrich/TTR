@@ -48,7 +48,7 @@
   \code{stockSymbols} returns a character vector containing all the listed symbols for the
   given exchanges.
 }
-\author{ Josh Ulrich }
+\author{ Joshua Ulrich }
 \note{
   The symbols returned by \code{stockSymbols} may not be in the format necessary to retrieve data
   using \code{getYahooData}.

@@ -33,7 +33,7 @@
 
   \code{wilderSum} returns a vector of weighted sums.
 }
-\author{ Josh Ulrich }
+\author{ Joshua Ulrich }
 \note{
   In \code{growth} you can specify the number of periods and type of compounding
   to use when calculating returns of the price series via the \code{'\dots'} argument.

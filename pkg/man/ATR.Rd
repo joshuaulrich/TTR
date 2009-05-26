@@ -31,7 +31,7 @@
   \item{ true.high }{ The true high of the series. }
   \item{ true.low }{ The true low of the series. }
 }
-\author{ Josh Ulrich }
+\author{ Joshua Ulrich }
 \references{
   The following site(s) were used to code/document this indicator:\cr
   \url{http://www.fmlabs.com/reference/TR.htm}\cr

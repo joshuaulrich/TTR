@@ -67,7 +67,7 @@
   \item{runSD}{returns standard deviations over a n-period moving window.}
   \item{runMAD}{returns median/mean absolute deviations over a n-period moving window.}
 }
-\author{ Josh Ulrich }
+\author{ Joshua Ulrich }
 %\note{
 %  In \code{growth} you can specify the number of periods and type of compounding
 %  to use when calculating returns of the price series via the \code{'\dots'} argument.

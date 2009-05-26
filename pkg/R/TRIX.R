@@ -27,15 +27,20 @@ function(price, n=20, nSig=9, maType, percent=TRUE, ...) {
   # http://www.linnsoft.com/tour/techind/trix.htm
   # http://stockcharts.com/education/IndicatorAnalysis/indic_trix.htm
 
-  #price  <- as.matrix(price)
-
   # Default MA
   if(missing(maType)) {
     maType <- 'EMA'
   }
 
-  # Case of two different 'maType's for both MAs.
+  # Case of different 'maType's for all MAs.
   if( is.list(maType) ) {
+
+    # Make sure maType is a list of lists
+    maTypeInfo <- sapply(maType,is.list)
+    if( !(all(maTypeInfo) && length(maTypeInfo) == 4) ) {
+      stop("If \'maType\' is a list, you must specify\n ",
+      "*four* MAs (see Examples section of ?TRIX)")
+    }
 
     # If MA function has 'n' arg, see if it's populated in maType;
     # if it isn't, populate it with function's formal 'n'
@@ -58,7 +63,7 @@ function(price, n=20, nSig=9, maType, percent=TRUE, ...) {
 
   }
   
-  # Case of one 'maType' for both MAs.
+  # Case of one 'maType' for all MAs.
   else {
   
     mavg1 <- do.call( maType, c( list(price), list(n=n, ...) ) )

@@ -39,8 +39,11 @@ function(price, n=c(10,10,10,15), nROC=c(10,15,20,30), nSig=9,
   # Long-Term Monthly KST
   # MA(ROC(9)6) + MA(ROC(12)6) + MA(ROC(18)6) + MA(ROC(24)9)
 
-  if( !all.equal(NROW(n), NROW(wts), NROW(nROC)) )
+  if( !all.equal(NROW(n), NROW(wts), NROW(nROC)) ) {
     stop("'n', 'nROC', and 'wts' must be the same length.")
+  } else {
+    N <- NROW(n)
+  }
 
   #price <- as.vector(price)
   ret <- NULL
@@ -52,6 +55,14 @@ function(price, n=c(10,10,10,15), nROC=c(10,15,20,30), nSig=9,
 
   # Case of two different 'maType's for both MAs.
   if( is.list(maType) ) {
+
+    # Make sure maType is a list of lists
+    maTypeInfo <- sapply(maType,is.list)
+    if( !(all(maTypeInfo) && length(maTypeInfo) == N) ) {
+      stop("If \'maType\' is a list, you must specify\n ",
+      "the same number of MAs as elements in \'n\' and\n ",
+      "\'nROC\' (see Examples section of ?KST)")
+    }
 
     # If MA function has 'n' arg, see if it's populated in maType;
     # if it isn't, populate it with formal 'n'

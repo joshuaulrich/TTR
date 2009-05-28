@@ -1,4 +1,4 @@
-'adjSplitDiv' <-
+'adjRatios' <-
 function(splits, dividends, close) {
 
   if( !missing(dividends) &&
@@ -26,7 +26,7 @@ function(splits, dividends, close) {
   }
 
   obj <- merge.xts(close,splits,dividends)
-  adj <- .Call('adjSplitDiv',obj[,2],obj[,3],obj[,1])
+  adj <- .Call('adjRatios',obj[,2],obj[,3],obj[,1])
   adj <- xts(cbind(adj[[1]],adj[[2]]),index(obj))
   colnames(adj) <- c('Split','Div')
   

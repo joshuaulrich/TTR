@@ -1,12 +1,12 @@
-\name{adjSplitDiv}
-\alias{adjSplitDiv}
+\name{adjRatios}
+\alias{adjRatios}
 \alias{adjust}
 \title{ Split and dividend adjustment ratios }
 \description{
   Create split and dividend adjustment ratio vectors.
 }
 \usage{
-  adjSplitDiv(splits, dividends, close)
+  adjRatios(splits, dividends, close)
 }
 \arguments{
   \item{splits}{ Split series that is coercible to xts. }

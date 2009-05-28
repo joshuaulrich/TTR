@@ -21,7 +21,7 @@
 #include <R.h>
 #include <Rinternals.h>
 
-SEXP adjSplitDiv (SEXP split, SEXP div, SEXP close) {
+SEXP adjRatios (SEXP split, SEXP div, SEXP close) {
 
     // Initialize REAL pointers to function arguments
     double *real_close = REAL(close);

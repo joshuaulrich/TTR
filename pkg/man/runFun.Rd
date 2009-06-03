@@ -15,10 +15,10 @@
   Various functions to analyze data over a moving window of periods.
 }
 \usage{
-  runSum(x, n=10)
-  runMin(x, n=10)
-  runMax(x, n=10)
-  runMean(x, n=10)
+  runSum(x, n=10, cumulative=FALSE)
+  runMin(x, n=10, cumulative=FALSE)
+  runMax(x, n=10, cumulative=FALSE)
+  runMean(x, n=10, cumulative=FALSE)
   runMedian(x, n=10, non.unique="mean")
   runCov(x, y, n=10, use="all.obs", sample=TRUE)
   runCor(x, y, n=10, use="all.obs", sample=TRUE)
@@ -30,7 +30,9 @@
 \arguments{
   \item{x}{ Object coercible to xts or matrix. }
   \item{y}{ Object coercible to xts or matrix. }
-  \item{n}{ Number of periods to use in the window. }
+  \item{n}{ Number of periods to use in the window or, if \code{cumulative=TRUE},
+    the number of obversations to use before the first result is returned. }
+  \item{cumulative}{ Logical, use from-inception calculation? }
   \item{sample}{ Logical, sample covariance if \code{TRUE} (denominator of \code{n-1}) }
   \item{use}{ Only \code{"all.obs"} currently implemented. }
   \item{non.unique}{ One of 'mean', 'max', or 'min'; which compute their respective

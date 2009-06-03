@@ -1,3 +1,3 @@
 ".onLoad" <- function(lib,pkg) {
-  cat("TTR: Technical Trading Rules (version 0.2)\n")
+  message("Technical Trading Rules (version 0.20-0)\n")
 }

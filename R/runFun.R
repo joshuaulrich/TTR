@@ -18,7 +18,7 @@
 #
 
 "runSum" <-
-function(x, n=10) {
+function(x, n=10, cumulative=FALSE) {
 
   x <- try.xts(x, error=as.matrix)
 
@@ -34,22 +34,29 @@ function(x, n=10) {
 
   # Initialize result vector 
   result <- double(NROW(x))
-  result[(n+beg-1)] <- sum(x[beg:(n+beg-1)])
 
-  # Call Fortran routine
-  result <- .Fortran( "runsum",
-                   ia = as.double(x[beg:NROW(x)]),
-                   lia = as.integer(len),
-                   n = as.integer(n),
-                   oa = as.double(result[beg:NROW(x)]),
-                   loa = as.integer(len),
-                   PACKAGE = "TTR",
-                   DUP = FALSE )$oa
+  if(cumulative) {
+    result[beg:NROW(x)] <- cumsum(x[beg:NROW(x)])
+  } else {
+    result[(n+beg-1)] <- sum(x[beg:(n+beg-1)])
 
-  # Replace 1:(n-1) with NAs and prepend NAs from original data
-  is.na(result) <- c(1:(n-1))
-  result <- c( rep( NA, NAs ), result )
+    # Call Fortran routine
+    result <- .Fortran( "runsum",
+                     ia = as.double(x[beg:NROW(x)]),
+                     lia = as.integer(len),
+                     n = as.integer(n),
+                     oa = as.double(result[beg:NROW(x)]),
+                     loa = as.integer(len),
+                     PACKAGE = "TTR",
+                     DUP = FALSE )$oa
+    
+    # Prepend NAs from original data
+    result <- c( rep( NA, NAs ), result )
+  }
   
+  # Replace 1:(n-1) with NAs
+  is.na(result) <- c(1:(n-1+NAs))
+
   # Convert back to original class
   reclass(result, x)
 }
@@ -91,7 +98,7 @@ function(x, n=10) {
 #-------------------------------------------------------------------------#
 
 "runMin" <-
-function(x, n=10) {
+function(x, n=10, cumulative=FALSE) {
 
   x <- try.xts(x, error=as.matrix)
 
@@ -107,20 +114,27 @@ function(x, n=10) {
 
   # Initialize result vector 
   result <- double(NROW(x))
-  result[(n+beg-1)] <- min(x[beg:(n+beg-1)])
+  
+  if(cumulative) {
+    result[beg:NROW(x)] <- cummin(x[beg:NROW(x)])
+  } else {
+    result[(n+beg-1)] <- min(x[beg:(n+beg-1)])
 
-  result <- .Fortran( "runmin",
-                   ia = as.double(x[beg:NROW(x)]),
-                   lia = as.integer(len),
-                   n = as.integer(n),
-                   oa = as.double(result[beg:NROW(x)]),
-                   loa = as.integer(len),
-                   PACKAGE = "TTR",
-                   DUP = FALSE )$oa
+    result <- .Fortran( "runmin",
+                     ia = as.double(x[beg:NROW(x)]),
+                     lia = as.integer(len),
+                     n = as.integer(n),
+                     oa = as.double(result[beg:NROW(x)]),
+                     loa = as.integer(len),
+                     PACKAGE = "TTR",
+                     DUP = FALSE )$oa
 
-  # Replace 1:(n-1) with NAs and prepend NAs from original data
-  is.na(result) <- c(1:(n-1))
-  result <- c( rep( NA, NAs ), result )
+    # Prepend NAs from original data
+    result <- c( rep( NA, NAs ), result )
+  }
+  
+  # Replace 1:(n-1) with NAs
+  is.na(result) <- c(1:(n-1+NAs))
 
   # Convert back to original class
   reclass(result, x)
@@ -129,7 +143,7 @@ function(x, n=10) {
 #-------------------------------------------------------------------------#
 
 "runMax" <-
-function(x, n=10) {
+function(x, n=10, cumulative=FALSE) {
 
   x <- try.xts(x, error=as.matrix)
   
@@ -145,16 +159,21 @@ function(x, n=10) {
 
   # Initialize result vector 
   result <- double(NROW(x))
-  result[(n+beg-1)] <- max(x[beg:(n+beg-1)])
 
-  result <- .Fortran( "runmax",
-                   ia = as.double(x[beg:NROW(x)]),
-                   lia = as.integer(len),
-                   n = as.integer(n),
-                   oa = as.double(result[beg:NROW(x)]),
-                   loa = as.integer(len),
-                   PACKAGE = "TTR",
-                   DUP = FALSE )$oa
+  if(cumulative) {
+    result[beg:NROW(x)] <- cummax(x[beg:NROW(x)])
+  } else {
+    result[(n+beg-1)] <- max(x[beg:(n+beg-1)])
+
+    result <- .Fortran( "runmax",
+                     ia = as.double(x[beg:NROW(x)]),
+                     lia = as.integer(len),
+                     n = as.integer(n),
+                     oa = as.double(result[beg:NROW(x)]),
+                     loa = as.integer(len),
+                     PACKAGE = "TTR",
+                     DUP = FALSE )$oa
+  }
 
   # Replace 1:(n-1) with NAs and prepend NAs from original data
   is.na(result) <- c(1:(n-1))
@@ -167,9 +186,13 @@ function(x, n=10) {
 #-------------------------------------------------------------------------#
 
 "runMean" <-
-function(x, n=10) {
+function(x, n=10, cumulative=FALSE) {
 
-  result <- runSum(x, n) / n
+  if(cumulative) {
+    result <- runSum(x, n, cumulative) / 1:NROW(x)
+  } else {
+    result <- runSum(x, n) / n
+  }
 
   return(result)
 }

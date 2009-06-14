@@ -18,7 +18,7 @@
 #
 
 "stoch" <-
-function(HLC, nFastK=14, nFastD=3, nSlowD=3, maType, bounded=TRUE, ...) {
+function(HLC, nFastK=14, nFastD=3, nSlowD=3, smooth=1, maType, bounded=TRUE, ...) {
 
   # Stochastics
 
@@ -53,7 +53,8 @@ function(HLC, nFastK=14, nFastD=3, nSlowD=3, maType, bounded=TRUE, ...) {
     lmin <- runMax(c( low[1], low[-NROW(HLC)]), nFastK)
   }
 
-  fastK <- (close - lmin) / (hmax - lmin)
+  num <- close - lmin
+  den <- hmax - lmin
 
   if(missing(maType)) {
     maType <- 'SMA'
@@ -66,9 +67,9 @@ function(HLC, nFastK=14, nFastD=3, nSlowD=3, maType, bounded=TRUE, ...) {
 
     # Make sure maType is a list of lists
     maTypeInfo <- sapply(maType,is.list)
-    if( !(all(maTypeInfo) && length(maTypeInfo) == 2) ) {
+    if( !(all(maTypeInfo) && length(maTypeInfo) == 3) ) {
       stop("If \'maType\' is a list, you must specify\n ",
-      "*two* MAs (see Examples section of ?stochastics)")
+      "*three* MAs (see Examples section of ?stochastics)")
     }
 
     # If MA function has 'n' arg, see if it's populated in maType;
@@ -79,7 +80,14 @@ function(HLC, nFastK=14, nFastD=3, nSlowD=3, maType, bounded=TRUE, ...) {
     if( !is.null( formals(maType[[2]])$n ) && is.null( maType[[2]]$n ) ) {
       maType[[2]]$n <- nSlowD
     }
+    if( !is.null( formals(maType[[3]])$n ) && is.null( maType[[3]]$n ) ) {
+      maType[[2]]$n <- smooth
+    }
     
+    numMA <- do.call( maType[[3]][[1]], c( list(num), maType[[3]][-1] ) )
+    denMA <- do.call( maType[[3]][[1]], c( list(den), maType[[3]][-1] ) )
+
+    fastK <- num / den
     fastD <- do.call( maType[[1]][[1]], c( list(fastK), maType[[1]][-1] ) )
     slowD <- do.call( maType[[2]][[1]], c( list(fastD), maType[[2]][-1] ) )
   }
@@ -88,6 +96,10 @@ function(HLC, nFastK=14, nFastD=3, nSlowD=3, maType, bounded=TRUE, ...) {
   # e.g. stoch(price, 14, 3, 3, maType="WMA", wts=volume )
   else {
   
+    numMA <- do.call( maType, c( list(num), list(n=smooth) ) )
+    denMA <- do.call( maType, c( list(den), list(n=smooth) ) )
+
+    fastK <- num / den
     fastD <- do.call( maType, c( list(fastK), list(n=nFastD, ...) ) )
     slowD <- do.call( maType, c( list(fastD), list(n=nSlowD, ...) ) )
 

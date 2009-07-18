@@ -104,7 +104,7 @@ test.runVar <- function() {
   checkEqualsNumeric( runVar(input$top$Close), output$topVar )
   checkEquals( attributes(runVar(input$top$Close)), attributes(output$topVar) )
   checkException( runVar(input$mid$Close) )
-  checkEqualsNumeric( tail(runVar(input$all$Close,250),1), var(input$all$Close) )
+  checkEqualsNumeric( tail(runVar(input$all$Close,n=250),1), var(input$all$Close) )
 }
 
 # Standard Deviation

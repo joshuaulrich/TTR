@@ -200,7 +200,7 @@ function(x, n=10, cumulative=FALSE) {
 #-------------------------------------------------------------------------#
 
 "runMedian" <-
-function(x, n=10, non.unique="mean") {
+function(x, n=10, non.unique="mean", cumulative=FALSE) {
 
   x <- try.xts(x, error=as.matrix)
 
@@ -225,6 +225,7 @@ function(x, n=10, non.unique="mean") {
                    oa = double(len),
                    la = as.integer(len),
                    ver = as.integer(non.unique),
+                   cu = as.integer(cumulative),
                    PACKAGE = "TTR",
                    DUP = FALSE )$oa
 
@@ -239,7 +240,7 @@ function(x, n=10, non.unique="mean") {
 #-------------------------------------------------------------------------#
 
 "runCov" <-
-function(x, y, n=10, use="all.obs", sample=TRUE) {
+function(x, y, n=10, use="all.obs", sample=TRUE, cumulative=FALSE) {
 
   x <- try.xts(x, error=as.matrix)
   y <- try.xts(y, error=as.matrix)
@@ -263,9 +264,9 @@ function(x, y, n=10, use="all.obs", sample=TRUE) {
   beg <- 1 + NAs
   len <- NROW(xy) - NAs
   
-  xCenter <- runSum(x, n)/n
+  xCenter <- runMean(x, n, cumulative)
   xCenter[1:(NAs+n-1)] <- 0
-  yCenter <- runSum(y, n)/n
+  yCenter <- runMean(y, n, cumulative)
   yCenter[1:(NAs+n-1)] <- 0
 
   # Call Fortran routine
@@ -278,6 +279,7 @@ function(x, y, n=10, use="all.obs", sample=TRUE) {
                    n = as.integer(n),
                    samp = as.integer(sample),
                    oa = double(len),
+                   cu = as.integer(cumulative),
                    PACKAGE = "TTR",
                    DUP = FALSE )$oa
 
@@ -293,10 +295,11 @@ function(x, y, n=10, use="all.obs", sample=TRUE) {
 #-------------------------------------------------------------------------#
 
 "runCor" <-
-function(x, y, n=10, use="all.obs", sample=TRUE) {
+function(x, y, n=10, use="all.obs", sample=TRUE, cumulative=FALSE) {
 
-  result <- runCov(x, y, n, use=use, sample=sample ) /
-            ( runSD(x, n, sample=sample) * runSD(y, n, sample=sample) )
+  result <- runCov(x, y, n, use=use, sample=sample, cumulative) /
+            ( runSD(x, n, sample=sample, cumulative) *
+              runSD(y, n, sample=sample, cumulative) )
 
   return( result )
 }
@@ -304,9 +307,10 @@ function(x, y, n=10, use="all.obs", sample=TRUE) {
 #-------------------------------------------------------------------------#
 
 "runVar" <-
-function(x, n=10, sample=TRUE) {
+function(x, y=NULL, n=10, sample=TRUE, cumulative=FALSE) {
 
-  result <- runCov(x, x, n, use="all.obs", sample=sample)
+  if(is.null(y)) y <- x
+  result <- runCov(x, y, n, use="all.obs", sample=sample, cumulative)
 
   return( result )
 }
@@ -314,9 +318,10 @@ function(x, n=10, sample=TRUE) {
 #-------------------------------------------------------------------------#
 
 "runSD" <-
-function(x, n=10, sample=TRUE) {
+function(x, n=10, sample=TRUE, cumulative=FALSE) {
 
-  result <- sqrt( runCov(x, x, n, use="all.obs", sample=sample) )
+  result <- sqrt( runCov(x, x, n, use="all.obs",
+                  sample=sample, cumulative) )
 
   return( result )
 }
@@ -324,8 +329,8 @@ function(x, n=10, sample=TRUE) {
 #-------------------------------------------------------------------------#
 
 "runMAD" <-
-function(x, n=10, center=runMedian(x, n), stat="median",
-         constant=1.4826, non.unique="mean") {
+function(x, n=10, center=NULL, stat="median",
+         constant=1.4826, non.unique="mean", cumulative=FALSE) {
 
   x <- try.xts(x, error=as.matrix)
 
@@ -338,6 +343,10 @@ function(x, n=10, center=runMedian(x, n), stat="median",
   }
   beg <- 1 + NAs
   len <- NROW(x) - NAs
+  
+  if(is.null(center)) {
+    center <- runMedian(x, n, cumulative=cumulative)
+  }
   center[1:(NAs+n-1)] <- 0
 
   # Mean or Median absolute deviation?
@@ -357,6 +366,7 @@ function(x, n=10, center=runMedian(x, n), stat="median",
                    oa = double(len),                    # output array
                    stat = as.integer(median),           # center statistic
                    ver = as.integer(non.unique),        # median type
+                   cu = as.integer(cumulative),         # from inception
                    PACKAGE = "TTR",
                    DUP = FALSE )$oa
 

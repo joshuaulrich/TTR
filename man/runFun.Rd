@@ -19,13 +19,13 @@
   runMin(x, n=10, cumulative=FALSE)
   runMax(x, n=10, cumulative=FALSE)
   runMean(x, n=10, cumulative=FALSE)
-  runMedian(x, n=10, non.unique="mean")
-  runCov(x, y, n=10, use="all.obs", sample=TRUE)
-  runCor(x, y, n=10, use="all.obs", sample=TRUE)
-  runVar(x, n=10, sample=TRUE)
-  runSD(x, n=10, sample=TRUE)
-  runMAD(x, n=10, center=runMedian(x, n), stat="median",
-         constant=1.4826, non.unique="mean")
+  runMedian(x, n=10, non.unique="mean", cumulative=FALSE)
+  runCov(x, y, n=10, use="all.obs", sample=TRUE, cumulative=FALSE)
+  runCor(x, y, n=10, use="all.obs", sample=TRUE, cumulative=FALSE)
+  runVar(x, y=NULL, n=10, sample=TRUE, cumulative=FALSE)
+  runSD(x, n=10, sample=TRUE, cumulative=FALSE)
+  runMAD(x, n=10, center=NULL, stat="median",
+         constant=1.4826, non.unique="mean", cumulative=FALSE)
 }
 \arguments{
   \item{x}{ Object coercible to xts or matrix. }
@@ -38,7 +38,7 @@
   \item{non.unique}{ One of 'mean', 'max', or 'min'; which compute their respective
     statistics for the two middle values of even-sized samples. }
   \item{center}{ The values to use as the measure of central tendency, around
-    which to calculate deviations. }
+    which to calculate deviations. The default (\code{NULL}) uses the median. }
   \item{stat}{ Statistic to calculate, one of 'median' or 'mean' (e.g. median
     absolute deviation or mean absolute deviation, respectively.) }
   \item{constant}{ Scale factor applied to approximate the standard deviation. }

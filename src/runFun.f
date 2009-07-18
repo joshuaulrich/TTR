@@ -144,15 +144,18 @@ c     la   : length of output array
 c     win  : window
 c     lmed : local median
 c     ver  : median type to use if 'n' is even (min, avg, max)
+c     cu   : cumulative flag
 c
-      subroutine runmedian(ia, n, oa, la, ver)
+      subroutine runmedian(ia, n, oa, la, ver, cu)
       implicit none
 
-      integer n, la, i, j, k, mid, flag, ver
-      double precision ia(la), oa(la), win(n), lmed
+      integer n, la, i, j, k, mid, flag, ver, cu
+      double precision ia(la), oa(la), win(la), lmed
 
       do 10 i=n,la
-          j = i-n+1
+        
+        if( cu .EQ. 1 ) n = i
+        j = i-n+1
 
         do 20 k=1,n
 
@@ -189,13 +192,15 @@ c     ad  : absolute deviation
 c     stat: statistic to calculate (0=mean, 1=median)
 c     ver  : median type to use if 'n' is even (min, avg, max)
 c
-      subroutine runMAD(rs, cs, la, n, oa, stat, ver)
+      subroutine runMAD(rs, cs, la, n, oa, stat, ver, cu)
       implicit none
 
-      integer la, n, i, j, k, l, mid, stat, ver, flag
-      double precision rs(la), cs(la), oa(la), win(n), ad
+      integer la, n, i, j, k, l, mid, stat, ver, flag, cu
+      double precision rs(la), cs(la), oa(la), win(la), ad
       
       do 10 i=n,la
+        
+        if( cu .EQ. 1 ) n = i
         j = i-n+1
 
         do 20 k=1,n
@@ -239,17 +244,19 @@ c     oa    : output array
 c     cov   : covariance
 c     samp  : sample (1=true)
 c
-      subroutine runCov(rs1, avg1, rs2, avg2, la, n, samp, oa)
+      subroutine runCov(rs1, avg1, rs2, avg2, la, n, samp, oa, cu)
       implicit none
 
-      integer la, n, i, j, k, l, samp
+      integer la, n, i, j, k, l, samp, cu
       double precision rs1(la), avg1(la), rs2(la), avg2(la)
       double precision oa(la), cov
       
       do 10 i=n,la
+
+        if( cu .EQ. 1 ) n = i
         j = i-n+1
 
-          cov = 0.0D0
+        cov = 0.0D0
 
         do 20 k=1,n
           
@@ -258,11 +265,11 @@ c
 
    20 continue
           
-          if( samp .EQ. 1 ) then
-            oa(i) = cov / (n-1)
-          else
-            oa(i) = cov / n
-          endif
+        if( samp .EQ. 1 ) then
+          oa(i) = cov / (n-1)
+        else
+          oa(i) = cov / n
+        endif
 
    10 continue
       end

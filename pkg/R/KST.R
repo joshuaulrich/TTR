@@ -67,7 +67,7 @@ function(price, n=c(10,10,10,15), nROC=c(10,15,20,30), nSig=9,
     # If MA function has 'n' arg, see if it's populated in maType;
     # if it isn't, populate it with formal 'n'
     for(i in 1:length(maType)) {
-      if( !is.null( formals(maType[[i]])$n ) && is.null( maType[[i]]$n ) ) {
+      if( !is.null( formals(maType[[i]][[1]])$n ) && is.null( maType[[i]]$n ) ) {
         maType[[i]]$n <- n[i]
       }
       roc <- ROC(price, nROC[i], na.pad=TRUE)

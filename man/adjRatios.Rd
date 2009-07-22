@@ -15,7 +15,7 @@
 }
 \details{
   If only \code{splits} is provided, the resulting object will only have as
-  many observationsf as \code{splits}.\cr
+  many observations as \code{splits}.\cr
   \cr If \code{splits} and \code{close} are provided, the resulting object
   will have as many observations as \code{max(NROW(splits),NROW(close))}.\cr
   \cr\code{close} is required if \code{dividends} is provided.

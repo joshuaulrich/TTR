@@ -60,13 +60,13 @@ function(x, nFast=12, nSlow=26, nSig=9, maType, percent=TRUE, ...) {
 
     # If MA function has 'n' arg, see if it's populated in maType;
     # if it isn't, populate it with function's formal 'n'
-    if( !is.null( formals(maType[[1]])$n ) && is.null( maType[[1]]$n ) ) {
+    if( !is.null( formals(maType[[1]][[1]])$n ) && is.null( maType[[1]]$n ) ) {
       maType[[1]]$n <- nFast
     }
-    if( !is.null( formals(maType[[2]])$n ) && is.null( maType[[2]]$n ) ) {
+    if( !is.null( formals(maType[[2]][[1]])$n ) && is.null( maType[[2]]$n ) ) {
       maType[[2]]$n <- nSlow
     }
-    if( !is.null( formals(maType[[3]])$n ) && is.null( maType[[3]]$n ) ) {
+    if( !is.null( formals(maType[[3]][[1]])$n ) && is.null( maType[[3]]$n ) ) {
       maType[[3]]$n <- nSig
     }
     

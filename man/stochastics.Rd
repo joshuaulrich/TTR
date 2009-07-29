@@ -13,7 +13,7 @@
   Developed by William Blau in 1993.
 }
 \usage{
-  stoch(HLC, nFastK=14, nFastD=3, nSlowD=3, smooth=1, maType, bounded=TRUE, \dots)
+  stoch(HLC, nFastK=14, nFastD=3, nSlowD=3, maType, bounded=TRUE, smooth=1, \dots)
 
   SMI(HLC, n=13, nFast=2, nSlow=25, nSig=9, maType, bounded=TRUE, \dots)
 }

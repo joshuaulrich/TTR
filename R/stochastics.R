@@ -18,7 +18,7 @@
 #
 
 "stoch" <-
-function(HLC, nFastK=14, nFastD=3, nSlowD=3, smooth=1, maType, bounded=TRUE, ...) {
+function(HLC, nFastK=14, nFastD=3, nSlowD=3, maType, bounded=TRUE, smooth=1, ...) {
 
   # Stochastics
 

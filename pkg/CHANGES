@@ -1,70 +1,38 @@
-TTR version 0.2
-  Changes from version 0.14-0
+TTR version 0.20-0
+  Changes from version 0.2-1
 
 
 NEW FEATURES:
 
-- Added the zig zag indicator: ZigZag()
+- adjRatios() creates split and/or dividend adjustment ratio
+  series via C code.
 
-- Added volatility estimators/indicators: volatility(), with
-  the following calculations
-  - Close-to-Close
-  - Garman Klass
-  - Parkinson
-  - Rogers Satchell
+- GMMA() calculates the Guppy Multiple Moving Average
 
-- Added Money Flow Index: MFI()
+- volatility() now has Yang Zhang, and Garman-Klass (Yang Zhang)
+  calculations.
 
-- Added Donchian channel: DonchianChannel()
+- The functions below now have cumulative argument.  This allows the
+  calculation of "from inception" running series.
+    - runSum, runMin, runMax
+    - runMean, runMedian
+    - runCov, runCor, runVar, runSD, runMAD
+
+- Added internal smoothing to FastK in stoch() via 'smooth' argument
+  (thanks to Stanley Neo).
 
 
 CHANGES:
 
-- All functions now use xts internally, adding support for all major
-  time series classes.  If try.xts() fails on the input object(s),
-  they will be converted to a matrix and a matrix object will be
-  returned.
+- Removed message from .onLoad()
 
-- Added 'bounded' arg to stoch() and SMI(), which includes the current
-  period in the calculation.
-
-- Added naCheck() and implemented it in the moving average functions.
-
-- Moved maType argument default values from function formals to
-  function body for the following functions:
-    ADX, ATR, CCI, DPO, EMV, KST, MACD, RSI, TRIX, BBands,
-    chaikinVolatility, stoch, SMI
-
-- momentum() in CMO() no longer sets na=100
-
-- Replaced 'na' argument in momentum() and ROC() with 'na.pad'
-
-- Added 'multiple' argument to TDI(), allowing more user control
-
-- getYahooData() now returns an xts object
-
-- Added colnames to output for ADX, EMV, and CLV (for xts)
-
-- Added unit tests using the RUnit package
-  - Used checkEquals on object attributes as well as values
-
-- Removed .First.lib function and added .onLoad with package version.
+- getYahooData() now uses adjRatios(), which yields significant
+  improvements for larger data sets.
 
 
 BUG FIXES:
 
-- Corrected NaN replacement in CLV()
+- Fixed version number; 0.20-0 is now > 0.14-0 (rookie mistake)
 
-- Corrected williamsAD(): AD=0 if C(t)=C(t-1)
-
-- Corrected runMedian() and runMAD().  The argument controlling
-  which type of median to calculate for even-numbered samples
-  wasn't being passed to the Fortran routine.
-
-- aroon() calculation starts at period n+1, instead of n
-
-- Added NA to first element of closeLag of ATR()
-
-- Corrected BBands() and CCI() for rowMeans use on xts objects
-
-- Made changes to Rd files to pass R CMD check on R-devel (2.9.0)
+- Fixed bug when maType was a list and 'n' was not specified in maType.
+  This affected: stoch(), SMI(), RSI(), KST(), MACD(), TRIX().

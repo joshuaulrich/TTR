@@ -57,7 +57,8 @@ function(HL, n=20) {
   }
 
   oscillator <- aroonUp - aroonDn
+  result <- cbind( aroonUp, aroonDn, oscillator )
+  colnames(result) <- c( "aroonUp", "aroonDn", "oscillator" )
 
-  # Convert back to original class
-  reclass( cbind( aroonUp, aroonDn, oscillator ), HL )
+  reclass( result, HL )
 }

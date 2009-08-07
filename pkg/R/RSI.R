@@ -32,6 +32,8 @@ function(price, n=14, maType, ...) {
   # http://www.fmlabs.com/reference/StochRSI.htm
   # http://stockcharts.com/education/IndicatorAnalysis/indic_stochRSI.html
 
+  price <- try.xts(price, error=as.matrix)
+
   up <- momentum(price, n=1, na.pad=TRUE)
   dn <- ifelse(up<0, abs(up), 0)
   up <- ifelse(up>0,     up , 0)
@@ -75,5 +77,5 @@ function(price, n=14, maType, ...) {
 
   rsi <- 100 * mavgUp / ( mavgUp + mavgDn )
 
-  return( rsi )
+  reclass( rsi, price )
 }

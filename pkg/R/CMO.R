@@ -24,6 +24,8 @@ function(x, n=14) {
 
   # http://www.fmlabs.com/reference/CMO.htm
 
+  x <- try.xts(x, error=as.matrix)
+  
   up <- momentum(x, n=1)
   dn <- ifelse(up<0, abs(up), 0)
   up <- ifelse(up>0,     up , 0)
@@ -32,5 +34,6 @@ function(x, n=14) {
   dn <- runSum(dn, n)
 
   cmo <- 100 * (up-dn)/(up+dn)
-  return( cmo )
+
+  reclass( cmo, x )
 }

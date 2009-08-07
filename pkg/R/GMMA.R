@@ -24,6 +24,8 @@ function(x, short=c(3,5,8,10,12,15), long=c(30,35,40,45,50,60), maType) {
 
   # http://www.investopedia.com/terms/g/guppy-multiple-moving-average.asp
 
+  x <- try.xts(x, error=as.matrix)
+  
   # Default MA
   if(missing(maType)) {
     maType <- 'EMA'
@@ -32,6 +34,5 @@ function(x, short=c(3,5,8,10,12,15), long=c(30,35,40,45,50,60), maType) {
   gmma <- sapply(c(short,long), function(g) do.call(maType, list(x,n=g)))
   colnames(gmma) <- c(paste('short lag',short),paste('long lag',long))
   
-  return(gmma)
+  reclass(gmma, x)
 }
-

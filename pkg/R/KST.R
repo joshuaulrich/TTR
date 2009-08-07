@@ -101,5 +101,8 @@ function(price, n=c(10,10,10,15), nROC=c(10,15,20,30), nSig=9,
     signal <- do.call( maType, c( list(kst), list(n=nSig, ...) ) )
   }
 
-  return( cbind( kst, signal ) )
+  result <- cbind( kst, signal )
+  colnames(result) <- c( "kst", "signal" )
+
+  return( result )
 }

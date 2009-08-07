@@ -25,7 +25,7 @@ function(x, n=10, maType, shift=n/2+1, percent=FALSE, ...) {
   # http://www.fmlabs.com/reference/DPO.htm
   # http://www.equis.com/Customer/Resources/TAAZ/?c=3&p=48
 
-  x <- as.vector(x)
+  x <- try.xts(x, error=as.matrix)
 
   maArgs <- list(n=n, ...)
   # Default MA
@@ -34,13 +34,13 @@ function(x, n=10, maType, shift=n/2+1, percent=FALSE, ...) {
   }
 
   mavg <- do.call( maType, c( list(x), maArgs ) )
-  mavg <- c( mavg[-c(1:shift)], rep(NA, shift) )
+  mavg <- lag.xts(mavg, -shift)
 
   if(percent) {
-    DPO <- 100 * ( x / mavg - 1 )
+    DPO <- 100 * ( x[,1] / mavg - 1 )
   } else {
-    DPO <- x - mavg
+    DPO <- x[,1] - mavg
   }
 
-  return( DPO )
+  reclass( DPO, x )
 }

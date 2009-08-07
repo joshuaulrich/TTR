@@ -203,5 +203,8 @@ function(HLC, n=13, nFast=2, nSlow=25, nSig=9, maType, bounded=TRUE, ...) {
 
   }
 
-  return( cbind( SMI, signal ) )
+  result <- cbind( SMI, signal )
+  colnames(result) <- c( "SMI", "signal" )
+  
+  reclass( result, HLC )
 }

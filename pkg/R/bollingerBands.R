@@ -61,5 +61,6 @@ function(HLC, n=20, maType, sd=2, ...) {
 
   res <- cbind(dn, mavg, up, pctB)
   colnames(res) <- c("dn", "mavg", "up", "pctB")
+
   reclass(res, HLC)
 }

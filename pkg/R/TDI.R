@@ -24,6 +24,8 @@ function(price, n=20, multiple=2) {
 
   # http://www.linnsoft.com/tour/techind/tdi.htm
 
+  price <- try.xts(price, error=as.matrix)
+  
   mom <- momentum(price, n, na.pad=TRUE)
   mom[is.na(mom)] <- 0
 
@@ -35,5 +37,8 @@ function(price, n=20, multiple=2) {
 
   tdi <- abs.di - (abs.mom.2n - abs.mom.1n)
 
-  return( cbind( tdi,di ) )
+  result <- cbind( tdi,di )
+  colnames(result) <- c( "tdi","di" )
+
+  reclass( result, price )
 }

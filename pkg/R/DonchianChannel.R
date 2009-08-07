@@ -40,6 +40,7 @@ function(HL, n=10) {
   mid  <- (high+low)/2
 
   result <- cbind(high,mid,low)
+  colnames(result) <- c("high","mid","low")
   
   return(result)
 }

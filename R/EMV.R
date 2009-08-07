@@ -53,5 +53,5 @@ function(HL, volume, n=9, maType, vol.divisor=10000, ...) {
   result <- cbind(emv,maEMV)
   colnames(result) <- c('emv','maEMV')
   
-  return( result )
+  reclass( result, HL )
 }

@@ -84,5 +84,8 @@ function(price, n=20, nSig=9, maType, percent=TRUE, ...) {
     signal <- do.call( maType, c( list(TRIX), list(n=n, ...) ) )
   }
 
-  return( cbind( TRIX, signal ) )
+  result <- cbind( TRIX, signal )
+  colnames(result) <- c( "TRIX", "signal" )
+
+  return( result )
 }

@@ -50,8 +50,8 @@ function(HLC, n=14, maType, ...) {
 
   atr <- do.call( maType, c( list(tr), maArgs ) )
 
-  # Convert back to original class
   result <- cbind( tr, atr, trueHigh, trueLow )
   colnames(result) <- c('tr','atr','trueHigh','trueLow')
+  
   reclass( result, HLC )
 }

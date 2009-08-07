@@ -74,7 +74,6 @@ function (x, n=10, wilder=FALSE, ratio=NULL) {
   is.na(ma) <- c(1:(n-1))
   ma <- c( rep( NA, x.na$NAs ), ma ) 
   
-  # Convert back to original class
   reclass(ma, x)
 }
 
@@ -102,6 +101,9 @@ function(x, n=10, wts=1:n) {
   # http://www.fmlabs.com/reference/WeightedMA.htm
   # http://www.equis.com/Customer/Resources/TAAZ/Default.aspx?c=3&p=74
   # http://linnsoft.com/tour/techind/movAvg.htm
+
+  x <- try.xts(x, error=as.matrix)
+  wts <- try.xts(wts, error=as.matrix)
 
   if( !any( NROW(wts) == c( NROW(x), n ) ) )
     stop("Length of 'wts' must equal the length of 'x' or 'n'")
@@ -147,7 +149,7 @@ function(x, n=10, wts=1:n) {
   ma[1:(n-1)] <- NA
   ma <- c( rep( NA, NAs ), ma )
 
-  return( ma )
+  reclass(ma, x)
 }
 
 #-------------------------------------------------------------------------#
@@ -158,6 +160,9 @@ function(price, volume, n=10) {
   # Elastic, Volume-Weighted Moving Average
 
   # http://linnsoft.com/tour/techind/evwma.htm
+
+  price <- try.xts(price, error=as.matrix)
+  volume <- try.xts(volume, error=as.matrix)
 
   if( !any( NROW(volume) == c( NROW(price), 1 ) ) )
     stop("Length of 'volume' must equal 1 or the length of 'price'")
@@ -202,7 +207,7 @@ function(price, volume, n=10) {
   ma[1:(n-1)] <- NA
   ma <- c( rep( NA, max( NAp, NAv ) ), ma )
 
-  return( ma )
+  reclass(ma, price)
 }
 
 #-------------------------------------------------------------------------#
@@ -215,7 +220,7 @@ function (x, n=10, ratio=NULL) {
   # http://www.fmlabs.com/reference/ZeroLagExpMA.htm
   # http://linnsoft.com/tour/techind/movAvg.htm
 
-  x   <- as.vector(x)
+  x <- try.xts(x, error=as.matrix)
   
   # Count NAs, ensure they're only at beginning of data, then remove.
   NAs <- sum( is.na(x) )
@@ -248,5 +253,5 @@ function (x, n=10, ratio=NULL) {
   ma[1:(n-1)] <- NA
   ma <- c( rep( NA, NAs ), ma ) 
   
-  return(ma)
+  reclass(ma, x)
 }

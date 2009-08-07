@@ -94,5 +94,8 @@ function(x, nFast=12, nSlow=26, nSig=9, maType, percent=TRUE, ...) {
   } else
     signal <- do.call( maType, c( list( macd ), list(n=nSig, ...) ) )
 
-  return( cbind( macd, signal ) )
+  result <- cbind( macd, signal )
+  colnames(result) <- c( "macd", "signal" )
+  
+  return( result )
 }

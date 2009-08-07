@@ -95,7 +95,7 @@ ZLEMA(x, n=10, ratio=NULL)
     ema.20 <-   EMA(ttrc[,"Close"], 20)
     sma.20 <-   SMA(ttrc[,"Close"], 20)
    dema.20 <-  DEMA(ttrc[,"Close"], 20)
-  evwma.20 <- EVWMA(ttrc[,"Close"], 20)
+  evwma.20 <- EVWMA(ttrc[,"Close"], ttrc[,"Volume"], 20)
   zlema.20 <- ZLEMA(ttrc[,"Close"], 20)
 
   ## Example of short-term instability of EMA

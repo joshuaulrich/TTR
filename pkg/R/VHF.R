@@ -46,7 +46,7 @@ function(price, n=28) {
   # Find highest max, and lowest min of price series
   hmax  <- runMax( high, n)
   lmin  <- runMin(  low, n)
-  denom <- momentum(close, n=1, na.pad=TRUE)
+  denom <- abs( momentum(close, n=1, na.pad=TRUE) )
 
   VHF <- ( hmax - lmin ) / runSum(denom, n)
 

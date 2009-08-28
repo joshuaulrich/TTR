@@ -25,7 +25,6 @@
 \author{ Joshua Ulrich }
 \references{
   The following site(s) were used to code/document this indicator:\cr
-  \url{http://www.fmlabs.com/reference/VHF.htm}\cr
   \url{http://www.equis.com/Customer/Resources/TAAZ?c=3&p=119}\cr
 }
 \note{

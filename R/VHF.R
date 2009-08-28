@@ -22,7 +22,6 @@ function(price, n=28) {
 
   # Vertical Horizontal Filter
 
-  # http://www.fmlabs.com/reference/VHF.htm
   # http://www.equis.com/Customer/Resources/TAAZ?c=3&p=119
 
   price <- try.xts(price, error=as.matrix)

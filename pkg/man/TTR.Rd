@@ -13,7 +13,7 @@
     Package: \tab TTR\cr
     Type: \tab Package\cr
     Version: \tab 0.20-1\cr
-    Date: \tab 2009-07-29\cr
+    Date: \tab 2009-08-27\cr
     License: \tab GPL Version 3 or later.\cr
   }
 

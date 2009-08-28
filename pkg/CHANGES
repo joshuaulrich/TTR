@@ -1,38 +1,25 @@
-TTR version 0.20-0
-  Changes from version 0.2-1
+TTR version 0.20-1
+  Changes from version 0.20-0
 
 
 NEW FEATURES:
 
-- adjRatios() creates split and/or dividend adjustment ratio
-  series via C code.
-
-- GMMA() calculates the Guppy Multiple Moving Average
-
-- volatility() now has Yang Zhang, and Garman-Klass (Yang Zhang)
-  calculations.
-
-- The functions below now have cumulative argument.  This allows the
-  calculation of "from inception" running series.
-    - runSum, runMin, runMax
-    - runMean, runMedian
-    - runCov, runCor, runVar, runSD, runMAD
-
-- Added internal smoothing to FastK in stoch() via 'smooth' argument
-  (thanks to Stanley Neo).
+- None.
 
 
 CHANGES:
 
-- Removed message from .onLoad()
-
-- getYahooData() now uses adjRatios(), which yields significant
-  improvements for larger data sets.
+- Updated CMO, DPO, DonchianChannel, RSI, and TDI to *explicitly*
+  use xts internally.
 
 
 BUG FIXES:
 
-- Fixed version number; 0.20-0 is now > 0.14-0 (rookie mistake)
+- Fixed bug in WMA, EVWMA, ZLEMA, and GMMA; results were not being
+  reclassed back to their original class.
 
-- Fixed bug when maType was a list and 'n' was not specified in maType.
-  This affected: stoch(), SMI(), RSI(), KST(), MACD(), TRIX().
+- Set colnames after cbind call in the following functions: ADX, aroon,
+  ATR, BBands, DonchianChannel, EMV, KST, MACD, stoch, SMI, TDI, TRIX.
+
+- Fixed bug in VHF; missing abs() calculation in the denominator.
+  Thanks to Jürgen Wurzer for the report!

@@ -6,6 +6,8 @@
 \alias{DEMA}
 \alias{EVWMA}
 \alias{ZLEMA}
+\alias{VWAP}
+\alias{VWMA}
 \alias{MA}
 \title{ Moving Averages }
 \description{
@@ -18,6 +20,8 @@
  DEMA(x, n=10)
 EVWMA(price, volume, n=10)
 ZLEMA(x, n=10, ratio=NULL)
+ VWMA(price, volume, n=10)
+ VWAP(price, volume, n=10)
 }
 \arguments{
   \item{x}{ Price, volume, etc. series that is coercible to xts or matrix. }
@@ -48,6 +52,8 @@ ZLEMA(x, n=10, ratio=NULL)
   \code{ZLEMA} is similar to an EMA, as it gives more weight to recent observations, but attempts to
   remove lag by subtracting data prior to \code{(n-1)/2} periods (default) to minimize
   the cumulative effect.
+  
+  \code{VWMA} and \code{VWAP} calculate the volume-weighted moving average price.
 }
 \value{
   A object of the same class as \code{x} or \code{price} or a vector
@@ -58,6 +64,8 @@ ZLEMA(x, n=10, ratio=NULL)
   \item{DEMA}{ Double-exponential moving average. }
   \item{EVWMA}{ Elastic, volume-weighted moving average. }
   \item{ZLEMA}{ Zero lag exponential moving average. }
+  \item{VWMA}{ Volume-weighed moving average (same as \code{VWAP}). }
+  \item{VWAP}{ Volume-weighed average price (same as \code{VWMA}). }
 }
 \author{ Joshua Ulrich }
 \references{

@@ -255,3 +255,17 @@ function (x, n=10, ratio=NULL) {
   
   reclass(ma, x)
 }
+
+#-------------------------------------------------------------------------#
+
+"VWAP" <- "VWMA" <-
+function(price, volume, n=10) {
+
+  # Volume-weighted average price
+  # Volume-weighted moving average
+
+  res <- WMA(price, n=n, volume)
+  return(res)
+
+}
+

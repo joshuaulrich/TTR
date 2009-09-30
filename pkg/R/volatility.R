@@ -36,6 +36,12 @@ function(OHLC, n=10, calc="close", N=260, ...) {
   # Historical Close-to-Close Volatility
   # http://www.sitmo.com/eq/172
   if( calc=="close" ) {
+    # Add univariate case from Cedrick Johnson's R-SIG-Finance post
+    if( NCOL(OHLC) == 1 ) {
+      r <- ROC(OHLC, 1, ...)
+    } else {
+      r <- ROC(OHLC[, 4], 1, ...)
+    }
     r <- ROC( OHLC[,4], 1, ... )
     rBar <- runSum( r, n-1 ) / (n-1)
     s <- sqrt( N/(n-2) * runSum( (r-rBar)^2 , n-1 ) )

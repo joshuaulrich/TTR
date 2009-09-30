@@ -1,0 +1,25 @@
+TTR version 0.20-1
+  Changes from version 0.20-0
+
+
+NEW FEATURES:
+
+- None.
+
+
+CHANGES:
+
+- Updated CMO, DPO, DonchianChannel, RSI, and TDI to *explicitly*
+  use xts internally.
+
+
+BUG FIXES:
+
+- Fixed bug in WMA, EVWMA, ZLEMA, and GMMA; results were not being
+  reclassed back to their original class.
+
+- Set colnames after cbind call in the following functions: ADX, aroon,
+  ATR, BBands, DonchianChannel, EMV, KST, MACD, stoch, SMI, TDI, TRIX.
+
+- Fixed bug in VHF; missing abs() calculation in the denominator.
+  Thanks to Jürgen Wurzer for the report!

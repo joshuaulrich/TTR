@@ -81,13 +81,13 @@ function(HLC, nFastK=14, nFastD=3, nSlowD=3, maType, bounded=TRUE, smooth=1, ...
       maType[[2]]$n <- nSlowD
     }
     if( !is.null( formals(maType[[3]][[1]])$n ) && is.null( maType[[3]]$n ) ) {
-      maType[[2]]$n <- smooth
+      maType[[3]]$n <- smooth
     }
     
     numMA <- do.call( maType[[3]][[1]], c( list(num), maType[[3]][-1] ) )
     denMA <- do.call( maType[[3]][[1]], c( list(den), maType[[3]][-1] ) )
 
-    fastK <- num / den
+    fastK <- numMA / denMA
     fastD <- do.call( maType[[1]][[1]], c( list(fastK), maType[[1]][-1] ) )
     slowD <- do.call( maType[[2]][[1]], c( list(fastD), maType[[2]][-1] ) )
   }
@@ -99,7 +99,7 @@ function(HLC, nFastK=14, nFastD=3, nSlowD=3, maType, bounded=TRUE, smooth=1, ...
     numMA <- do.call( maType, c( list(num), list(n=smooth) ) )
     denMA <- do.call( maType, c( list(den), list(n=smooth) ) )
 
-    fastK <- num / den
+    fastK <- numMA / denMA
     fastD <- do.call( maType, c( list(fastK), list(n=nFastD, ...) ) )
     slowD <- do.call( maType, c( list(fastD), list(n=nSlowD, ...) ) )
 

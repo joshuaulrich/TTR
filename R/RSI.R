@@ -35,8 +35,10 @@ function(price, n=14, maType, ...) {
   price <- try.xts(price, error=as.matrix)
 
   up <- momentum(price, n=1, na.pad=TRUE)
-  dn <- ifelse(up<0, abs(up), 0)
-  up <- ifelse(up>0,     up , 0)
+  which.dn <- which(up < 0)
+  dn <- up*0
+  dn[which.dn] <- -up[which.dn]
+  up[which.dn] <- 0
 
   maArgs <- list(n=n, ...)
   # Default Welles Wilder EMA

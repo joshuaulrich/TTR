@@ -48,11 +48,7 @@ function (x, n=10, wilder=FALSE, ratio=NULL) {
   
   # Count NAs, ensure they're only at beginning of data, then remove.
   # Avoid na.omit() because it will cause problems for reclass()
-  x.na <- naCheck(x, n)
-
-  # Initialize ma vector
-  ma <- rep(1, NROW(x))
-  ma[x.na$beg] <- mean(x[x.na$nonNA[1]:x.na$beg])
+  x.na <- xts:::naCheck(x, n)
 
   # Determine decay ratio
   if(is.null(ratio)) {
@@ -60,20 +56,9 @@ function (x, n=10, wilder=FALSE, ratio=NULL) {
     else       ratio <- 2/(n+1)
   }
 
-  # Call Fortran routine
-  ma <- .Fortran( "ema", ia = as.double(x[x.na$nonNA]),
-                         lia = as.integer(NROW(x.na$nonNA)),
-                         n = as.integer(n),
-                         oa = as.double(ma[x.na$nonNA]),
-                         loa = as.integer(NROW(x.na$nonNA)),
-                         ratio = as.double(ratio),
-                         PACKAGE = "TTR",
-                         DUP = FALSE )$oa
+  # Call C routine
+  ma <- .Call("ema", x, n, ratio, PACKAGE = "TTR")
 
-  # Replace 1:(n-1) with NAs and prepend NAs from original data
-  is.na(ma) <- c(1:(n-1))
-  ma <- c( rep( NA, x.na$NAs ), ma ) 
-  
   reclass(ma, x)
 }
 

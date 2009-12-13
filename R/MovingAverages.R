@@ -46,8 +46,8 @@ function (x, n=10, wilder=FALSE, ratio=NULL) {
 
   x <- try.xts(x, error=as.matrix)
   
-  # Count NAs, ensure they're only at beginning of data, then remove.
-  # Avoid na.omit() because it will cause problems for reclass()
+  # Check for non-leading NAs
+  # Leading NAs are handled in the C code
   x.na <- xts:::naCheck(x, n)
 
   # Determine decay ratio
@@ -154,44 +154,16 @@ function(price, volume, n=10) {
   if( n < 1 || n > NROW(price) )
     stop("Invalid 'n'")
 
-  # Count NAs, ensure they're only at beginning of data, then remove.
-  NAp <- sum( is.na(price) )
-  NAv <- sum( is.na(volume) )
-  NAs <- max( NAp, NAv )
-  if( NAs > 0 ) {
-    if( any( is.na( price[-(1:NAp)]) ) )
-      stop("'price' contains non-leading NAs")
-    if( any( is.na(volume[-(1:NAv)]) ) )
-      stop("'volume' contains non-leading NAs")
-  }
-  pv <- na.omit( cbind(price, volume) )
+  pv <- cbind(price, volume)
 
-  # Initialize ma vector 
-  ma <- rep(0, NROW(pv))
-  ma[n] <- pv[n,1]
+  # Check for non-leading NAs
+  # Leading NAs are handled in the C code
+  pv.na <- xts:::naCheck(pv, n)
 
-  if(NROW(volume)==1) {
-    vSum <- rep(volume, NROW(pv))
-  } else {
-    vSum <- runSum(pv[,2], n)
-    vSum[1:(n-1)] <- pv[1:(n-1),2]
-  }
+  # Call C routine
+  ma <- .Call("evwma", pv[,1], pv[,2], n, PACKAGE = "TTR")
 
-  # Call Fortran routine
-  ma <- .Fortran( "evwma", ip = as.double(pv[,1]),
-                           iv = as.double(pv[,2]),
-                           ivs = as.double(vSum),
-                           lia = as.integer(NROW(pv)),
-                           n = as.integer(n),
-                           oa = as.double(ma),
-                           loa = as.integer(NROW(ma)),
-                           PACKAGE = "TTR",
-                           DUP = FALSE )$oa
-
-  # replace 1:(n-1) with NAs and prepend NAs from original data
-  ma[1:(n-1)] <- NA
-  ma <- c( rep( NA, max( NAp, NAv ) ), ma )
-
+  # Convert back to original class
   reclass(ma, price)
 }
 

@@ -70,26 +70,12 @@ function(x, n=10) {
 
   if( n < 1 || n > NROW(x) ) stop("Invalid 'n'")
 
-  # Count NAs, ensure they're only at beginning of data, then remove.
-  NAs <- sum( is.na(x) )
-  if( NAs > 0 ) {
-    if( any( is.na(x[-(1:NAs)]) ) ) stop("Series contains non-leading NAs")
-  }
-  beg <- 1 + NAs
-  len <- NROW(x) - NAs
+  # Check for non-leading NAs
+  # Leading NAs are handled in the C code
+  x.na <- xts:::naCheck(x, n)
 
-  result <- .Fortran( "wilder",
-                   ia  = as.double(x[beg:NROW(x)]),
-                   lia = as.integer(len),
-                   n   = as.integer(n),
-                   oa  = as.double(x[beg:NROW(x)]),
-                   loa = as.integer(len),
-                   PACKAGE = "TTR",
-                   DUP = FALSE )$oa
-
-  # Replace 1:(n-1) with NAs and prepend NAs from original data
-  is.na(result) <- c(1:(n-1))
-  result <- c( rep( NA, NAs ), result )
+  # Call C routine
+  result <- .Call("wilderSum", x, n, PACKAGE = "TTR")
 
   # Convert back to original class
   reclass(result, x)

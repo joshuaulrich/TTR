@@ -1,7 +1,7 @@
 #
 #   TTR: Technical Trading Rules
 #
-#   Copyright (C) 2007-2008  Joshua M. Ulrich
+#   Copyright (C) 2007-2010  Joshua M. Ulrich
 #
 #   This program is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
@@ -43,22 +43,13 @@ function(HL, accel=c(.02,.2)) {
   # accel = c( long = c( 0.02, 0.2 ), short = long )
 
   HL <- try.xts(HL, error=as.matrix)
-  HL.na <- naCheck(HL, 0)
 
-  # Initialize necessary vector
-  sar <- rep(0,NROW(HL.na$nonNA))
+  # Check for non-leading NAs
+  # Leading NAs are handled in the C code
+  HL.na <- xts:::naCheck(HL, 0)
 
-  sar <- .Fortran("psar", iha = as.double( HL[HL.na$nonNA,1] ),
-                          ila = as.double( HL[HL.na$nonNA,2] ),
-                          la  = as.integer( NROW( HL.na$nonNA ) ),
-                          af  = as.double( accel[1] ),
-                          maf = as.double( accel[2] ),
-                          sar = as.double( sar[] ),
-                          PACKAGE = "TTR",
-                          DUP = FALSE )$sar
-  
-  # Prepend NAs from original data
-  sar <- c( rep( NA, HL.na$NAs ), sar ) 
+  # Call C routine
+  sar <- .Call("sar", HL[,1], HL[,2], accel, PACKAGE = "TTR")
 
   reclass( sar, HL )
 }

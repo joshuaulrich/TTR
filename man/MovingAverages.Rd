@@ -4,6 +4,8 @@
 \alias{EMA}
 \alias{WMA}
 \alias{DEMA}
+\alias{GD}
+\alias{T3}
 \alias{EVWMA}
 \alias{ZLEMA}
 \alias{VWAP}
@@ -17,7 +19,7 @@
   SMA(x, n=10)
   EMA(x, n=10, wilder=FALSE, ratio=NULL)
   WMA(x, n=10, wts=1:n)
- DEMA(x, n=10)
+ DEMA(x, n=10, v=1)
 EVWMA(price, volume, n=10)
 ZLEMA(x, n=10, ratio=NULL)
  VWMA(price, volume, n=10)
@@ -29,6 +31,7 @@ ZLEMA(x, n=10, ratio=NULL)
   \item{volume}{ Volume series that is coercible to xts or matrix, that 
     corresponds to price series, or a constant.  See Notes. }
   \item{n}{ Number of periods to average over. }
+  \item{v}{ The 'volume factor' (a number in [0,1]).  See Notes. }
   \item{wts}{ Vector of weights.  Length of \code{wts} vector must equal the
     length of \code{x}, or \code{n} (the default). }
   \item{wilder}{ logical; if \code{TRUE}, a Welles Wilder type EMA will be
@@ -45,7 +48,7 @@ ZLEMA(x, n=10, ratio=NULL)
   \code{n}.  If the length of \code{wts} is equal to the length of \code{x}, the WMA will
   use the values of \code{wts} as weights.
 
-  \code{DEMA} is calculated as: \code{DEMA = 2 * EMA(x,n) - EMA(EMA(x,n),n)}.
+  \code{DEMA} is calculated as: \code{DEMA = (1 + v) * EMA(x,n) - EMA(EMA(x,n),n) * v}.
 
   \code{EVWMA} uses volume to define the period of the MA.
 
@@ -73,6 +76,7 @@ ZLEMA(x, n=10, ratio=NULL)
   \url{http://www.fmlabs.com/reference/ExpMA.htm}\cr
   \url{http://www.fmlabs.com/reference/WeightedMA.htm}\cr
   \url{http://www.fmlabs.com/reference/DEMA.htm}\cr
+  \url{http://www.fmlabs.com/reference/T3.htm}\cr
   \url{http://linnsoft.com/tour/techind/evwma.htm}\cr
   \url{http://www.fmlabs.com/reference/ZeroLagExpMA.htm}\cr
 }
@@ -84,6 +88,12 @@ ZLEMA(x, n=10, ratio=NULL)
   Since \code{WMA} can accept a weight vector of length equal to the length of \code{x} or of
   length \code{n}, it can be used as a regular weighted moving average (in the case 
   \code{wts=1:n}) or as a moving average weighted by volume, another indicator, etc.
+
+  Since \code{DEMA} allows adjusting \code{v}, it is technically Tim Tillson's generalized DEMA
+  (GD).  When \code{v=1} (the default), the result is the standard DEMA.  When \code{v=0}, the
+  result is a regular EMA.  All other values of \code{v} return the GD result.  This function
+  can be used to calculate Tillson's T3 indicator (see example below).  Thanks to John Gavin
+  for suggesting the generalization.
 
   For \code{EVWMA}, if \code{volume} is a series, \code{n} should be chosen so the sum of the
   volume for \code{n} periods approximates the total number of outstanding shares for the
@@ -106,6 +116,10 @@ ZLEMA(x, n=10, ratio=NULL)
   evwma.20 <- EVWMA(ttrc[,"Close"], ttrc[,"Volume"], 20)
   zlema.20 <- ZLEMA(ttrc[,"Close"], 20)
 
+  ## Example of Tim Tillson's T3 indicator
+  T3 <- function(x, n=10, v=1) DEMA(DEMA(DEMA(x,n,v),n,v),n,v)
+  t3 <- T3(ttrc[,"Close"])
+  
   ## Example of short-term instability of EMA
   ## (and other indicators mentioned above)
   x <- rnorm(100)

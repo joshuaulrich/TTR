@@ -65,13 +65,19 @@ function (x, n=10, wilder=FALSE, ratio=NULL) {
 #-------------------------------------------------------------------------#
 
 "DEMA" <-
-function(x, n=10) {
+function(x, n=10, v=1) {
 
   # Double Exponential Moving Average
+  # Thanks to John Gavin for the v-factor generalization
 
   # http://www.fmlabs.com/reference/DEMA.htm
+  # http://www.fmlabs.com/reference/T3.htm
 
-  dema <- 2 * EMA(x,n) - EMA(EMA(x,n),n)
+  if(v < 0 || v > 1) {
+    stop("Please ensure 0 <= v <= 1")
+  }
+
+  dema <- (1 + v) * EMA(x,n) - EMA(EMA(x,n),n) * v
 
   return( dema )
 }

@@ -1,5 +1,4 @@
 /*
- *
  *  TTR: Technical Trading Rules
  *
  *  Copyright (C) 2007-2010  Joshua M. Ulrich
@@ -23,50 +22,50 @@
 
 SEXP wilderSum (SEXP x, SEXP n) {
 
-    // Initalize loop and PROTECT counters
+    /* Initalize loop and PROTECT counters */
     int i, P=0;
 
-    // assure that 'x' is double
+    /* assure that 'x' is double */
     if(TYPEOF(x) != REALSXP) {
       PROTECT(x = coerceVector(x, REALSXP)); P++;
     }
-    // assure that 'n' is integer
+    /* assure that 'n' is integer */
     if(TYPEOF(n) != INTSXP) {
       PROTECT(n = coerceVector(n, INTSXP)); P++;
     }
 
-    // Pointers to function arguments
+    /* Pointers to function arguments */
     double *d_x = REAL(x);
     int i_n = INTEGER(n)[0];
 
-    // Input object length
+    /* Input object length */
     int nr = nrows(x);
 
-    // Initalize result R object
+    /* Initalize result R object */
     SEXP result; PROTECT(result = allocVector(REALSXP,nr)); P++;
     double *d_result = REAL(result);
 
     int beg = i_n - 1;
     d_result[0] = d_x[0];
 
-    // Loop over input, starting at 2nd element
+    /* Loop over input, starting at 2nd element */
     for(i = 1; i < nr; i++) {
-        // Account for leading NAs in input
+        /* Account for leading NAs in input */
         if(ISNA(d_x[i-1])) {
             d_result[i-1] = NA_REAL;
             beg++;
             d_result[i] = d_x[i];
             continue;
         }
-        // Calculate sum
+        /* Calculate sum */
         d_result[i] = d_x[i] + d_result[i-1] * (i_n-1)/i_n;
-        // Set leading NAs in output
+        /* Set leading NAs in output */
         if(i <= beg) {
             d_result[i-1] = NA_REAL;
         }
     }
 
-    // UNPROTECT R objects and return result
+    /* UNPROTECT R objects and return result */
     UNPROTECT(P);
     return(result);
 }

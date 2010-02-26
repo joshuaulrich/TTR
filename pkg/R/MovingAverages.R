@@ -45,7 +45,9 @@ function (x, n=10, wilder=FALSE, ratio=NULL) {
   # http://stockcharts.com/education/IndicatorAnalysis/indic_movingAvg.html
 
   x <- try.xts(x, error=as.matrix)
-  
+  if( n < 1 || n > NROW(x) )
+    stop("Invalid 'n'")
+
   # Check for non-leading NAs
   # Leading NAs are handled in the C code
   x.na <- xts:::naCheck(x, n)

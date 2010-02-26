@@ -1,5 +1,4 @@
 /*
- *
  *  TTR: Technical Trading Rules
  *
  *  Copyright (C) 2007-2010  Joshua M. Ulrich
@@ -23,10 +22,10 @@
 
 SEXP sar (SEXP hi, SEXP lo, SEXP xl) {
 
-    // Initalize loop and PROTECT counters
+    /* Initalize loop and PROTECT counters */
     int i, P=0;
 
-    // Ensure all arguments are double
+    /* Ensure all arguments are double */
     if(TYPEOF(hi) != REALSXP) {
       PROTECT(hi = coerceVector(hi, REALSXP)); P++;
     }
@@ -37,19 +36,19 @@ SEXP sar (SEXP hi, SEXP lo, SEXP xl) {
       PROTECT(xl = coerceVector(xl, REALSXP)); P++;
     }
 
-    // Pointers to function arguments
+    /* Pointers to function arguments */
     double *d_hi = REAL(hi);
     double *d_lo = REAL(lo);
     double *d_xl = REAL(xl);
 
-    // Input object length
+    /* Input object length */
     int nr = nrows(hi);
 
-    // Initalize result R object
+    /* Initalize result R object */
     SEXP sar; PROTECT(sar = allocVector(REALSXP,nr)); P++;
     double *d_sar = REAL(sar);
 
-    // Find first non-NA value
+    /* Find first non-NA value */
     int beg = 1;
     for(i=0; i < nr; i++) {
       if( ISNA(d_hi[i]) || ISNA(d_lo[i]) ) {
@@ -60,7 +59,7 @@ SEXP sar (SEXP hi, SEXP lo, SEXP xl) {
       }
     }
 
-    // Initialize values needed by the routine
+    /* Initialize values needed by the routine */
     int sig0 = 1, sig1 = 0;
     double xpt0 = d_hi[beg-1], xpt1 = 0;
     double af0 = d_xl[0], af1 = 0;
@@ -68,12 +67,12 @@ SEXP sar (SEXP hi, SEXP lo, SEXP xl) {
     d_sar[beg-1] = d_lo[beg-1]-0.01;
 
     for(i=beg; i < nr; i++) {
-      // Increment signal, extreme point, and acceleration factor
+      /* Increment signal, extreme point, and acceleration factor */
       sig1 = sig0;
       xpt1 = xpt0;
       af1 = af0;
 
-      // Local extrema
+      /* Local extrema */
       lmin = (d_lo[i-1] < d_lo[i]) ? d_lo[i-1] : d_lo[i];
       lmax = (d_hi[i-1] > d_hi[i]) ? d_hi[i-1] : d_hi[i];
 
@@ -81,23 +80,17 @@ SEXP sar (SEXP hi, SEXP lo, SEXP xl) {
        * Create signal and extreme price vectors
        */
 
-      // Previous buy signal
+      /* Previous buy signal */
       if( sig1 == 1 ) {
 
-        // New signal
-        sig0 = (d_lo[i] > d_sar[i-1]) ? 1 : -1;
+        sig0 = (d_lo[i] > d_sar[i-1]) ? 1 : -1;   /* New signal */
+        xpt0 = (d_hi[i] > xpt1) ? d_hi[i] : xpt1; /* New extreme price */
 
-        // New extreme price
-        xpt0 = (d_hi[i] > xpt1) ? d_hi[i] : xpt1;
-
-      // Previous sell signal
+      /* Previous sell signal */
       } else {
-      
-        // New signal
-        sig0 = (d_hi[i] < d_sar[i-1]) ? -1 : 1;
 
-        // New extreme price
-        xpt0 = (d_lo[i] < xpt1) ? d_lo[i] : xpt1;
+        sig0 = (d_hi[i] < d_sar[i-1]) ? -1 : 1;   /* New signal */
+        xpt0 = (d_lo[i] < xpt1) ? d_lo[i] : xpt1; /* New extreme price */
 
       }
 
@@ -106,50 +99,50 @@ SEXP sar (SEXP hi, SEXP lo, SEXP xl) {
        * and stop-and-reverse (sar) vector
        */
 
-      // No signal change
+      /* No signal change */
       if( sig0 == sig1 ) {
 
         d_sar[i] = d_sar[i-1] + ( xpt1 - d_sar[i-1] ) * af1;
 
-        // Current buy signal
+        /* Current buy signal */
         if( sig0 == 1 ) {
 
-          // Determine new acceleration factor vector value
+          /* Determine new acceleration factor vector value */
           if( xpt0 > xpt1 ) {
             af0 = (af1 == d_xl[1]) ? d_xl[1] : (d_xl[0] + af1);
           } else {
             af0 = af1;
           }
 
-          // Determine sar vector value
+          /* Determine sar vector value */
           if( d_sar[i] > lmin ) {
             d_sar[i] = lmin;
           }
 
-        // Current sell signal
+        /* Current sell signal */
         } else {
 
-          // Determine new acceleration factor vector value
+          /* Determine new acceleration factor vector value */
           if( xpt0 < xpt1 ) {
             af0 = (af1 == d_xl[1]) ? d_xl[1] : (d_xl[0] + af1);
           } else {
             af0 = af1;
           }
 
-          // Determine sar vector value
+          /* Determine sar vector value */
           if( d_sar[i] < lmax ) {
             d_sar[i] = lmax;
           }
         }
 
-      // New signal
+      /* New signal */
       } else {
         af0 = d_xl[0];
         d_sar[i] = xpt1;
       }
     }
     
-    // UNPROTECT R objects and return result
+    /* UNPROTECT R objects and return result */
     UNPROTECT(P);
     return(sar);
 }

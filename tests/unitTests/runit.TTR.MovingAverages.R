@@ -37,9 +37,9 @@ test.EMA <- function() {
 # Exponential Moving Average, Wilder ratio
 test.EMA.wilder <- function() {
   checkEqualsNumeric( EMA(input$all$Close, wilder=TRUE), output$allEMAwilder )
-  checkEquals( attributes(EMA(input$all$Close), wilder=TRUE), attributes(output$allEMAwilder) )
+  checkEquals( attributes(EMA(input$all$Close, wilder=TRUE)), attributes(output$allEMAwilder) )
   checkEqualsNumeric( EMA(input$top$Close, wilder=TRUE), output$topEMAwilder )
-  checkEquals( attributes(EMA(input$top$Close), wilder=TRUE), attributes(output$topEMAwilder) )
+  checkEquals( attributes(EMA(input$top$Close, wilder=TRUE)), attributes(output$topEMAwilder) )
   checkException( EMA(input$mid$Close, wilder=TRUE) )
 }
 

@@ -1,0 +1,36 @@
+TTR version 0.20-2
+  Changes from version 0.20-1
+
+
+NEW FEATURES:
+
+- Added VWAP and VWMA (thanks to Brian Peterson)
+
+- Added v-factor generalization to DEMA (thanks to John Gavin)
+
+
+CHANGES:
+
+- Updated volatility() to handle univariate case of calc='close'
+  (thanks to Cedrick Johnson)
+
+- Moved EMA, SAR, and wilderSum from .Fortran to .Call and used
+  xts:::naCheck in lieu of TTR's NA check mechanism
+
+- RSI up/down momentum now faster with xts (thanks to Jeff Ryan)
+
+- If 'ratio' is specified in EMA but 'n' is missing, the traditional
+  value of 'n' is approximated and returned as the first non-NA value
+
+
+BUG FIXES:
+
+- Fix to stoch() when maType is a list and 'n' is not set in the list's
+  3rd element (thanks to Wind Me)
+
+- Fixed fastK in stoch() when smooth != 1
+
+- Fixed segfault caused by EMA when n < NROW(x) (thanks to Douglas Hobbs)
+
+- test.EMA.wilder failed under R-devel (thanks to Prof Brian Ripley)
+

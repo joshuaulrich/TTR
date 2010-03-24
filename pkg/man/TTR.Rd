@@ -12,8 +12,8 @@
   \tabular{ll}{
     Package: \tab TTR\cr
     Type: \tab Package\cr
-    Version: \tab 0.20-1\cr
-    Date: \tab 2009-08-27\cr
+    Version: \tab 0.20-2\cr
+    Date: \tab 2010-03-23\cr
     License: \tab GPL Version 3 or later.\cr
   }
 
@@ -26,6 +26,7 @@
   \code{\link{RSI}}\cr
   \code{\link{runFun}}\cr
   \code{\link{stoch}}\cr
+  \code{\link{VWAP}}\cr
   \code{\link{WebData}}\cr
 }
 \author{

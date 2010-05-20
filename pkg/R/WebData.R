@@ -40,7 +40,7 @@ function(exchange=c("AMEX","NASDAQ","NYSE"),
   # ~         -> NA (NYSE Only)
 
   symbols  <- NULL
-  symbols.colnames <- c("Name","Symbol","MarketCap","Exchange")
+  symbols.colnames <- c("Symbol","Name","LastSale","MarketCap","IPOyear","Sector","Industry","Exchange")
   exchange <- match.arg(exchange, several.ok=TRUE)
   sort.by  <- match.arg(sort.by, symbols.colnames, several.ok=TRUE)
 
@@ -49,22 +49,32 @@ function(exchange=c("AMEX","NASDAQ","NYSE"),
     flush.console()
 
     # Fetch Symbols
-    if( i=="NASDAQ") {
-      url  <- "http://www.nasdaq.com/asp/symbols.asp?exchange=Q&start=0"
-      exch <- read.csv(url, skip=2, header=FALSE, as.is=TRUE,
-                colClasses=c("character","character","NULL","NULL","character","NULL"))
-    } else
-    if( i=="AMEX") {
-      url  <- "http://www.nasdaq.com/asp/symbols.asp?exchange=1&start=0"
-      exch <- read.csv(url, skip=2, header=FALSE, as.is=TRUE,
-                colClasses=c("character","character","character","NULL"))
+    url  <- paste("http://www.nasdaq.com/screening/companies-by-name.aspx",
+                  "?letter=0&exchange=",tolower(i),"&render=download",sep="")
+    exch <- read.csv(url, header=TRUE, as.is=TRUE)[,1:7]
+    
+    # Create "Exchange" column
+    exch    <- cbind( exch, rep(i,NROW(exch)), stringsAsFactors=FALSE )
+    colnames(exch) <- symbols.colnames
 
+    # Clean up any whitespace in Symbol
+    exch$Symbol <- gsub("[[:space:]]","",exch$Symbol)
+
+    # Convert LastSale and IPOyear to numeric
+    suppressWarnings({
+      exch[,3] <- as.numeric(exch[,3])  # Some of these values are "n/a",
+      exch[,4] <- as.numeric(exch[,4])  # so suppressWarnings() keeps
+      exch[,5] <- as.numeric(exch[,5])  # things quiet.
+    })
+
+    # Exchange-specific scrubbing
+    if( i=="AMEX") {
       # Transform Symbols to Yahoo format
-      exch[,2] <- gsub("/WS$", "-WT", exch[,2])  # AMEX, NYSE
-      exch[,2] <- gsub("/WS/", "-WT", exch[,2])  # AMEX, NYSE
-      exch[,2] <- gsub("/U",   "-U",  exch[,2])  # AMEX
-      exch[,2] <- gsub("\\^",  "-P",  exch[,2])  # AMEX, NYSE
-      exch[,2] <- gsub("/",    "-",   exch[,2])  # AMEX, NYSE
+      exch[,1] <- gsub("/WS$", "-WT", exch[,1])  # AMEX, NYSE
+      exch[,1] <- gsub("/WS/", "-WT", exch[,1])  # AMEX, NYSE
+      exch[,1] <- gsub("/U",   "-U",  exch[,1])  # AMEX
+      exch[,1] <- gsub("\\^",  "-P",  exch[,1])  # AMEX, NYSE
+      exch[,1] <- gsub("/",    "-",   exch[,1])  # AMEX, NYSE
 
       # Drop symbols Yahoo doesn't provide
       drop <- c( grep("\\.", exch[,2]),   # AMEX
@@ -75,11 +85,8 @@ function(exchange=c("AMEX","NASDAQ","NYSE"),
       }
 
     } else
+    # More exchange-specific scrubbing
     if( i=="NYSE") {
-      url  <- "http://www.nasdaq.com/asp/symbols.asp?exchange=N&start=0"
-      exch <- read.csv(url, skip=2, header=FALSE, as.is=TRUE,
-                colClasses=c("character","character","character","NULL"))
-
       # Transform Symbols to Yahoo format
       exch[,2] <- gsub("/WS$", "-WT", exch[,2])  # AMEX, NYSE
       exch[,2] <- gsub("/WS/", "-WT", exch[,2])  # AMEX, NYSE
@@ -96,15 +103,16 @@ function(exchange=c("AMEX","NASDAQ","NYSE"),
 
     }
 
-    # Remove last line, create "Exchange" column, and set column names
-    exch    <- cbind( exch[-NROW(exch),], rep(i,NROW(exch)-1), stringsAsFactors=FALSE )
-    colnames(exch) <- symbols.colnames
+    # Append data from all exchanges
     symbols <- rbind( symbols, exch )
   }
 
   # Sort
   symbols <- symbols[do.call("order", symbols[,sort.by]),]
 
+  # Pretty rownames
+  rownames(symbols) <- 1:NROW(symbols)
+  
   return(symbols)
 }
 

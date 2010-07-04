@@ -53,7 +53,7 @@ function(HLC, n=20, maType, sd=2, ...) {
   mavg  <- do.call( maType, c( list(HLC), maArgs ) )
 
   # Calculate standard deviation by hand to incorporate various MAs
-  sdev   <- runSD(HLC, n)
+  sdev   <- runSD(HLC, n, sample=FALSE)
 
   up     <- mavg + sd * sdev
   dn     <- mavg - sd * sdev

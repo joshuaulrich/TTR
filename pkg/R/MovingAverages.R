@@ -239,3 +239,29 @@ function(price, volume, n=10) {
 
 }
 
+#-------------------------------------------------------------------------#
+
+"VMA" <-
+function (x, w, ratio=1) {
+
+  # Variable Moving Average
+
+  # http://www.fmlabs.com/reference/default.htm?url=vidya.htm
+
+  x <- try.xts(x, error=as.matrix)
+  w <- try.xts(w, error=as.matrix)
+
+  if( NROW(w) != NROW(x) )
+    stop("Length of 'w' must equal the length of 'x'")
+
+  # Check for non-leading NAs
+  # Leading NAs are handled in the C code
+  x.na <- xts:::naCheck(x, 1)
+  w.na <- xts:::naCheck(w, 1)
+  
+  # Call C routine
+  ma <- .Call("vma", x, abs(w), ratio, PACKAGE = "TTR")
+
+  reclass(ma, x)
+}
+

@@ -1,9 +1,9 @@
 Package: TTR
 Type: Package
 Title: Technical Trading Rules
-Version: 0.20-2
+Version: 0.20-3
 Revision: 99
-Date: 2010-03-23
+Date: 2011-01-12
 Author: Joshua Ulrich
 Maintainer: Joshua Ulrich <josh.m.ulrich@gmail.com>
 Depends: xts (>= 0.6.4)

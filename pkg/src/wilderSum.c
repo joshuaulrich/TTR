@@ -44,7 +44,7 @@ SEXP wilderSum (SEXP x, SEXP n) {
 
     /* Find first non-NA input value */
     int beg = i_n - 1;
-    double sum;
+    double sum = 0;
     for(i = 0; i < beg; i++) {
         /* Account for leading NAs in input */
         if(ISNA(d_x[i])) {

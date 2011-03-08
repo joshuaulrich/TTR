@@ -29,21 +29,18 @@ SEXP ema (SEXP x, SEXP n, SEXP ratio) {
     if(TYPEOF(x) != REALSXP) {
       PROTECT(x = coerceVector(x, REALSXP)); P++;
     }
-    /* ensure that 'n' is integer */
-    if(TYPEOF(n) != INTSXP) {
-      PROTECT(n = coerceVector(n, INTSXP)); P++;
-    }
 
     /* Pointers to function arguments */
     double *d_x = REAL(x);
-    int i_n = INTEGER(n)[0];
-    double d_ratio = REAL(ratio)[0];
+    int i_n = asInteger(n);
+    double d_ratio = asReal(ratio);
     
     /* Input object length */
     int nr = nrows(x);
 
     /* Initalize result R object */
-    SEXP result; PROTECT(result = allocVector(REALSXP,nr)); P++;
+    SEXP result;
+    PROTECT(result = allocVector(REALSXP,nr)); P++;
     double *d_result = REAL(result);
 
     /* Find first non-NA input value */
@@ -88,21 +85,18 @@ SEXP evwma (SEXP pr, SEXP vo, SEXP n) {
     if(TYPEOF(vo) != REALSXP) {
       PROTECT(vo = coerceVector(vo, REALSXP)); P++;
     }
-    /* ensure that 'n' is integer */
-    if(TYPEOF(n) != INTSXP) {
-      PROTECT(n = coerceVector(n, INTSXP)); P++;
-    }
 
     /* Pointers to function arguments */
     double *d_pr = REAL(pr);
     double *d_vo = REAL(vo);
-    int i_n = INTEGER(n)[0];
+    int i_n = asInteger(n);
     
     /* Input object length */
     int nr = nrows(pr);
 
     /* Initalize result R object */
-    SEXP result; PROTECT(result = allocVector(REALSXP,nr)); P++;
+    SEXP result;
+    PROTECT(result = allocVector(REALSXP,nr)); P++;
     double *d_result = REAL(result);
 
     /* Volume Sum */
@@ -156,13 +150,14 @@ SEXP vma (SEXP x, SEXP w, SEXP ratio) {
     /* Pointers to function arguments */
     double *d_x = REAL(x);
     double *d_w = REAL(w);
-    double d_ratio = REAL(ratio)[0];
+    double d_ratio = asReal(ratio);
     
     /* Input object length */
     int nr = nrows(x);
 
     /* Initalize result R object */
-    SEXP result; PROTECT(result = allocVector(REALSXP,nr)); P++;
+    SEXP result;
+    PROTECT(result = allocVector(REALSXP,nr)); P++;
     double *d_result = REAL(result);
 
     /* Find first non-NA input value */

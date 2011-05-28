@@ -42,8 +42,7 @@ function(OHLC, n=10, calc="close", N=260, ...) {
     } else {
       r <- ROC(OHLC[, 4], 1, ...)
     }
-    rBar <- runSum( r, n-1 ) / (n-1)
-    s <- sqrt( N/(n-2) * runSum( (r-rBar)^2 , n-1 ) )
+    s <- sqrt(N) * runSD(r , n-1)
   }
 
   # Historical Open-High-Low-Close Volatility: Garman Klass

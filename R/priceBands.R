@@ -17,12 +17,15 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-PBands <- function(prices, n=20, maType="SMA", sd=2, ..., fastn=2, centered=FALSE, lavg=FALSE ) {
+PBands <- function(prices, n=20, maType="SMA", sd=2, ..., fastn=2,
+  centered=FALSE, lavg=FALSE ) {
 
   # Price Bands, implemented by Brian G. Peterson <brian@braverock.com>
-  # inspired by the univariate Bollinger Bands, and Ram Ben-David	
+  # inspired by the univariate Bollinger Bands, and Ram Ben-David
 
-  if(!is.vector(prices) && ncol(prices)>1) stop('prices should be a univariate series, maybe use lapply(prices,PBands) instead?')
+  if(!is.vector(prices) && ncol(prices)>1)
+    stop('prices should be a univariate series, maybe use',
+         'lapply(prices,PBands) instead?')
   
   prices <- try.xts(prices, error=as.matrix)
 
@@ -40,13 +43,13 @@ PBands <- function(prices, n=20, maType="SMA", sd=2, ..., fastn=2, centered=FALS
   sdev <- runSD((mavg-fastmavg),n=n,sample=FALSE)
   
   if(!isTRUE(centered)){
-	  center <- mavg
+    center <- mavg
   } else {
-	  centerrun <- (mavg-fastmavg)/sdev
-	  if(isTRUE(smoothing)){
-		  maArgs <- list(n=(n*2), ...)
-	  }
-	  center <- mavg + ( do.call(maType, c( list(centerrun), maArgs ) ) )	  
+    centerrun <- (mavg-fastmavg)/sdev
+    if(isTRUE(smoothing)){
+      maArgs <- list(n=(n*2), ...)
+    }
+    center <- mavg + ( do.call(maType, c( list(centerrun), maArgs ) ) )
   }
   
   up     <- center + sd * sdev
@@ -55,5 +58,5 @@ PBands <- function(prices, n=20, maType="SMA", sd=2, ..., fastn=2, centered=FALS
   res <- cbind(dn, center, up)
   colnames(res) <- c("dn", "center", "up")
 
-  res	
+  reclass(res, prices)
 }

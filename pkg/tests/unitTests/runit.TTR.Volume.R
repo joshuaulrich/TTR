@@ -15,7 +15,8 @@ ttrc$Date <- NULL
 #input$top[1:10,] <- NA
 #input$mid[9:20,] <- NA
 
-iAll <- as.matrix(ttrc[1:250,])
+#iAll <- as.matrix(ttrc[1:250,])
+iAll <- ttrc[1:250,]
 iTop <- iAll; iTop[1:10,] <- NA
 iMid <- iAll; iMid[9:20,] <- NA
 
@@ -30,7 +31,7 @@ load('unitTests/output.volume.rda')
 
 # On Balance Volume
 test.OBV <- function() {
-  checkEqualsNumeric( OBV(iAll[,cl], iAll[,'Volume']), output$allOBV )
+  checkEqualsNumeric( OBV(iAll$Close, iAll$Volume), output$allOBV )
   #checkEqualsNumeric( OBV(iTop[,cl], iTop[,'Volume']), output$topOBV )
   #checkException( OBV(iMid[,cl], iMid[,'Volume']) )
   #checkException( OBV(iAll[,cl], iMid[,'Volume']) )
@@ -48,8 +49,10 @@ test.chaikinAD <- function() {
 
 # Chaikin Money Flow
 test.CMF <- function() {
-  checkEqualsNumeric( CMF(iAll[,hlc], iAll[,'Volume']), output$allCMF )
-  checkEqualsNumeric( CMF(iTop[,hlc], iTop[,'Volume']), output$topCMF )
+  ia <- iAll[,hlc];  rownames(ia) <- NULL
+  it <- iTop[,hlc];  rownames(it) <- NULL
+  checkEqualsNumeric( CMF(ia, iAll[,'Volume']), output$allCMF )
+  checkEqualsNumeric( CMF(it, iTop[,'Volume']), output$topCMF )
   checkException( CMF(iMid[,hlc], iMid[,'Volume']) )
   checkException( CMF(iAll[,hlc], iMid[,'Volume']) )
   checkException( CMF(iMid[,hlc], iAll[,'Volume']) )
@@ -57,8 +60,10 @@ test.CMF <- function() {
 
 # Money Flow Index
 test.MFI <- function() {
-  checkEqualsNumeric( MFI(iAll[,hlc], iAll[,'Volume']), output$allMFI )
-  checkEqualsNumeric( MFI(iTop[,hlc], iTop[,'Volume']), output$topMFI )
+  ia <- iAll[,hlc];  rownames(ia) <- NULL
+  it <- iTop[,hlc];  rownames(it) <- NULL
+  checkEqualsNumeric( MFI(ia, iAll[,'Volume']), output$allMFI )
+  checkEqualsNumeric( MFI(it, iTop[,'Volume']), output$topMFI )
   checkException( MFI(iMid[,hlc], iMid[,'Volume']) )
   checkException( MFI(iAll[,hlc], iMid[,'Volume']) )
   checkException( MFI(iMid[,hlc], iAll[,'Volume']) )

@@ -67,7 +67,8 @@ test.CLV <- function() {
 
 # Arms' Ease of Movement
 test.EMV <- function() {
-  emv.all <- EMV(input$all[,c('High','Low')], input$all$Volume)
+  ia <- iAll[,hl];  rownames(ia) <- NULL
+  emv.all <- EMV(ia, input$all$Volume)
   checkEqualsNumeric( emv.all, output$allEMV )
   checkEquals( attributes(emv.all), attributes(output$allEMV) )
   #emv.top<- EMV(input$top[,c('High','Low')], input$top$Volume)

@@ -45,6 +45,7 @@ function(splits, dividends, close) {
   }
 
   obj <- merge.xts(close,splits,dividends)
+  obj <- obj[!is.na(obj[,1]),]  # drop rows missing close prices
   adj <- .Call('adjRatios',obj[,2],obj[,3],obj[,1],PACKAGE="TTR")
   adj <- xts(cbind(adj[[1]],adj[[2]]),index(obj))
   colnames(adj) <- c('Split','Div')

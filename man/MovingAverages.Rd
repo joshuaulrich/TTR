@@ -20,7 +20,7 @@
   SMA(x, n=10)
   EMA(x, n=10, wilder=FALSE, ratio=NULL)
   WMA(x, n=10, wts=1:n)
- DEMA(x, n=10, v=1)
+ DEMA(x, n=10, v=1, wilder=FALSE, ratio=NULL)
 EVWMA(price, volume, n=10)
 ZLEMA(x, n=10, ratio=NULL)
  VWMA(price, volume, n=10)
@@ -52,7 +52,8 @@ ZLEMA(x, n=10, ratio=NULL)
   \code{n}.  If the length of \code{wts} is equal to the length of \code{x}, the WMA will
   use the values of \code{wts} as weights.
 
-  \code{DEMA} is calculated as: \code{DEMA = (1 + v) * EMA(x,n) - EMA(EMA(x,n),n) * v}.
+  \code{DEMA} is calculated as: \code{DEMA = (1 + v) * EMA(x,n) - EMA(EMA(x,n),n) * v}
+  (with the corresponding \code{wilder} and \code{ratio} arguments).
 
   \code{EVWMA} uses volume to define the period of the MA.
 

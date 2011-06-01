@@ -46,7 +46,7 @@ PBands <- function(prices, n=20, maType="SMA", sd=2, ..., fastn=2,
     center <- mavg
   } else {
     centerrun <- (mavg-fastmavg)/sdev
-    if(isTRUE(smoothing)){
+    if(isTRUE(lavg)){
       maArgs <- list(n=(n*2), ...)
     }
     center <- mavg + ( do.call(maType, c( list(centerrun), maArgs ) ) )

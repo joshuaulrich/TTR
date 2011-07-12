@@ -207,7 +207,7 @@ function (x, n=10, ratio=NULL) {
 
   # Determine decay ratio
   if(is.null(ratio)) {
-    ratio <- 2/(n-1)
+    ratio <- 2/(n+1)
   }
 
   # Call Fortran routine

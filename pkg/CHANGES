@@ -1,36 +1,37 @@
-TTR version 0.20-2
-  Changes from version 0.20-1
-
+TTR version 0.21-0
+  Changes from version 0.20-2
 
 NEW FEATURES:
 
-- Added VWAP and VWMA (thanks to Brian Peterson)
+- Added variable moving average function, VMA.
 
-- Added v-factor generalization to DEMA (thanks to John Gavin)
+- Added Brian Peterson's price bands function, PBands.
+
+- Added David Varadi's DVI indicator, DVI.
 
 
 CHANGES:
 
-- Updated volatility() to handle univariate case of calc='close'
-  (thanks to Cedrick Johnson)
+- Added wilder and ratio arguments to DEMA. Thanks to Matthew Fornari for the
+  suggestion.
 
-- Moved EMA, SAR, and wilderSum from .Fortran to .Call and used
-  xts:::naCheck in lieu of TTR's NA check mechanism
+- Changed wilderSum to seed initial value with raw sum. This matches Wilder's
+  original calculations. Thanks to Mahesh Bp for the report.
 
-- RSI up/down momentum now faster with xts (thanks to Jeff Ryan)
-
-- If 'ratio' is specified in EMA but 'n' is missing, the traditional
-  value of 'n' is approximated and returned as the first non-NA value
+- The BBands sd calculation now uses the population instead of sample
+  statistic. This is consistent with Bollinger Band literature. Thanks to
+  Jeff Ryan for the patch.
 
 
 BUG FIXES:
 
-- Fix to stoch() when maType is a list and 'n' is not set in the list's
-  3rd element (thanks to Wind Me)
+- Fixed stockSymbols for nasdaq.com changes.
 
-- Fixed fastK in stoch() when smooth != 1
+- Fixed ZLEMA default ratio by changing it from 2/(n-1) to 2/(n+1). This
+  makes it consistent with EMA. Thanks to Dirk Eddelbuettel.
 
-- Fixed segfault caused by EMA when n < NROW(x) (thanks to Douglas Hobbs)
+- Corrected close-to-close volatility. Thanks to James Toll for the report.
 
-- test.EMA.wilder failed under R-devel (thanks to Prof Brian Ripley)
+- adjRatios failed (spectacularly) if there were missing close prices. Thanks
+  to Garrett See for the report.
 

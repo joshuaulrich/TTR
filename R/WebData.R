@@ -50,53 +50,50 @@ function(exchange=c("AMEX","NASDAQ","NYSE"),
 
     # Fetch Symbols
     url  <- paste("http://www.nasdaq.com/screening/companies-by-name.aspx",
-                  "?letter=0&exchange=",tolower(i),"&render=download",sep="")
-    exch <- read.csv(url, header=TRUE, as.is=TRUE)[,1:7]
+                  "?letter=0&exchange=",i,"&render=download",sep="")
+    exch <- read.csv(url, header=TRUE, as.is=TRUE, na="n/a")
+
+    # Find and order by necessary columns
+    col.loc <- sapply(symbols.colnames, grep, names(exch), ignore.case=TRUE)
+    exch <- exch[,c(col.loc, recursive=TRUE)]
     
     # Create "Exchange" column
-    exch    <- cbind( exch, rep(i,NROW(exch)), stringsAsFactors=FALSE )
+    exch <- data.frame(exch, Exchange=i, stringsAsFactors=FALSE)
     colnames(exch) <- symbols.colnames
 
     # Clean up any whitespace in Symbol
     exch$Symbol <- gsub("[[:space:]]","",exch$Symbol)
 
-    # Convert LastSale and IPOyear to numeric
-    suppressWarnings({
-      exch[,3] <- as.numeric(exch[,3])  # Some of these values are "n/a",
-      exch[,4] <- as.numeric(exch[,4])  # so suppressWarnings() keeps
-      exch[,5] <- as.numeric(exch[,5])  # things quiet.
-    })
-
     # Exchange-specific scrubbing
-    if( i=="AMEX") {
+    if(i=="AMEX") {
       # Transform Symbols to Yahoo format
-      exch[,1] <- gsub("/WS$", "-WT", exch[,1])  # AMEX, NYSE
-      exch[,1] <- gsub("/WS/", "-WT", exch[,1])  # AMEX, NYSE
-      exch[,1] <- gsub("/U",   "-U",  exch[,1])  # AMEX
-      exch[,1] <- gsub("\\^",  "-P",  exch[,1])  # AMEX, NYSE
-      exch[,1] <- gsub("/",    "-",   exch[,1])  # AMEX, NYSE
+      exch$Symbol <- gsub("/WS$", "-WT", exch$Symbol)  # AMEX, NYSE
+      exch$Symbol <- gsub("/WS/", "-WT", exch$Symbol)  # AMEX, NYSE
+      exch$Symbol <- gsub("/U",   "-U",  exch$Symbol)  # AMEX
+      exch$Symbol <- gsub("\\^",  "-P",  exch$Symbol)  # AMEX, NYSE
+      exch$Symbol <- gsub("/",    "-",   exch$Symbol)  # AMEX, NYSE
 
       # Drop symbols Yahoo doesn't provide
-      drop <- c( grep("\\.", exch[,2]),   # AMEX
-                 grep("\\$", exch[,2]),   # AMEX, NYSE
-                 grep(":",   exch[,2]) )  # AMEX, NYSE
+      drop <- c( grep("\\.", exch$Symbol),   # AMEX
+                 grep("\\$", exch$Symbol),   # AMEX, NYSE
+                 grep(":",   exch$Symbol) )  # AMEX, NYSE
       if(NROW(drop)!=0) {
         exch <- exch[-drop,]
       }
 
     } else
     # More exchange-specific scrubbing
-    if( i=="NYSE") {
+    if(i=="NYSE") {
       # Transform Symbols to Yahoo format
-      exch[,2] <- gsub("/WS$", "-WT", exch[,2])  # AMEX, NYSE
-      exch[,2] <- gsub("/WS/", "-WT", exch[,2])  # AMEX, NYSE
-      exch[,2] <- gsub("\\^",  "-P",  exch[,2])  # AMEX, NYSE
-      exch[,2] <- gsub("/",    "-",   exch[,2])  # AMEX, NYSE
+      exch$Symbol <- gsub("/WS$", "-WT", exch$Symbol)  # AMEX, NYSE
+      exch$Symbol <- gsub("/WS/", "-WT", exch$Symbol)  # AMEX, NYSE
+      exch$Symbol <- gsub("\\^",  "-P",  exch$Symbol)  # AMEX, NYSE
+      exch$Symbol <- gsub("/",    "-",   exch$Symbol)  # AMEX, NYSE
 
       # Drop symbols Yahoo doesn't provide
-      drop <- c( grep("\\$", exch[,2]),   # AMEX
-                 grep(":",   exch[,2]),   # AMEX, NYSE
-                 grep("~",   exch[,2]) )  # AMEX, NYSE
+      drop <- c( grep("\\$", exch$Symbol),   # AMEX
+                 grep(":",   exch$Symbol),   # AMEX, NYSE
+                 grep("~",   exch$Symbol) )  # AMEX, NYSE
       if(NROW(drop)!=0) {
         exch <- exch[-drop,]
       }

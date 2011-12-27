@@ -105,7 +105,7 @@ function(OHLC, n=10, calc="close", N=260, ...) {
     s2c  <- N/(n-1) * runSum((log(OHLC[,4]/OHLC[,1]) -
                 1/n * runSum( log(OHLC[,4]/OHLC[,1]),n))^2,n)
     s2rs <- volatility(OHLC=OHLC, n=n, calc="rogers.satchell", N=N, ...)
-    s <- s2o + k*s2c + (1-k)*s2rs
+    s <- sqrt(s2o + k*s2c + (1-k)*(s2rs^2))
   }
 
   reclass(s,OHLC)

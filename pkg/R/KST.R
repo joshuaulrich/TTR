@@ -89,7 +89,7 @@ function(price, n=c(10,10,10,15), nROC=c(10,15,20,30), nSig=9,
   }
 
   if(is.xts(ret)) {
-    kst <- xts(rowSums(ret),index(ret))
+    kst <- xts(100 * rowSums(ret),index(ret))
   } else {
     kst <- 100 * rowSums(ret)
   }

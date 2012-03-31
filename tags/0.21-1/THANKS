@@ -1,0 +1,8 @@
+In no particular order:
+
+- I can't thank Jeff Ryan enough for all his help with TTR via:
+  motivation to submit TTR to CRAN, helpful comments, testing, and
+  providing an example Fortran implementation of 'EMA' (from which
+  all other included Fortran functions are based).
+
+- Many thanks to Ion Georgiadis for helpful suggestions and testing.

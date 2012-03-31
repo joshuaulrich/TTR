@@ -1,0 +1,25 @@
+TTR version 0.21-1
+  Changes from version 0.21-0
+
+NEW FEATURES:
+
+- None.
+
+
+CHANGES:
+
+- Attempted to make stockSymbols more robust to nasdaq.com changes.
+
+
+BUG FIXES:
+
+- Fixed stockSymbols for nasdaq.com changes (again).
+
+- Corrected final calculation in Yang-Zhang volatility, thanks to Shal Patel.
+
+- Corrected k in Yang-Zhang volatility, thanks to Ian Rayner.
+
+- Corrected s2o and s2c in Yang-Zhang volatility, thanks to Ian Rayner.
+
+- Corrected KST when input is xts (res is now * 100), thanks to Yuanwei
+

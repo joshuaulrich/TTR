@@ -259,7 +259,7 @@ function(symbol, start, end, freq="daily", type="price", adjust=TRUE, quiet=FALS
       if( all(is.na(ohlc[,'Split'])) ) {
         s.ratio <- rep(1,NROW(ohlc))
       } else {
-        s.ratio <- adjRatios(split=ohlc[,'Split'])[,1]
+        s.ratio <- adjRatios(splits=ohlc[,'Split'])[,1]
       }
 
       # Un-adjust dividends for Splits

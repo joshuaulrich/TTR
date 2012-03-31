@@ -1,37 +1,25 @@
-TTR version 0.21-0
-  Changes from version 0.20-2
+TTR version 0.21-1
+  Changes from version 0.21-0
 
 NEW FEATURES:
 
-- Added variable moving average function, VMA.
-
-- Added Brian Peterson's price bands function, PBands.
-
-- Added David Varadi's DVI indicator, DVI.
+- None.
 
 
 CHANGES:
 
-- Added wilder and ratio arguments to DEMA. Thanks to Matthew Fornari for the
-  suggestion.
-
-- Changed wilderSum to seed initial value with raw sum. This matches Wilder's
-  original calculations. Thanks to Mahesh Bp for the report.
-
-- The BBands sd calculation now uses the population instead of sample
-  statistic. This is consistent with Bollinger Band literature. Thanks to
-  Jeff Ryan for the patch.
+- Attempted to make stockSymbols more robust to nasdaq.com changes.
 
 
 BUG FIXES:
 
-- Fixed stockSymbols for nasdaq.com changes.
+- Fixed stockSymbols for nasdaq.com changes (again).
 
-- Fixed ZLEMA default ratio by changing it from 2/(n-1) to 2/(n+1). This
-  makes it consistent with EMA. Thanks to Dirk Eddelbuettel.
+- Corrected final calculation in Yang-Zhang volatility, thanks to Shal Patel.
 
-- Corrected close-to-close volatility. Thanks to James Toll for the report.
+- Corrected k in Yang-Zhang volatility, thanks to Ian Rayner.
 
-- adjRatios failed (spectacularly) if there were missing close prices. Thanks
-  to Garrett See for the report.
+- Corrected s2o and s2c in Yang-Zhang volatility, thanks to Ian Rayner.
+
+- Corrected KST when input is xts (res is now * 100), thanks to Yuanwei
 

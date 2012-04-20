@@ -28,18 +28,21 @@ function(splits, dividends, close) {
   if(missing(close) || all(is.na(close)) || NROW(close)==0) {
     close <- NA
   } else {
+    if(NCOL(close)!=1) stop('"close" must be univariate')
     close <- try.xts(close,
       error=stop('"as.xts(close)" failed'))
   }
   if(missing(splits) || all(is.na(splits)) || NROW(splits)==0) {
     splits <- NA
   } else {
+    if(NCOL(splits)!=1) stop('"splits" must be univariate')
     splits <- try.xts(splits,
       error=stop('"as.xts(splits)" failed'))
   }
   if(missing(dividends) || all(is.na(dividends)) || NROW(dividends)==0) {
     dividends <- NA
   } else {
+    if(NCOL(dividends)!=1) stop('"dividends" must be univariate')
     dividends <- try.xts(dividends,
       error=stop('"as.xts(dividends)" failed'))
   }

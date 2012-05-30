@@ -22,32 +22,36 @@
 }
 \details{
   \itemize{
-    \item Close-to-Close Volatility (\code{close})\cr
+    \item Close-to-Close Volatility (\code{calc="close"})\cr
     Historical volatility calculation using close-to-close prices.
 
-    \item OHLC Volatility: Garman and Klass (\code{garman.klass})\cr
+    \item OHLC Volatility: Garman and Klass (\code{calc="garman.klass"})\cr
     The Garman and Klass estimator for estimating historical volatility assumes
     Brownian motion with zero drift and no opening jumps (i.e. the opening =
     close of the previous period). This estimator is 7.4 times more efficient
     than the close-to-close estimator.
 
-    \item High-Low Volatility: Parkinson (\code{parkinson})\cr
+    \item High-Low Volatility: Parkinson (\code{calc="parkinson"})\cr
     The Parkinson formula for estimating the historical volatility of an
     underlying based on high and low prices.
 
-    \item OHLC Volatility: Rogers and Satchell (\code{rogers.satchell})\cr
+    \item OHLC Volatility: Rogers and Satchell (\code{calc="rogers.satchell"})\cr
     The Roger and Satchell historical volatility estimator allows for non-zero
     drift, but assumed no opening jump.
 
-    \item OHLC Volatility: Garman and Klass - Yang and Zhang (\code{gk.yz})\cr
+    \item OHLC Volatility: Garman and Klass - Yang and Zhang (\code{calc="gk.yz"})\cr
     This estimator is a modified version of the Garman and Klass estimator
     that allows for opening gaps.
 
-    \item OHLC Volatility: Yang and Zhang (\code{yang.zhang})\cr
+    \item OHLC Volatility: Yang and Zhang (\code{calc="yang.zhang"})\cr
     The Yang and Zhang historical volatility estimator has minimum
     estimation error, and is independent of drift and opening gaps.  It can
     be interpreted as a weighted average of the Rogers and Satchell estimator,
-    the close-open volatility, and the open-close volatility.
+    the close-open volatility, and the open-close volatility.\cr
+    Users may override the default values of \eqn{\alpha} (1.34 by default) or
+    \eqn{k} used in the calculation by specifying \code{alpha} or \code{k} in
+    \code{\dots}, respectively. Specifying \code{k} will cause \code{alpha}  
+    to be ignored, if both are provided.
   }
 }
 \value{
@@ -57,17 +61,17 @@
 \author{ Joshua Ulrich }
 \references{
   The following site(s) were used to code/document these indicators:\cr\cr
-  Close-to-Close Volatility (\code{close}):\cr
+  Close-to-Close Volatility (\code{calc="close"}):\cr
   \url{http://www.sitmo.com/eq/172}\cr
-  OHLC Volatility: Garman Klass (\code{garman.klass}):\cr
+  OHLC Volatility: Garman Klass (\code{calc="garman.klass"}):\cr
   \url{http://www.sitmo.com/eq/402}\cr
-  High-Low Volatility: Parkinson (\code{parkinson}):\cr
+  High-Low Volatility: Parkinson (\code{calc="parkinson"}):\cr
   \url{http://www.sitmo.com/eq/173}\cr
-  OHLC Volatility: Rogers Satchell (\code{rogers.satchell}):\cr
+  OHLC Volatility: Rogers Satchell (\code{calc="rogers.satchell"}):\cr
   \url{http://www.sitmo.com/eq/414}\cr
-  OHLC Volatility: Garman Klass - Yang Zhang (\code{gk.yz}):\cr
+  OHLC Volatility: Garman Klass - Yang Zhang (\code{calc="gk.yz"}):\cr
   \url{http://www.sitmo.com/eq/409}\cr
-  OHLC Volatility: Yang Zhang (\code{yang.zhang}):\cr
+  OHLC Volatility: Yang Zhang (\code{calc="yang.zhang"}):\cr
   \url{http://www.sitmo.com/eq/417}\cr
 }
 %\note{

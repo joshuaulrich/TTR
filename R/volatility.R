@@ -100,10 +100,8 @@ function(OHLC, n=10, calc="close", N=260, ...) {
       k <- 0.34 / ( 1.34 + (n+1)/(n-1) )
     }
 
-    s2o  <- N/(n-1) * runSum((log(OHLC[,1]/Cl1) -
-                1/n * runSum( log(OHLC[,1]/Cl1),n))^2,n)
-    s2c  <- N/(n-1) * runSum((log(OHLC[,4]/OHLC[,1]) -
-                1/n * runSum( log(OHLC[,4]/OHLC[,1]),n))^2,n)
+    s2o <- N * runVar(log(OHLC[,1] / Cl1), n)
+    s2c <- N * runVar(log(OHLC[,4] / OHLC[,1]), n)
     s2rs <- volatility(OHLC=OHLC, n=n, calc="rogers.satchell", N=N, ...)
     s <- sqrt(s2o + k*s2c + (1-k)*(s2rs^2))
   }

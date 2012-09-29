@@ -18,11 +18,13 @@
 #
 
 'DonchianChannel' <-
-function(HL, n=10) {
+function(HL, n=10, include.lag=FALSE) {
 
   # Donchian Channel
 
   # http://www.linnsoft.com/tour/techind/donch.htm
+
+  HL <- try.xts(x, error=as.matrix)
 
   if(!(NCOL(HL) %in% c(1,2))) {
     stop("Price series must be either High-Low, or Close/univariate.")
@@ -41,6 +43,10 @@ function(HL, n=10) {
 
   result <- cbind(high,mid,low)
   colnames(result) <- c("high","mid","low")
+
+  if(include.lag) {
+    result <- lag(result)
+  }
   
-  return(result)
+  reclass(result, HL)
 }

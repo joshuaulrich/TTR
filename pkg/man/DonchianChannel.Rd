@@ -7,11 +7,13 @@
   generate buy and sell signals for the Turtle Trading system.
 }
 \usage{
-  DonchianChannel(HL, n=10)
+  DonchianChannel(HL, n=10, include.lag=FALSE)
 }
 \arguments{
   \item{HL}{ Object that is coercible to xts or matrix and contains High-Low prices. }
   \item{n}{ Number of periods for moving average. }
+  \item{include.lag}{ Should values be lagged so that today's prices are
+    not included in the calculation? }
 }
 \details{
   Donchian Channels consist of two (sometimes three) lines:

@@ -84,13 +84,13 @@ SEXP sar (SEXP hi, SEXP lo, SEXP xl) {
       if( sig1 == 1 ) {
 
         sig0 = (d_lo[i] > d_sar[i-1]) ? 1 : -1;   /* New signal */
-        xpt0 = (d_hi[i] > xpt1) ? d_hi[i] : xpt1; /* New extreme price */
+        xpt0 = fmax(lmax, xpt1); /* New extreme price */
 
       /* Previous sell signal */
       } else {
 
         sig0 = (d_hi[i] < d_sar[i-1]) ? -1 : 1;   /* New signal */
-        xpt0 = (d_lo[i] < xpt1) ? d_lo[i] : xpt1; /* New extreme price */
+        xpt0 = fmin(lmin, xpt1); /* New extreme price */
 
       }
 
@@ -138,7 +138,7 @@ SEXP sar (SEXP hi, SEXP lo, SEXP xl) {
       /* New signal */
       } else {
         af0 = d_xl[0];
-        d_sar[i] = xpt1;
+        d_sar[i] = xpt0;
       }
     }
     

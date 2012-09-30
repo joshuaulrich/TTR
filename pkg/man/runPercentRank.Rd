@@ -7,7 +7,7 @@
   This function computes a running/rolling percentage rank.
 }
 \usage{
-  runPercentRank(x, n=10, cumulative=FALSE, exact.multiplier=0.5)
+  runPercentRank(x, n=260, cumulative=FALSE, exact.multiplier=0.5)
 }
 \arguments{
   \item{x}{ Object coercible to xts or matrix. }

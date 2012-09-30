@@ -13,7 +13,7 @@
   \item{HL}{ Object that is coercible to xts or matrix and contains High-Low prices. }
   \item{n}{ Number of periods for moving average. }
   \item{include.lag}{ Should values be lagged so that today's prices are
-    not included in the calculation? }
+    not included in the calculation? See Note. }
 }
 \details{
   Donchian Channels consist of two (sometimes three) lines:
@@ -33,6 +33,17 @@
 \references{
   The following site(s) were used to code/document this indicator:\cr
   \url{http://www.linnsoft.com/tour/techind/donch.htm}\cr
+}
+\note{
+  The default of \code{include.lag=FALSE} makes \code{DonchainChannel} consistent
+  with other \pkg{TTR} functions, in that it includes the current period in the
+  calculation.
+
+  The default is different than the original calculation, which would calculate
+  the indicator using periods t-1 through t-n. Setting \code{include.lag=TRUE}
+  will return the result of the original calculation.
+
+  The default of this argument may change in the future.
 }
 \seealso{
   See \code{\link{BBands}}.

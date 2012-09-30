@@ -35,7 +35,7 @@ function(HL, n=10, include.lag=FALSE) {
   #  prior period's data for use on the current period. In both case
   #  including the current period in the calculation would not be correct."
 
-  HL <- try.xts(x, error=as.matrix)
+  HL <- try.xts(HL, error=as.matrix)
 
   if(!(NCOL(HL) %in% c(1,2))) {
     stop("Price series must be either High-Low, or Close/univariate.")

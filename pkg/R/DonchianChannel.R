@@ -24,6 +24,17 @@ function(HL, n=10, include.lag=FALSE) {
 
   # http://www.linnsoft.com/tour/techind/donch.htm
 
+  # Notes from John Bollinger:
+  #
+  # "In the old paper-calculation days you would calculate the numbers
+  #  after the close by hand and for use in the next day's trading to gauge
+  #  the "n-day" breakouts and you would have used n-days worth of data the
+  #  calc. Thus an n-day calc with a lag of one would be consistent with
+  #  practice in Donchian's day. (Total window of n+1.) Another example are
+  #  the floor traders numbers or pivots, which are calculated from the
+  #  prior period's data for use on the current period. In both case
+  #  including the current period in the calculation would not be correct."
+
   HL <- try.xts(x, error=as.matrix)
 
   if(!(NCOL(HL) %in% c(1,2))) {
@@ -45,7 +56,8 @@ function(HL, n=10, include.lag=FALSE) {
   colnames(result) <- c("high","mid","low")
 
   if(include.lag) {
-    result <- lag(result)
+    # use lag.xts in case 'result' is a matrix
+    result <- lag.xts(result)
   }
   
   reclass(result, HL)

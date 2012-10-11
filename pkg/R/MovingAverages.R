@@ -47,6 +47,9 @@ function (x, n=10, wilder=FALSE, ratio=NULL) {
   x <- try.xts(x, error=as.matrix)
   if( n < 1 || n > NROW(x) )
     stop("Invalid 'n'")
+  if( any(nNonNA <- n > colSums(!is.na(x))) )
+    stop("n > number of non-NA values in column(s) ",
+         paste(which(nNonNA), collapse=", "))
 
   # Check for non-leading NAs
   # Leading NAs are handled in the C code
@@ -169,6 +172,10 @@ function(price, volume, n=10) {
     stop("Invalid 'n'")
 
   pv <- cbind(price, volume)
+
+  if( any(nNonNA <- n > colSums(!is.na(pv))) )
+    stop("n > number of non-NA values in ",
+         paste(c("price","volume")[which(nNonNA)], collapse=", "))
 
   # Check for non-leading NAs
   # Leading NAs are handled in the C code

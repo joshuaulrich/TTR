@@ -17,6 +17,31 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+#'Rate of Change / Momentum
+#'
+#'Calculate the (rate of) change of a series over \code{n} periods.
+#'
+#'The ROC indicator provides the percentage difference of a series over two
+#'observations, while the momentum indicator simply provides the difference.
+#'
+#'@aliases changes ROC momentum
+#'@param x Price, volume, etc. series that is coercible to xts or matrix.
+#'@param n Number of periods to use.
+#'@param type Compounding type; either \code{"continuous"} (the default) or
+#'\code{"discrete"}.
+#'@param na.pad Should periods prior to \code{n} be appended?  Default is
+#'\code{TRUE}.
+#'@return A object of the same class as \code{x} or a vector (if \code{try.xts}
+#'fails) containing the rate-of-change (or return) values for \code{ROC} or a
+#'vector containing the differenced price series for \code{momentum}.
+#'@author Joshua Ulrich
+#'@keywords ts
+#'@examples
+#'
+#'  data(ttrc)
+#'  roc <- ROC(ttrc[,"Close"])
+#'  mom <- momentum(ttrc[,"Close"])
+#'@rdname changes
 "ROC" <-
 function(x, n=1, type=c("continuous","discrete"), na.pad=TRUE) {
 
@@ -59,6 +84,7 @@ function(x, n=1, type=c("continuous","discrete"), na.pad=TRUE) {
 
 #-------------------------------------------------------------------------#
 
+#'@rdname changes
 "momentum" <-
 function(x, n=1, na.pad=TRUE) {
 

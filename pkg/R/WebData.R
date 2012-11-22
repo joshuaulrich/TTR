@@ -17,6 +17,71 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+#'Fetch Internet Data
+#'
+#'Get investment data from the internet.
+#'
+#'\code{getYahooData} fetches individual stock data from the Yahoo! Finance
+#'website.  It also adjusts price for splits and dividends, and volume for
+#'splits.
+#'
+#'\code{stockSymbols} fetches instrument symbols from the nasdaq.com website,
+#'and adjusts the symbols to be compatible with the Yahoo! Finance website.
+#'
+#'@aliases WebData getYahooData stockSymbols
+#'@param symbol Yahoo! Finance instrument symbol.
+#'@param start Numeric; first date of desired data, in YYYYMMDD format.
+#'Default is first date of series.
+#'@param end Numeric; last date of desired data, in YYYYMMDD format.  Default
+#'is last date of series.
+#'@param freq Desired data frequency.  One of \code{"daily"}, \code{"weekly"},
+#'\code{"monthly"}.
+#'@param type Type of data to return.  One of \code{"price"}, or
+#'\code{"split"}.  \code{type="split"} will return both split and dividend
+#'data.
+#'@param adjust Logical; if \code{TRUE}, the Open, High, Low, and Close prices
+#'will be adjusted for dividends and splits, and Volume will be adjusted for
+#'dividends.
+#'@param quiet Logical; if \code{TRUE}, status messages will be printed to the
+#'console.
+#'@param exchange Character vector of exchange names on which desired
+#'instrument symbols are traded.
+#'@param sort.by Character vector of columns by which returned data will be
+#'sorted.  Must be one or more of \code{"Name"}, \code{"Symbol"},
+#'\code{"Market.Cap"}, or \code{"Exchange"}.
+#'@return \code{getYahooData} returns an xts object containing the columns:
+#'
+#'\code{stockSymbols} returns a character vector containing all the listed
+#'symbols for the given exchanges.
+#' \describe{
+#'     \item{ Date }{ Trade date, in CCYYMMDD format. }
+#'     \item{ Open }{ Open price. }
+#'     \item{ High }{ High price. }
+#'     \item{ Low }{ Low price. }
+#'     \item{ Close }{ Close price. }
+#'     \item{ Volume }{ Volume. }
+#' }
+#'@returnItem Date Trade date, in CCYYMMDD format.
+#'@returnItem Open Open price.
+#'@returnItem High High price.
+#'@returnItem Low Low price.
+#'@returnItem Close Close price.
+#'@returnItem Volume Volume.
+#'@note The symbols returned by \code{stockSymbols} may not be in the format
+#'necessary to retrieve data using \code{getYahooData}.
+#'
+#'\code{getYahooData} has only been tested on daily data.  It isn't known if
+#'the function correctly adjusts data for any other frequency.
+#'@author Joshua Ulrich
+#'@keywords ts
+#'@examples
+#'
+#'  ### Note: you must have a working internet
+#'  ### connection for these examples to work!
+#'  ibm <- getYahooData("IBM", 19990404, 20050607)
+#'
+#'  nyse.symbols <- stockSymbols("NYSE")
+#'@rdname WebData
 "stockSymbols" <-
 function(exchange=c("AMEX","NASDAQ","NYSE"),
          sort.by=c("Exchange","Symbol"), quiet=FALSE) {
@@ -115,6 +180,7 @@ function(exchange=c("AMEX","NASDAQ","NYSE"),
 
 #-------------------------------------------------------------------------#
 
+#'@rdname WebData
 "getYahooData" <-
 function(symbol, start, end, freq="daily", type="price", adjust=TRUE, quiet=FALSE) {
 

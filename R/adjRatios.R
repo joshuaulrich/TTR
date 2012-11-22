@@ -17,6 +17,31 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+
+
+#'Split and dividend adjustment ratios
+#'
+#'Create split and dividend adjustment ratio vectors.
+#'
+#'If only \code{splits} is provided, the resulting object will only have as
+#'many observations as \code{splits}.\cr \cr If \code{splits} and \code{close}
+#'are provided, the resulting object will have as many observations as
+#'\code{max(NROW(splits),NROW(close))}.\cr \cr\code{close} is required if
+#'\code{dividends} is provided.
+#'
+#'@aliases adjRatios adjust
+#'@param splits Split series that is coercible to xts.
+#'@param dividends Dividend series that is coercible to xts.
+#'@param close Close price series that is coercible to xts.
+#'@return A xts object containing the columns:
+#'  \describe{
+#'   \item{ Split }{ The split adjustment ratio. }
+#'   \item{ Div }{ The dividend adjustment ratio. }
+#'  }
+#'@returnItem Split The split adjustment ratio.
+#'@returnItem Div The dividend adjustment ratio.
+#'@author Joshua Ulrich
+#'@keywords ts
 'adjRatios' <-
 function(splits, dividends, close) {
 

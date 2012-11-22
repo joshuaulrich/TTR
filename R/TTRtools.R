@@ -17,6 +17,35 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+#'Miscellaneous Tools
+#'
+#'Various functions that may be useful in designing technical trading rules.
+#'
+#'\code{growth} calculates the growth of an investment using given prices and
+#'signals.
+#'
+#'\code{lags} calculates the lags of a given series.
+#'
+#'\code{wilderSum} calculates a Welles Wilder style weighted sum.
+#'
+#'@aliases growth lags wilderSum
+#'@param price Price series that is coercible to xts or matrix.
+#'@param signals Signals to use (defaults to vector of ones).  Use '0' for no
+#'position, '1' for long position, and '-1' for short position.
+#'@param x Object that is coercible to xts or matrix.
+#'@param n Number of periods to use.
+#'@param \dots Further arguments to be passed from or to other methods.
+#'@return \code{growth} returns a vector of the growth of the investment.
+#'
+#'\code{lags} returns a matrix of lagged values of the original vector.
+#'
+#'\code{wilderSum} returns a vector of weighted sums.
+#'@note In \code{growth} you can specify the number of periods and type of
+#'compounding to use when calculating returns of the price series via the
+#'\code{'\dots'} argument.
+#'@author Joshua Ulrich
+#'@keywords ts
+#'@rdname TTRtools
 "lags" <-
 function(x, n=1) {
 
@@ -37,6 +66,7 @@ function(x, n=1) {
 }
 
 #-------------------------------------------------------------------------#
+#'@rdname TTRtools
 "growth" <-
 function(price, signals, ...) {
 
@@ -55,6 +85,7 @@ function(price, signals, ...) {
 
 #-------------------------------------------------------------------------#
 
+#'@rdname TTRtools
 'naCheck' <-
 function(x, n=0) {
 

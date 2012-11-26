@@ -17,8 +17,6 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-
-
 #'Guppy Multiple Moving Averages
 #'
 #'Calculate the Guppy Multiple Moving Average of a series.
@@ -32,9 +30,13 @@
 #'@param x Price, volume, etc. series that is coercible to xts or matrix.
 #'@param short Vector of short-term periods.
 #'@param long Vector of long-term periods.
-#'@param maType Either: \cr(1) A function or a string naming the function to be
-#'called, or\cr (2) a \emph{list} with the first component like (1) above, and
-#'additional parameters specified as \emph{named} components.  See Examples.
+#'@param maType Either:
+#'  \enumerate{
+#'    \item A function or a string naming the function to be called.
+#'    \item A \emph{list} with the first component like (1) above, and
+#'      additional parameters specified as \emph{named} components.
+#'      See Examples.
+#'  }
 #'@return A object of the same class as \code{x} or \code{price} or a vector
 #'(if \code{try.xts} fails) containing the Guppy Multiple Moving Average.
 #'@author Joshua Ulrich
@@ -50,12 +52,11 @@
 #'  data(ttrc)
 #'  gmma <- GMMA(ttrc[,"Close"])
 #'
+#'@export
 "GMMA" <-
 function(x, short=c(3,5,8,10,12,15), long=c(30,35,40,45,50,60), maType) {
 
   # Guppy Multiple Moving Average
-
-  # http://www.investopedia.com/terms/g/guppy-multiple-moving-average.asp
 
   x <- try.xts(x, error=as.matrix)
   

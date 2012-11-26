@@ -135,15 +135,11 @@
 #'  tail( EMA(x[10:100],10), 1 )
 #'  tail( EMA(x[ 1:100],10), 1 )
 #'@rdname MovingAverages
+#'@export
 "SMA" <-
 function(x, n=10) {
 
   # Simple Moving Average
-
-  # http://www.fmlabs.com/reference/SimpleMA.htm
-  # http://www.equis.com/Customer/Resources/TAAZ/Default.aspx?c=3&p=74
-  # http://linnsoft.com/tour/techind/movAvg.htm
-  # http://stockcharts.com/education/IndicatorAnalysis/indic_movingAvg.html
 
   ma <- runMean( x, n )
 
@@ -153,15 +149,11 @@ function(x, n=10) {
 #-------------------------------------------------------------------------#
 
 #'@rdname MovingAverages
+#'@export
 "EMA" <-
 function (x, n=10, wilder=FALSE, ratio=NULL) {
 
   # Exponential Moving Average
-
-  # http://www.fmlabs.com/reference/ExpMA.htm
-  # http://www.equis.com/Customer/Resources/TAAZ/Default.aspx?c=3&p=74
-  # http://linnsoft.com/tour/techind/movAvg.htm
-  # http://stockcharts.com/education/IndicatorAnalysis/indic_movingAvg.html
 
   x <- try.xts(x, error=as.matrix)
   if( n < 1 || n > NROW(x) )
@@ -194,14 +186,12 @@ function (x, n=10, wilder=FALSE, ratio=NULL) {
 #-------------------------------------------------------------------------#
 
 #'@rdname MovingAverages
+#'@export
 "DEMA" <-
 function(x, n=10, v=1, wilder=FALSE, ratio=NULL) {
 
   # Double Exponential Moving Average
   # Thanks to John Gavin for the v-factor generalization
-
-  # http://www.fmlabs.com/reference/DEMA.htm
-  # http://www.fmlabs.com/reference/T3.htm
 
   if(v < 0 || v > 1) {
     stop("Please ensure 0 <= v <= 1")
@@ -216,14 +206,11 @@ function(x, n=10, v=1, wilder=FALSE, ratio=NULL) {
 #-------------------------------------------------------------------------#
 
 #'@rdname MovingAverages
+#'@export
 "WMA" <-
 function(x, n=10, wts=1:n) {
 
   # Weighted Moving Average
-
-  # http://www.fmlabs.com/reference/WeightedMA.htm
-  # http://www.equis.com/Customer/Resources/TAAZ/Default.aspx?c=3&p=74
-  # http://linnsoft.com/tour/techind/movAvg.htm
 
   x <- try.xts(x, error=as.matrix)
   wts <- try.xts(wts, error=as.matrix)
@@ -278,12 +265,11 @@ function(x, n=10, wts=1:n) {
 #-------------------------------------------------------------------------#
 
 #'@rdname MovingAverages
+#'@export
 "EVWMA" <-
 function(price, volume, n=10) {
 
   # Elastic, Volume-Weighted Moving Average
-
-  # http://linnsoft.com/tour/techind/evwma.htm
 
   price <- try.xts(price, error=as.matrix)
   volume <- try.xts(volume, error=as.matrix)
@@ -313,13 +299,11 @@ function(price, volume, n=10) {
 #-------------------------------------------------------------------------#
 
 #'@rdname MovingAverages
+#'@export
 "ZLEMA" <-
 function (x, n=10, ratio=NULL) {
 
   # Zero-Lag Exponential Moving Average
-
-  # http://www.fmlabs.com/reference/ZeroLagExpMA.htm
-  # http://linnsoft.com/tour/techind/movAvg.htm
 
   x <- try.xts(x, error=as.matrix)
   
@@ -360,6 +344,7 @@ function (x, n=10, ratio=NULL) {
 #-------------------------------------------------------------------------#
 
 #'@rdname MovingAverages
+#'@export VWAP VWMA
 "VWAP" <- "VWMA" <-
 function(price, volume, n=10) {
 
@@ -374,12 +359,11 @@ function(price, volume, n=10) {
 #-------------------------------------------------------------------------#
 
 #'@rdname MovingAverages
+#'@export
 "VMA" <-
 function (x, w, ratio=1) {
 
   # Variable Moving Average
-
-  # http://www.fmlabs.com/reference/default.htm?url=vidya.htm
 
   x <- try.xts(x, error=as.matrix)
   w <- try.xts(w, error=as.matrix)

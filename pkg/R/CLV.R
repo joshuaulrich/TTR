@@ -17,8 +17,6 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-
-
 #'Close Location Value
 #'
 #'The Close Location Value (CLV) relates the day's close to its trading range.
@@ -43,12 +41,11 @@
 #'  data(ttrc)
 #'  clv <- CLV(ttrc[,c("High","Low","Close")])
 #'
+#'@export
 "CLV" <-
 function(HLC) {
 
   # Close Location Value
-
-  # http://stockcharts.com/education/IndicatorAnalysis/indic_AccumDistLine.html
 
   HLC <- try.xts(HLC, error=as.matrix)
   clv <- ((HLC[,3]-HLC[,2]) - (HLC[,1]-HLC[,3])) / (HLC[,1]-HLC[,2])

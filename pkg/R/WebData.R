@@ -61,12 +61,6 @@
 #'     \item{ Close }{ Close price. }
 #'     \item{ Volume }{ Volume. }
 #' }
-#'@returnItem Date Trade date, in CCYYMMDD format.
-#'@returnItem Open Open price.
-#'@returnItem High High price.
-#'@returnItem Low Low price.
-#'@returnItem Close Close price.
-#'@returnItem Volume Volume.
 #'@note The symbols returned by \code{stockSymbols} may not be in the format
 #'necessary to retrieve data using \code{getYahooData}.
 #'
@@ -82,6 +76,7 @@
 #'
 #'  nyse.symbols <- stockSymbols("NYSE")
 #'@rdname WebData
+#'@export
 "stockSymbols" <-
 function(exchange=c("AMEX","NASDAQ","NYSE"),
          sort.by=c("Exchange","Symbol"), quiet=FALSE) {
@@ -181,6 +176,7 @@ function(exchange=c("AMEX","NASDAQ","NYSE"),
 #-------------------------------------------------------------------------#
 
 #'@rdname WebData
+#'@export
 "getYahooData" <-
 function(symbol, start, end, freq="daily", type="price", adjust=TRUE, quiet=FALSE) {
 

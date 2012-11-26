@@ -17,8 +17,6 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-
-
 #'On Balance Volume (OBV)
 #'
 #'On Balance Volume (OBV) is a measure of the money flowing into or out of a
@@ -47,15 +45,11 @@
 #'  data(ttrc)
 #'  obv <- OBV(ttrc[,"Close"], ttrc[,"Volume"])
 #'
+#'@export
 "OBV" <-
 function(price, volume) {
 
   # On Balance Volume
-
-  # http://www.fmlabs.com/reference/OBV.htm
-  # http://www.equis.com/Customer/Resources/TAAZ?c=3&p=82
-  # http://linnsoft.com/tour/techind/obVol.htm
-  # http://stockcharts.com/education/IndicatorAnalysis/indic-obv.htm
   
   price <- try.xts(price, error=as.matrix)
   volume <- try.xts(volume, error=as.matrix)

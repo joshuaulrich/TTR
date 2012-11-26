@@ -17,8 +17,6 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-
-
 #'Chaikin Volatility
 #'
 #'Chaikin Volatility measures the rate of change of the security's trading
@@ -49,13 +47,11 @@
 #'  data(ttrc)
 #'  volatility <- chaikinVolatility(ttrc[,c("High","Low")])
 #'
+#'@export
 "chaikinVolatility" <-
 function(HL, n=10, maType, ...) {
 
   # Chaikin Volatility
-
-  # http://www.fmlabs.com/reference/ChaikinVolatility.htm
-  # http://www.equis.com/Customer/Resources/TAAZ/Default.aspx?c=3&p=120
 
   HL <- try.xts(HL, error=as.matrix)
 

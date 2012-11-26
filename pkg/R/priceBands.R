@@ -17,8 +17,6 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-
-
 #'Construct (optionally further smoothed and centered ) volatility bands around
 #'prices
 #'
@@ -45,12 +43,12 @@
 #'@param maType A function or a string naming the function to be called.
 #'@param sd The number of standard deviations to use.
 #'@param \dots any other pass-thru parameters, usually for function named by
-#'\code{maType}.
+#'  \code{maType}.
 #'@param fastn Number of periods to use for smoothing higher-frequency 'noise'.
 #'@param centered Whether to center the bands around a series adjusted for high
-#'frequency noise, default \code{FALSE}.
+#'  frequency noise, default \code{FALSE}.
 #'@param lavg Whether to use a longer \code{(n*2)} smoothing period for
-#'centering, default \code{FALSE}.
+#'  centering, default \code{FALSE}.
 #'@return A object of the same class as \code{prices} or a matrix (if
 #'\code{try.xts} fails) containing the columns:
 #' \describe{
@@ -66,6 +64,8 @@
 #'    data(ttrc)
 #'    pbands.close <- PBands( ttrc[,"Close"] )
 #'
+#'@rdname priceBands
+#'@export
 PBands <- function(prices, n=20, maType="SMA", sd=2, ..., fastn=2,
   centered=FALSE, lavg=FALSE ) {
 

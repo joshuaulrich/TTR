@@ -17,8 +17,6 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-
-
 #'Triple Smoothed Exponential Oscillator
 #'
 #'The TRIX indicator calculates the rate of change of a triple exponential
@@ -30,9 +28,13 @@
 #'@param price Price series that is coercible to xts or matrix.
 #'@param n Number of periods for moving average.
 #'@param nSig Number of periods for signal line moving average.
-#'@param maType Either: \cr(1) A function or a string naming the function to be
-#'called, or\cr (2) a \emph{list} with the first component like (1) above, and
-#'additional parameters specified as \emph{named} components.  See Examples.
+#'@param maType Either:
+#'  \enumerate{
+#'    \item A function or a string naming the function to be called.
+#'    \item A \emph{list} with the first component like (1) above, and
+#'      additional parameters specified as \emph{named} components.
+#'      See Examples.
+#'  }
 #'@param percent logical; if \code{TRUE}, the rate of change is calculated
 #'using the \code{ROC} function, otherwise the \code{momentum} function is
 #'used.
@@ -61,15 +63,11 @@
 #'  trix4 <- TRIX(ttrc[,"Close"],
 #'    maType=list(list(SMA), list(EMA, wilder=TRUE), list(SMA), list(DEMA)))
 #'
+#'@export
 "TRIX" <-
 function(price, n=20, nSig=9, maType, percent=TRUE, ...) {
 
   # Triple Smoothed Exponential Oscillator
-
-  # http://www.fmlabs.com/reference/default.htm?url=TRIX.htm
-  # http://www.equis.com/Customer/Resources/TAAZ/?c=3&p=114
-  # http://www.linnsoft.com/tour/techind/trix.htm
-  # http://stockcharts.com/education/IndicatorAnalysis/indic_trix.htm
 
   # Default MA
   if(missing(maType)) {

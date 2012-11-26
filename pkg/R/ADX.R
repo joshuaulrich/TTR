@@ -17,8 +17,6 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-
-
 #'Welles Wilder's Directional Movement Index
 #'
 #'Directional Movement Index; developed by J. Welles Wilder.
@@ -40,10 +38,6 @@
 #'   \item{ DX }{ The Direction Index. }
 #'   \item{ ADX }{ The Average Direction Index (trend strength). }
 #' }
-#'@returnItem DIp The positive Direction Index.
-#'@returnItem DIn The negative Direction Index.
-#'@returnItem DX The Direction Index.
-#'@returnItem ADX The Average Direction Index (trend strength).
 #'@note A buy/sell signal is generated when the +/-DI crosses up over the
 #'-/+DI, when the DX/ADX signals a strong trend.  A high/low DX signals a
 #'strong/weak trend.  DX is usually smoothed with a moving average (i.e. the
@@ -70,20 +64,11 @@
 #'  data(ttrc)
 #'  dmi.adx <- ADX(ttrc[,c("High","Low","Close")])
 #'
+#'@export
 "ADX" <-
 function(HLC, n=14, maType, ...) {
 
   # Welles Wilder's Directional Movement Index
-
-  # http://www.fmlabs.com/reference/DI.htm
-  # http://www.fmlabs.com/reference/DX.htm
-  # http://www.fmlabs.com/reference/ADX.htm
-  # http://www.fmlabs.com/reference/ADXR.htm
-  # http://www.equis.com/Customer/Resources/TAAZ/Default.aspx?c=3&p=49
-  # http://linnsoft.com/tour/techind/dirInd.htm
-  # http://linnsoft.com/tour/techind/adx.htm
-  # http://linnsoft.com/tour/techind/adxr.htm
-  # http://stockcharts.com/education/IndicatorAnalysis/indic_ADX.html
 
   HLC <- try.xts(HLC, error=as.matrix)
   dH  <- momentum(HLC[,1])

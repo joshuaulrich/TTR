@@ -51,9 +51,13 @@
 #'@param nFast Number of periods for initial smoothing.
 #'@param nSlow Number of periods for double smoothing.
 #'@param nSig Number of periods for signal line.
-#'@param maType Either: \cr(1) A function or a string naming the function to be
-#'called, or\cr (2) a \emph{list} with the first component like (1) above, and
-#'additional parameters specified as \emph{named} components.  See Examples.
+#'@param maType Either:
+#'  \enumerate{
+#'    \item A function or a string naming the function to be called.
+#'    \item A \emph{list} with the first component like (1) above, and
+#'      additional parameters specified as \emph{named} components.
+#'      See Examples.
+#'  }
 #'@param bounded Logical, should current period's values be used in the
 #'calculation?
 #'@param \dots Other arguments to be passed to the \code{maType} function in
@@ -67,11 +71,6 @@
 #'     \item{ SMI }{ Stochastic Momentum Index }
 #'     \item{ signal }{ Stochastic Momentum Index signal line }
 #' }
-#'@returnItem fastK Stochastic Fast \%K
-#'@returnItem fastD Stochastic Fast \%D
-#'@returnItem slowD Stochastic Slow \%D
-#'@returnItem SMI Stochastic Momentum Index
-#'@returnItem signal Stochastic Momentum Index signal line
 #'@note The calculation for William's \%R is similar to that of stochastics'
 #'fast \%K.
 #'
@@ -94,12 +93,14 @@
 #'options; and note Warning section.  See \code{\link{WPR}} to compare it's
 #'results to fast \%K.
 #'@references The following site(s) were used to code/document these
-#'indicators:\cr Stochastic Oscillator:\cr
+#'indicators:
+#'\cr Stochastic Oscillator:\cr
 #'\url{http://www.fmlabs.com/reference/StochasticOscillator.htm}\cr
 #'\url{http://www.equis.com/Customer/Resources/TAAZ?c=3&p=106}\cr
 #'\url{http://linnsoft.com/tour/techind/stoc.htm}\cr
 #'\url{http://stockcharts.com/education/IndicatorAnalysis/indic_stochasticOscillator.html}\cr
-#'SMI:\cr \url{http://www.fmlabs.com/reference/default.htm?url=SMI.htm}\cr
+#'\cr SMI:\cr
+#'\url{http://www.fmlabs.com/reference/default.htm?url=SMI.htm}\cr
 #'@keywords ts
 #'@examples
 #'
@@ -121,15 +122,11 @@
 #'
 #'  stochRSI <- stoch( RSI(ttrc[,"Close"]) )
 #'@rdname stochastics
+#'@export
 "stoch" <-
 function(HLC, nFastK=14, nFastD=3, nSlowD=3, maType, bounded=TRUE, smooth=1, ...) {
 
   # Stochastics
-
-  # http://www.fmlabs.com/reference/StochasticOscillator.htm
-  # http://www.equis.com/Customer/Resources/TAAZ?c=3&p=106
-  # http://linnsoft.com/tour/techind/stoc.htm
-  # http://stockcharts.com/education/IndicatorAnalysis/indic_stochasticOscillator.html
 
   HLC <- try.xts(HLC, error=as.matrix)
 
@@ -218,6 +215,7 @@ function(HLC, nFastK=14, nFastD=3, nSlowD=3, maType, bounded=TRUE, smooth=1, ...
 #-------------------------------------------------------------------------#
 
 #'@rdname stochastics
+#'@export
 "SMI" <-
 function(HLC, n=13, nFast=2, nSlow=25, nSig=9, maType, bounded=TRUE, ...) {
 

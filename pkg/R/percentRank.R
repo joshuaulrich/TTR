@@ -1,3 +1,22 @@
+#
+#   TTR: Technical Trading Rules
+#
+#   Copyright (C) 2007-2012  Joshua M. Ulrich
+#
+#   This program is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation, either version 3 of the License, or
+#   (at your option) any later version.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+
 #'Percent Rank over a Moving Window
 #'
 #'This function computes a running/rolling percentage rank.
@@ -24,33 +43,34 @@
 #'@references The following site(s) were used to code/document this
 #'indicator:\cr \url{http://en.wikipedia.org/wiki/Percentile_rank}\cr
 #'@keywords ts
+#'@export
 runPercentRank <- function(x, n=260, cumulative = FALSE, exact.multiplier = 0.5) {
-	x <- try.xts(x, error = as.matrix)
-	
-	if (n < 1 || n > NROW(x)) stop("Invalid 'n'")
-	if (0 > exact.multiplier || exact.multiplier > 1) stop("Invalid 'exact.multiplier'")
-		
-	NAs <- sum(is.na(x))
-	if (NAs > 0) {
-		if (any(is.na(x[-(1:NAs)]))) stop("Series contains non-leading NAs")
-	}
-	beg <- 1 + NAs
-	
-	len <- NROW(x) - NAs
-	result <- double(NROW(x))
-	
-	if (cumulative) {
-		result <- .Fortran("cumprnk", ia = as.double(x[beg:NROW(x)]), lia = as.integer(len), 
-							xmlt = as.double(exact.multiplier), oa = as.double(result[beg:NROW(x)]), 
-							PACKAGE = "TTR", DUP = FALSE)$oa
-	} else if (identical(as.integer(n),1L)) {
-		result[] <- exact.multiplier
-	} else {
-		result <- .Fortran("runprnk", ia = as.double(x[beg:NROW(x)]), lia = as.integer(len), 
-							n = as.integer(n), xmlt = as.double(exact.multiplier), 
-							oa = as.double(result[beg:NROW(x)]), PACKAGE = "TTR", DUP = FALSE)$oa
-		is.na(result) <- c(1:(n - 1))
-	}
-	result <- c(rep(NA, NAs), result)
-	reclass(result, x)
+  x <- try.xts(x, error = as.matrix)
+
+  if (n < 1 || n > NROW(x)) stop("Invalid 'n'")
+  if (0 > exact.multiplier || exact.multiplier > 1) stop("Invalid 'exact.multiplier'")
+
+  NAs <- sum(is.na(x))
+  if (NAs > 0) {
+    if (any(is.na(x[-(1:NAs)]))) stop("Series contains non-leading NAs")
+  }
+  beg <- 1 + NAs
+
+  len <- NROW(x) - NAs
+  result <- double(NROW(x))
+
+  if (cumulative) {
+    result <- .Fortran("cumprnk", ia = as.double(x[beg:NROW(x)]), lia = as.integer(len), 
+              xmlt = as.double(exact.multiplier), oa = as.double(result[beg:NROW(x)]), 
+              PACKAGE = "TTR", DUP = FALSE)$oa
+  } else if (identical(as.integer(n),1L)) {
+    result[] <- exact.multiplier
+  } else {
+    result <- .Fortran("runprnk", ia = as.double(x[beg:NROW(x)]), lia = as.integer(len), 
+              n = as.integer(n), xmlt = as.double(exact.multiplier), 
+              oa = as.double(result[beg:NROW(x)]), PACKAGE = "TTR", DUP = FALSE)$oa
+    is.na(result) <- c(1:(n - 1))
+  }
+  result <- c(rep(NA, NAs), result)
+  reclass(result, x)
 }

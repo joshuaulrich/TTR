@@ -42,15 +42,11 @@
 #'  roc <- ROC(ttrc[,"Close"])
 #'  mom <- momentum(ttrc[,"Close"])
 #'@rdname changes
+#'@export
 "ROC" <-
 function(x, n=1, type=c("continuous","discrete"), na.pad=TRUE) {
 
   # Rate of Change
-
-  # http://www.fmlabs.com/reference/RateOfChange.htm
-  # http://www.equis.com/Customer/Resources/TAAZ/?c=3&p=95
-  # http://linnsoft.com/tour/techind/roc.htm
-  # http://stockcharts.com/education/IndicatorAnalysis/indic_ROC.htm
 
   x <- try.xts(x, error=as.matrix)
   type <- match.arg(type)
@@ -85,6 +81,7 @@ function(x, n=1, type=c("continuous","discrete"), na.pad=TRUE) {
 #-------------------------------------------------------------------------#
 
 #'@rdname changes
+#'@export
 "momentum" <-
 function(x, n=1, na.pad=TRUE) {
 

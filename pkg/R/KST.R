@@ -17,8 +17,6 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-
-
 #'Know Sure Thing
 #'
 #'The Know Sure Thing (KST) is a smooth, summed, rate of change indicator.
@@ -33,9 +31,13 @@
 #'@param n A vector of the number of periods to use in the MA calculations.
 #'@param nROC A vector of the number of periods to use in the ROC calculations.
 #'@param nSig The number of periods to use for the KST signal line.
-#'@param maType Either: \cr(1) A function or a string naming the function to be
-#'called, or\cr (2) a \emph{list} with the first component like (1) above, and
-#'additional parameters specified as \emph{named} components.  See Examples.
+#'@param maType Either:
+#'  \enumerate{
+#'    \item A function or a string naming the function to be called.
+#'    \item A \emph{list} with the first component like (1) above, and
+#'      additional parameters specified as \emph{named} components.
+#'      See Examples.
+#'  }
 #'@param wts A vector the same length as \code{n}, of the weight for each
 #'period (need not sum to one).
 #'@param \dots Other arguments to be passed to the \code{maType} function in
@@ -68,6 +70,7 @@
 #'  kst4MA <- KST(ttrc[,"Close"],
 #'    maType=list(list(SMA),list(EMA),list(DEMA),list(WMA)))
 #'
+#'@export
 "KST" <-
 function(price, n=c(10,10,10,15), nROC=c(10,15,20,30), nSig=9,
          maType, wts=1:NROW(n), ...) {

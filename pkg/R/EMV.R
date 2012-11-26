@@ -17,8 +17,6 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-
-
 #'Arms' Ease of Movement Value
 #'
 #'Arms' Ease of Movement Value (EMV) emphasizes days where the security moves
@@ -59,14 +57,11 @@
 #'  data(ttrc)
 #'  emv <- EMV(ttrc[,c("High","Low")], ttrc[,"Volume"])
 #'
+#'@export
 "EMV" <-
 function(HL, volume, n=9, maType, vol.divisor=10000, ...) {
 
   # Arms' Ease of Movement Value
-
-  # http://www.fmlabs.com/reference/ArmsEMV.htm
-  # http://www.equis.com/Customer/Resources/TAAZ/?c=3&p=51
-  # http://linnsoft.com/tour/techind/arms.htm
 
   if( missing(HL) | missing(volume) )
     stop("High-Low matrix (HL) and volume vector must be specified.")

@@ -17,8 +17,6 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-
-
 #'MACD Oscillator
 #'
 #'The MACD was developed by Gerald Appel and is probably the most popular price
@@ -34,10 +32,13 @@
 #'@param nFast Number of periods for fast moving average.
 #'@param nSlow Number of periods for slow moving average.
 #'@param nSig Number of periods for signal moving average.
-#'@param maType Either: \cr (1) A function or a string naming the function to
-#'be called, or\cr (2) a \emph{list} with the first component like (1) above,
-#'and additional parameters specified as \emph{named} components.  See
-#'Examples.
+#'@param maType Either:
+#'  \enumerate{
+#'    \item A function or a string naming the function to be called.
+#'    \item A \emph{list} with the first component like (1) above, and
+#'      additional parameters specified as \emph{named} components.
+#'      See Examples.
+#'  }
 #'@param percent logical; if \code{TRUE}, the percentage difference between the
 #'fast and slow moving averages is returned, otherwise the difference between
 #'the respective averages is returned.
@@ -58,11 +59,20 @@
 #'@seealso See \code{\link{EMA}}, \code{\link{SMA}}, etc. for moving average
 #'options; and note Warning section.
 #'@references The following site(s) were used to code/document this
-#'indicator:\cr \url{http://www.fmlabs.com/reference/MACD.htm}\cr
+#'indicator:
+#'\cr Moving Average Convergence/Divergence (MACD):\cr
+#'\url{http://www.fmlabs.com/reference/MACD.htm}\cr
+#'\url{http://www.equis.com/Customer/Resources/TAAZ/?c=3&p=66}\cr
+#'\url{http://linnsoft.com/tour/techind/macd.htm}\cr
+#'\url{http://stockcharts.com/education/IndicatorAnalysis/indic_MACD1.html}\cr
+#'\cr Price Oscillator:\cr
 #'\url{http://www.fmlabs.com/reference/PriceOscillator.htm}\cr
 #'\url{http://www.fmlabs.com/reference/PriceOscillatorPct.htm}\cr
-#'\url{http://stockcharts.com/education/IndicatorAnalysis/indic_MACD1.html}\cr
+#'\url{http://www.equis.com/Customer/Resources/TAAZ/?c=3&p=94}\cr
 #'\url{http://stockcharts.com/education/IndicatorAnalysis/indic_priceOscillator.html}\cr
+#'\cr Volume Oscillator:\cr
+#'\url{http://www.fmlabs.com/reference/PVO.htm}\cr
+#'\url{http://www.equis.com/Customer/Resources/TAAZ/Default.aspx?c=3&p=122}\cr
 #'@keywords ts
 #'@examples
 #'
@@ -72,26 +82,11 @@
 #'  macd2 <- MACD( ttrc[,"Close"], 12, 26, 9,
 #'           maType=list(list(SMA), list(EMA, wilder=TRUE), list(SMA)) )
 #'
+#'@export
 "MACD" <-
 function(x, nFast=12, nSlow=26, nSig=9, maType, percent=TRUE, ...) {
 
   # Oscillators
-
-  # Moving Average Convergence/Divergence (MACD)
-  # http://www.fmlabs.com/reference/MACD.htm
-  # http://www.equis.com/Customer/Resources/TAAZ/?c=3&p=66
-  # http://linnsoft.com/tour/techind/macd.htm
-  # http://stockcharts.com/education/IndicatorAnalysis/indic_MACD1.html
-
-  # Price Oscillator
-  # http://www.fmlabs.com/reference/PriceOscillator.htm
-  # http://www.fmlabs.com/reference/PriceOscillatorPct.htm
-  # http://www.equis.com/Customer/Resources/TAAZ/?c=3&p=94
-  # http://stockcharts.com/education/IndicatorAnalysis/indic_priceOscillator.html
-
-  # Volume Oscillator
-  # http://www.fmlabs.com/reference/PVO.htm
-  # http://www.equis.com/Customer/Resources/TAAZ/Default.aspx?c=3&p=122
 
   # WISHLIST:
   # Add capability to allow 'ma.slow' and 'ma.fast' to be vectors

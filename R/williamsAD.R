@@ -17,8 +17,6 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-
-
 #'Williams Accumulation / Distribution
 #'
 #'The Williams Accumulation / Distribution (AD) line is a measure of market
@@ -37,7 +35,8 @@
 #'@seealso See \code{\link{OBV}}, \code{\link{chaikinAD}}, and
 #'\code{\link{ATR}}.
 #'@references The following site(s) were used to code/document this
-#'indicator:\cr \url{http://www.fmlabs.com/reference/WilliamsAD.htm}\cr
+#'indicator:\cr
+#'\url{http://www.fmlabs.com/reference/WilliamsAD.htm}\cr
 #'\url{http://www.equis.com/Customer/Resources/TAAZ/?c=3&p=125}\cr
 #'@keywords ts
 #'@examples
@@ -45,13 +44,11 @@
 #'  data(ttrc)
 #'  ad <- williamsAD(ttrc[,c("High","Low","Close")])
 #'
+#'@export
 "williamsAD" <-
 function(HLC) {
 
   # Williams Accumulation/Distribution
-
-  # http://www.fmlabs.com/reference/WilliamsAD.htm
-  # http://www.equis.com/Customer/Resources/TAAZ/?c=3&p=125
 
   HLC <- try.xts(HLC, error=as.matrix)
 

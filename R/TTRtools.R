@@ -46,6 +46,7 @@
 #'@author Joshua Ulrich
 #'@keywords ts
 #'@rdname TTRtools
+#'@export
 "lags" <-
 function(x, n=1) {
 
@@ -67,6 +68,7 @@ function(x, n=1) {
 
 #-------------------------------------------------------------------------#
 #'@rdname TTRtools
+#'@export
 "growth" <-
 function(price, signals, ...) {
 
@@ -86,6 +88,7 @@ function(price, signals, ...) {
 #-------------------------------------------------------------------------#
 
 #'@rdname TTRtools
+#'@export
 'naCheck' <-
 function(x, n=0) {
 

@@ -17,8 +17,6 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-
-
 #'True Range / Average True Range
 #'
 #'True range (TR) is a measure of volatility of a High-Low-Close series;
@@ -62,16 +60,11 @@
 #'  data(ttrc)
 #'  atr <- ATR(ttrc[,c("High","Low","Close")], n=14)
 #'
+#'@export
 "ATR" <-
 function(HLC, n=14, maType, ...) {
 
   # Average True Range / True Range
-
-  # http://www.fmlabs.com/reference/TR.htm
-  # http://www.fmlabs.com/reference/ATR.htm
-  # http://www.equis.com/Customer/Resources/TAAZ/?c=3&p=35
-  # http://www.linnsoft.com/tour/techind/trueRange.htm
-  # http://stockcharts.com/education/IndicatorAnalysis/indic_ATR.html
 
   HLC <- try.xts(HLC, error=as.matrix)
   

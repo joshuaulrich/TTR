@@ -17,8 +17,6 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-
-
 #'Donchian Channel
 #'
 #'Donchian Channels were created by Richard Donchian and were used to generate
@@ -62,12 +60,11 @@
 #'  data(ttrc)
 #'  dc <- DonchianChannel( ttrc[,c("High","Low")] )
 #'
+#'@export
 'DonchianChannel' <-
 function(HL, n=10, include.lag=FALSE) {
 
   # Donchian Channel
-
-  # http://www.linnsoft.com/tour/techind/donch.htm
 
   # Notes from John Bollinger:
   #

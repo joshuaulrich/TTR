@@ -17,8 +17,6 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-
-
 #'William's \%R
 #'
 #'William's \% R.
@@ -37,7 +35,8 @@
 #'@author Joshua Ulrich
 #'@seealso See \code{\link{stoch}}.
 #'@references The following site(s) were used to code/document this
-#'indicator:\cr \url{http://www.fmlabs.com/reference/WilliamsR.htm}\cr
+#'indicator:\cr
+#'\url{http://www.fmlabs.com/reference/WilliamsR.htm}\cr
 #'\url{http://www.equis.com/Customer/Resources/TAAZ?c=3&p=126}\cr
 #'\url{http://linnsoft.com/tour/techind/willR.htm}\cr
 #'\url{http://stockcharts.com/education/IndicatorAnalysis/indic_williamsR.html}\cr
@@ -54,15 +53,11 @@
 #'  lines(tail(stochWPR, 100), col="blue")
 #'  lines(tail(1-stochWPR, 100), col="red", lty="dashed")
 #'
+#'@export
 "WPR" <-
 function(HLC, n=14) {
 
   # William's Percent R (similar to Stochastics' fast %K)
-
-  # http://www.fmlabs.com/reference/WilliamsR.htm
-  # http://www.equis.com/Customer/Resources/TAAZ?c=3&p=126
-  # http://linnsoft.com/tour/techind/willR.htm
-  # http://stockcharts.com/education/IndicatorAnalysis/indic_williamsR.html
 
   HLC <- try.xts(HLC, error=as.matrix)
   

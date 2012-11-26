@@ -17,8 +17,6 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-
-
 #'Commodity Channel Index
 #'
 #'The Commodity Channel Index (CCI) attempts to identify starting and ending
@@ -61,15 +59,11 @@
 #'  data(ttrc)
 #'  cci <- CCI(ttrc[,c("High","Low","Close")])
 #'
+#'@export
 "CCI" <-
 function(HLC, n=20, maType, c=0.015, ...) {
 
   # Commodity Channel Index
-
-  # http://www.fmlabs.com/reference/CCI.htm
-  # http://www.equis.com/Customer/Resources/TAAZ/?c=3&p=42
-  # http://www.linnsoft.com/tour/techind/cci.htm
-  # http://stockcharts.com/education/IndicatorAnalysis/indic_CCI.html
 
   HLC <- try.xts(HLC, error=as.matrix)
 

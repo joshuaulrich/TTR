@@ -17,8 +17,6 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-
-
 #'Zig Zag
 #'
 #'Zig Zag higlights trends by removing price changes smaller than \code{change}
@@ -57,17 +55,12 @@
 #'  data(ttrc)
 #'  zz <- ZigZag( ttrc[,c("High", "Low")], change=20 )
 #'
+#'@export
 "ZigZag" <- 
 function( HL, change=10, percent=TRUE, retrace=FALSE, lastExtreme=TRUE ) {
 
   # Zig Zag Indicator
   # Adapted from Alberto Santini's code
-
-  # http://www.fmlabs.com/reference/default.htm?url=ZigZag.htm
-  # http://www.linnsoft.com/tour/techind/zigzag.htm
-  # http://www.linnsoft.com/tour/techind/zigosc.htm
-  # http://www.equis.com/Customer/Resources/TAAZ/?c=3&p=127
-  # http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:zigzag
 
   HL <- try.xts(HL, error=as.matrix)
   HL.na <- naCheck(HL,0)

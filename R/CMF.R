@@ -17,8 +17,6 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-
-
 #'Chaikin Money Flow
 #'
 #'Chaikin Money Flow compares total volume over the last \code{n} time periods
@@ -51,14 +49,11 @@
 #'  data(ttrc)
 #'  cmf <- CMF(ttrc[,c("High","Low","Close")], ttrc[,"Volume"])
 #'
+#'@export
 "CMF" <-
 function(HLC, volume, n=20) {
 
   # Chaikin Money Flow
-
-  # http://www.fmlabs.com/reference/ChaikinMoneyFlow.htm
-  # http://www.linnsoft.com/tour/techind/cmf.htm
-  # http://stockcharts.com/education/IndicatorAnalysis/indic_ChaikinMoneyFlow1.html
 
   HLC <- try.xts(HLC, error=as.matrix)
   volume <- try.xts(volume, error=as.matrix)

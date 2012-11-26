@@ -17,8 +17,6 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-
-
 #'DV Intermediate Oscillator
 #'
 #'The DV Intermediate oscillator (DVI) is a very smooth momentum oscillator
@@ -47,11 +45,11 @@
 #'  data(ttrc)
 #'  dvi <- DVI(ttrc[,"Close"])
 #'
+#'@export
 DVI <- function(price, n=252, wts=c(0.8,0.2), smooth=3,
   magnitude=c(5,100,5), stretch=c(10,100,2)) {
 
-  # Implementation of David Varadi's DVI indicator, based on:
-  # http://marketsci.wordpress.com/2010/07/27/css-analytics\%E2\%80\%99-dvi-indicator-revealed/
+  # David Varadi's DVI indicator
 
   # try to convert 'price' to xts
   price <- try.xts(price, error=as.matrix)

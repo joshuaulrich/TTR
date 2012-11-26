@@ -17,8 +17,6 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-
-
 #'Aroon
 #'
 #'The Aroon indicator attempts to identify starting trends.  The indicator
@@ -42,9 +40,6 @@
 #'   \item{ aroonDn }{ The Aroon down indicator. }
 #'   \item{ oscillator }{ The Aroon oscillator (\code{aroonUp - aroonDn}). }
 #' }
-#'@returnItem aroonUp The Aroon up indicator.
-#'@returnItem aroonDn The Aroon down indicator.
-#'@returnItem oscillator The Aroon oscillator (\code{aroonUp - aroonDn}).
 #'@note If High-Low prices are given, the function calculates the max/min using
 #'the high/low prices.  Otherwise the function calculates the max/min of the
 #'single series.
@@ -68,15 +63,11 @@
 #'  data(ttrc)
 #'  trend <- aroon( ttrc[,c("High", "Low")], n=20 )
 #'
+#'@export
 "aroon" <-
 function(HL, n=20) {
 
   # Aroon up, down, and oscillator.
-
-  # http://www.fmlabs.com/reference/Aroon.htm
-  # http://www.fmlabs.com/reference/AroonOscillator.htm
-  # http://www.linnsoft.com/tour/techind/aroon.htm
-  # http://stockcharts.com/education/IndicatorAnalysis/indic-Aroon.htm
 
   HL <- try.xts(HL, error=as.matrix)
 

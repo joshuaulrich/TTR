@@ -72,17 +72,11 @@
 #'  bbands.HLC <- BBands( ttrc[,c("High","Low","Close")] )
 #'  bbands.close <- BBands( ttrc[,"Close"] )
 #'@rdname bollingerBands
+#'@export
 "BBands" <-
 function(HLC, n=20, maType, sd=2, ...) {
 
   # Bollinger Bands
-
-  # http://www.fmlabs.com/reference/Bollinger.htm
-  # http://www.fmlabs.com/reference/BollingerWidth.htm
-  # http://www.equis.com/Customer/Resources/TAAZ/?c=3&p=36
-  # http://www.linnsoft.com/tour/techind/bb.htm
-  # http://stockcharts.com/education/IndicatorAnalysis/indic_Bbands.html
-  # http://stockcharts.com/education/IndicatorAnalysis/indic_BBWidth.htm
 
   HLC <- try.xts(HLC, error=as.matrix)
 

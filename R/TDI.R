@@ -17,8 +17,6 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-
-
 #'Trend Detection Index
 #'
 #'The Trend Detection Index (TDI) attempts to identify starting and ending
@@ -45,8 +43,6 @@
 #'   \item{ tdi }{ The Trend Detection Index. }
 #'   \item{ di }{ The Direction Indicator. }
 #' }
-#'@returnItem tdi The Trend Detection Index.
-#'@returnItem di The Direction Indicator.
 #'@note Positive/negative TDI values signal a trend/consolidation.  A positive/
 #'negative direction indicator signals a up/down trend.  I.e. buy if the TDI
 #'and the direction indicator are positive, and sell if the TDI is positive
@@ -56,19 +52,19 @@
 #'\code{\link{VHF}}, \code{\link{GMMA}} for other indicators that measure trend
 #'direction/strength.
 #'@references The following site(s) were used to code/document this
-#'indicator:\cr \url{http://www.linnsoft.com/tour/techind/tdi.htm}\cr
+#'indicator:\cr
+#'\url{http://www.linnsoft.com/tour/techind/tdi.htm}\cr
 #'@keywords ts
 #'@examples
 #'
 #'  data(ttrc)
 #'  tdi <- TDI(ttrc[,"Close"], n=30)
 #'
+#'@export
 "TDI" <-
 function(price, n=20, multiple=2) {
 
   # Trend Detection Index
-
-  # http://www.linnsoft.com/tour/techind/tdi.htm
 
   price <- try.xts(price, error=as.matrix)
   

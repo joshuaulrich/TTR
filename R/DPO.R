@@ -17,8 +17,6 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-
-
 #'De-Trended Price Oscillator
 #'
 #'The Detrended Price Oscillator (DPO) removes the trend in prices - or other
@@ -54,13 +52,11 @@
 #'  priceDPO <- DPO(ttrc[,"Close"])
 #'  volumeDPO <- DPO(ttrc[,"Volume"])
 #'
+#'@export
 "DPO" <-
 function(x, n=10, maType, shift=n/2+1, percent=FALSE, ...) {
 
   # De-Trended Price Oscillator
-
-  # http://www.fmlabs.com/reference/DPO.htm
-  # http://www.equis.com/Customer/Resources/TAAZ/?c=3&p=48
 
   x <- try.xts(x, error=as.matrix)
 

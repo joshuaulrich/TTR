@@ -17,8 +17,6 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-
-
 #'Relative Strength Index
 #'
 #'The Relative Strength Index (RSI) calculates a ratio of the recent upward
@@ -32,9 +30,13 @@
 #'
 #'@param price Price series that is coercible to xts or matrix.
 #'@param n Number of periods for moving averages.
-#'@param maType Either: \cr(1) A function or a string naming the function to be
-#'called, or\cr (2) a \emph{list} with the first component like (1) above, and
-#'additional parameters specified as \emph{named} components.  See Examples.
+#'@param maType Either:
+#'  \enumerate{
+#'    \item A function or a string naming the function to be called.
+#'    \item A \emph{list} with the first component like (1) above, and
+#'      additional parameters specified as \emph{named} components.
+#'      See Examples.
+#'  }
 #'@param \dots Other arguments to be passed to the \code{maType} function in
 #'case (1) above.
 #'@return A object of the same class as \code{price} or a vector (if
@@ -51,10 +53,15 @@
 #'options; and note Warning section.  See \code{\link{CMO}} for a variation on
 #'RSI.
 #'@references The following site(s) were used to code/document this
-#'indicator:\cr \url{http://www.fmlabs.com/reference/RSI.htm}\cr
+#'indicator:
+#'\cr Relative Strength Index:\cr
+#'\url{http://www.fmlabs.com/reference/RSI.htm}\cr
 #'\url{http://www.equis.com/Customer/Resources/TAAZ/?c=3&p=100}\cr
 #'\url{http://linnsoft.com/tour/techind/rsi.htm}\cr
 #'\url{http://stockcharts.com/education/IndicatorAnalysis/indic_RSI.html}\cr
+#'\cr Stochastic RSI:\cr
+#'\url{http://www.fmlabs.com/reference/StochRSI.htm}\cr
+#'\url{http://stockcharts.com/education/IndicatorAnalysis/indic_stochRSI.html}\cr
 #'@keywords ts
 #'@examples
 #'
@@ -72,20 +79,9 @@
 #'                maDown=list(WMA,wts=1:10)))
 #'
 #'
+#'@export
 "RSI" <- 
 function(price, n=14, maType, ...) {
-
-  # Relative Strength Index
-
-  # http://www.fmlabs.com/reference/RSI.htm
-  # http://www.equis.com/Customer/Resources/TAAZ/?c=3&p=100
-  # http://linnsoft.com/tour/techind/rsi.htm
-  # http://stockcharts.com/education/IndicatorAnalysis/indic_RSI.html
-
-  # Stochastic RSI
-
-  # http://www.fmlabs.com/reference/StochRSI.htm
-  # http://stockcharts.com/education/IndicatorAnalysis/indic_stochRSI.html
 
   price <- try.xts(price, error=as.matrix)
 

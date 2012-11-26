@@ -17,8 +17,6 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-
-
 #'Vertical Horizontal Filter
 #'
 #'The Vertical Horizontal Filter (VHF) attempts to identify starting and ending
@@ -41,7 +39,8 @@
 #'\code{\link{TDI}}, \code{\link{GMMA}} for other indicators that measure trend
 #'direction/strength.
 #'@references The following site(s) were used to code/document this
-#'indicator:\cr \url{http://www.equis.com/Customer/Resources/TAAZ?c=3&p=119}\cr
+#'indicator:\cr
+#'\url{http://www.equis.com/Customer/Resources/TAAZ?c=3&p=119}\cr
 #'@keywords ts
 #'@examples
 #'
@@ -49,12 +48,11 @@
 #'  vhf.close <- VHF(ttrc[,"Close"])
 #'  vhf.hilow <- VHF(ttrc[,c("High","Low","Close")])
 #'
+#'@export
 "VHF" <-
 function(price, n=28) {
 
   # Vertical Horizontal Filter
-
-  # http://www.equis.com/Customer/Resources/TAAZ?c=3&p=119
 
   price <- try.xts(price, error=as.matrix)
 

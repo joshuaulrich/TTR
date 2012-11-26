@@ -17,8 +17,6 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-
-
 #'Money Flow Index
 #'
 #'The MFI is a ratio of positive and negative money flow over time.
@@ -56,14 +54,11 @@
 #'  data(ttrc)
 #'  mfi <- MFI(ttrc[,c("High","Low","Close")], ttrc[,"Volume"])
 #'
+#'@export
 "MFI" <-
 function(HLC, volume, n=14) {
 
   # Money Flow Index
-
-  # http://www.fmlabs.com/reference/default.htm?url=MoneyFlowIndex.htm
-  # http://www.linnsoft.com/tour/techind/mfi.htm
-  # http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:money_flow_index_mfi
 
   HLC <- try.xts(HLC, error=as.matrix)
   volume <- try.xts(volume, error=as.matrix)

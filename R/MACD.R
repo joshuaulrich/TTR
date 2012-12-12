@@ -120,8 +120,8 @@ function(x, nFast=12, nSlow=26, nSig=9, maType, percent=TRUE, ...) {
       maType[[3]]$n <- nSig
     }
     
-    mavg.slow <- do.call( maType[[1]][[1]], c( list(x), maType[[1]][-1] ) )
-    mavg.fast <- do.call( maType[[2]][[1]], c( list(x), maType[[2]][-1] ) )
+    mavg.fast <- do.call( maType[[1]][[1]], c( list(x), maType[[1]][-1] ) )
+    mavg.slow <- do.call( maType[[2]][[1]], c( list(x), maType[[2]][-1] ) )
 
   }
   

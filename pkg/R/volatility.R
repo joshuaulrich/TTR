@@ -21,11 +21,11 @@
 #'
 #'Selected volatility estimators/indicators; various authors.
 #'
-#'\itemize{ \item Close-to-Close Volatility (\code{calc="close"})\cr
-#'  \deqn{ \sigma_{cl} = \sqrt{\frac{Z}{n-2} \sum_{i=1}^{n-1}(r_i-\bar{r})^2} }
-#'    { sqrt(N/(n-2)*sum((r-mean(r))^2)) }
-#'  where \eqn{ r_i = \ln \left(\frac{C_i}{C_{i-1}}\right) }
-#'  and \deqn{ \bar{r} = \frac{r_1+r_2+\ldots r_{n-1}}{n-1} }
+#'\itemize{ 
+#'   \item Close-to-Close Volatility (\code{calc="close"})\cr
+#'      \deqn{ \sigma_{cl} = \sqrt{\frac{Z}{n-2} \sum_{i=1}^{n-1}(r_i-\bar{r})^2} }{sqrt(N/(n-2)*sum((r-mean(r))^2))} 
+#'      where \deqn{ r_i = \log \left(\frac{C_i}{C_{i-1}}\right) }
+#'      and \deqn{ \bar{r} = \frac{r_1+r_2+\ldots r_{n-1}}{n-1} }
 #'
 #'\item OHLC Volatility: Garman and Klass (\code{calc="garman.klass"})\cr The
 #'Garman and Klass estimator for estimating historical volatility assumes
@@ -34,30 +34,31 @@
 #'than the close-to-close estimator.
 #'  \deqn{ \sigma = \sqrt{ \frac{Z}{n} \sum
 #'    \left[ \textstyle\frac{1}{2}\displaystyle
-#'      \left( \ln \frac{H_i}{L_i} \right)^2  - (2\ln 2-1)
-#'      \left( \ln \frac{C_i}{O_i} \right)^2 \right] } }
+#'      \left( \log \frac{H_i}{L_i} \right)^2  - (2\log 2-1)
+#'      \left( \log \frac{C_i}{O_i} \right)^2 \right] } }
 #'
-#'\item High-Low Volatility: Parkinson (\code{calc="parkinson"})\cr The
-#'Parkinson formula for estimating the historical volatility of an underlying
-#'based on high and low prices.
-#'  \deqn{ \sigma = \sqrt{ \frac{Z}{n 4 \ln 2} \sum_{i=1}^{n}
-#'    \left(\ln \frac{H_i}{L_i}\right)^2} }
+#'\item High-Low Volatility: Parkinson (\code{calc="parkinson"})\cr 
+#' The Parkinson formula for estimating the historical volatility of 
+#' an underlying based on high and low prices.
+#'  \deqn{ \sigma = \sqrt{ \frac{Z}{4 n \times \log 2} \sum_{i=1}^{n}
+#'    \left(\log \frac{H_i}{L_i}\right)^2} }
 #'
 #'\item OHLC Volatility: Rogers and Satchell (\code{calc="rogers.satchell"})\cr
 #'The Roger and Satchell historical volatility estimator allows for non-zero
 #'drift, but assumed no opening jump.
 #'  \deqn{ \sigma = \sqrt{ \textstyle\frac{Z}{n} \sum \left[
-#'    \ln \textstyle\frac{H_i}{C_i} \ln \textstyle\frac{H_i}{O_i} +
-#'    \ln \textstyle\frac{L_i}{C_i} \ln \textstyle\frac{L_i}{O_i} \right] } }
+#'    \log \textstyle\frac{H_i}{C_i} \times \log \textstyle\frac{H_i}{O_i} +
+#'    \log \textstyle\frac{L_i}{C_i} \times \log \textstyle\frac{L_i}{O_i} \right] } }
 #'
 #'\item OHLC Volatility: Garman and Klass - Yang and Zhang
 #'(\code{calc="gk.yz"})\cr This estimator is a modified version of the Garman
 #'and Klass estimator that allows for opening gaps.
+#' 
 #'  \deqn{ \sigma = \sqrt{ \textstyle\frac{Z}{n} \sum \left[
-#'    \left( \ln \textstyle\frac{O_i}{C_{i-1}} \right)^2  +
+#'    \left( \log \textstyle\frac{O_i}{C_{i-1}} \right)^2  +
 #'      \textstyle\frac{1}{2}\displaystyle
-#'    \left( \ln \textstyle\frac{H_i}{L_i} \right)^2 - (2\ln 2-1)
-#'    \left( \ln \textstyle\frac{C_i}{O_i} \right)^2 \right] } }
+#'    \left( \log \textstyle\frac{H_i}{L_i} \right)^2 - (2 \times \log 2-1)
+#'    \left( \log \textstyle\frac{C_i}{O_i} \right)^2 \right] } }
 #'
 #'\item OHLC Volatility: Yang and Zhang (\code{calc="yang.zhang"})\cr The Yang
 #'and Zhang historical volatility estimator has minimum estimation error, and
@@ -70,14 +71,14 @@
 #'provided.
 #'  \deqn{ \sigma^2 = \sigma_o^2 + k\sigma_c^2 + (1-k)\sigma_{rs}^2 }
 #'  \deqn{ \sigma_o^2 =\textstyle \frac{Z}{n-1} \sum
-#'    \left( \ln\frac{O_i}{C_{i-1}}-\mu_o \right)^2 }
-#'  \deqn{ \mu_o=\textstyle \frac{1}{n} \sum \ln\frac{O_i}{C_{i-1}} }
+#'    \left( \log \frac{O_i}{C_{i-1}}-\mu_o \right)^2 }
+#'  \deqn{ \mu_o=\textstyle \frac{1}{n} \sum \log \frac{O_i}{C_{i-1}} }
 #'  \deqn{ \sigma_c^2 =\textstyle \frac{Z}{n-1} \sum
-#'    \left( \ln\frac{C_i}{O_i}-\mu_c \right)^2 }
-#'  \deqn{ \mu_c=\textstyle \frac{1}{n} \sum \ln\frac{C_i}{O_i} }
+#'    \left( \log \frac{C_i}{O_i}-\mu_c \right)^2 }
+#'  \deqn{ \mu_c=\textstyle \frac{1}{n} \sum \log \frac{C_i}{O_i} }
 #'  \deqn{ \sigma_{rs}^2 = \textstyle\frac{Z}{n} \sum \left( 
-#'    \ln \textstyle\frac{H_i}{C_i} \ln \textstyle\frac{H_i}{O_i} + 
-#'    \ln \textstyle\frac{L_i}{C_i} \ln \textstyle\frac{L_i}{O_i} 
+#'    \log \textstyle\frac{H_i}{C_i} \times \log \textstyle\frac{H_i}{O_i} + 
+#'    \log \textstyle\frac{L_i}{C_i} \times \log \textstyle\frac{L_i}{O_i} 
 #'    \right) }
 #'  \deqn{ k=\frac{\alpha}{1+\frac{n+1}{n-1}} }
 #'}

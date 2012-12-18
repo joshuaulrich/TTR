@@ -52,12 +52,12 @@
 #'@param nSlow Number of periods for double smoothing.
 #'@param nSig Number of periods for signal line.
 #'@param maType Either:
-#'  \enumerate{
-#'    \item A function or a string naming the function to be called.
-#'    \item A \emph{list} with the first component like (1) above, and
-#'      additional parameters specified as \emph{named} components.
-#'      See Examples.
-#'  }
+#' \enumerate{
+#'   \item A function or a string naming the function to be called.
+#'   \item A \emph{list} with the first component like (1) above, and
+#'     additional parameters specified as \emph{named} components.
+#'     See Examples.
+#' }
 #'@param bounded Logical, should current period's values be used in the
 #'calculation?
 #'@param \dots Other arguments to be passed to the \code{maType} function in
@@ -65,11 +65,11 @@
 #'@return A object of the same class as \code{HLC} or a matrix (if
 #'\code{try.xts} fails) containing the columns:
 #' \describe{
-#'     \item{ fastK }{ Stochastic Fast \%K }
-#'     \item{ fastD }{ Stochastic Fast \%D }
-#'     \item{ slowD }{ Stochastic Slow \%D }
-#'     \item{ SMI }{ Stochastic Momentum Index }
-#'     \item{ signal }{ Stochastic Momentum Index signal line }
+#'    \item{ fastK }{ Stochastic Fast \%K }
+#'    \item{ fastD }{ Stochastic Fast \%D }
+#'    \item{ slowD }{ Stochastic Slow \%D }
+#'    \item{ SMI }{ Stochastic Momentum Index }
+#'    \item{ signal }{ Stochastic Momentum Index signal line }
 #' }
 #'@note The calculation for William's \%R is similar to that of stochastics'
 #'fast \%K.
@@ -104,23 +104,23 @@
 #'@keywords ts
 #'@examples
 #'
-#'  data(ttrc)
-#'  stochOSC <- stoch(ttrc[,c("High","Low","Close")])
-#'  stochWPR <- WPR(ttrc[,c("High","Low","Close")])
+#' data(ttrc)
+#' stochOSC <- stoch(ttrc[,c("High","Low","Close")])
+#' stochWPR <- WPR(ttrc[,c("High","Low","Close")])
 #'
-#'  plot(tail(stochOSC[,"fastK"], 100), type="l",
-#'      main="Fast %K and Williams %R", ylab="",
-#'      ylim=range(cbind(stochOSC, stochWPR), na.rm=TRUE) )
-#'  lines(tail(stochWPR, 100), col="blue")
-#'  lines(tail(1-stochWPR, 100), col="red", lty="dashed")
+#' plot(tail(stochOSC[,"fastK"], 100), type="l",
+#'     main="Fast %K and Williams %R", ylab="",
+#'     ylim=range(cbind(stochOSC, stochWPR), na.rm=TRUE) )
+#' lines(tail(stochWPR, 100), col="blue")
+#' lines(tail(1-stochWPR, 100), col="red", lty="dashed")
 #'
-#'  stoch2MA <- stoch( ttrc[,c("High","Low","Close")],
-#'      maType=list(list(SMA), list(EMA, wilder=TRUE), list(SMA)) )
+#' stoch2MA <- stoch( ttrc[,c("High","Low","Close")],
+#'     maType=list(list(SMA), list(EMA, wilder=TRUE), list(SMA)) )
 #'
-#'  SMI3MA <- SMI(ttrc[,c("High","Low","Close")],
-#'      maType=list(list(SMA), list(EMA, wilder=TRUE), list(SMA)) )
+#' SMI3MA <- SMI(ttrc[,c("High","Low","Close")],
+#'     maType=list(list(SMA), list(EMA, wilder=TRUE), list(SMA)) )
 #'
-#'  stochRSI <- stoch( RSI(ttrc[,"Close"]) )
+#' stochRSI <- stoch( RSI(ttrc[,"Close"]) )
 #'@rdname stochastics
 #'@export
 "stoch" <-

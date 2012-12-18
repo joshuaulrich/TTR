@@ -46,8 +46,8 @@
 #'@keywords ts
 #'@examples
 #'
-#'  data(ttrc)
-#'  ad <- chaikinAD(ttrc[,c("High","Low","Close")], ttrc[,"Volume"])
+#' data(ttrc)
+#' ad <- chaikinAD(ttrc[,c("High","Low","Close")], ttrc[,"Volume"])
 #'
 #'@export
 "chaikinAD" <-

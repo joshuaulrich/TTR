@@ -48,9 +48,9 @@
 #'@keywords ts
 #'@examples
 #'
-#'  data(ttrc)
-#'  priceDPO <- DPO(ttrc[,"Close"])
-#'  volumeDPO <- DPO(ttrc[,"Volume"])
+#' data(ttrc)
+#' priceDPO <- DPO(ttrc[,"Close"])
+#' volumeDPO <- DPO(ttrc[,"Volume"])
 #'
 #'@export
 "DPO" <-

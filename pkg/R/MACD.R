@@ -33,12 +33,12 @@
 #'@param nSlow Number of periods for slow moving average.
 #'@param nSig Number of periods for signal moving average.
 #'@param maType Either:
-#'  \enumerate{
-#'    \item A function or a string naming the function to be called.
-#'    \item A \emph{list} with the first component like (1) above, and
-#'      additional parameters specified as \emph{named} components.
-#'      See Examples.
-#'  }
+#' \enumerate{
+#'   \item A function or a string naming the function to be called.
+#'   \item A \emph{list} with the first component like (1) above, and
+#'     additional parameters specified as \emph{named} components.
+#'     See Examples.
+#' }
 #'@param percent logical; if \code{TRUE}, the percentage difference between the
 #'fast and slow moving averages is returned, otherwise the difference between
 #'the respective averages is returned.
@@ -47,8 +47,8 @@
 #'@return A object of the same class as \code{x} or a matrix (if \code{try.xts}
 #'fails) containing the columns:
 #' \describe{
-#'   \item{ macd }{ The price (volume, etc.) oscillator. }
-#'   \item{ signal }{ The oscillator signal line (a moving average of the oscillator). }
+#'  \item{ macd }{ The price (volume, etc.) oscillator. }
+#'  \item{ signal }{ The oscillator signal line (a moving average of the oscillator). }
 #' }
 #'@note The MACD is a special case of the general oscillator applied to price.
 #'The MACD can be used as a general oscillator applied to any series. Time
@@ -76,11 +76,11 @@
 #'@keywords ts
 #'@examples
 #'
-#'  data(ttrc)
+#' data(ttrc)
 #'
-#'  macd  <- MACD( ttrc[,"Close"], 12, 26, 9, maType="EMA" )
-#'  macd2 <- MACD( ttrc[,"Close"], 12, 26, 9,
-#'           maType=list(list(SMA), list(EMA, wilder=TRUE), list(SMA)) )
+#' macd  <- MACD( ttrc[,"Close"], 12, 26, 9, maType="EMA" )
+#' macd2 <- MACD( ttrc[,"Close"], 12, 26, 9,
+#'          maType=list(list(SMA), list(EMA, wilder=TRUE), list(SMA)) )
 #'
 #'@export
 "MACD" <-

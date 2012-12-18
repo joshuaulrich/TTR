@@ -43,10 +43,10 @@
 #'@return A object of the same class as \code{HLC} or a matrix (if
 #'\code{try.xts} fails) containing the columns:
 #' \describe{
-#'   \item{ dn }{ The lower Bollinger Band. }
-#'   \item{ ma }{ The middle Moving Average (see notes). }
-#'   \item{ up }{ The upper Bollinger Band. }
-#'   \item{ pctB }{ The \%B calculation. }
+#'  \item{ dn }{ The lower Bollinger Band. }
+#'  \item{ ma }{ The middle Moving Average (see notes). }
+#'  \item{ up }{ The upper Bollinger Band. }
+#'  \item{ pctB }{ The \%B calculation. }
 #' }            
 #'@note Using any moving average other than SMA will result in inconsistencies
 #'between the moving average calculation and the standard deviation
@@ -65,12 +65,12 @@
 #'@keywords ts
 #'@examples
 #'
-#'  ## The examples below show the differences between using a
-#'  ## High-Low-Close series, and just a close series when
-#'  ## calculating Bollinger Bands.
-#'  data(ttrc)
-#'  bbands.HLC <- BBands( ttrc[,c("High","Low","Close")] )
-#'  bbands.close <- BBands( ttrc[,"Close"] )
+#' ## The examples below show the differences between using a
+#' ## High-Low-Close series, and just a close series when
+#' ## calculating Bollinger Bands.
+#' data(ttrc)
+#' bbands.HLC <- BBands( ttrc[,c("High","Low","Close")] )
+#' bbands.close <- BBands( ttrc[,"Close"] )
 #'@rdname bollingerBands
 #'@export
 "BBands" <-

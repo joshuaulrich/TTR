@@ -42,8 +42,8 @@
 #'@keywords ts
 #'@examples
 #'
-#'  data(ttrc)
-#'  dvi <- DVI(ttrc[,"Close"])
+#' data(ttrc)
+#' dvi <- DVI(ttrc[,"Close"])
 #'
 #'@export
 DVI <- function(price, n=252, wts=c(0.8,0.2), smooth=3,

@@ -47,8 +47,8 @@
 #'@keywords ts
 #'@examples
 #'
-#'  data(ttrc)
-#'  sar <- SAR(ttrc[,c("High","Low")])
+#' data(ttrc)
+#' sar <- SAR(ttrc[,c("High","Low")])
 #'
 #'@export
 "SAR" <-

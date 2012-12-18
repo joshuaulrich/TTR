@@ -56,8 +56,8 @@
 #'@keywords ts
 #'@examples
 #'
-#'  data(ttrc)
-#'  cci <- CCI(ttrc[,c("High","Low","Close")])
+#' data(ttrc)
+#' cci <- CCI(ttrc[,c("High","Low","Close")])
 #'
 #'@export
 "CCI" <-

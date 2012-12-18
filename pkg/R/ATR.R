@@ -39,10 +39,10 @@
 #'@return A object of the same class as \code{HLC} or a matrix (if
 #'\code{try.xts} fails) containing the columns:\
 #' \describe{
-#'   \item{ tr }{ The true range of the series. }
-#'   \item{ atr }{ The average (as specified by \code{ma}) true range of the series. }
-#'   \item{ true.high }{ The true high of the series. }
-#'   \item{ true.low }{ The true low of the series. }
+#'  \item{ tr }{ The true range of the series. }
+#'  \item{ atr }{ The average (as specified by \code{ma}) true range of the series. }
+#'  \item{ true.high }{ The true high of the series. }
+#'  \item{ true.low }{ The true low of the series. }
 #' }
 #'@author Joshua Ulrich
 #'@seealso See \code{\link{EMA}}, \code{\link{SMA}}, etc. for moving average
@@ -57,8 +57,8 @@
 #'@keywords ts
 #'@examples
 #'
-#'  data(ttrc)
-#'  atr <- ATR(ttrc[,c("High","Low","Close")], n=14)
+#' data(ttrc)
+#' atr <- ATR(ttrc[,c("High","Low","Close")], n=14)
 #'
 #'@export
 "ATR" <-

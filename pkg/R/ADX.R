@@ -33,10 +33,10 @@
 #'@return A object of the same class as \code{HLC} or a matrix (if
 #'\code{try.xts} fails) containing the columns:
 #' \describe{
-#'   \item{ DIp }{ The positive Direction Index. }
-#'   \item{ DIn }{ The negative Direction Index. }
-#'   \item{ DX }{ The Direction Index. }
-#'   \item{ ADX }{ The Average Direction Index (trend strength). }
+#'  \item{ DIp }{ The positive Direction Index. }
+#'  \item{ DIn }{ The negative Direction Index. }
+#'  \item{ DX }{ The Direction Index. }
+#'  \item{ ADX }{ The Average Direction Index (trend strength). }
 #' }
 #'@note A buy/sell signal is generated when the +/-DI crosses up over the
 #'-/+DI, when the DX/ADX signals a strong trend.  A high/low DX signals a
@@ -61,8 +61,8 @@
 #'@keywords ts
 #'@examples
 #'
-#'  data(ttrc)
-#'  dmi.adx <- ADX(ttrc[,c("High","Low","Close")])
+#' data(ttrc)
+#' dmi.adx <- ADX(ttrc[,c("High","Low","Close")])
 #'
 #'@export
 "ADX" <-

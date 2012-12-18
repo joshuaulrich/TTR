@@ -38,8 +38,8 @@
 #'@keywords ts
 #'@examples
 #'
-#'  data(ttrc)
-#'  clv <- CLV(ttrc[,c("High","Low","Close")])
+#' data(ttrc)
+#' clv <- CLV(ttrc[,c("High","Low","Close")])
 #'
 #'@export
 "CLV" <-

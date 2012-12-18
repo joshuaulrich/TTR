@@ -32,12 +32,12 @@
 #'@param nROC A vector of the number of periods to use in the ROC calculations.
 #'@param nSig The number of periods to use for the KST signal line.
 #'@param maType Either:
-#'  \enumerate{
-#'    \item A function or a string naming the function to be called.
-#'    \item A \emph{list} with the first component like (1) above, and
-#'      additional parameters specified as \emph{named} components.
-#'      See Examples.
-#'  }
+#' \enumerate{
+#'   \item A function or a string naming the function to be called.
+#'   \item A \emph{list} with the first component like (1) above, and
+#'     additional parameters specified as \emph{named} components.
+#'     See Examples.
+#' }
 #'@param wts A vector the same length as \code{n}, of the weight for each
 #'period (need not sum to one).
 #'@param \dots Other arguments to be passed to the \code{maType} function in
@@ -64,11 +64,11 @@
 #'@keywords ts
 #'@examples
 #'
-#'  data(ttrc)
-#'  kst <- KST(ttrc[,"Close"])
-#'  
-#'  kst4MA <- KST(ttrc[,"Close"],
-#'    maType=list(list(SMA),list(EMA),list(DEMA),list(WMA)))
+#' data(ttrc)
+#' kst <- KST(ttrc[,"Close"])
+#' 
+#' kst4MA <- KST(ttrc[,"Close"],
+#'   maType=list(list(SMA),list(EMA),list(DEMA),list(WMA)))
 #'
 #'@export
 "KST" <-

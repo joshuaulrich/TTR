@@ -37,9 +37,9 @@
 #'@return A object of the same class as \code{HL} or a matrix (if
 #'\code{try.xts} fails) containing the columns:
 #' \describe{
-#'   \item{ high }{ The highest high series. }
-#'   \item{ mid }{ The average of \code{high} and \code{low}. }
-#'   \item{ low }{ The lowest low series. }
+#'  \item{ high }{ The highest high series. }
+#'  \item{ mid }{ The average of \code{high} and \code{low}. }
+#'  \item{ low }{ The lowest low series. }
 #' }
 #'@note The default of \code{include.lag=FALSE} makes \code{DonchainChannel}
 #'consistent with other \pkg{TTR} functions, in that it includes the current
@@ -57,8 +57,8 @@
 #'@keywords ts
 #'@examples
 #'
-#'  data(ttrc)
-#'  dc <- DonchianChannel( ttrc[,c("High","Low")] )
+#' data(ttrc)
+#' dc <- DonchianChannel( ttrc[,c("High","Low")] )
 #'
 #'@export
 'DonchianChannel' <-

@@ -22,7 +22,7 @@
 #'
 #'John Bollinger's famous adaptive volatility bands most often use the typical
 #'price of an HLC series, or may be calculated on a univariate price series
-#'(see \code{\link{BBands}}.
+#'(see \code{\link{BBands}}).
 #'
 #'This function applies a second moving average denoted by \code{fastn} to
 #'filter out higher-frequency noise, making the bands somewhat more stable to
@@ -35,7 +35,7 @@
 #'smooth the price-response function.
 #'
 #'If you have multiple different price series in \code{prices}, and want to use
-#'this function, call this functions using \code{lapply(prices,PBands)}.
+#'this function, call this functions using \code{lapply(prices,PBands,...)}.
 #'
 #'@aliases PBands priceBands
 #'@param prices A univariate series of prices.
@@ -43,26 +43,26 @@
 #'@param maType A function or a string naming the function to be called.
 #'@param sd The number of standard deviations to use.
 #'@param \dots any other pass-thru parameters, usually for function named by
-#'  \code{maType}.
+#' \code{maType}.
 #'@param fastn Number of periods to use for smoothing higher-frequency 'noise'.
 #'@param centered Whether to center the bands around a series adjusted for high
-#'  frequency noise, default \code{FALSE}.
+#' frequency noise, default \code{FALSE}.
 #'@param lavg Whether to use a longer \code{(n*2)} smoothing period for
-#'  centering, default \code{FALSE}.
+#' centering, default \code{FALSE}.
 #'@return A object of the same class as \code{prices} or a matrix (if
 #'\code{try.xts} fails) containing the columns:
 #' \describe{
-#'     \item{ dn }{ The lower price volatility Band. }
-#'     \item{ center }{ The smoothed centerline (see details). }
-#'     \item{ up }{ The upper price volatility Band. }
+#'    \item{ dn }{ The lower price volatility Band. }
+#'    \item{ center }{ The smoothed centerline (see details). }
+#'    \item{ up }{ The upper price volatility Band. }
 #' }
 #'@author Brian G. Peterson
 #'@seealso \code{\link{BBands}}
 #'@keywords ts
 #'@examples
 #'
-#'    data(ttrc)
-#'    pbands.close <- PBands( ttrc[,"Close"] )
+#'   data(ttrc)
+#'   pbands.close <- PBands( ttrc[,"Close"] )
 #'
 #'@rdname priceBands
 #'@export

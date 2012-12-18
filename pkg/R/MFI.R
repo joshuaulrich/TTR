@@ -51,8 +51,8 @@
 #'@keywords ts
 #'@examples
 #'
-#'  data(ttrc)
-#'  mfi <- MFI(ttrc[,c("High","Low","Close")], ttrc[,"Volume"])
+#' data(ttrc)
+#' mfi <- MFI(ttrc[,c("High","Low","Close")], ttrc[,"Volume"])
 #'
 #'@export
 "MFI" <-

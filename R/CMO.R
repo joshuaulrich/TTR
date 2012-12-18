@@ -31,12 +31,12 @@
 #'@return A object of the same class as \code{x} or a vector (if \code{try.xts}
 #'fails) containing Chande Momentum Oscillator values.
 #'@note There are several ways to interpret the CMO:
-#'  \enumerate{
-#'    \item Values over/under +/- 50 indicate overbought/oversold conditions.
-#'    \item High CMO values indicate strong trends.
-#'    \item When the CMO crosses above/below a moving average of the CMO,
-#'          it is a buy/sell signal.
-#'  }
+#' \enumerate{
+#'   \item Values over/under +/- 50 indicate overbought/oversold conditions.
+#'   \item High CMO values indicate strong trends.
+#'   \item When the CMO crosses above/below a moving average of the CMO,
+#'         it is a buy/sell signal.
+#' }
 #'@author Joshua Ulrich
 #'@seealso See \code{\link{RSI}}.
 #'@references The following site(s) were used to code/document this
@@ -44,8 +44,8 @@
 #'@keywords ts
 #'@examples
 #'
-#'  data(ttrc)
-#'  cmo <- CMO(ttrc[,"Close"])
+#' data(ttrc)
+#' cmo <- CMO(ttrc[,"Close"])
 #'
 #'@export
 "CMO" <-

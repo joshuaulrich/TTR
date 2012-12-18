@@ -46,8 +46,8 @@
 #'@keywords ts
 #'@examples
 #'
-#'  data(ttrc)
-#'  cmf <- CMF(ttrc[,c("High","Low","Close")], ttrc[,"Volume"])
+#' data(ttrc)
+#' cmf <- CMF(ttrc[,c("High","Low","Close")], ttrc[,"Volume"])
 #'
 #'@export
 "CMF" <-

@@ -26,19 +26,19 @@
 #'@param dividends Dividend series that is coercible to xts.
 #'@param close Close price series that is coercible to xts.
 #'@return A xts object containing the columns:
-#'  \describe{
-#'    \item{ Split }{ The split adjustment ratio. }
-#'    \item{ Div }{ The dividend adjustment ratio. }
-#'  }
+#' \describe{
+#'   \item{ Split }{ The split adjustment ratio. }
+#'   \item{ Div }{ The dividend adjustment ratio. }
+#' }
 #'@details
-#'  \itemize{
-#'    \item If only \code{splits} is provided, the resulting object will
-#'      only have as many observations as \code{splits}.
-#'    \item If \code{splits} and \code{close} are provided, the resulting
-#'      object will have as many observations as \code{max(NROW(splits),
-#'      NROW(close))}.
-#'    \item \code{close} is required if \code{dividends} is provided.
-#'  }
+#' \itemize{
+#'   \item If only \code{splits} is provided, the resulting object will
+#'     only have as many observations as \code{splits}.
+#'   \item If \code{splits} and \code{close} are provided, the resulting
+#'     object will have as many observations as \code{max(NROW(splits),
+#'     NROW(close))}.
+#'   \item \code{close} is required if \code{dividends} is provided.
+#' }
 #'
 #'@author Joshua Ulrich
 #'@keywords ts

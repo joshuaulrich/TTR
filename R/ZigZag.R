@@ -51,9 +51,9 @@
 #'@keywords ts
 #'@examples
 #'
-#'  ## Get Data and Indicator ##
-#'  data(ttrc)
-#'  zz <- ZigZag( ttrc[,c("High", "Low")], change=20 )
+#' ## Get Data and Indicator ##
+#' data(ttrc)
+#' zz <- ZigZag( ttrc[,c("High", "Low")], change=20 )
 #'
 #'@export
 "ZigZag" <- 

@@ -42,8 +42,8 @@
 #'@keywords ts
 #'@examples
 #'
-#'  data(ttrc)
-#'  obv <- OBV(ttrc[,"Close"], ttrc[,"Volume"])
+#' data(ttrc)
+#' obv <- OBV(ttrc[,"Close"], ttrc[,"Volume"])
 #'
 #'@export
 "OBV" <-

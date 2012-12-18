@@ -40,8 +40,8 @@
 #'@return A object of the same class as \code{price} or a matrix (if
 #'\code{try.xts} fails) containing the columns:
 #' \describe{
-#'   \item{ tdi }{ The Trend Detection Index. }
-#'   \item{ di }{ The Direction Indicator. }
+#'  \item{ tdi }{ The Trend Detection Index. }
+#'  \item{ di }{ The Direction Indicator. }
 #' }
 #'@note Positive/negative TDI values signal a trend/consolidation.  A positive/
 #'negative direction indicator signals a up/down trend.  I.e. buy if the TDI
@@ -57,8 +57,8 @@
 #'@keywords ts
 #'@examples
 #'
-#'  data(ttrc)
-#'  tdi <- TDI(ttrc[,"Close"], n=30)
+#' data(ttrc)
+#' tdi <- TDI(ttrc[,"Close"], n=30)
 #'
 #'@export
 "TDI" <-

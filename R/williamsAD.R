@@ -41,8 +41,8 @@
 #'@keywords ts
 #'@examples
 #'
-#'  data(ttrc)
-#'  ad <- williamsAD(ttrc[,c("High","Low","Close")])
+#' data(ttrc)
+#' ad <- williamsAD(ttrc[,c("High","Low","Close")])
 #'
 #'@export
 "williamsAD" <-

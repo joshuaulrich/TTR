@@ -43,16 +43,16 @@
 #'@return A object of the same class as \code{x} and \code{y} or a vector (if
 #'\code{try.xts} fails).
 #' \describe{
-#'   \item{runSum}{returns sums over a n-period moving window.}
-#'   \item{runMin}{returns minimums over a n-period moving window.}
-#'   \item{runMax}{returns maximums over a n-period moving window.}
-#'   \item{runMean}{returns means over a n-period moving window.}
-#'   \item{runMedian}{returns medians over a n-period moving window.}
-#'   \item{runCov}{returns covariances over a n-period moving window.}
-#'   \item{runCor}{returns correlations over a n-period moving window.}
-#'   \item{runVar}{returns variances over a n-period moving window.}
-#'   \item{runSD}{returns standard deviations over a n-period moving window.}
-#'   \item{runMAD}{returns median/mean absolute deviations over a n-period moving window.}
+#'  \item{runSum}{returns sums over a n-period moving window.}
+#'  \item{runMin}{returns minimums over a n-period moving window.}
+#'  \item{runMax}{returns maximums over a n-period moving window.}
+#'  \item{runMean}{returns means over a n-period moving window.}
+#'  \item{runMedian}{returns medians over a n-period moving window.}
+#'  \item{runCov}{returns covariances over a n-period moving window.}
+#'  \item{runCor}{returns correlations over a n-period moving window.}
+#'  \item{runVar}{returns variances over a n-period moving window.}
+#'  \item{runSD}{returns standard deviations over a n-period moving window.}
+#'  \item{runMAD}{returns median/mean absolute deviations over a n-period moving window.}
 #' }
 #' 
 #'moving window.

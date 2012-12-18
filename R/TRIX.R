@@ -29,12 +29,12 @@
 #'@param n Number of periods for moving average.
 #'@param nSig Number of periods for signal line moving average.
 #'@param maType Either:
-#'  \enumerate{
-#'    \item A function or a string naming the function to be called.
-#'    \item A \emph{list} with the first component like (1) above, and
-#'      additional parameters specified as \emph{named} components.
-#'      See Examples.
-#'  }
+#' \enumerate{
+#'   \item A function or a string naming the function to be called.
+#'   \item A \emph{list} with the first component like (1) above, and
+#'     additional parameters specified as \emph{named} components.
+#'     See Examples.
+#' }
 #'@param percent logical; if \code{TRUE}, the rate of change is calculated
 #'using the \code{ROC} function, otherwise the \code{momentum} function is
 #'used.
@@ -58,10 +58,10 @@
 #'@keywords ts
 #'@examples
 #'
-#'  data(ttrc)
-#'  trix  <- TRIX(ttrc[,"Close"])
-#'  trix4 <- TRIX(ttrc[,"Close"],
-#'    maType=list(list(SMA), list(EMA, wilder=TRUE), list(SMA), list(DEMA)))
+#' data(ttrc)
+#' trix  <- TRIX(ttrc[,"Close"])
+#' trix4 <- TRIX(ttrc[,"Close"],
+#' maType=list(list(SMA), list(EMA, wilder=TRUE), list(SMA), list(DEMA)))
 #'
 #'@export
 "TRIX" <-

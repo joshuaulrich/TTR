@@ -24,19 +24,19 @@
 #'Wilder.
 #'
 #'The RSI calculation is \code{RSI = 100 - 100 / ( 1 + RS )}, where \code{RS}
-#'is the smoothed ratio of 'average gains over 'average' losses.  The
+#'is the smoothed ratio of 'average' gains over 'average' losses.  The
 #''averages' aren't true averages, since they're divided by the value of
-#'\code{n} not the number of gain/loss periods.
+#'\code{n} and not the number of periods in which there are  gains/losses.
 #'
 #'@param price Price series that is coercible to xts or matrix.
 #'@param n Number of periods for moving averages.
 #'@param maType Either:
-#'  \enumerate{
-#'    \item A function or a string naming the function to be called.
-#'    \item A \emph{list} with the first component like (1) above, and
-#'      additional parameters specified as \emph{named} components.
-#'      See Examples.
-#'  }
+#' \enumerate{
+#'   \item A function or a string naming the function to be called.
+#'   \item A \emph{list} with the first component like (1) above, and
+#'     additional parameters specified as \emph{named} components.
+#'     See Examples.
+#' }
 #'@param \dots Other arguments to be passed to the \code{maType} function in
 #'case (1) above.
 #'@return A object of the same class as \code{price} or a vector (if
@@ -65,18 +65,18 @@
 #'@keywords ts
 #'@examples
 #'
-#'  data(ttrc)
-#'  price <- ttrc[,"Close"]
+#' data(ttrc)
+#' price <- ttrc[,"Close"]
 #'
-#'  # Default case
-#'  rsi <- RSI(price)
+#' # Default case
+#' rsi <- RSI(price)
 #'
-#'  # Case of one 'maType' for both MAs
-#'  rsiMA1 <- RSI(price, n=14, maType="WMA", wts=ttrc[,"Volume"])
+#' # Case of one 'maType' for both MAs
+#' rsiMA1 <- RSI(price, n=14, maType="WMA", wts=ttrc[,"Volume"])
 #'
-#'  # Case of two different 'maType's for both MAs
-#'  rsiMA2 <- RSI(price, n=14, maType=list(maUp=list(EMA,ratio=1/5),
-#'                maDown=list(WMA,wts=1:10)))
+#' # Case of two different 'maType's for both MAs
+#' rsiMA2 <- RSI(price, n=14, maType=list(maUp=list(EMA,ratio=1/5),
+#'              maDown=list(WMA,wts=1:10)))
 #'
 #'
 #'@export

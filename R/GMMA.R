@@ -31,12 +31,12 @@
 #'@param short Vector of short-term periods.
 #'@param long Vector of long-term periods.
 #'@param maType Either:
-#'  \enumerate{
-#'    \item A function or a string naming the function to be called.
-#'    \item A \emph{list} with the first component like (1) above, and
-#'      additional parameters specified as \emph{named} components.
-#'      See Examples.
-#'  }
+#' \enumerate{
+#'   \item A function or a string naming the function to be called.
+#'   \item A \emph{list} with the first component like (1) above, and
+#'     additional parameters specified as \emph{named} components.
+#'     See Examples.
+#' }
 #'@return A object of the same class as \code{x} or \code{price} or a vector
 #'(if \code{try.xts} fails) containing the Guppy Multiple Moving Average.
 #'@author Joshua Ulrich
@@ -49,8 +49,8 @@
 #'@keywords ts
 #'@examples
 #'
-#'  data(ttrc)
-#'  gmma <- GMMA(ttrc[,"Close"])
+#' data(ttrc)
+#' gmma <- GMMA(ttrc[,"Close"])
 #'
 #'@export
 "GMMA" <-

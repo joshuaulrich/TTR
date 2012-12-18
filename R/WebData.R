@@ -54,12 +54,12 @@
 #'\code{stockSymbols} returns a character vector containing all the listed
 #'symbols for the given exchanges.
 #' \describe{
-#'     \item{ Date }{ Trade date, in CCYYMMDD format. }
-#'     \item{ Open }{ Open price. }
-#'     \item{ High }{ High price. }
-#'     \item{ Low }{ Low price. }
-#'     \item{ Close }{ Close price. }
-#'     \item{ Volume }{ Volume. }
+#'    \item{ Date }{ Trade date, in CCYYMMDD format. }
+#'    \item{ Open }{ Open price. }
+#'    \item{ High }{ High price. }
+#'    \item{ Low }{ Low price. }
+#'    \item{ Close }{ Close price. }
+#'    \item{ Volume }{ Volume. }
 #' }
 #'@note The symbols returned by \code{stockSymbols} may not be in the format
 #'necessary to retrieve data using \code{getYahooData}.
@@ -70,11 +70,11 @@
 #'@keywords ts
 #'@examples
 #'
-#'  ### Note: you must have a working internet
-#'  ### connection for these examples to work!
-#'  ibm <- getYahooData("IBM", 19990404, 20050607)
+#' ### Note: you must have a working internet
+#' ### connection for these examples to work!
+#' ibm <- getYahooData("IBM", 19990404, 20050607)
 #'
-#'  nyse.symbols <- stockSymbols("NYSE")
+#' nyse.symbols <- stockSymbols("NYSE")
 #'@rdname WebData
 #'@export
 "stockSymbols" <-

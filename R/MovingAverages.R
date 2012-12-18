@@ -65,15 +65,15 @@
 #'@return A object of the same class as \code{x} or \code{price} or a vector
 #'(if \code{try.xts} fails) containing the columns:
 #' \describe{
-#'     \item{SMA}{ Simple moving average. }
-#'     \item{EMA}{ Exponential moving average. }
-#'     \item{WMA}{ Weighted moving average. }
-#'     \item{DEMA}{ Double-exponential moving average. }
-#'     \item{EVWMA}{ Elastic, volume-weighted moving average. }
-#'     \item{ZLEMA}{ Zero lag exponential moving average. }
-#'     \item{VWMA}{ Volume-weighed moving average (same as \code{VWAP}). }
-#'     \item{VWAP}{ Volume-weighed average price (same as \code{VWMA}). }
-#'     \item{VWA}{ Variable-length moving average. }
+#'    \item{SMA}{ Simple moving average. }
+#'    \item{EMA}{ Exponential moving average. }
+#'    \item{WMA}{ Weighted moving average. }
+#'    \item{DEMA}{ Double-exponential moving average. }
+#'    \item{EVWMA}{ Elastic, volume-weighted moving average. }
+#'    \item{ZLEMA}{ Zero lag exponential moving average. }
+#'    \item{VWMA}{ Volume-weighed moving average (same as \code{VWAP}). }
+#'    \item{VWAP}{ Volume-weighed average price (same as \code{VWMA}). }
+#'    \item{VWA}{ Variable-length moving average. }
 #' }
 #'@note For \code{EMA}, \code{wilder=FALSE} (the default) uses an exponential
 #'smoothing ratio of \code{2/(n+1)}, while \code{wilder=TRUE} uses Welles
@@ -114,26 +114,27 @@
 #'@keywords ts
 #'@examples
 #'
-#'  data(ttrc)
-#'    ema.20 <-   EMA(ttrc[,"Close"], 20)
-#'    sma.20 <-   SMA(ttrc[,"Close"], 20)
-#'   dema.20 <-  DEMA(ttrc[,"Close"], 20)
-#'  evwma.20 <- EVWMA(ttrc[,"Close"], ttrc[,"Volume"], 20)
-#'  zlema.20 <- ZLEMA(ttrc[,"Close"], 20)
+#' data(ttrc)
+#' ema.20 <-   EMA(ttrc[,"Close"], 20)
+#' sma.20 <-   SMA(ttrc[,"Close"], 20)
+#' dema.20 <-  DEMA(ttrc[,"Close"], 20)
+#' evwma.20 <- EVWMA(ttrc[,"Close"], ttrc[,"Volume"], 20)
+#' zlema.20 <- ZLEMA(ttrc[,"Close"], 20)
 #'
-#'  ## Example of Tim Tillson's T3 indicator
-#'  T3 <- function(x, n=10, v=1) DEMA(DEMA(DEMA(x,n,v),n,v),n,v)
-#'  t3 <- T3(ttrc[,"Close"])
-#'  
-#'  ## Example of short-term instability of EMA
-#'  ## (and other indicators mentioned above)
-#'  x <- rnorm(100)
-#'  tail( EMA(x[90:100],10), 1 )
-#'  tail( EMA(x[70:100],10), 1 )
-#'  tail( EMA(x[50:100],10), 1 )
-#'  tail( EMA(x[30:100],10), 1 )
-#'  tail( EMA(x[10:100],10), 1 )
-#'  tail( EMA(x[ 1:100],10), 1 )
+#' ## Example of Tim Tillson's T3 indicator
+#' T3 <- function(x, n=10, v=1) DEMA(DEMA(DEMA(x,n,v),n,v),n,v)
+#' t3 <- T3(ttrc[,"Close"])
+#' 
+#' ## Example of short-term instability of EMA
+#' ## (and other indicators mentioned above)
+#' x <- rnorm(100)
+#' tail( EMA(x[90:100],10), 1 )
+#' tail( EMA(x[70:100],10), 1 )
+#' tail( EMA(x[50:100],10), 1 )
+#' tail( EMA(x[30:100],10), 1 )
+#' tail( EMA(x[10:100],10), 1 )
+#' tail( EMA(x[ 1:100],10), 1 )
+#' 
 #'@rdname MovingAverages
 #'@export
 "SMA" <-

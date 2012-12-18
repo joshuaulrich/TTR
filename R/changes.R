@@ -38,9 +38,9 @@
 #'@keywords ts
 #'@examples
 #'
-#'  data(ttrc)
-#'  roc <- ROC(ttrc[,"Close"])
-#'  mom <- momentum(ttrc[,"Close"])
+#' data(ttrc)
+#' roc <- ROC(ttrc[,"Close"])
+#' mom <- momentum(ttrc[,"Close"])
 #'@rdname changes
 #'@export
 "ROC" <-

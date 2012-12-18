@@ -38,8 +38,8 @@
 #'@return A object of the same class as \code{HL} and \code{volume} or a matrix
 #'(if \code{try.xts} fails) containing the columns:
 #' \describe{
-#'   \item{ emv }{ The ease of movement values. }
-#'   \item{ emvMA }{ The smoothed (as specified by \code{ma}) ease of movement values. }
+#'  \item{ emv }{ The ease of movement values. }
+#'  \item{ emvMA }{ The smoothed (as specified by \code{ma}) ease of movement values. }
 #' }
 #'@note A buy/sell signal is generated when the EMV crosses above/below zero.
 #'When the EMV hovers around zero, there are small price movements and/or high
@@ -54,8 +54,8 @@
 #'@keywords ts
 #'@examples
 #'
-#'  data(ttrc)
-#'  emv <- EMV(ttrc[,c("High","Low")], ttrc[,"Volume"])
+#' data(ttrc)
+#' emv <- EMV(ttrc[,c("High","Low")], ttrc[,"Volume"])
 #'
 #'@export
 "EMV" <-

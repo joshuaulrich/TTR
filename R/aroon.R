@@ -36,9 +36,9 @@
 #'@return A object of the same class as \code{HL} or a matrix (if
 #'\code{try.xts} fails) containing the columns:
 #' \describe{
-#'   \item{ aroonUp }{ The Aroon up indicator. }
-#'   \item{ aroonDn }{ The Aroon down indicator. }
-#'   \item{ oscillator }{ The Aroon oscillator (\code{aroonUp - aroonDn}). }
+#'  \item{ aroonUp }{ The Aroon up indicator. }
+#'  \item{ aroonDn }{ The Aroon down indicator. }
+#'  \item{ oscillator }{ The Aroon oscillator (\code{aroonUp - aroonDn}). }
 #' }
 #'@note If High-Low prices are given, the function calculates the max/min using
 #'the high/low prices.  Otherwise the function calculates the max/min of the
@@ -59,9 +59,9 @@
 #'@keywords ts
 #'@examples
 #'
-#'  ## Get Data and Indicator ##
-#'  data(ttrc)
-#'  trend <- aroon( ttrc[,c("High", "Low")], n=20 )
+#' ## Get Data and Indicator ##
+#' data(ttrc)
+#' trend <- aroon( ttrc[,c("High", "Low")], n=20 )
 #'
 #'@export
 "aroon" <-

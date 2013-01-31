@@ -62,6 +62,7 @@
 #'calculated; see notes.
 #'@param ratio A smoothing/decay ratio.  \code{ratio} overrides \code{wilder}
 #'in \code{EMA}, and provides additional smoothing in \code{VMA}.
+#'@param \dots any other passthrough parameters
 #'@return A object of the same class as \code{x} or \code{price} or a vector
 #'(if \code{try.xts} fails) containing the columns:
 #' \describe{
@@ -138,12 +139,14 @@
 #'@rdname MovingAverages
 #'@export
 "SMA" <-
-function(x, n=10) {
+function(x, n=10, ...) {
 
   # Simple Moving Average
 
   ma <- runMean( x, n )
-
+  
+  if(!is.null(dim(ma))) colnames(ma) <- paste(colnames(x),'SMA',n,sep='.')
+  
   return(ma)
 }
 
@@ -152,7 +155,7 @@ function(x, n=10) {
 #'@rdname MovingAverages
 #'@export
 "EMA" <-
-function (x, n=10, wilder=FALSE, ratio=NULL) {
+function (x, n=10, wilder=FALSE, ratio=NULL, ...) {
 
   # Exponential Moving Average
 
@@ -181,7 +184,12 @@ function (x, n=10, wilder=FALSE, ratio=NULL) {
   # Call C routine
   ma <- .Call("ema", x, n, ratio, PACKAGE = "TTR")
 
-  reclass(ma, x)
+  ma <- reclass(ma,x)
+  
+  if(!is.null(dim(ma))) colnames(ma) <- paste(colnames(x),'EMA',n,sep='.')
+  
+  return(ma)
+  
 }
 
 #-------------------------------------------------------------------------#
@@ -201,7 +209,9 @@ function(x, n=10, v=1, wilder=FALSE, ratio=NULL) {
   dema <- (1 + v) * EMA(x,n,wilder,ratio) -
     EMA(EMA(x,n,wilder,ratio),n,wilder,ratio) * v
 
-  return( dema )
+  if(!is.null(dim(dema))) colnames(dema)<-gsub('.EMA.','.DEMA.',colnames(dema))
+  
+  return(dema)
 }
 
 #-------------------------------------------------------------------------#
@@ -209,7 +219,7 @@ function(x, n=10, v=1, wilder=FALSE, ratio=NULL) {
 #'@rdname MovingAverages
 #'@export
 "WMA" <-
-function(x, n=10, wts=1:n) {
+function(x, n=10, wts=1:n, ...) {
 
   # Weighted Moving Average
 
@@ -260,7 +270,9 @@ function(x, n=10, wts=1:n) {
   ma[1:(n-1)] <- NA
   ma <- c( rep( NA, NAs ), ma )
 
-  reclass(ma, x)
+  if(!is.null(dim(ma))) colnames(ma) <- paste(colnames(x),'WMA',n,sep='.')
+  
+  reclass(ma,x)
 }
 
 #-------------------------------------------------------------------------#
@@ -268,7 +280,7 @@ function(x, n=10, wts=1:n) {
 #'@rdname MovingAverages
 #'@export
 "EVWMA" <-
-function(price, volume, n=10) {
+function(price, volume, n=10, ...) {
 
   # Elastic, Volume-Weighted Moving Average
 
@@ -293,6 +305,8 @@ function(price, volume, n=10) {
   # Call C routine
   ma <- .Call("evwma", pv[,1], pv[,2], n, PACKAGE = "TTR")
 
+  if(!is.null(dim(ma))) colnames(ma) <- paste(colnames(x),'EVWMA',n,sep='.')
+  
   # Convert back to original class
   reclass(ma, price)
 }
@@ -302,7 +316,7 @@ function(price, volume, n=10) {
 #'@rdname MovingAverages
 #'@export
 "ZLEMA" <-
-function (x, n=10, ratio=NULL) {
+function (x, n=10, ratio=NULL, ...) {
 
   # Zero-Lag Exponential Moving Average
 
@@ -339,7 +353,9 @@ function (x, n=10, ratio=NULL) {
   ma[1:(n-1)] <- NA
   ma <- c( rep( NA, NAs ), ma ) 
   
-  reclass(ma, x)
+  if(!is.null(dim(ma))) colnames(ma) <- paste(colnames(x),'ZLEMA',n,sep='.')
+  
+  reclass(ma,x)
 }
 
 #-------------------------------------------------------------------------#
@@ -347,14 +363,16 @@ function (x, n=10, ratio=NULL) {
 #'@rdname MovingAverages
 #'@export VWAP VWMA
 "VWAP" <- "VWMA" <-
-function(price, volume, n=10) {
+function(price, volume, n=10, ...) {
 
   # Volume-weighted average price
   # Volume-weighted moving average
 
   res <- WMA(price, n=n, volume)
+  
+  if(!is.null(dim(res))) colnames(res)<-gsub('WMA.','VWAP.',colnames(res))
+  
   return(res)
-
 }
 
 #-------------------------------------------------------------------------#
@@ -362,7 +380,7 @@ function(price, volume, n=10) {
 #'@rdname MovingAverages
 #'@export
 "VMA" <-
-function (x, w, ratio=1) {
+function (x, w, ratio=1, ...) {
 
   # Variable Moving Average
 
@@ -380,6 +398,7 @@ function (x, w, ratio=1) {
   # Call C routine
   ma <- .Call("vma", x, abs(w), ratio, PACKAGE = "TTR")
 
-  reclass(ma, x)
+  if(!is.null(dim(ma))) colnames(ma) <- paste(colnames(x),'VMA',n,sep='.')
+  
+  reclass(ma,x)
 }
-

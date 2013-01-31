@@ -14,21 +14,21 @@
 \alias{ZLEMA}
 \title{Moving Averages}
 \usage{
-  SMA(x, n = 10)
+  SMA(x, n = 10, ...)
 
-  EMA(x, n = 10, wilder = FALSE, ratio = NULL)
+  EMA(x, n = 10, wilder = FALSE, ratio = NULL, ...)
 
   DEMA(x, n = 10, v = 1, wilder = FALSE, ratio = NULL)
 
-  WMA(x, n = 10, wts = 1:n)
+  WMA(x, n = 10, wts = 1:n, ...)
 
-  EVWMA(price, volume, n = 10)
+  EVWMA(price, volume, n = 10, ...)
 
-  ZLEMA(x, n = 10, ratio = NULL)
+  ZLEMA(x, n = 10, ratio = NULL, ...)
 
-  VWAP(price, volume, n = 10)
+  VWAP(price, volume, n = 10, ...)
 
-  VMA(x, w, ratio = 1)
+  VMA(x, w, ratio = 1, ...)
 }
 \arguments{
   \item{x}{Price, volume, etc. series that is coercible to
@@ -59,6 +59,8 @@
   \item{ratio}{A smoothing/decay ratio.  \code{ratio}
   overrides \code{wilder} in \code{EMA}, and provides
   additional smoothing in \code{VMA}.}
+
+  \item{\dots}{any other passthrough parameters}
 }
 \value{
   A object of the same class as \code{x} or \code{price} or

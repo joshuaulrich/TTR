@@ -71,8 +71,6 @@ function(HL, n=20) {
 
   HL <- try.xts(HL, error=as.matrix)
 
-  aroonUp <- aroonDn <- vector("numeric",NROW(HL))
-
   # Calculation if price vector is given
   if(NCOL(HL)==1) {
     high <- HL
@@ -87,16 +85,9 @@ function(HL, n=20) {
 
   stop("Price series must be either High-Low, or Close")
 
-  # Find max and min of price series over past (n+1) days
-  # It must be (n+1) to cover today, and the past n days
-  hmax <- runMax(high, n+1)
-  lmin <- runMin( low, n+1)
-
   # Calculate Aroon UP and DOWN
-  for(i in (n+1):NROW(HL)) {
-    aroonUp[i] <- 100 * ( max((0:n)[high[(i-n):i] %in% hmax[i]]) / n )
-    aroonDn[i] <- 100 * ( max((0:n)[ low[(i-n):i] %in% lmin[i]]) / n )
-  }
+  aroonUp <- .Call("aroon_max", high, n, PACKAGE="TTR")
+  aroonDn <- .Call("aroon_max", -low, n, PACKAGE="TTR")
 
   oscillator <- aroonUp - aroonDn
   result <- cbind( aroonUp, aroonDn, oscillator )

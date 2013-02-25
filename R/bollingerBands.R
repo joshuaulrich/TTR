@@ -44,7 +44,7 @@
 #'\code{try.xts} fails) containing the columns:
 #' \describe{
 #'  \item{ dn }{ The lower Bollinger Band. }
-#'  \item{ ma }{ The middle Moving Average (see notes). }
+#'  \item{ mavg }{ The middle Moving Average (see notes). }
 #'  \item{ up }{ The upper Bollinger Band. }
 #'  \item{ pctB }{ The \%B calculation. }
 #' }            

@@ -36,13 +36,14 @@
 }
 \details{
   The Detrended Price shows cycles and overbought /
-  oversold conditions. Note the calculation shifts the
-  results \code{shift} periods, so the last \code{shift}
-  periods will be zero.
+  oversold conditions.
 }
 \note{
-  As stated above, the DPO can be used on any univariate
-  series, not just price.
+  DPO does not extend to the last date because it is based
+  on a displaced moving average. The calculation shifts the
+  results \code{shift} periods, so the last \code{shift}
+  periods will be zero.\cr As stated above, the DPO can be
+  used on any univariate series, not just price.
 }
 \examples{
 data(ttrc)
@@ -57,6 +58,7 @@ volumeDPO <- DPO(ttrc[,"Volume"])
   indicator:\cr
   \url{http://www.fmlabs.com/reference/DPO.htm}\cr
   \url{http://www.equis.com/Customer/Resources/TAAZ/?c=3&p=48}\cr
+  \url{http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:detrended_price_osci}\cr
 }
 \seealso{
   See \code{\link{EMA}}, \code{\link{SMA}}, etc. for moving

@@ -23,8 +23,8 @@
 \value{
   A object of the same class as \code{HLC} or a matrix (if
   \code{try.xts} fails) containing the columns: \describe{
-  \item{ dn }{ The lower Bollinger Band. } \item{ ma }{ The
-  middle Moving Average (see notes). } \item{ up }{ The
+  \item{ dn }{ The lower Bollinger Band. } \item{ mavg }{
+  The middle Moving Average (see notes). } \item{ up }{ The
   upper Bollinger Band. } \item{ pctB }{ The \%B
   calculation. } }
 }

@@ -74,6 +74,9 @@
 #'@note The calculation for William's \%R is similar to that of stochastics'
 #'fast \%K.
 #'
+#'The value for fast \%K will be 0.5 whenever the highest high and
+#'lowest low are the same over the last \code{n} periods.
+#'
 #'The stochastic oscillator and SMI calculate relative value of the close
 #'versus the high/low range and the midpoint of the high/low range,
 #'respectively.
@@ -189,6 +192,7 @@ function(HLC, nFastK=14, nFastD=3, nSlowD=3, maType, bounded=TRUE, smooth=1, ...
     denMA <- do.call( maType[[3]][[1]], c( list(den), maType[[3]][-1] ) )
 
     fastK <- numMA / denMA
+    fastK[is.na(fastK)] <- 0.5
     fastD <- do.call( maType[[1]][[1]], c( list(fastK), maType[[1]][-1] ) )
     slowD <- do.call( maType[[2]][[1]], c( list(fastD), maType[[2]][-1] ) )
   }
@@ -201,6 +205,7 @@ function(HLC, nFastK=14, nFastD=3, nSlowD=3, maType, bounded=TRUE, smooth=1, ...
     denMA <- do.call( maType, c( list(den), list(n=smooth) ) )
 
     fastK <- numMA / denMA
+    fastK[is.na(fastK)] <- 0.5
     fastD <- do.call( maType, c( list(fastK), list(n=nFastD, ...) ) )
     slowD <- do.call( maType, c( list(fastD), list(n=nSlowD, ...) ) )
 

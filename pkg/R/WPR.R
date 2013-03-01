@@ -32,6 +32,9 @@
 #'@return A object of the same class as \code{HLC} or a vector (if
 #'\code{try.xts} fails) containing the William's \%R values.
 #'@note The William's \%R calculation is similar to stochastics' fast \%K.
+#'
+#'The value for William's \%R will be 0.5 whenever the highest high and
+#'lowest low are the same over the last \code{n} periods.
 #'@author Joshua Ulrich
 #'@seealso See \code{\link{stoch}}.
 #'@references The following site(s) were used to code/document this
@@ -81,6 +84,7 @@ function(HLC, n=14) {
   lmin <- runMin( low, n)
 
   pctR <- (hmax - close) / (hmax - lmin)
+  pctR[is.na(pctR)] <- 0.5
 
   reclass( pctR, HLC )
 }

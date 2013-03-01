@@ -84,6 +84,10 @@
   The calculation for William's \%R is similar to that of
   stochastics' fast \%K.
 
+  The value for fast \%K will be 0.5 whenever the highest
+  high and lowest low are the same over the last \code{n}
+  periods.
+
   The stochastic oscillator and SMI calculate relative
   value of the close versus the high/low range and the
   midpoint of the high/low range, respectively.

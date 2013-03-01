@@ -27,6 +27,10 @@
 \note{
   The William's \%R calculation is similar to stochastics'
   fast \%K.
+
+  The value for William's \%R will be 0.5 whenever the
+  highest high and lowest low are the same over the last
+  \code{n} periods.
 }
 \examples{
 data(ttrc)

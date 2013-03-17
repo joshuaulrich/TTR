@@ -77,8 +77,11 @@ function(HL, accel=c(.02,.2)) {
   # Leading NAs are handled in the C code
   HL.na <- xts:::naCheck(HL, 0)
 
+  # Gap for inital SAR
+  initGap <- sd(drop(coredata(HL[,1] - HL[,2])), na.rm=TRUE)
+
   # Call C routine
-  sar <- .Call("sar", HL[,1], HL[,2], accel, PACKAGE = "TTR")
+  sar <- .Call("sar", HL[,1], HL[,2], accel, initGap, PACKAGE = "TTR")
 
   reclass( sar, HL )
 }

@@ -43,9 +43,9 @@ test.SAR <- function() {
   im <- input$mid[,c('High','Low')]
   rownames(ia) <- rownames(it) <- rownames(im) <- NULL
   checkEqualsNumeric( SAR(ia), output$allSAR )
-  checkEqualsNumeric( attributes(SAR(ia)), attributes(output$allSAR) )
+  checkEquals( attributes(SAR(ia)), attributes(output$allSAR) )
   checkEqualsNumeric( SAR(it), output$topSAR )
-  checkEqualsNumeric( attributes(SAR(it)), attributes(output$topSAR) )
+  checkEquals( attributes(SAR(it)), attributes(output$topSAR) )
   checkException( SAR(im) )
 }
 

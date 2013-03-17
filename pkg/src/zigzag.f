@@ -5,7 +5,7 @@ c   Copyright (C) 2007-2013  Joshua M. Ulrich
 c
 c   This program is free software: you can redistribute it and/or modify
 c   it under the terms of the GNU General Public License as published by
-c   the Free Software Foundation, either version 3 of the License, or
+c   the Free Software Foundation, either version 2 of the License, or
 c   (at your option) any later version.
 c
 c   This program is distributed in the hope that it will be useful,

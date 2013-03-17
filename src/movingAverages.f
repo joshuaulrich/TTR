@@ -170,7 +170,7 @@ c
 
       do 10 i=n+1,lia
 
-        loc = DINT(i-(lag))
+        loc = INT(i-(lag))
         oa(i) = ratio * ( 2*ia(i) - (ia(loc)*(1-wt) + ia(loc+1)*wt ) )
      C         + ( 1 - ratio ) * oa(i-1)
 

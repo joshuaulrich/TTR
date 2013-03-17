@@ -1,7 +1,7 @@
 c
 c   TTR: Technical Trading Rules
 c
-c   Copyright (C) 2007-2012  Joshua M. Ulrich
+c   Copyright (C) 2007-2013  Joshua M. Ulrich
 c
 c   This program is free software: you can redistribute it and/or modify
 c   it under the terms of the GNU General Public License as published by

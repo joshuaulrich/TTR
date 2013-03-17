@@ -37,7 +37,7 @@
 #'@param maType A function or a string naming the function to be called.
 #'@param \dots Other arguments to be passed to the \code{maType} function.
 #'@return A object of the same class as \code{HLC} or a matrix (if
-#'\code{try.xts} fails) containing the columns:\
+#'\code{try.xts} fails) containing the columns:
 #' \describe{
 #'  \item{ tr }{ The true range of the series. }
 #'  \item{ atr }{ The average (as specified by \code{ma}) true range of the series. }

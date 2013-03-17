@@ -1,12 +1,12 @@
 Package: TTR
 Type: Package
 Title: Technical Trading Rules
-Version: 0.21-1
-Revision: 122
-Date: 2012-03-31
+Version: 0.22-0
+Revision: 151
+Date: 2013-03-18
 Author: Joshua Ulrich
 Maintainer: Joshua Ulrich <josh.m.ulrich@gmail.com>
-Depends: xts (>= 0.9.0)
+Depends: xts (>= 0.9-3)
 LinkingTo: xts
 Enhances: quantmod
 Suggests: RUnit

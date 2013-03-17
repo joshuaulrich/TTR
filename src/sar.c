@@ -20,7 +20,7 @@
 #include <R.h>
 #include <Rinternals.h>
 
-SEXP sar (SEXP hi, SEXP lo, SEXP xl) {
+SEXP sar (SEXP hi, SEXP lo, SEXP xl, SEXP ig) {
 
     /* Initalize loop and PROTECT counters */
     int i, P=0;
@@ -35,6 +35,7 @@ SEXP sar (SEXP hi, SEXP lo, SEXP xl) {
     if(TYPEOF(xl) != REALSXP) {
       PROTECT(xl = coerceVector(xl, REALSXP)); P++;
     }
+    double initGap = asReal(ig);
 
     /* Pointers to function arguments */
     double *d_hi = REAL(hi);
@@ -64,7 +65,7 @@ SEXP sar (SEXP hi, SEXP lo, SEXP xl) {
     double xpt0 = d_hi[beg-1], xpt1 = 0;
     double af0 = d_xl[0], af1 = 0;
     double lmin, lmax;
-    d_sar[beg-1] = d_lo[beg-1]-0.01;
+    d_sar[beg-1] = d_lo[beg-1]-initGap;
 
     for(i=beg; i < nr; i++) {
       /* Increment signal, extreme point, and acceleration factor */

@@ -2,7 +2,6 @@
 \alias{growth}
 \alias{lags}
 \alias{naCheck}
-\alias{wilderSum}
 \title{Miscellaneous Tools}
 \usage{
   lags(x, n = 1)
@@ -32,8 +31,6 @@
 
   \code{lags} returns a matrix of lagged values of the
   original vector.
-
-  \code{wilderSum} returns a vector of weighted sums.
 }
 \description{
   Various functions that may be useful in designing
@@ -44,9 +41,6 @@
   using given prices and signals.
 
   \code{lags} calculates the lags of a given series.
-
-  \code{wilderSum} calculates a Welles Wilder style
-  weighted sum.
 }
 \note{
   In \code{growth} you can specify the number of periods

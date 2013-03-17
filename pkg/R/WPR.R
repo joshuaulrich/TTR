@@ -84,7 +84,7 @@ function(HLC, n=14) {
   lmin <- runMin( low, n)
 
   pctR <- (hmax - close) / (hmax - lmin)
-  pctR[is.na(pctR)] <- 0.5
+  pctR[is.nan(pctR)] <- 0.5
 
   reclass( pctR, HLC )
 }

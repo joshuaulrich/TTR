@@ -26,7 +26,7 @@
 #'\deqn{ \sigma_{cl} = \sqrt{\frac{Z}{n-2} \sum_{i=1}^{n-1}(r_i-\bar{r})^2}
 #'}{sqrt(N) * runSD(ROC(Cl), n-1)}
 #'\deqn{where\;\; r_i = \log \left(\frac{C_i}{C_{i-1}}\right) }{}
-#'\deqn{and\;\; \bar{r} = \frac{r_1+r_2+\ldots r_{n-1}}{n-1} }{}
+#'\deqn{and\;\; \bar{r} = \frac{r_1+r_2+\ldots +r_{n-1}}{n-1} }{}
 #'
 #'\item OHLC Volatility: Garman and Klass (\code{calc="garman.klass"})\cr The
 #'Garman and Klass estimator for estimating historical volatility assumes

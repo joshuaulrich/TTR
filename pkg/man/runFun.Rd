@@ -15,8 +15,6 @@
 \usage{
   runSum(x, n = 10, cumulative = FALSE)
 
-  wilderSum(x, n = 10)
-
   runMin(x, n = 10, cumulative = FALSE)
 
   runMax(x, n = 10, cumulative = FALSE)
@@ -40,6 +38,8 @@
   runMAD(x, n = 10, center = NULL, stat = "median",
     constant = 1.4826, non.unique = "mean",
     cumulative = FALSE)
+
+  wilderSum(x, n = 10)
 }
 \arguments{
   \item{x}{Object coercible to xts or matrix.}
@@ -88,9 +88,9 @@
   over a n-period moving window.} \item{runSD}{returns
   standard deviations over a n-period moving window.}
   \item{runMAD}{returns median/mean absolute deviations
-  over a n-period moving window.} }
-
-  moving window.
+  over a n-period moving window.} \item{wilderSum}{retuns a
+  Welles Wilder style weighted sum over a n-period moving
+  window.} }
 }
 \description{
   Various functions to analyze data over a moving window of

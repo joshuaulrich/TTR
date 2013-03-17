@@ -23,7 +23,7 @@
 #'
 #'
 #'@aliases runFun runSum runMin runMax runMean runMedian runCov runCor runVar
-#'runSD runMAD
+#'runSD runMAD wilderSum
 #'@param x Object coercible to xts or matrix.
 #'@param y Object coercible to xts or matrix.
 #'@param n Number of periods to use in the window or, if
@@ -53,9 +53,9 @@
 #'  \item{runVar}{returns variances over a n-period moving window.}
 #'  \item{runSD}{returns standard deviations over a n-period moving window.}
 #'  \item{runMAD}{returns median/mean absolute deviations over a n-period moving window.}
+#'  \item{wilderSum}{retuns a Welles Wilder style weighted sum over a n-period moving window.}
 #' }
 #' 
-#'moving window.
 #'@author Joshua Ulrich
 #'@keywords ts
 #'@rdname runFun
@@ -99,28 +99,6 @@ function(x, n=10, cumulative=FALSE) {
   
   # Replace 1:(n-1) with NAs
   is.na(result) <- c(1:(n-1+NAs))
-
-  # Convert back to original class
-  reclass(result, x)
-}
-
-#-------------------------------------------------------------------------#
-
-#'@rdname runFun
-#'@export
-"wilderSum" <-
-function(x, n=10) {
-
-  x <- try.xts(x, error=as.matrix)
-
-  if( n < 1 || n > NROW(x) ) stop("Invalid 'n'")
-
-  # Check for non-leading NAs
-  # Leading NAs are handled in the C code
-  x.na <- xts:::naCheck(x, n)
-
-  # Call C routine
-  result <- .Call("wilderSum", x, n, PACKAGE = "TTR")
 
   # Convert back to original class
   reclass(result, x)
@@ -424,6 +402,28 @@ function(x, n=10, center=NULL, stat="median",
   # Replace 1:(n-1) with NAs and prepend NAs from original data
   is.na(result) <- c(1:(n-1))
   result <- c( rep( NA, NAs ), result )
+
+  # Convert back to original class
+  reclass(result, x)
+}
+
+#-------------------------------------------------------------------------#
+
+#'@rdname runFun
+#'@export
+"wilderSum" <-
+function(x, n=10) {
+
+  x <- try.xts(x, error=as.matrix)
+
+  if( n < 1 || n > NROW(x) ) stop("Invalid 'n'")
+
+  # Check for non-leading NAs
+  # Leading NAs are handled in the C code
+  x.na <- xts:::naCheck(x, n)
+
+  # Call C routine
+  result <- .Call("wilderSum", x, n, PACKAGE = "TTR")
 
   # Convert back to original class
   reclass(result, x)

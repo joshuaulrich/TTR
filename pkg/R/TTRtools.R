@@ -26,9 +26,7 @@
 #'
 #'\code{lags} calculates the lags of a given series.
 #'
-#'\code{wilderSum} calculates a Welles Wilder style weighted sum.
-#'
-#'@aliases growth lags wilderSum
+#'@aliases growth lags
 #'@param price Price series that is coercible to xts or matrix.
 #'@param signals Signals to use (defaults to vector of ones).  Use '0' for no
 #'position, '1' for long position, and '-1' for short position.
@@ -39,7 +37,6 @@
 #'
 #'\code{lags} returns a matrix of lagged values of the original vector.
 #'
-#'\code{wilderSum} returns a vector of weighted sums.
 #'@note In \code{growth} you can specify the number of periods and type of
 #'compounding to use when calculating returns of the price series via the
 #'\code{'\dots'} argument.

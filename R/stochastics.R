@@ -192,7 +192,7 @@ function(HLC, nFastK=14, nFastD=3, nSlowD=3, maType, bounded=TRUE, smooth=1, ...
     denMA <- do.call( maType[[3]][[1]], c( list(den), maType[[3]][-1] ) )
 
     fastK <- numMA / denMA
-    fastK[is.na(fastK)] <- 0.5
+    fastK[is.nan(fastK)] <- 0.5
     fastD <- do.call( maType[[1]][[1]], c( list(fastK), maType[[1]][-1] ) )
     slowD <- do.call( maType[[2]][[1]], c( list(fastD), maType[[2]][-1] ) )
   }
@@ -205,7 +205,7 @@ function(HLC, nFastK=14, nFastD=3, nSlowD=3, maType, bounded=TRUE, smooth=1, ...
     denMA <- do.call( maType, c( list(den), list(n=smooth) ) )
 
     fastK <- numMA / denMA
-    fastK[is.na(fastK)] <- 0.5
+    fastK[is.nan(fastK)] <- 0.5
     fastD <- do.call( maType, c( list(fastK), list(n=nFastD, ...) ) )
     slowD <- do.call( maType, c( list(fastD), list(n=nSlowD, ...) ) )
 

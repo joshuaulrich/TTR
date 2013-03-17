@@ -91,5 +91,9 @@ function(HLC, n=20, maType, c=0.015, ...) {
 
   cci <- ( HLC - mavg ) / ( c * meanDev )
 
+  if(is.xts(cci)) {
+    colnames(cci) <- "cci"
+  }
+
   reclass(cci, HLC)
 }

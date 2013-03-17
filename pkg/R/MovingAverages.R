@@ -145,8 +145,10 @@ function(x, n=10, ...) {
 
   ma <- runMean( x, n )
   
-  if(!is.null(dim(ma))) colnames(ma) <- paste(colnames(x),'SMA',n,sep='.')
-  
+  if(!is.null(dim(ma))) {
+    colnames(ma) <- paste(colnames(x),'SMA',n,sep='.')
+  }
+
   return(ma)
 }
 
@@ -186,8 +188,10 @@ function (x, n=10, wilder=FALSE, ratio=NULL, ...) {
 
   ma <- reclass(ma,x)
   
-  if(!is.null(dim(ma))) colnames(ma) <- paste(colnames(x),'EMA',n,sep='.')
-  
+  if(!is.null(dim(ma))) {
+    colnames(ma) <- paste(colnames(x),'EMA',n,sep='.')
+  }
+
   return(ma)
   
 }
@@ -209,8 +213,10 @@ function(x, n=10, v=1, wilder=FALSE, ratio=NULL) {
   dema <- (1 + v) * EMA(x,n,wilder,ratio) -
     EMA(EMA(x,n,wilder,ratio),n,wilder,ratio) * v
 
-  if(!is.null(dim(dema))) colnames(dema)<-gsub('.EMA.','.DEMA.',colnames(dema))
-  
+  if(!is.null(dim(dema))) {
+    colnames(dema) <- gsub('.EMA.','.DEMA.',colnames(dema))
+  }
+
   return(dema)
 }
 
@@ -270,8 +276,10 @@ function(x, n=10, wts=1:n, ...) {
   ma[1:(n-1)] <- NA
   ma <- c( rep( NA, NAs ), ma )
 
-  if(!is.null(dim(ma))) colnames(ma) <- paste(colnames(x),'WMA',n,sep='.')
-  
+  if(!is.null(dim(ma))) {
+    colnames(ma) <- paste(colnames(x),'WMA',n,sep='.')
+  }
+
   reclass(ma,x)
 }
 
@@ -305,8 +313,10 @@ function(price, volume, n=10, ...) {
   # Call C routine
   ma <- .Call("evwma", pv[,1], pv[,2], n, PACKAGE = "TTR")
 
-  if(!is.null(dim(ma))) colnames(ma) <- paste(colnames(x),'EVWMA',n,sep='.')
-  
+  if(!is.null(dim(ma))) {
+    colnames(ma) <- paste(colnames(price),'EVWMA',n,sep='.')
+  }
+
   # Convert back to original class
   reclass(ma, price)
 }
@@ -353,8 +363,10 @@ function (x, n=10, ratio=NULL, ...) {
   ma[1:(n-1)] <- NA
   ma <- c( rep( NA, NAs ), ma ) 
   
-  if(!is.null(dim(ma))) colnames(ma) <- paste(colnames(x),'ZLEMA',n,sep='.')
-  
+  if(!is.null(dim(ma))) {
+    colnames(ma) <- paste(colnames(x),'ZLEMA',n,sep='.')
+  }
+
   reclass(ma,x)
 }
 
@@ -370,8 +382,10 @@ function(price, volume, n=10, ...) {
 
   res <- WMA(price, n=n, volume)
   
-  if(!is.null(dim(res))) colnames(res)<-gsub('WMA.','VWAP.',colnames(res))
-  
+  if(!is.null(dim(res))) {
+    colnames(res) <- gsub('WMA.','VWAP.',colnames(res))
+  }
+
   return(res)
 }
 
@@ -398,7 +412,9 @@ function (x, w, ratio=1, ...) {
   # Call C routine
   ma <- .Call("vma", x, abs(w), ratio, PACKAGE = "TTR")
 
-  if(!is.null(dim(ma))) colnames(ma) <- paste(colnames(x),'VMA',n,sep='.')
-  
+  if(!is.null(dim(ma))) {
+    colnames(ma) <- paste(colnames(x),'VMA',sep='')
+  }
+
   reclass(ma,x)
 }

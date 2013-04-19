@@ -32,6 +32,8 @@
 #'@param smooth The number of periods to smooth price.
 #'@param magnitude A set of 3 periods used to smooth magnitude.
 #'@param stretch A set of 3 periods used to smooth stretch.
+#'@param exact.multiplier The weight applied to identical values in the window.
+#'See \code{runPercentRank}.
 #'@return A object of the same class as \code{price} or a vector (if
 #'\code{try.xts} fails) containing the DVI values.
 #'@author Joshua Ulrich
@@ -47,7 +49,7 @@
 #'
 #'@export
 DVI <- function(price, n=252, wts=c(0.8,0.2), smooth=3,
-  magnitude=c(5,100,5), stretch=c(10,100,2)) {
+  magnitude=c(5,100,5), stretch=c(10,100,2), exact.multiplier=1) {
 
   # David Varadi's DVI indicator
 
@@ -72,11 +74,8 @@ DVI <- function(price, n=252, wts=c(0.8,0.2), smooth=3,
   pctRank <- function(x,i) match(x[i], sort(coredata(x[(i-(n-1)):i])))
 
   # calculate the DVI magnitude and stretch for each period
-  dvi.mag <- dvi.str <- rep(NA,NROW(price))
-  for(i in n:NROW(price)) {
-    dvi.mag[i] <- pctRank(mag, i) / n
-    dvi.str[i] <- pctRank(str, i) / n
-  }
+  dvi.mag <- runPercentRank(mag, n, FALSE, exact.multiplier)
+  dvi.str <- runPercentRank(str, n, FALSE, exact.multiplier)
 
   # calculate final DVI value
   dvi <- wts[1] * dvi.mag + wts[2] * dvi.str

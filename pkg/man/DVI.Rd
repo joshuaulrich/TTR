@@ -3,7 +3,8 @@
 \title{DV Intermediate Oscillator}
 \usage{
   DVI(price, n = 252, wts = c(0.8, 0.2), smooth = 3,
-    magnitude = c(5, 100, 5), stretch = c(10, 100, 2))
+    magnitude = c(5, 100, 5), stretch = c(10, 100, 2),
+    exact.multiplier = 1)
 }
 \arguments{
   \item{price}{Price series that is coercible to xts or
@@ -22,6 +23,9 @@
 
   \item{stretch}{A set of 3 periods used to smooth
   stretch.}
+
+  \item{exact.multiplier}{The weight applied to identical
+  values in the window. See \code{runPercentRank}.}
 }
 \value{
   A object of the same class as \code{price} or a vector

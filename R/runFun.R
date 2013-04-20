@@ -71,6 +71,7 @@ function(x, n=10, cumulative=FALSE) {
   NAs <- sum(is.na(x))
   if( NAs > 0 ) {
     if( any( is.na(x[-(1:NAs)]) ) ) stop("Series contains non-leading NAs")
+    if( NAs + n > NROW(x) ) stop("not enough non-NA values")
   }
   beg <- 1 + NAs
   len <- NROW(x) - NAs
@@ -119,6 +120,7 @@ function(x, n=10, cumulative=FALSE) {
   NAs <- sum( is.na(x) )
   if( NAs > 0 ) {
     if( any( is.na(x[-(1:NAs)]) ) ) stop("Series contains non-leading NAs")
+    if( NAs + n > NROW(x) ) stop("not enough non-NA values")
   }
   beg <- 1 + NAs
   len <- NROW(x) - NAs
@@ -166,6 +168,7 @@ function(x, n=10, cumulative=FALSE) {
   NAs <- sum( is.na(x) )
   if( NAs > 0 ) {
     if( any( is.na(x[-(1:NAs)]) ) ) stop("Series contains non-leading NAs")
+    if( NAs + n > NROW(x) ) stop("not enough non-NA values")
   }
   beg <- 1 + NAs
   len <- NROW(x) - NAs
@@ -227,6 +230,7 @@ function(x, n=10, non.unique="mean", cumulative=FALSE) {
   NAs <- sum( is.na(x) )
   if( NAs > 0 ) {
     if( any( is.na(x[-(1:NAs)]) ) ) stop("Series contains non-leading NAs")
+    if( NAs + n > NROW(x) ) stop("not enough non-NA values")
   }
   beg <- 1 + NAs
   len <- NROW(x) - NAs
@@ -279,6 +283,7 @@ function(x, y, n=10, use="all.obs", sample=TRUE, cumulative=FALSE) {
   NAs <- max( xNAs, yNAs )
   if( NAs > 0 ) {
     if( any( is.na(xy[-(1:NAs),]) ) ) stop("Series contain non-leading NAs")
+    if( NAs + n > NROW(x) ) stop("not enough non-NA values")
   }
   beg <- 1 + NAs
   len <- NROW(xy) - NAs
@@ -367,6 +372,7 @@ function(x, n=10, center=NULL, stat="median",
   NAs <- sum( is.na(x) )
   if( NAs > 0 ) {
     if( any( is.na(x[-(1:NAs)]) ) ) stop("Series contains non-leading NAs")
+    if( NAs + n > NROW(x) ) stop("not enough non-NA values")
   }
   beg <- 1 + NAs
   len <- NROW(x) - NAs

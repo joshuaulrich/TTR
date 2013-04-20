@@ -1,6 +1,8 @@
 # Load Fortran symbol table
 useDynLib(TTR)
 
+import(xts)
+
 # User visible TTR functions
 export(adjRatios)
 export(ADX)

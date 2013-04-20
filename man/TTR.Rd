@@ -9,10 +9,6 @@
   stock symbols, and data from Yahoo Finance.
 }
 \details{
-  \tabular{ll}{ Package: \tab TTR\cr Type: \tab Package\cr
-  Version: \tab 0.22-0\cr Date: \tab 2013-03-18\cr License:
-  \tab GPL Version 2 or later.\cr }
-
   Users will probably be most interested in the following
   functions:\cr \code{\link{ADX}}\cr
   \code{\link{BBands}}\cr \code{\link{changes}}\cr

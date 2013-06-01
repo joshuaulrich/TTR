@@ -281,7 +281,7 @@ function(symbol, start, end, freq="daily", type="price", adjust=TRUE, quiet=FALS
     ohlc <- read.table(url, header=TRUE, sep=",")
     ohlc[,'Adj.Close'] <- NULL
     ohlc <- ohlc[order(ohlc[,"Date"]),]
-    ohlc <- xts(ohlc[,-1], as.POSIXct(as.character(ohlc[,1])))
+    ohlc <- xts(ohlc[,-1], as.Date(as.character(ohlc[,1])))
 
     }
 
@@ -316,7 +316,7 @@ function(symbol, start, end, freq="daily", type="price", adjust=TRUE, quiet=FALS
       ohlc[,'Split'] <- 1 / sapply( parse( text=ohlc[,'Split'] ), eval )
 
       ohlc <- ohlc[order(ohlc[,1]),]
-      ohlc <- xts(ohlc[,-1], as.POSIXct(as.character(ohlc[,1])))
+      ohlc <- xts(ohlc[,-1], as.Date(as.character(ohlc[,1])))
 
       if( all(is.na(ohlc[,'Split'])) ) {
         s.ratio <- rep(1,NROW(ohlc))

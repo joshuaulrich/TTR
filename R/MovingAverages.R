@@ -146,7 +146,7 @@ function(x, n=10, ...) {
   ma <- runMean( x, n )
   
   if(!is.null(dim(ma))) {
-    colnames(ma) <- paste(colnames(x),'SMA',n,sep='.')
+    colnames(ma) <- "SMA"
   }
 
   return(ma)
@@ -189,7 +189,7 @@ function (x, n=10, wilder=FALSE, ratio=NULL, ...) {
   ma <- reclass(ma,x)
   
   if(!is.null(dim(ma))) {
-    colnames(ma) <- paste(colnames(x),'EMA',n,sep='.')
+    colnames(ma) <- "EMA"
   }
 
   return(ma)
@@ -214,7 +214,7 @@ function(x, n=10, v=1, wilder=FALSE, ratio=NULL) {
     EMA(EMA(x,n,wilder,ratio),n,wilder,ratio) * v
 
   if(!is.null(dim(dema))) {
-    colnames(dema) <- gsub('.EMA.','.DEMA.',colnames(dema))
+    colnames(dema) <- "DEMA"
   }
 
   return(dema)
@@ -277,7 +277,7 @@ function(x, n=10, wts=1:n, ...) {
   ma <- c( rep( NA, NAs ), ma )
 
   if(!is.null(dim(ma))) {
-    colnames(ma) <- paste(colnames(x),'WMA',n,sep='.')
+    colnames(ma) <- "WMA"
   }
 
   reclass(ma,x)
@@ -314,7 +314,7 @@ function(price, volume, n=10, ...) {
   ma <- .Call("evwma", pv[,1], pv[,2], n, PACKAGE = "TTR")
 
   if(!is.null(dim(ma))) {
-    colnames(ma) <- paste(colnames(price),'EVWMA',n,sep='.')
+    colnames(ma) <- "EVWMA"
   }
 
   # Convert back to original class
@@ -364,7 +364,7 @@ function (x, n=10, ratio=NULL, ...) {
   ma <- c( rep( NA, NAs ), ma ) 
   
   if(!is.null(dim(ma))) {
-    colnames(ma) <- paste(colnames(x),'ZLEMA',n,sep='.')
+    colnames(ma) <- "ZLEMA"
   }
 
   reclass(ma,x)
@@ -383,7 +383,7 @@ function(price, volume, n=10, ...) {
   res <- WMA(price, n=n, volume)
   
   if(!is.null(dim(res))) {
-    colnames(res) <- gsub('WMA.','VWAP.',colnames(res))
+    colnames(res) <- "VWAP"
   }
 
   return(res)
@@ -413,7 +413,7 @@ function (x, w, ratio=1, ...) {
   ma <- .Call("vma", x, abs(w), ratio, PACKAGE = "TTR")
 
   if(!is.null(dim(ma))) {
-    colnames(ma) <- paste(colnames(x),'VMA',sep='')
+    colnames(ma) <- "VMA"
   }
 
   reclass(ma,x)

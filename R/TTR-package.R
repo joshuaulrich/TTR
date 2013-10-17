@@ -37,6 +37,7 @@ NULL
 #'
 #'@name TTR
 #'@docType package
+#'@useDynLib TTR
 #'@author Joshua Ulrich
 #'
 #'Maintainer: Joshua Ulrich

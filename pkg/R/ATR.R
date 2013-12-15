@@ -69,7 +69,7 @@ function(HLC, n=14, maType, ...) {
   HLC <- try.xts(HLC, error=as.matrix)
   
   if(is.xts(HLC)) {
-    closeLag <- lag(HLC[,3])
+    closeLag <- lag.xts(HLC[,3])
   } else {
     closeLag <- c( NA, HLC[-NROW(HLC),3] )
   }

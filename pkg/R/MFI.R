@@ -80,7 +80,7 @@ function(HLC, volume, n=14) {
   }
 
   if(is.xts(HLC)) {
-    priceLag <- lag(HLC)
+    priceLag <- lag.xts(HLC)
   } else {
     priceLag <- c( NA, HLC[-NROW(HLC)] )
   }

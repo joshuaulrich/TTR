@@ -66,7 +66,7 @@ DVI <- function(price, n=252, wts=c(0.8,0.2), smooth=3,
   mag <- SMA( ( SMA(r,magnitude[1]) + SMA(r,magnitude[2])/10 )/2, magnitude[3] )
 
   # calculate stretch, based on whether return is +/-
-  b <- ifelse( price > lag(price), 1, -1 )
+  b <- ifelse( price > lag.xts(price), 1, -1 )
   str <- SMA( ( runSum(b,stretch[1]) + runSum(b,stretch[2])/10 )/2, stretch[3] )
 
   # A simple percent rank function, possibly different

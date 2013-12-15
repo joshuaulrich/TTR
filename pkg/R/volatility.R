@@ -189,7 +189,7 @@ function(OHLC, n=10, calc="close", N=260, ...) {
     # Historical Open-High-Low-Close Volatility: Garman and Klass (Yang Zhang)
     # http://www.sitmo.com/eq/409
     if(is.xts(OHLC)) {
-      Cl1 <- lag(OHLC[,4])
+      Cl1 <- lag.xts(OHLC[,4])
     } else {
       Cl1 <- c( NA, OHLC[-NROW(OHLC),4] )
     }
@@ -208,7 +208,7 @@ function(OHLC, n=10, calc="close", N=260, ...) {
     # Historical Open-High-Low-Close Volatility: Yang Zhang
     # http://www.sitmo.com/eq/417
     if(is.xts(OHLC)) {
-      Cl1 <- lag(OHLC[,4])
+      Cl1 <- lag.xts(OHLC[,4])
     } else {
       Cl1 <- c( NA, OHLC[-NROW(OHLC),4] )
     }

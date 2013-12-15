@@ -53,7 +53,7 @@ function(x, n=1, type=c("continuous","discrete"), na.pad=TRUE) {
 
   if(is.xts(x)) {
     if(type=="discrete") {
-      roc <- x / lag(x,n,na.pad=na.pad) - 1
+      roc <- x / lag.xts(x,n,na.pad=na.pad) - 1
     }
     # Continuous change
     if(type=="continuous") {

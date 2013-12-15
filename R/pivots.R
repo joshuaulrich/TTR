@@ -36,7 +36,7 @@ function(data, lagts=TRUE) {
   if(lagts){
     newrow <- xts(t(rep(NA,5)), order.by=last(index(data))+1)
     ret <- rbind(ret,newrow)
-    ret <- lag(ret)
+    ret <- lag.xts(ret)
   }
   return(ret)
 }

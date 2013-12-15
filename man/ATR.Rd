@@ -22,9 +22,9 @@
   \code{try.xts} fails) containing the columns: \describe{
   \item{ tr }{ The true range of the series. } \item{ atr
   }{ The average (as specified by \code{ma}) true range of
-  the series. } \item{ true.high }{ The true high of the
-  series. } \item{ true.low }{ The true low of the series.
-  } }
+  the series. } \item{ trueHigh }{ The true high of the
+  series. } \item{ trueLow }{ The true low of the series. }
+  }
 }
 \description{
   True range (TR) is a measure of volatility of a

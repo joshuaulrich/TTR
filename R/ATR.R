@@ -41,8 +41,8 @@
 #' \describe{
 #'  \item{ tr }{ The true range of the series. }
 #'  \item{ atr }{ The average (as specified by \code{ma}) true range of the series. }
-#'  \item{ true.high }{ The true high of the series. }
-#'  \item{ true.low }{ The true low of the series. }
+#'  \item{ trueHigh }{ The true high of the series. }
+#'  \item{ trueLow }{ The true low of the series. }
 #' }
 #'@author Joshua Ulrich
 #'@seealso See \code{\link{EMA}}, \code{\link{SMA}}, etc. for moving average

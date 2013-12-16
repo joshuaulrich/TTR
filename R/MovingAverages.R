@@ -48,6 +48,12 @@
 #'value of \code{w}.  Higher (lower) values of \code{w} will cause \code{VMA}
 #'to react faster (slower).
 #'
+#'\code{HMA} a WMA of the difference of two other WMAs, making it very
+#'reponsive.
+#'
+#'\code{ALMA} inspired by Gaussian filters. Tends to put less weight on most
+#'recent observations, reducing tendency to overshoot.
+#'
 #'@aliases MovingAverages SMA EMA WMA DEMA GD T3 EVWMA ZLEMA VWAP VWMA VMA MA
 #'@param x Price, volume, etc. series that is coercible to xts or matrix.
 #'@param price Price series that is coercible to xts or matrix.
@@ -62,6 +68,8 @@
 #'calculated; see notes.
 #'@param ratio A smoothing/decay ratio.  \code{ratio} overrides \code{wilder}
 #'in \code{EMA}, and provides additional smoothing in \code{VMA}.
+#'@param offset Percentile at which the center of the distribution should occur.
+#'@param sigma Standard deviation of the distribution.
 #'@param \dots any other passthrough parameters
 #'@return A object of the same class as \code{x} or \code{price} or a vector
 #'(if \code{try.xts} fails) containing the columns:
@@ -75,6 +83,8 @@
 #'    \item{VWMA}{ Volume-weighed moving average (same as \code{VWAP}). }
 #'    \item{VWAP}{ Volume-weighed average price (same as \code{VWMA}). }
 #'    \item{VWA}{ Variable-length moving average. }
+#'    \item{HMA}{ Hull moving average. }
+#'    \item{ALMA}{ Arnaud Legoux moving average. }
 #' }
 #'@note For \code{EMA}, \code{wilder=FALSE} (the default) uses an exponential
 #'smoothing ratio of \code{2/(n+1)}, while \code{wilder=TRUE} uses Welles
@@ -101,7 +111,7 @@
 #'calculated using the indicators' own previous values, and are therefore
 #'unstable in the short-term.  As the indicator receives more data, its output
 #'becomes more stable.  See example below.
-#'@author Joshua Ulrich
+#'@author Joshua Ulrich, Ivan Popivanov (HMA, ALMA)
 #'@seealso See \code{\link{wilderSum}}, which is used in calculating a Welles
 #'Wilder type MA.
 #'@references The following site(s) were used to code/document this
@@ -112,6 +122,8 @@
 #'\url{http://linnsoft.com/tour/techind/evwma.htm}\cr
 #'\url{http://www.fmlabs.com/reference/ZeroLagExpMA.htm}\cr
 #'\url{http://www.fmlabs.com/reference/VIDYA.htm}\cr
+#'\url{http://www.traderslog.com/hullmovingaverage}\cr
+#'\url{http://www.arnaudlegoux.com/}\cr
 #'@keywords ts
 #'@examples
 #'
@@ -121,6 +133,8 @@
 #' dema.20 <-  DEMA(ttrc[,"Close"], 20)
 #' evwma.20 <- EVWMA(ttrc[,"Close"], ttrc[,"Volume"], 20)
 #' zlema.20 <- ZLEMA(ttrc[,"Close"], 20)
+#' alma <- ALMA(ttrc[,"Close"])
+#' hma <- HMA(ttrc[,"Close"])
 #'
 #' ## Example of Tim Tillson's T3 indicator
 #' T3 <- function(x, n=10, v=1) DEMA(DEMA(DEMA(x,n,v),n,v),n,v)
@@ -417,4 +431,41 @@ function (x, w, ratio=1, ...) {
   }
 
   reclass(ma,x)
+}
+
+#-------------------------------------------------------------------------#
+
+#'@rdname MovingAverages
+#'@export
+"HMA" <-
+function(x, n=20, ...) {
+
+  # Hull Moving Average
+
+  reclass(WMA(2*WMA(x, n=n/2, ...) - WMA(x, n=n, ...), n=trunc(sqrt(n)), ...), x)
+}
+
+#-------------------------------------------------------------------------#
+
+#'@rdname MovingAverages
+#'@export
+"ALMA" <-
+function(x, n=9, offset=0.85, sigma=6, ...) {
+
+  # ALMA (Arnaud Legoux Moving Average)
+
+  if(offset < 0 || offset > 1) {
+    stop("Please ensure 0 <= offset <= 1")
+  }
+  if(sigma <= 0)
+    stop("sigma must be > 0")
+
+  m <- floor(offset*(n-1))
+  s <- n/sigma
+  wts <- exp(-((seq(0,n-1)-m)^2)/(2*s*s))
+  sumWeights <- sum(wts)
+  if(sumWeights != 0)
+    wts <- wts/sumWeights
+  alma <- rollapply(x, width=n, FUN=function(xx) sum(xx*wts), align="right")
+  reclass(alma, x)
 }

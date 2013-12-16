@@ -107,3 +107,20 @@ test.WPR <- function() {
   checkEquals( attributes(ot), attributes(output$topWPR) )
   checkException( WPR(input$mid$Close) )
 }
+
+# Ultimate Oscillator
+test.ultimateOscillator <- function() {
+  # This mess is because data.frames' attributes don't come through reclass() well
+  ia <- input$all[,c('High','Low','Close')]
+  it <- input$top[,c('High','Low','Close')]
+  rn <- rownames(ia)
+  rownames(ia) <- rownames(it) <- NULL
+  oa <- ultimateOscillator(ia); names(oa) <- rn
+  ot <- ultimateOscillator(it); names(ot) <- rn
+  # End: mess
+  checkEqualsNumeric( oa, output$allUltOsc )
+  checkEquals( attributes(oa), attributes(output$allUltOsc) )
+  checkEqualsNumeric( ot, output$topUltOsc )
+  checkEquals( attributes(ot), attributes(output$topUltOsc) )
+  checkException( ultimateOscillator(input$mid$Close) )
+}

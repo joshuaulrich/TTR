@@ -1,8 +1,10 @@
 \name{SMA}
+\alias{ALMA}
 \alias{DEMA}
 \alias{EMA}
 \alias{EVWMA}
 \alias{GD}
+\alias{HMA}
 \alias{MA}
 \alias{MovingAverages}
 \alias{SMA}
@@ -29,6 +31,10 @@
   VWAP(price, volume, n = 10, ...)
 
   VMA(x, w, ratio = 1, ...)
+
+  HMA(x, n = 20, ...)
+
+  ALMA(x, n = 9, offset = 0.85, sigma = 6, ...)
 }
 \arguments{
   \item{x}{Price, volume, etc. series that is coercible to
@@ -60,6 +66,11 @@
   overrides \code{wilder} in \code{EMA}, and provides
   additional smoothing in \code{VMA}.}
 
+  \item{offset}{Percentile at which the center of the
+  distribution should occur.}
+
+  \item{sigma}{Standard deviation of the distribution.}
+
   \item{\dots}{any other passthrough parameters}
 }
 \value{
@@ -74,7 +85,8 @@
   Volume-weighed moving average (same as \code{VWAP}). }
   \item{VWAP}{ Volume-weighed average price (same as
   \code{VWMA}). } \item{VWA}{ Variable-length moving
-  average. } }
+  average. } \item{HMA}{ Hull moving average. }
+  \item{ALMA}{ Arnaud Legoux moving average. } }
 }
 \description{
   Calculate various moving averages (MA) of a series.
@@ -111,6 +123,13 @@
   based on the absolute value of \code{w}.  Higher (lower)
   values of \code{w} will cause \code{VMA} to react faster
   (slower).
+
+  \code{HMA} a WMA of the difference of two other WMAs,
+  making it very reponsive.
+
+  \code{ALMA} inspired by Gaussian filters. Tends to put
+  less weight on most recent observations, reducing
+  tendency to overshoot.
 }
 \note{
   For \code{EMA}, \code{wilder=FALSE} (the default) uses an
@@ -154,6 +173,8 @@ sma.20 <-   SMA(ttrc[,"Close"], 20)
 dema.20 <-  DEMA(ttrc[,"Close"], 20)
 evwma.20 <- EVWMA(ttrc[,"Close"], ttrc[,"Volume"], 20)
 zlema.20 <- ZLEMA(ttrc[,"Close"], 20)
+alma <- ALMA(ttrc[,"Close"])
+hma <- HMA(ttrc[,"Close"])
 
 ## Example of Tim Tillson's T3 indicator
 T3 <- function(x, n=10, v=1) DEMA(DEMA(DEMA(x,n,v),n,v),n,v)
@@ -170,7 +191,7 @@ tail( EMA(x[10:100],10), 1 )
 tail( EMA(x[ 1:100],10), 1 )
 }
 \author{
-  Joshua Ulrich
+  Joshua Ulrich, Ivan Popivanov (HMA, ALMA)
 }
 \references{
   The following site(s) were used to code/document this
@@ -182,6 +203,8 @@ tail( EMA(x[ 1:100],10), 1 )
   \url{http://linnsoft.com/tour/techind/evwma.htm}\cr
   \url{http://www.fmlabs.com/reference/ZeroLagExpMA.htm}\cr
   \url{http://www.fmlabs.com/reference/VIDYA.htm}\cr
+  \url{http://www.traderslog.com/hullmovingaverage}\cr
+  \url{http://www.arnaudlegoux.com/}\cr
 }
 \seealso{
   See \code{\link{wilderSum}}, which is used in calculating

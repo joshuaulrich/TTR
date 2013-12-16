@@ -69,9 +69,6 @@ DVI <- function(price, n=252, wts=c(0.8,0.2), smooth=3,
   b <- ifelse( price > lag.xts(price), 1, -1 )
   str <- SMA( ( runSum(b,stretch[1]) + runSum(b,stretch[2])/10 )/2, stretch[3] )
 
-  # A simple percent rank function, possibly different
-  # than Excel's percentrank function.
-  pctRank <- function(x,i) match(x[i], sort(coredata(x[(i-(n-1)):i])))
 
   # calculate the DVI magnitude and stretch for each period
   dvi.mag <- runPercentRank(mag, n, FALSE, exact.multiplier)

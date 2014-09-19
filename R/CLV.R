@@ -51,7 +51,7 @@ function(HLC) {
   clv <- ((HLC[,3]-HLC[,2]) - (HLC[,1]-HLC[,3])) / (HLC[,1]-HLC[,2])
 
   # Account for H=L=C
-  clv[is.nan(clv)] <- 0
+  clv[is.nan(clv) | is.infinite(clv)] <- 0
 
   if(is.xts(clv)) colnames(clv) <- 'clv'
   reclass( clv, HLC )

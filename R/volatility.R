@@ -102,6 +102,7 @@
 #'@param n Number of periods for the volatility estimate.
 #'@param calc The calculation (type) of estimator to use.
 #'@param N Number of periods per year.
+#'@param mean0 Use a mean of 0 rather than the sample mean.
 #'@param \dots Arguments to be passed to/from other methods.
 #'@return A object of the same class as \code{OHLC} or a vector (if
 #'\code{try.xts} fails) containing the chosen volatility estimator values.
@@ -130,13 +131,14 @@
 #' data(ttrc)
 #' ohlc <- ttrc[,c("Open","High","Low","Close")]
 #' vClose <- volatility(ohlc, calc="close")
+#' vClose0 <- volatility(ohlc, calc="close", mean0=TRUE)
 #' vGK <- volatility(ohlc, calc="garman")
 #' vParkinson <- volatility(ohlc, calc="parkinson")
 #' vRS <- volatility(ohlc, calc="rogers")
 #'
 #'@export
 "volatility" <-
-function(OHLC, n=10, calc="close", N=260, ...) {
+function(OHLC, n=10, calc="close", N=260, mean0=FALSE, ...) {
 
   OHLC <- try.xts(OHLC, error=as.matrix)
 
@@ -160,7 +162,13 @@ function(OHLC, n=10, calc="close", N=260, ...) {
     } else {
       r <- ROC(OHLC[, 4], 1, ...)
     }
-    s <- sqrt(N) * runSD(r , n-1)
+    if( isTRUE(mean0) ) {
+      # This is an alternative SD calculation using an effective mean of 0
+      s <- sqrt(N) * sqrt(runSum(r^2, n-1) / (n-2))
+    } else {
+      # This is the standard SD calculation using the sample mean
+      s <- sqrt(N) * runSD(r, n-1)
+    }
   }
 
   # Historical Open-High-Low-Close Volatility: Garman Klass

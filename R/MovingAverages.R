@@ -184,7 +184,7 @@ function (x, n=10, wilder=FALSE, ratio=NULL, ...) {
 
   # Check for non-leading NAs
   # Leading NAs are handled in the C code
-  x.na <- xts:::naCheck(x, n)
+  x.na <- naCheck(x, n)
   
   # If ratio is specified, and n is not, set n to approx 'correct'
   # value backed out from ratio
@@ -322,7 +322,7 @@ function(price, volume, n=10, ...) {
 
   # Check for non-leading NAs
   # Leading NAs are handled in the C code
-  pv.na <- xts:::naCheck(pv, n)
+  pv.na <- naCheck(pv, n)
 
   # Call C routine
   ma <- .Call("evwma", pv[,1], pv[,2], n, PACKAGE = "TTR")
@@ -420,8 +420,8 @@ function (x, w, ratio=1, ...) {
 
   # Check for non-leading NAs
   # Leading NAs are handled in the C code
-  x.na <- xts:::naCheck(x, 1)
-  w.na <- xts:::naCheck(w, 1)
+  x.na <- naCheck(x, 1)
+  w.na <- naCheck(w, 1)
   
   # Call C routine
   ma <- .Call("vma", x, abs(w), ratio, PACKAGE = "TTR")

@@ -426,7 +426,7 @@ function(x, n=10) {
 
   # Check for non-leading NAs
   # Leading NAs are handled in the C code
-  x.na <- xts:::naCheck(x, n)
+  x.na <- naCheck(x, n)
 
   # Call C routine
   result <- .Call("wilderSum", x, n, PACKAGE = "TTR")

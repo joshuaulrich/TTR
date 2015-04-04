@@ -96,7 +96,7 @@ function( HL, change=10, percent=TRUE, retrace=FALSE, lastExtreme=TRUE ) {
                            lex = as.integer( lastExtreme ),
                            zz  = as.double( zz ),
                            PACKAGE = "TTR",
-                           DUP = FALSE )$zz
+                           DUP = TRUE )$zz
   
   # Interpolate results
   zz <- ifelse( zz==0, NA, zz )

@@ -62,13 +62,13 @@ runPercentRank <- function(x, n=260, cumulative = FALSE, exact.multiplier = 0.5)
   if (cumulative) {
     result <- .Fortran("cumprnk", ia = as.double(x[beg:NROW(x)]), lia = as.integer(len), 
               xmlt = as.double(exact.multiplier), oa = as.double(result[beg:NROW(x)]), 
-              PACKAGE = "TTR", DUP = FALSE)$oa
+              PACKAGE = "TTR", DUP = TRUE)$oa
   } else if (identical(as.integer(n),1L)) {
     result[] <- exact.multiplier
   } else {
     result <- .Fortran("runprnk", ia = as.double(x[beg:NROW(x)]), lia = as.integer(len), 
               n = as.integer(n), xmlt = as.double(exact.multiplier), 
-              oa = as.double(result[beg:NROW(x)]), PACKAGE = "TTR", DUP = FALSE)$oa
+              oa = as.double(result[beg:NROW(x)]), PACKAGE = "TTR", DUP = TRUE)$oa
     is.na(result) <- c(1:(n - 1))
   }
   result <- c(rep(NA, NAs), result)

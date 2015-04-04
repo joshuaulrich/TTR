@@ -92,7 +92,7 @@ function(x, n=10, cumulative=FALSE) {
                      oa = as.double(result[beg:NROW(x)]),
                      loa = as.integer(len),
                      PACKAGE = "TTR",
-                     DUP = FALSE )$oa
+                     DUP = TRUE )$oa
     
     # Prepend NAs from original data
     result <- c( rep( NA, NAs ), result )
@@ -140,7 +140,7 @@ function(x, n=10, cumulative=FALSE) {
                      oa = as.double(result[beg:NROW(x)]),
                      loa = as.integer(len),
                      PACKAGE = "TTR",
-                     DUP = FALSE )$oa
+                     DUP = TRUE )$oa
 
     # Prepend NAs from original data
     result <- c( rep( NA, NAs ), result )
@@ -188,7 +188,7 @@ function(x, n=10, cumulative=FALSE) {
                      oa = as.double(result[beg:NROW(x)]),
                      loa = as.integer(len),
                      PACKAGE = "TTR",
-                     DUP = FALSE )$oa
+                     DUP = TRUE )$oa
   }
 
   # Replace 1:(n-1) with NAs and prepend NAs from original data
@@ -248,7 +248,7 @@ function(x, n=10, non.unique="mean", cumulative=FALSE) {
                    ver = as.integer(non.unique),
                    cu = as.integer(cumulative),
                    PACKAGE = "TTR",
-                   DUP = FALSE )$oa
+                   DUP = TRUE )$oa
 
   # Replace 1:(n-1) with NAs and prepend NAs from original data
   is.na(result) <- c(1:(n-1))
@@ -305,7 +305,7 @@ function(x, y, n=10, use="all.obs", sample=TRUE, cumulative=FALSE) {
                    oa = double(len),
                    cu = as.integer(cumulative),
                    PACKAGE = "TTR",
-                   DUP = FALSE )$oa
+                   DUP = TRUE )$oa
 
   # Replace 1:(n-1) with NAs and prepend NAs from original data
   is.na(result) <- c(1:(n-1))
@@ -401,7 +401,7 @@ function(x, n=10, center=NULL, stat="median",
                    ver = as.integer(non.unique),        # median type
                    cu = as.integer(cumulative),         # from inception
                    PACKAGE = "TTR",
-                   DUP = FALSE )$oa
+                   DUP = TRUE )$oa
 
   if( median ) result <- result * constant
 

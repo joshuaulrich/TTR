@@ -7,7 +7,7 @@
 \alias{yang.zhang}
 \title{Volatility}
 \usage{
-  volatility(OHLC, n = 10, calc = "close", N = 260, ...)
+  volatility(OHLC, n = 10, calc = "close", N = 260, mean0 = FALSE, ...)
 }
 \arguments{
   \item{OHLC}{Object that is coercible to xts or matrix and
@@ -19,6 +19,8 @@
   \item{calc}{The calculation (type) of estimator to use.}
 
   \item{N}{Number of periods per year.}
+
+  \item{mean0}{Use a mean of 0 rather than the sample mean.}
 
   \item{\dots}{Arguments to be passed to/from other
   methods.}

@@ -64,12 +64,12 @@
 #'\url{http://www.fmlabs.com/reference/MACD.htm}\cr
 #'\url{http://www.equis.com/Customer/Resources/TAAZ/?c=3&p=66}\cr
 #'\url{http://linnsoft.com/tour/techind/macd.htm}\cr
-#'\url{http://stockcharts.com/education/IndicatorAnalysis/indic_MACD1.html}\cr
+#'\url{http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:moving_average_convergence_divergence_macd}\cr
 #'\cr Price Oscillator:\cr
 #'\url{http://www.fmlabs.com/reference/PriceOscillator.htm}\cr
 #'\url{http://www.fmlabs.com/reference/PriceOscillatorPct.htm}\cr
 #'\url{http://www.equis.com/Customer/Resources/TAAZ/?c=3&p=94}\cr
-#'\url{http://stockcharts.com/education/IndicatorAnalysis/indic_priceOscillator.html}\cr
+#'\url{http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:price_oscillators_ppo}\cr
 #'\cr Volume Oscillator:\cr
 #'\url{http://www.fmlabs.com/reference/PVO.htm}\cr
 #'\url{http://www.equis.com/Customer/Resources/TAAZ/Default.aspx?c=3&p=122}\cr

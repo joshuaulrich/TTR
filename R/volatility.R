@@ -111,20 +111,20 @@
 #'volatility measures.
 #'@references The following sites were used to code/document these
 #'indicators. All were created by Thijs van den Berg under the GNU Free
-#'Documentation License and were retrieved on 2008-04-20. The links are
-#'currently dead, but can be accessed via internet archives.\cr
+#'Documentation License and were retrieved on 2008-04-20. The original
+#'links are dead, but can be accessed via internet archives.\cr
 #'\cr Close-to-Close Volatility (\code{calc="close"}):\cr
-#'\url{http://www.sitmo.com/eq/172}\cr
+#'\url{https://web.archive.org/web/20100421083157/http://www.sitmo.com/eq/172}\cr
 #'\cr OHLC Volatility: Garman Klass (\code{calc="garman.klass"}):\cr
-#'\url{http://www.sitmo.com/eq/402}\cr
+#'\url{https://web.archive.org/web/20100326172550/http://www.sitmo.com/eq/402}\cr
 #'\cr High-Low Volatility: Parkinson (\code{calc="parkinson"}):\cr
-#'\url{http://www.sitmo.com/eq/173}\cr
+#'\url{https://web.archive.org/web/20100328195855/http://www.sitmo.com/eq/173}\cr
 #'\cr OHLC Volatility: Rogers Satchell (\code{calc="rogers.satchell"}):\cr
-#'\url{http://www.sitmo.com/eq/414}\cr
+#'\url{https://web.archive.org/web/20091002233833/http://www.sitmo.com/eq/414}\cr
 #'\cr OHLC Volatility: Garman Klass - Yang Zhang (\code{calc="gk.yz"}):\cr
-#'\url{http://www.sitmo.com/eq/409}\cr
+#'\url{https://web.archive.org/web/20100326215050/http://www.sitmo.com/eq/409}\cr
 #'\cr OHLC Volatility: Yang Zhang (\code{calc="yang.zhang"}):\cr
-#'\url{http://www.sitmo.com/eq/417}\cr
+#'\url{https://web.archive.org/web/20100326215050/http://www.sitmo.com/eq/409}\cr
 #'@keywords ts
 #'@examples
 #'

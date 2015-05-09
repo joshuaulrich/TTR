@@ -57,10 +57,9 @@
 #'options; and note Warning section.  See \code{\link{ROC}} for the
 #'rate-of-change function.  See \code{\link{MACD}} for a generic oscillator.
 #'@references The following site(s) were used to code/document this
-#'indicator:\cr \url{http://www.pring.com/index.html}\cr
-#'\url{http://www.pring.com/movieweb/daily_kst.htm}\cr
-#'\url{http://www.pring.com/articles/article28.htm}\cr
-#'\url{http://www.pring.com/movieweb/KST_MCM.htm}\cr
+#'indicator:\cr
+#'\url{https://web.archive.org/web/20110715112957/http://www.pring.com/movieweb/daily_kst.htm}\cr
+#'\url{https://web.archive.org/web/20100101162707/http://www.pring.com/movieweb/KST_MCM.htm}\cr
 #'@keywords ts
 #'@examples
 #'

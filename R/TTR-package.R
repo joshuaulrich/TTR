@@ -80,4 +80,5 @@ NULL
 #' ibm <- getYahooData("IBM", 19990404, 20050607)
 #' 
 #'@rdname TTR
+#'@import xts zoo
 NULL

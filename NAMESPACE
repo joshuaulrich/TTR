@@ -1,7 +1,7 @@
 # Load Fortran symbol table
 useDynLib(TTR)
 
-import(xts)
+import(xts, zoo)
 
 # User visible TTR functions
 export(adjRatios)

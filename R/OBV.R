@@ -58,7 +58,10 @@ function(price, volume) {
     price <- as.vector(price)
     volume <- as.vector(volume)
   }
-  obv <- c( volume[1], ifelse( ROC(price) > 0, volume, -volume )[-1] )
+  prChg <- ROC(price)
+  obv <- c( volume[1], ifelse( prChg > 0, volume, -volume )[-1] )
+  # OBV[t] = OBV[t-1] if price change is equal to zero
+  obv[abs(prChg) < sqrt(.Machine$double.eps)] <- 0
   obv <- cumsum( obv )
 
   if(is.xts(obv)) {

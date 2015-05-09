@@ -70,9 +70,9 @@ function(HLC, volume, n=14) {
 
   if(NCOL(HLC)==3) {
     if(is.xts(HLC)) {
-      HLC <- xts(rowMeans(HLC),index(HLC))
+      HLC <- xts(apply(HLC, 1, mean),index(HLC))
     } else {
-      HLC <- rowMeans(HLC)
+      HLC <- apply(HLC, 1, mean)
     }
   } else
   if(NCOL(HLC)!=1) {

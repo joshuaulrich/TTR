@@ -70,10 +70,10 @@ function(HLC, n=20, maType, c=0.015, ...) {
   if(NCOL(HLC)==3) {
     if(is.xts(HLC)) {
       xa <- xcoredata(HLC)
-      HLC <- xts(rowMeans(HLC),index(HLC))
+      HLC <- xts(apply(HLC, 1, mean),index(HLC))
       xcoredata(HLC) <- xa
     } else {
-      HLC <- rowMeans(HLC)
+      HLC <- apply(HLC, 1, mean)
     }
   } else
   if(NCOL(HLC)!=1) {

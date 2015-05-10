@@ -1,3 +1,38 @@
+#-#-#-#-#-#-#-#-#-#    Changes in TTR version 0.23-0    #-#-#-#-#-#-#-#-#-#
+
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+  - Update DVI to use runPercentRank. Thanks to Ivan Popivanov for the patch.
+
+  - getYahooData now returns an xts object with Date index (not POSIXct).
+
+  - MA function colnames no longer based on input colnames.
+
+
+NEW FEATURES
+
+  - Add HMA and ALMA functions/docs. Thanks to Ivan Popivanov.
+
+  - Add Ultimate Oscillator function/docs/tests. Thanks to Ivan Popivanov.
+
+
+BUG FIXES
+
+  - runFuns now throw error if there are not enough non-NA values.
+
+  - Change all instances of lag() to lag.xts() in case 'x' is a matrix.
+    Thanks to Ivan Popivanov for the report.
+
+  - Correct output column names in ATR docs.
+
+  - CLV now sets NaN and Inf values to 0, instead of only NaN values.
+
+  - Fix OBV so OBV[t] = OBV[t-1] when Close[t] == Close[t-1].
+
+  - Fix dead links in documentation.
+
+
 #-#-#-#-#-#-#-#-#-#    Changes in TTR version 0.22-0    #-#-#-#-#-#-#-#-#-#
 
 

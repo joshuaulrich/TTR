@@ -2,7 +2,7 @@ Package: TTR
 Type: Package
 Title: Technical Trading Rules
 Version: 0.23-0
-Date: 2015-05-18
+Date: 2015-07-09
 Author: Joshua Ulrich
 Maintainer: Joshua Ulrich <josh.m.ulrich@gmail.com>
 Imports: xts (>= 0.9-3), zoo

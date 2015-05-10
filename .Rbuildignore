@@ -1,0 +1,7 @@
+R/pivots.R
+WISHLIST
+^.*\.Rproj$
+^\.Rproj\.user$
+\.git
+\.gitignore
+\.orig$

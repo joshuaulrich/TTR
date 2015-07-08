@@ -81,4 +81,6 @@ NULL
 #' 
 #'@rdname TTR
 #'@import xts zoo
+#'@importFrom stats approx embed na.omit sd
+#'@importFrom utils flush.console read.csv read.table
 NULL

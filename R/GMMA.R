@@ -65,7 +65,8 @@ function(x, short=c(3,5,8,10,12,15), long=c(30,35,40,45,50,60), maType) {
     maType <- 'EMA'
   }
   
-  gmma <- sapply(c(short,long), function(g) do.call(maType, list(x,n=g)))
+  fn <- function(g) { do.call(maType, list(x,n=g)) }
+  gmma <- do.call(cbind, lapply(c(short,long), fn))
   colnames(gmma) <- c(paste('short lag',short),paste('long lag',long))
   
   reclass(gmma, x)

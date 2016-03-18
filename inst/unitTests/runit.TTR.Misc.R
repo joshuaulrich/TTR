@@ -25,7 +25,7 @@ hlc <- c('High','Low','Close')
 cl  <- 'Close'
 
 # Load output data
-load('unitTests/output.misc.rda')
+load(system.file("unitTests/output.misc.rda", package="TTR"))
 
 #################################################
 

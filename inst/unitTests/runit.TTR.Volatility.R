@@ -16,7 +16,7 @@ input$top[1:10,] <- NA
 input$mid[9:20,] <- NA
 
 # Load output data
-load('unitTests/output.volatility.rda')
+load(system.file("unitTests/output.volatility.rda", package="TTR"))
 
 #################################################
 

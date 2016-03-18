@@ -25,7 +25,7 @@ hlc <- c('High','Low','Close')
 cl  <- 'Close'
 
 # Load output data
-load('unitTests/output.volume.rda')
+load(system.file("unitTests/output.volume.rda", package="TTR"))
 
 #################################################
 

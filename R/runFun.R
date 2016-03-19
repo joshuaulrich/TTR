@@ -67,6 +67,10 @@ function(x, n=10, cumulative=FALSE) {
 
   if( n < 1 || n > NROW(x) ) stop("Invalid 'n'")
 
+  if(NCOL(x) > 1) {
+    stop("ncol(x) > 1. runSum only supports univariate 'x'")
+  }
+
   # Count NAs, ensure they're only at beginning of data.
   NAs <- sum(is.na(x))
   if( NAs > 0 ) {
@@ -115,6 +119,10 @@ function(x, n=10, cumulative=FALSE) {
   x <- try.xts(x, error=as.matrix)
 
   if( n < 1 || n > NROW(x) ) stop("Invalid 'n'")
+
+  if(NCOL(x) > 1) {
+    stop("ncol(x) > 1. runMin only supports univariate 'x'")
+  }
 
   # Count NAs, ensure they're only at beginning of data, then remove.
   NAs <- sum( is.na(x) )
@@ -172,6 +180,10 @@ function(x, n=10, cumulative=FALSE) {
   }
   beg <- 1 + NAs
   len <- NROW(x) - NAs
+
+  if(NCOL(x) > 1) {
+    stop("ncol(x) > 1. runMax only supports univariate 'x'")
+  }
 
   # Initialize result vector 
   result <- double(NROW(x))
@@ -235,6 +247,10 @@ function(x, n=10, non.unique="mean", cumulative=FALSE) {
   beg <- 1 + NAs
   len <- NROW(x) - NAs
 
+  if(NCOL(x) > 1) {
+    stop("ncol(x) > 1. runMedian only supports univariate 'x'")
+  }
+
   # Non-unique median
   non.unique <- match.arg(non.unique, c('mean','max','min'))
   non.unique <- switch( non.unique, mean=0, max=1, min=-1 )
@@ -274,6 +290,11 @@ function(x, y, n=10, use="all.obs", sample=TRUE, cumulative=FALSE) {
   }
 
   if( n < 1 || n > NROW(x) ) stop("Invalid 'n'")
+
+  if(NCOL(x) > 1 || NCOL(y) > 1) {
+    stop("ncol(x) > 1 or ncol(y) > 1.",
+         " runCov only supports univariate 'x' and 'y'")
+  }
 
   # "all.obs", "complete.obs", "pairwise.complete.obs"
 
@@ -368,6 +389,10 @@ function(x, n=10, center=NULL, stat="median",
 
   if( n < 1 || n > NROW(x) ) stop("Invalid 'n'")
 
+  if(NCOL(x) > 1) {
+    stop("ncol(x) > 1. runMAD only supports univariate 'x'")
+  }
+
   # Count NAs, ensure they're only at beginning of data, then remove.
   NAs <- sum( is.na(x) )
   if( NAs > 0 ) {
@@ -423,6 +448,10 @@ function(x, n=10) {
   x <- try.xts(x, error=as.matrix)
 
   if( n < 1 || n > NROW(x) ) stop("Invalid 'n'")
+
+  if(NCOL(x) > 1) {
+    stop("ncol(x) > 1. wilderSum only supports univariate 'x'")
+  }
 
   # Check for non-leading NAs
   # Leading NAs are handled in the C code

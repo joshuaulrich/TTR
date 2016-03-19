@@ -23,6 +23,7 @@ test.runSum <- function() {
   checkEqualsNumeric( runSum(input$top$Close), output$topSum )
   checkEquals( attributes(runSum(input$top$Close)), attributes(output$topSum) )
   checkException( runSum(input$mid$Close) )
+  checkException( runSum(input$all[,1:2]) )
   checkEqualsNumeric( tail(runSum(input$all$Close,250),1), sum(input$all$Close) )
 }
 
@@ -33,6 +34,7 @@ test.wilderSum <- function() {
   checkEqualsNumeric( wilderSum(input$top$Close), output$topwSum )
   checkEquals( attributes(wilderSum(input$top$Close)), attributes(output$topwSum) )
   checkException( wilderSum(input$mid$Close) )
+  checkException( wilderSum(input$all[,1:2]) )
 }
 
 # Min
@@ -42,6 +44,7 @@ test.runMin <- function() {
   checkEqualsNumeric( runMin(input$top$Close), output$topMin )
   checkEquals( attributes(runMin(input$top$Close)), attributes(output$topMin) )
   checkException( runMin(input$mid$Close) )
+  checkException( runMin(input$all[,1:2]) )
   checkEqualsNumeric( tail(runMin(input$all$Close,250),1), min(input$all$Close) )
 }
 
@@ -52,6 +55,7 @@ test.runMax <- function() {
   checkEqualsNumeric( runMax(input$top$Close), output$topMax )
   checkEquals( attributes(runMax(input$top$Close)), attributes(output$topMax) )
   checkException( runMax(input$mid$Close) )
+  checkException( runMax(input$all[,1:2]) )
   checkEqualsNumeric( tail(runMax(input$all$Close,250),1), max(input$all$Close) )
 }
 
@@ -62,6 +66,7 @@ test.runMean <- function() {
   checkEqualsNumeric( runMean(input$top$Close), output$topMean )
   checkEquals( attributes(runMean(input$top$Close)), attributes(output$topMean) )
   checkException( runMean(input$mid$Close) )
+  checkException( runMean(input$all[,1:2]) )
   checkEqualsNumeric( tail(runMean(input$all$Close,250),1), mean(input$all$Close) )
 }
 
@@ -72,6 +77,7 @@ test.runMedian <- function() {
   checkEqualsNumeric( runMedian(input$top$Close), output$topMedian )
   checkEquals( attributes(runMedian(input$top$Close)), attributes(output$topMedian) )
   checkException( runMedian(input$mid$Close) )
+  checkException( runMedian(input$all[,1:2]) )
   checkEqualsNumeric( tail(runMedian(input$all$Close,250),1), median(input$all$Close) )
 }
 
@@ -83,6 +89,7 @@ test.runCov <- function() {
   checkEquals( attributes(runCov(input$top$High, input$top$Low)), attributes(output$topCov) )
   checkException( runCov(input$mid$High, input$mid$Low) )
   checkException( runCov(input$all$High) )
+  checkException( runCov(input$all[,1:2], input$all$Low) )
   checkEqualsNumeric( tail(runCov(input$all$High, input$all$Low, 250),1), cov(input$all$High, input$all$Low) )
 }
 
@@ -94,6 +101,7 @@ test.runCor <- function() {
   checkEquals( attributes(runCor(input$top$High, input$top$Low)), attributes(output$topCor) )
   checkException( runCor(input$mid$High, input$mid$Low) )
   checkException( runCor(input$all$High) )
+  checkException( runCor(input$all[,1:2], input$all$Low) )
   checkEqualsNumeric( tail(runCor(input$all$High, input$all$Low, 250),1), cor(input$all$High, input$all$Low) )
 }
 
@@ -104,6 +112,7 @@ test.runVar <- function() {
   checkEqualsNumeric( runVar(input$top$Close), output$topVar )
   checkEquals( attributes(runVar(input$top$Close)), attributes(output$topVar) )
   checkException( runVar(input$mid$Close) )
+  checkException( runVar(input$all[,1:2], input$all$Low) )
   checkEqualsNumeric( tail(runVar(input$all$Close,n=250),1), var(input$all$Close) )
 }
 
@@ -114,15 +123,17 @@ test.runSD <- function() {
   checkEqualsNumeric( runSD(input$top$Close), output$topSD )
   checkEquals( attributes(runSD(input$top$Close)), attributes(output$topSD) )
   checkException( runSD(input$mid$Close) )
+  checkException( runSD(input$all[,1:2]) )
   checkEqualsNumeric( tail(runSD(input$all$Close,250),1), sd(input$all$Close) )
 }
 
-# Variance
+# Absolute deviation
 test.runMAD <- function() {
   checkEqualsNumeric( runMAD(input$all$Close), output$allMAD )
   checkEquals( attributes(runMAD(input$all$Close)), attributes(output$allMAD) )
   checkEqualsNumeric( runMAD(input$top$Close), output$topMAD )
   checkEquals( attributes(runMAD(input$top$Close)), attributes(output$topMAD) )
   checkException( runMAD(input$mid$Close) )
+  checkException( runMAD(input$all[,1:2]) )
   checkEqualsNumeric( tail(runMAD(input$all$Close,250),1), mad(input$all$Close) )
 }

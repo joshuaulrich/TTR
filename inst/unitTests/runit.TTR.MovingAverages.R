@@ -23,6 +23,7 @@ test.SMA <- function() {
   checkEqualsNumeric( SMA(input$top$Close), output$topSMA )
   checkEquals( attributes(SMA(input$top$Close)), attributes(output$topSMA) )
   checkException( SMA(input$mid$Close) )
+  checkException( SMA(input$all[,1:2]) )
 }
 
 # Exponential Moving Average
@@ -32,6 +33,7 @@ test.EMA <- function() {
   checkEqualsNumeric( EMA(input$top$Close), output$topEMA )
   checkEquals( attributes(EMA(input$top$Close)), attributes(output$topEMA) )
   checkException( EMA(input$mid$Close) )
+  checkException( EMA(input$all[,1:2]) )
 }
 
 # Exponential Moving Average, Wilder ratio
@@ -50,6 +52,7 @@ test.DEMA <- function() {
   checkEqualsNumeric( DEMA(input$top$Close), output$topDEMA )
   checkEquals( attributes(DEMA(input$top$Close)), attributes(output$topDEMA) )
   checkException( DEMA(input$mid$Close) )
+  checkException( DEMA(input$all[,1:2]) )
 }
 
 # Weighted Moving Average, 1:n
@@ -60,6 +63,7 @@ test.WMA <- function() {
   checkEquals( attributes(WMA(input$top$Close)), attributes(output$topWMA) )
   checkException( WMA(input$mid$Close) )
   checkException( WMA(input$all$Close, wts=1) )
+  checkException( WMA(input$all[,1:2]) )
 }
 
 # Weighted Moving Average, Volume
@@ -69,6 +73,8 @@ test.WMAvol <- function() {
   checkEqualsNumeric( WMA(input$top$Close, wts=input$top$Volume), output$topWMAvol )
   checkEquals( attributes(WMA(input$top$Close, wts=input$top$Volume)), attributes(output$topWMAvol) )
   checkException( WMA(input$all$Close, wts=input$mid$Volume) )
+  checkException( WMA(input$all[,1:2], wts=input$all$Volume) )
+  checkException( WMA(input$all$Close, wts=input$all[,1:2]) )
 }
 
 # Exponential, Volume-Weighted Moving Average
@@ -79,6 +85,8 @@ test.EVWMA <- function() {
   checkEquals( attributes(EVWMA(input$top$Close, input$top$Volume)), attributes(output$topEVWMA) )
   checkException( EVWMA(input$mid$Close, input$mid$Volume) )
   checkException( EVWMA(input$all$Close) )
+  checkException( EVWMA(input$all[,1:2], input$all$Volume) )
+  checkException( EVWMA(input$all$Close, input$all[,1:2]) )
 }
 
 # Zero-Lag Exponential Moving Average
@@ -88,4 +96,5 @@ test.ZLEMA <- function() {
   checkEqualsNumeric( ZLEMA(input$top$Close), output$topZLEMA )
   checkEquals( attributes(ZLEMA(input$top$Close)), attributes(output$topZLEMA) )
   checkException( ZLEMA(input$mid$Close) )
+  checkException( ZLEMA(input$all[,1:2]) )
 }

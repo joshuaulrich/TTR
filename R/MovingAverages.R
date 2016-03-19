@@ -178,6 +178,9 @@ function (x, n=10, wilder=FALSE, ratio=NULL, ...) {
   x <- try.xts(x, error=as.matrix)
   if( n < 1 || n > NROW(x) )
     stop("Invalid 'n'")
+  if(NCOL(x) > 1) {
+    stop("ncol(x) > 1. EMA only supports univariate 'x'")
+  }
   if( any(nNonNA <- n > colSums(!is.na(x))) )
     stop("n > number of non-NA values in column(s) ",
          paste(which(nNonNA), collapse=", "))
@@ -250,6 +253,9 @@ function(x, n=10, wts=1:n, ...) {
     stop("Length of 'wts' must equal the length of 'x' or 'n'")
   if( n < 1 || n > NROW(x) )
     stop("Invalid 'n'")
+  if(NCOL(x) > 1 || NCOL(wts) > 1) {
+    stop("ncol(x) > 1 or ncol(wts) > 1. WMA only supports univariate 'x' and 'w'")
+  }
 
   # Count NAs, ensure they're only at beginning of data, then remove.
   NAx <- sum( is.na(x) )
@@ -313,6 +319,10 @@ function(price, volume, n=10, ...) {
     stop("Length of 'volume' must equal 1 or the length of 'price'")
   if( n < 1 || n > NROW(price) )
     stop("Invalid 'n'")
+  if(NCOL(price) > 1 || NCOL(volume) > 1) {
+    stop("ncol(price) > 1 or ncol(volume) > 1.",
+         " EVWMA only supports univariate 'price' and 'volume'")
+  }
 
   pv <- cbind(price, volume)
 
@@ -345,6 +355,9 @@ function (x, n=10, ratio=NULL, ...) {
   # Zero-Lag Exponential Moving Average
 
   x <- try.xts(x, error=as.matrix)
+  if(NCOL(x) > 1) {
+    stop("ncol(x) > 1. ZLEMA only supports univariate 'x'")
+  }
   
   # Count NAs, ensure they're only at beginning of data, then remove.
   NAs <- sum( is.na(x) )
@@ -417,6 +430,10 @@ function (x, w, ratio=1, ...) {
 
   if( NROW(w) != NROW(x) )
     stop("Length of 'w' must equal the length of 'x'")
+
+  if(NCOL(x) > 1 || NCOL(w) > 1) {
+    stop("ncol(x) > 1 or ncol(w) > 1. VMA only supports univariate 'x' and 'w'")
+  }
 
   # Check for non-leading NAs
   # Leading NAs are handled in the C code

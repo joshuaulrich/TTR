@@ -41,7 +41,7 @@
 #'@seealso See \code{\link{CLV}}, and \code{\link{chaikinAD}}.
 #'@references The following site(s) were used to code/document this
 #'indicator:\cr \url{http://www.fmlabs.com/reference/ChaikinMoneyFlow.htm}\cr
-#'\url{http://www.linnsoft.com/tour/techind/cmf.htm}\cr
+#'\url{https://www.linnsoft.com/techind/chaikin-money-flow-cmf}\cr
 #'\url{http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:chaikin_money_flow_cmf}\cr
 #'@keywords ts
 #'@examples

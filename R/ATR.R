@@ -52,7 +52,7 @@
 #'indicator:\cr \url{http://www.fmlabs.com/reference/TR.htm}\cr
 #'\url{http://www.fmlabs.com/reference/ATR.htm}\cr
 #'\url{http://www.equis.com/Customer/Resources/TAAZ/?c=3&p=35}\cr
-#'\url{http://www.linnsoft.com/tour/techind/trueRange.htm}\cr
+#'\url{https://www.linnsoft.com/techind/true-range-tr}\cr
 #'\url{http://stockcharts.com/education/IndicatorAnalysis/indic_ATR.html}\cr
 #'@keywords ts
 #'@examples

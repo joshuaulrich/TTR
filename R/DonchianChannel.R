@@ -53,7 +53,7 @@
 #'@author Joshua Ulrich
 #'@seealso See \code{\link{BBands}}.
 #'@references The following site(s) were used to code/document this
-#'indicator:\cr \url{http://www.linnsoft.com/tour/techind/donch.htm}\cr
+#'indicator:\cr \url{https://www.linnsoft.com/techind/donchian-channels}\cr
 #'@keywords ts
 #'@examples
 #'

@@ -54,7 +54,7 @@
 #'@references The following site(s) were used to code/document this
 #'indicator:\cr \url{http://www.fmlabs.com/reference/Aroon.htm}\cr
 #'\url{http://www.fmlabs.com/reference/AroonOscillator.htm}\cr
-#'\url{http://www.linnsoft.com/tour/techind/aroon.htm}\cr
+#'\url{https://www.linnsoft.com/techind/aroon-arn}\cr
 #'\url{http://stockcharts.com/education/IndicatorAnalysis/indic-Aroon.htm}\cr
 #'@keywords ts
 #'@examples

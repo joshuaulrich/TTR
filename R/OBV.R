@@ -37,8 +37,8 @@
 #'@references The following site(s) were used to code/document this
 #'indicator:\cr \url{http://www.fmlabs.com/reference/OBV.htm}\cr
 #'\url{http://www.equis.com/Customer/Resources/TAAZ?c=3&p=82}\cr
-#'\url{http://linnsoft.com/tour/techind/obVol.htm}\cr
-#'\url{http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:on_balance_volume_obv}\cr
+#'\url{https://www.linnsoft.com/techind/balance-open-interest}\cr
+#'\url{http://stockcharts.com/education/IndicatorAnalysis/indic-obv.htm}\cr
 #'@keywords ts
 #'@examples
 #'

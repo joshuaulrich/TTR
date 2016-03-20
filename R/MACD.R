@@ -63,7 +63,7 @@
 #'\cr Moving Average Convergence/Divergence (MACD):\cr
 #'\url{http://www.fmlabs.com/reference/MACD.htm}\cr
 #'\url{http://www.equis.com/Customer/Resources/TAAZ/?c=3&p=66}\cr
-#'\url{http://linnsoft.com/tour/techind/macd.htm}\cr
+#'\url{https://www.linnsoft.com/techind/macd}\cr
 #'\url{http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:moving_average_convergence_divergence_macd}\cr
 #'\cr Price Oscillator:\cr
 #'\url{http://www.fmlabs.com/reference/PriceOscillator.htm}\cr

@@ -44,8 +44,8 @@
 #'@references The following site(s) were used to code/document this
 #'indicator:\cr
 #'\url{http://www.fmlabs.com/reference/default.htm?url=ZigZag.htm}\cr
-#'\url{http://www.linnsoft.com/tour/techind/zigzag.htm}\cr
-#'\url{http://www.linnsoft.com/tour/techind/zigosc.htm}\cr
+#'\url{https://www.linnsoft.com/techind/zig-zag-indicator-zig-zzo}\cr
+#'\url{https://www.linnsoft.com/techind/zig-zag-oscillator-indicator-zzo}\cr
 #'\url{http://www.equis.com/Customer/Resources/TAAZ/?c=3&p=127}\cr
 #'\url{http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:zigzag}\cr
 #'@keywords ts

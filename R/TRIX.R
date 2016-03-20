@@ -53,7 +53,7 @@
 #'indicator:\cr
 #'\url{http://www.fmlabs.com/reference/default.htm?url=TRIX.htm}\cr
 #'\url{http://www.equis.com/Customer/Resources/TAAZ/?c=3&p=114}\cr
-#'\url{http://www.linnsoft.com/tour/techind/trix.htm}\cr
+#'\url{https://www.linnsoft.com/techind/trix-triple-smoothed-exponential-oscillator}\cr
 #'\url{http://stockcharts.com/education/IndicatorAnalysis/indic_trix.htm}\cr
 #'@keywords ts
 #'@examples

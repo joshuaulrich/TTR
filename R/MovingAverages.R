@@ -119,7 +119,7 @@
 #'\url{http://www.fmlabs.com/reference/WeightedMA.htm}\cr
 #'\url{http://www.fmlabs.com/reference/DEMA.htm}\cr
 #'\url{http://www.fmlabs.com/reference/T3.htm}\cr
-#'\url{http://linnsoft.com/tour/techind/evwma.htm}\cr
+#'\url{https://www.linnsoft.com/techind/evwma-elastic-volume-weighted-moving-average}\cr
 #'\url{http://www.fmlabs.com/reference/ZeroLagExpMA.htm}\cr
 #'\url{http://www.fmlabs.com/reference/VIDYA.htm}\cr
 #'\url{http://www.traderslog.com/hullmovingaverage}\cr

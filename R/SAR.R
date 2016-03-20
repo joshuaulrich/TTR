@@ -40,7 +40,7 @@
 #'developed by Welles Wilder.
 #'@references The following site(s) were used to code/document this
 #'indicator:\cr
-#'\url{http://www.linnsoft.com/tour/techind/sar.htm}\cr
+#'\url{https://www.linnsoft.com/techind/parabolic-sar-sar}\cr
 #'\url{http://www.fmlabs.com/reference/SAR.htm}\cr
 #'\url{http://stockcharts.com/education/IndicatorAnalysis/indic_ParaSAR.htm}\cr
 #'\url{http://www.equis.com/Customer/Resources/TAAZ/?c=3&p=87}

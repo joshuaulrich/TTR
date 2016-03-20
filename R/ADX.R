@@ -54,9 +54,9 @@
 #'\url{http://www.fmlabs.com/reference/ADX.htm}\cr
 #'\url{http://www.fmlabs.com/reference/ADXR.htm}\cr
 #'\url{http://www.equis.com/Customer/Resources/TAAZ/Default.aspx?c=3&p=49}\cr
-#'\url{http://linnsoft.com/tour/techind/dirInd.htm}\cr
-#'\url{http://linnsoft.com/tour/techind/adx.htm}\cr
-#'\url{http://linnsoft.com/tour/techind/adxr.htm}\cr
+#'\url{https://www.linnsoft.com/techind/directional-indicator-diplus-diminus}\cr
+#'\url{https://www.linnsoft.com/techind/adx-avg-directional-movement}\cr
+#'\url{https://www.linnsoft.com/techind/adxr-avg-directional-movement-rating}\cr
 #'\url{http://stockcharts.com/education/IndicatorAnalysis/indic_ADX.html}\cr
 #'@keywords ts
 #'@examples

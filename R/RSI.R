@@ -57,7 +57,7 @@
 #'\cr Relative Strength Index:\cr
 #'\url{http://www.fmlabs.com/reference/RSI.htm}\cr
 #'\url{http://www.equis.com/Customer/Resources/TAAZ/?c=3&p=100}\cr
-#'\url{http://linnsoft.com/tour/techind/rsi.htm}\cr
+#'\url{https://www.linnsoft.com/techind/relative-strength-index-rsi}\cr
 #'\url{http://stockcharts.com/education/IndicatorAnalysis/indic_RSI.html}\cr
 #'\cr Stochastic RSI:\cr
 #'\url{http://www.fmlabs.com/reference/StochRSI.htm}\cr

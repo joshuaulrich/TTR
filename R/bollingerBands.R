@@ -59,7 +59,7 @@
 #'indicator:\cr \url{http://www.fmlabs.com/reference/Bollinger.htm}\cr
 #'\url{http://www.fmlabs.com/reference/BollingerWidth.htm}\cr
 #'\url{http://www.equis.com/Customer/Resources/TAAZ/?c=3&p=36}\cr
-#'\url{http://www.linnsoft.com/tour/techind/bb.htm}\cr
+#'\url{https://www.linnsoft.com/techind/bollinger-bands}\cr
 #'\url{http://stockcharts.com/education/IndicatorAnalysis/indic_Bbands.html}\cr
 #'\url{http://stockcharts.com/education/IndicatorAnalysis/indic_BBWidth.htm}\cr
 #'@keywords ts

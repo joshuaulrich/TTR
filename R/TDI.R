@@ -53,7 +53,7 @@
 #'direction/strength.
 #'@references The following site(s) were used to code/document this
 #'indicator:\cr
-#'\url{http://www.linnsoft.com/tour/techind/tdi.htm}\cr
+#'\url{https://www.linnsoft.com/techind/trend-detection-index-tdi}\cr
 #'@keywords ts
 #'@examples
 #'

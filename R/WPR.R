@@ -41,7 +41,7 @@
 #'indicator:\cr
 #'\url{http://www.fmlabs.com/reference/WilliamsR.htm}\cr
 #'\url{http://www.equis.com/Customer/Resources/TAAZ?c=3&p=126}\cr
-#'\url{http://linnsoft.com/tour/techind/willR.htm}\cr
+#'\url{https://www.linnsoft.com/techind/williams-r-wpr}\cr
 #'\url{http://stockcharts.com/education/IndicatorAnalysis/indic_williamsR.html}\cr
 #'@keywords ts
 #'@examples

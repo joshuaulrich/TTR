@@ -46,7 +46,7 @@
 #'@references The following site(s) were used to code/document this
 #'indicator:\cr
 #'\url{http://www.fmlabs.com/reference/default.htm?url=MoneyFlowIndex.htm}\cr
-#'\url{http://www.linnsoft.com/tour/techind/mfi.htm}\cr
+#'\url{https://www.linnsoft.com/techind/money-flow-index-mfi}\cr
 #'\url{http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:money_flow_index_mfi}\cr
 #'@keywords ts
 #'@examples

@@ -44,7 +44,7 @@ NULL
 #'@references The following sites were used to code/document this package:\cr
 #'\url{http://www.fmlabs.com/reference/default.htm}\cr
 #'\url{http://www.equis.com/Customer/Resources/TAAZ/?p=0}\cr
-#'\url{http://www.linnsoft.com/tour/technicalindicators.htm}\cr
+#'\url{https://www.linnsoft.com/indicators}\cr
 #'\url{http://stockcharts.com/education/IndicatorAnalysis/}\cr
 #'@keywords package
 #'@examples

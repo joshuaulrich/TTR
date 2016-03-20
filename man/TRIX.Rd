@@ -63,7 +63,7 @@ indicator:\cr
 \url{http://www.fmlabs.com/reference/default.htm?url=TRIX.htm}\cr
 \url{http://www.equis.com/Customer/Resources/TAAZ/?c=3&p=114}\cr
 \url{https://www.linnsoft.com/techind/trix-triple-smoothed-exponential-oscillator}\cr
-\url{http://stockcharts.com/education/IndicatorAnalysis/indic_trix.htm}\cr
+\url{http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:trix}\cr
 }
 \seealso{
 See \code{\link{EMA}}, \code{\link{SMA}}, etc. for moving average

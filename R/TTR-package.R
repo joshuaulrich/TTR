@@ -45,7 +45,7 @@ NULL
 #'\url{http://www.fmlabs.com/reference/default.htm}\cr
 #'\url{http://www.equis.com/Customer/Resources/TAAZ/?p=0}\cr
 #'\url{https://www.linnsoft.com/indicators}\cr
-#'\url{http://stockcharts.com/education/IndicatorAnalysis/}\cr
+#'\url{http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators}\cr
 #'@keywords package
 #'@examples
 #'

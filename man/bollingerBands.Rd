@@ -69,8 +69,8 @@ indicator:\cr \url{http://www.fmlabs.com/reference/Bollinger.htm}\cr
 \url{http://www.fmlabs.com/reference/BollingerWidth.htm}\cr
 \url{http://www.equis.com/Customer/Resources/TAAZ/?c=3&p=36}\cr
 \url{https://www.linnsoft.com/techind/bollinger-bands}\cr
-\url{http://stockcharts.com/education/IndicatorAnalysis/indic_Bbands.html}\cr
-\url{http://stockcharts.com/education/IndicatorAnalysis/indic_BBWidth.htm}\cr
+\url{http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:bollinger_bands}\cr
+\url{http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:bollinger_band_width}\cr
 }
 \seealso{
 See \code{\link{EMA}}, \code{\link{SMA}}, etc. for moving average

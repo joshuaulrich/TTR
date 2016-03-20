@@ -34,7 +34,7 @@
 #'@seealso See \code{\link{chaikinAD}}, which uses CLV.
 #'@references The following site(s) were used to code/document this
 #'indicator:\cr
-#'\url{http://stockcharts.com/education/IndicatorAnalysis/indic_AccumDistLine.html}\cr
+#'\url{http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:accumulation_distribution_line}\cr
 #'@keywords ts
 #'@examples
 #'

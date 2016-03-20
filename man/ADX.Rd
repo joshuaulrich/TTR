@@ -60,7 +60,7 @@ indicator:\cr \url{http://www.fmlabs.com/reference/DI.htm}\cr
 \url{https://www.linnsoft.com/techind/directional-indicator-diplus-diminus}\cr
 \url{https://www.linnsoft.com/techind/adx-avg-directional-movement}\cr
 \url{https://www.linnsoft.com/techind/adxr-avg-directional-movement-rating}\cr
-\url{http://stockcharts.com/education/IndicatorAnalysis/indic_ADX.html}\cr
+\url{http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:average_directional_index_adx}\cr
 }
 \seealso{
 See \code{\link{EMA}}, \code{\link{SMA}}, etc. for moving average

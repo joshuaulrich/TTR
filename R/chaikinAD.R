@@ -42,7 +42,7 @@
 #'indicator:\cr \url{http://www.fmlabs.com/reference/AccumDist.htm}\cr
 #'\url{http://www.equis.com/Customer/Resources/TAAZ/?c=3&p=27}\cr
 #'\url{https://www.linnsoft.com/techind/accumulation-distribution}\cr
-#'\url{http://stockcharts.com/education/IndicatorAnalysis/indic_AccumDistLine.html}\cr
+#'\url{http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:accumulation_distribution_line}\cr
 #'@keywords ts
 #'@examples
 #'

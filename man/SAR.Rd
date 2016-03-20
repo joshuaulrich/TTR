@@ -44,7 +44,7 @@ indicator:\cr
 \url{https://www.linnsoft.com/techind/parabolic-sar-sar}\cr
 \url{http://www.fmlabs.com/reference/SAR.htm}\cr
 \url{http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:parabolic_sar}\cr
-\url{http://www.equis.com/Customer/Resources/TAAZ/?c=3&p=87}
+\url{http://www.metastock.com/Customer/Resources/TAAZ/#87}
 }
 \seealso{
 See \code{\link{ATR}} and \code{\link{ADX}}, which were also

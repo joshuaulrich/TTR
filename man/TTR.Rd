@@ -58,7 +58,7 @@ Maintainer: Joshua Ulrich
 \references{
 The following sites were used to code/document this package:\cr
 \url{http://www.fmlabs.com/reference/default.htm}\cr
-\url{http://www.equis.com/Customer/Resources/TAAZ/?p=0}\cr
+\url{http://www.metastock.com/Customer/Resources/TAAZ/}\cr
 \url{https://www.linnsoft.com/indicators}\cr
 \url{http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators}\cr
 }

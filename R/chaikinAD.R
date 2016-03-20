@@ -40,7 +40,7 @@
 #'@seealso See \code{\link{OBV}}, and \code{\link{CLV}}.
 #'@references The following site(s) were used to code/document this
 #'indicator:\cr \url{http://www.fmlabs.com/reference/AccumDist.htm}\cr
-#'\url{http://www.equis.com/Customer/Resources/TAAZ/?c=3&p=27}\cr
+#'\url{http://www.metastock.com/Customer/Resources/TAAZ/#27}\cr
 #'\url{https://www.linnsoft.com/techind/accumulation-distribution}\cr
 #'\url{http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:accumulation_distribution_line}\cr
 #'@keywords ts

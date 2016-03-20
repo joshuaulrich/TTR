@@ -62,17 +62,17 @@
 #'indicator:
 #'\cr Moving Average Convergence/Divergence (MACD):\cr
 #'\url{http://www.fmlabs.com/reference/MACD.htm}\cr
-#'\url{http://www.equis.com/Customer/Resources/TAAZ/?c=3&p=66}\cr
+#'\url{http://www.metastock.com/Customer/Resources/TAAZ/#66}\cr
 #'\url{https://www.linnsoft.com/techind/macd}\cr
 #'\url{http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:moving_average_convergence_divergence_macd}\cr
 #'\cr Price Oscillator:\cr
 #'\url{http://www.fmlabs.com/reference/PriceOscillator.htm}\cr
 #'\url{http://www.fmlabs.com/reference/PriceOscillatorPct.htm}\cr
-#'\url{http://www.equis.com/Customer/Resources/TAAZ/?c=3&p=94}\cr
+#'\url{http://www.metastock.com/Customer/Resources/TAAZ/#94}\cr
 #'\url{http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:price_oscillators_ppo}\cr
 #'\cr Volume Oscillator:\cr
 #'\url{http://www.fmlabs.com/reference/PVO.htm}\cr
-#'\url{http://www.equis.com/Customer/Resources/TAAZ/Default.aspx?c=3&p=122}\cr
+#'\url{http://www.metastock.com/Customer/Resources/TAAZ/#122}\cr
 #'@keywords ts
 #'@examples
 #'

@@ -56,7 +56,7 @@ indicator:\cr \url{http://www.fmlabs.com/reference/DI.htm}\cr
 \url{http://www.fmlabs.com/reference/DX.htm}\cr
 \url{http://www.fmlabs.com/reference/ADX.htm}\cr
 \url{http://www.fmlabs.com/reference/ADXR.htm}\cr
-\url{http://www.equis.com/Customer/Resources/TAAZ/Default.aspx?c=3&p=49}\cr
+\url{http://www.metastock.com/Customer/Resources/TAAZ/#49}\cr
 \url{https://www.linnsoft.com/techind/directional-indicator-diplus-diminus}\cr
 \url{https://www.linnsoft.com/techind/adx-avg-directional-movement}\cr
 \url{https://www.linnsoft.com/techind/adxr-avg-directional-movement-rating}\cr

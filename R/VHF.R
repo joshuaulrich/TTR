@@ -40,7 +40,7 @@
 #'direction/strength.
 #'@references The following site(s) were used to code/document this
 #'indicator:\cr
-#'\url{http://www.equis.com/Customer/Resources/TAAZ?c=3&p=119}\cr
+#'\url{http://www.metastock.com/Customer/Resources/TAAZ/#119}\cr
 #'@keywords ts
 #'@examples
 #'

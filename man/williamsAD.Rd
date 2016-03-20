@@ -39,7 +39,7 @@ Joshua Ulrich
 The following site(s) were used to code/document this
 indicator:\cr
 \url{http://www.fmlabs.com/reference/WilliamsAD.htm}\cr
-\url{http://www.equis.com/Customer/Resources/TAAZ/?c=3&p=125}\cr
+\url{http://www.metastock.com/Customer/Resources/TAAZ/#125}\cr
 }
 \seealso{
 See \code{\link{OBV}}, \code{\link{chaikinAD}}, and

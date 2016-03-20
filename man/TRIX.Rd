@@ -61,7 +61,7 @@ Joshua Ulrich
 The following site(s) were used to code/document this
 indicator:\cr
 \url{http://www.fmlabs.com/reference/default.htm?url=TRIX.htm}\cr
-\url{http://www.equis.com/Customer/Resources/TAAZ/?c=3&p=114}\cr
+\url{http://www.metastock.com/Customer/Resources/TAAZ/#114}\cr
 \url{https://www.linnsoft.com/techind/trix-triple-smoothed-exponential-oscillator}\cr
 \url{http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:trix}\cr
 }

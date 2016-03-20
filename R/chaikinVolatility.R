@@ -40,7 +40,7 @@
 #'volatility measure.
 #'@references The following site(s) were used to code/document this
 #'indicator:\cr \url{http://www.fmlabs.com/reference/ChaikinVolatility.htm}\cr
-#'\url{http://www.equis.com/Customer/Resources/TAAZ/Default.aspx?c=3&p=120}\cr
+#'\url{http://www.metastock.com/Customer/Resources/TAAZ/#120}\cr
 #'@keywords ts
 #'@examples
 #'

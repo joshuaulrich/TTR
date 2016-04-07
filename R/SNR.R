@@ -27,6 +27,7 @@
 #' @export
 #' 
 SNR <- function(HLC, n, ...) {
-  snr = abs(Cl(HLC) - lag(Cl(HLC), n))/ATR(HLC, n)$atr
+  HLC <- try.xts(HLC, error=as.matrix)
+  snr = abs(Cl(HLC) - lag.xts(Cl(HLC), n))/ATR(HLC, n, ...)$atr
   return(snr)
 }

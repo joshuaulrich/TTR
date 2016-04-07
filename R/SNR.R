@@ -28,6 +28,6 @@
 #' 
 SNR <- function(HLC, n, ...) {
   HLC <- try.xts(HLC, error=as.matrix)
-  snr = abs(Cl(HLC) - lag.xts(Cl(HLC), n))/ATR(HLC, n, ...)$atr
-  return(snr)
+  snr = abs(HLC[,"Close"] - lag.xts(Cl(HLC[,"Close"]), n))/ATR(HLC, n, ...)$atr
+  return(reclass(snr, HLC ))
 }

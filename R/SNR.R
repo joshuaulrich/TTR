@@ -27,8 +27,6 @@
 #' @export
 #' 
 SNR <- function(HLC, n, ...) {
-  require(TTR)
-  require(quantmod)
   snr = abs(Cl(HLC) - lag(Cl(HLC), n))/ATR(HLC, n)$atr
   return(snr)
 }

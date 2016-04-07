@@ -1,6 +1,6 @@
 #' Signal to Noise Ratio
 #' 
-#' # The n-day SNR for a given market is calculated by taking the absolute
+#' The n-day SNR for a given market is calculated by taking the absolute
 #' price change over an n-day period and dividing it by the average
 #' n-day volatility. 
 #' 

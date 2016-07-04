@@ -58,12 +58,14 @@ function(HLC, n=c(7,14,28), wts=c(4,2,1)) {
 
   buyPressure <- HLC[,3] - atr[,'trueLow']
 
-  avgs <- sapply(n, function(i) runSum(buyPressure, n=i)/runSum(atr[,'tr'], n=i))
+  osc <- buyPressure * 0.0
+  for(i in 1:3) {
+    osc <- osc + wts[i] * (runSum(buyPressure, n[i]) / runSum(atr[,'tr'], n[i]))
+  }
+  osc <- 100.0 * osc / sum(wts)
 
   # restore HLC .RECLASS attribute
   attr(HLC, ".RECLASS") <- HLC.RECLASS
-
-  osc <- 100.0*(wts[1]*avgs[,1] + wts[2]*avgs[,2] + wts[3]*avgs[,3]) / sum(wts)
 
   reclass(osc, HLC)
 }

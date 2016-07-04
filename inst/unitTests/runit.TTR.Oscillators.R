@@ -124,3 +124,17 @@ test.ultimateOscillator <- function() {
   checkEquals( attributes(ot), attributes(output$topUltOsc) )
   checkException( ultimateOscillator(input$mid$Close) )
 }
+
+test.ultimateOscillator.monthly.xts <- function() {
+  stopifnot(requireNamespace("xts"))
+  # Ultimate Oscillator on non-xts monthly data
+  iam <- xts::to.monthly(input$all, name=NULL)[,c('High','Low','Close')]
+  rn <- rownames(iam)
+  rownames(iam) <- NULL
+  oam <- ultimateOscillator(iam, c(2,5,8))
+  # Ultimate Oscillator on xts monthly data
+  xia <- xts::as.xts(input$all)
+  xiam <- xts::to.monthly(xia, name=NULL)[,c('High','Low','Close')]
+  xoam <- ultimateOscillator(xiam, c(2,5,8))
+  checkEqualsNumeric( oam, xoam )
+}

@@ -18,7 +18,7 @@ result is returned. Must be between 1 and \code{nrow(x)}, inclusive.}
 \item{cumulative}{Logical, use from-inception calculation?}
 
 \item{exact.multiplier}{The weight applied to identical values in the window.
-See details.}
+Must be between 0 and 1, inclusive. See details.}
 }
 \value{
 A object of percent ranks over a n-period moving window of the same

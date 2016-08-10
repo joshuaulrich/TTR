@@ -32,7 +32,7 @@
 #'result is returned. Must be between 1 and \code{nrow(x)}, inclusive.
 #'@param cumulative Logical, use from-inception calculation?
 #'@param exact.multiplier The weight applied to identical values in the window.
-#'See details.
+#'Must be between 0 and 1, inclusive. See details.
 #'@return A object of percent ranks over a n-period moving window of the same
 #'class as \code{x} and \code{y} or a vector (if \code{try.xts} fails).
 #'@note It may be important to note that this computation is different from the
@@ -49,7 +49,8 @@ runPercentRank <- function(x, n=260, cumulative = FALSE, exact.multiplier = 0.5)
 
   if (n < 1 || n > NROW(x))
     stop(sprintf("n = %d is outside valid range: [1, %d]", n, NROW(x)))
-  if (0 > exact.multiplier || exact.multiplier > 1) stop("Invalid 'exact.multiplier'")
+  if (exact.multiplier < 0 || exact.multiplier > 1)
+    stop(sprintf("exact.multiplier = %d is outside valid range: [0, 1]", exact.multiplier))
 
   NAs <- sum(is.na(x))
   if (NAs > 0) {

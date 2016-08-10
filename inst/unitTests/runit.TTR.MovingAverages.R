@@ -34,6 +34,8 @@ test.EMA <- function() {
   checkEquals( attributes(EMA(input$top$Close)), attributes(output$topEMA) )
   checkException( EMA(input$mid$Close) )
   checkException( EMA(input$all[,1:2]) )
+  checkException( EMA(input$all$Close, n = -1) )
+  checkException( EMA(input$all$Close, n = NROW(input$all) + 1) )
 }
 
 # Exponential Moving Average, Wilder ratio
@@ -64,6 +66,8 @@ test.WMA <- function() {
   checkException( WMA(input$mid$Close) )
   checkException( WMA(input$all$Close, wts=1) )
   checkException( WMA(input$all[,1:2]) )
+  checkException( WMA(input$all$Close, n = -1) )
+  checkException( WMA(input$all$Close, n = NROW(input$all) + 1) )
 }
 
 # Weighted Moving Average, Volume
@@ -87,6 +91,8 @@ test.EVWMA <- function() {
   checkException( EVWMA(input$all$Close) )
   checkException( EVWMA(input$all[,1:2], input$all$Volume) )
   checkException( EVWMA(input$all$Close, input$all[,1:2]) )
+  checkException( EVWMA(input$all$Close, n = -1) )
+  checkException( EVWMA(input$all$Close, n = NROW(input$all) + 1) )
 }
 
 # Zero-Lag Exponential Moving Average

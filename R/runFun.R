@@ -27,8 +27,8 @@
 #'@param x Object coercible to xts or matrix.
 #'@param y Object coercible to xts or matrix.
 #'@param n Number of periods to use in the window or, if
-#'\code{cumulative=TRUE}, the number of obversations to use before the first
-#'result is returned.
+#'\code{cumulative=TRUE}, the number of observations to use before the first
+#'result is returned. Must be between 1 and \code{nrow(x)}, inclusive.
 #'@param cumulative Logical, use from-inception calculation?
 #'@param sample Logical, sample covariance if \code{TRUE} (denominator of
 #'\code{n-1})
@@ -65,7 +65,8 @@ function(x, n=10, cumulative=FALSE) {
 
   x <- try.xts(x, error=as.matrix)
 
-  if( n < 1 || n > NROW(x) ) stop("Invalid 'n'")
+  if( n < 1 || n > NROW(x) )
+    stop(sprintf("n = %d is outside valid range: [1, %d]", n, NROW(x)))
 
   if(NCOL(x) > 1) {
     stop("ncol(x) > 1. runSum only supports univariate 'x'")
@@ -118,7 +119,8 @@ function(x, n=10, cumulative=FALSE) {
 
   x <- try.xts(x, error=as.matrix)
 
-  if( n < 1 || n > NROW(x) ) stop("Invalid 'n'")
+  if( n < 1 || n > NROW(x) )
+    stop(sprintf("n = %d is outside valid range: [1, %d]", n, NROW(x)))
 
   if(NCOL(x) > 1) {
     stop("ncol(x) > 1. runMin only supports univariate 'x'")
@@ -170,7 +172,8 @@ function(x, n=10, cumulative=FALSE) {
 
   x <- try.xts(x, error=as.matrix)
   
-  if( n < 1 || n > NROW(x) ) stop("Invalid 'n'")
+  if( n < 1 || n > NROW(x) )
+    stop(sprintf("n = %d is outside valid range: [1, %d]", n, NROW(x)))
 
   # Count NAs, ensure they're only at beginning of data, then remove.
   NAs <- sum( is.na(x) )
@@ -236,7 +239,8 @@ function(x, n=10, non.unique="mean", cumulative=FALSE) {
 
   x <- try.xts(x, error=as.matrix)
 
-  if( n < 1 || n > NROW(x) ) stop("Invalid 'n'")
+  if( n < 1 || n > NROW(x) )
+    stop(sprintf("n = %d is outside valid range: [1, %d]", n, NROW(x)))
 
   # Count NAs, ensure they're only at beginning of data, then remove.
   NAs <- sum( is.na(x) )
@@ -289,7 +293,8 @@ function(x, y, n=10, use="all.obs", sample=TRUE, cumulative=FALSE) {
     xy <- cbind( as.vector(x), as.vector(y) )
   }
 
-  if( n < 1 || n > NROW(x) ) stop("Invalid 'n'")
+  if( n < 1 || n > NROW(x) )
+    stop(sprintf("n = %d is outside valid range: [1, %d]", n, NROW(x)))
 
   if(NCOL(x) > 1 || NCOL(y) > 1) {
     stop("ncol(x) > 1 or ncol(y) > 1.",
@@ -387,7 +392,8 @@ function(x, n=10, center=NULL, stat="median",
 
   x <- try.xts(x, error=as.matrix)
 
-  if( n < 1 || n > NROW(x) ) stop("Invalid 'n'")
+  if( n < 1 || n > NROW(x) )
+    stop(sprintf("n = %d is outside valid range: [1, %d]", n, NROW(x)))
 
   if(NCOL(x) > 1) {
     stop("ncol(x) > 1. runMAD only supports univariate 'x'")
@@ -447,7 +453,8 @@ function(x, n=10) {
 
   x <- try.xts(x, error=as.matrix)
 
-  if( n < 1 || n > NROW(x) ) stop("Invalid 'n'")
+  if( n < 1 || n > NROW(x) )
+    stop(sprintf("n = %d is outside valid range: [1, %d]", n, NROW(x)))
 
   if(NCOL(x) > 1) {
     stop("ncol(x) > 1. wilderSum only supports univariate 'x'")

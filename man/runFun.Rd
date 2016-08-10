@@ -42,8 +42,8 @@ wilderSum(x, n = 10)
 \item{x}{Object coercible to xts or matrix.}
 
 \item{n}{Number of periods to use in the window or, if
-\code{cumulative=TRUE}, the number of obversations to use before the first
-result is returned.}
+\code{cumulative=TRUE}, the number of observations to use before the first
+result is returned. Must be between 1 and \code{nrow(x)}, inclusive.}
 
 \item{cumulative}{Logical, use from-inception calculation?}
 

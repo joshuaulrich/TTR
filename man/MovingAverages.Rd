@@ -41,7 +41,8 @@ ALMA(x, n = 9, offset = 0.85, sigma = 6, ...)
 \arguments{
 \item{x}{Price, volume, etc. series that is coercible to xts or matrix.}
 
-\item{n}{Number of periods to average over.}
+\item{n}{Number of periods to average over. Must be between 1 and
+\code{nrow(x)}, inclusive.}
 
 \item{wilder}{logical; if \code{TRUE}, a Welles Wilder type EMA will be
 calculated; see notes.}

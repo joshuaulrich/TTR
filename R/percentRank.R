@@ -28,8 +28,8 @@
 #'@aliases runPercentRank percentRank PercentRank
 #'@param x Object coercible to xts or matrix.
 #'@param n Number of periods to use in the window or, if
-#'\code{cumulative=TRUE}, the number of obversations to use before the first
-#'result is returned.
+#'\code{cumulative=TRUE}, the number of observations to use before the first
+#'result is returned. Must be between 1 and \code{nrow(x)}, inclusive.
 #'@param cumulative Logical, use from-inception calculation?
 #'@param exact.multiplier The weight applied to identical values in the window.
 #'See details.
@@ -47,7 +47,8 @@
 runPercentRank <- function(x, n=260, cumulative = FALSE, exact.multiplier = 0.5) {
   x <- try.xts(x, error = as.matrix)
 
-  if (n < 1 || n > NROW(x)) stop("Invalid 'n'")
+  if (n < 1 || n > NROW(x))
+    stop(sprintf("n = %d is outside valid range: [1, %d]", n, NROW(x)))
   if (0 > exact.multiplier || exact.multiplier > 1) stop("Invalid 'exact.multiplier'")
 
   NAs <- sum(is.na(x))

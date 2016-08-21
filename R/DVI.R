@@ -77,8 +77,11 @@ DVI <- function(price, n=252, wts=c(0.8,0.2), smooth=3,
   # calculate final DVI value
   dvi <- wts[1] * dvi.mag + wts[2] * dvi.str
 
+  result <- cbind(dvi.mag, dvi.str, dvi)
+  colnames(result) <- c("dvi.mag", "dvi.str", "dvi")
+
   # convert final DVI, magnitude, and stretch back to
   # original class of 'price'
-  reclass(cbind(dvi.mag,dvi.str,dvi), price)
+  reclass(result, price)
 }
 

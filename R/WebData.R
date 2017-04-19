@@ -272,7 +272,7 @@ function(symbol, start, end, freq="daily", type="price", adjust=TRUE, quiet=FALS
     } else {
 
     # Construct URL for 'beg' to 'end'
-    url <- paste( "http://ichart.finance.yahoo.com/table.csv?s=", symbol,
+    url <- paste( "https://ichart.finance.yahoo.com/table.csv?s=", symbol,
                   "&a=", beg$mon, "&b=", beg$mday, "&c=", beg$year+1900,
                   "&d=", end$mon, "&e=", end$mday, "&f=", end$year+1900,
                   "&g=", freq.url, "&ignore=.csv", sep="" )
@@ -290,7 +290,7 @@ function(symbol, start, end, freq="daily", type="price", adjust=TRUE, quiet=FALS
       if(!quiet) message("Unadjusted and adjusted dividend data are always returned.")
 
       # Construct URL for 'beg' to 'end'
-      url <- paste( "http://ichart.finance.yahoo.com/x?s=", symbol,
+      url <- paste( "https://ichart.finance.yahoo.com/x?s=", symbol,
                     "&a=", beg$mon, "&b=", beg$mday, "&c=", beg$year+1900,
                     "&d=", end$mon, "&e=", end$mday, "&f=", end$year+1900,
                     "&g=", freq.url, "&y=0&z=30000", sep="" )

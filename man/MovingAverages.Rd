@@ -125,7 +125,9 @@ recent observations, reducing tendency to overshoot.
 \note{
 For \code{EMA}, \code{wilder=FALSE} (the default) uses an exponential
 smoothing ratio of \code{2/(n+1)}, while \code{wilder=TRUE} uses Welles
-Wilder's exponential smoothing ratio of \code{1/n}.
+Wilder's exponential smoothing ratio of \code{1/n}. The \code{EMA} result
+is initialized with the \code{n}-period sample average at period \code{n}.
+The exponential decay is applied from that point forward.
 
 Since \code{WMA} can accept a weight vector of length equal to the length of
 \code{x} or of length \code{n}, it can be used as a regular weighted moving

@@ -52,8 +52,8 @@
 #' }
 #'@note The MACD is a special case of the general oscillator applied to price.
 #'The MACD can be used as a general oscillator applied to any series. Time
-#'periods for the MACD are often given as 26 and 12, but the function
-#'originally used exponential constants of 0.075 and 0.15, which are closer to
+#'periods for the MACD are often given as 26 and 12, but the original formula
+#'used exponential constants of 0.075 and 0.15, which are closer to
 #'25.6667 and 12.3333 periods.
 #'@author Joshua Ulrich
 #'@seealso See \code{\link{EMA}}, \code{\link{SMA}}, etc. for moving average

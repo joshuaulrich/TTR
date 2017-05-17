@@ -1,0 +1,78 @@
+
+c   Copyright (C) 2017  Chuluujav
+c    Channel based Zig Zig based
+c
+c     iha   : input array of high prices
+c     ila   : input array of low prices
+c     la    : length of arrays
+c     zz    : Zig/Zag vector
+c
+c     refpos: Reference (first) price position
+c     refval: Reference (first) price value
+c     infpos: Inflection (second) price position
+c     infval: Inflection (second) price value
+c     *mahdif,mildif : [L]ocal and [E]xtreme value distance
+c     *step  : [L]ocal and [E]xtreme maximums
+c
+      subroutine zigzagtri(iha, ila, la, zz, ilo, dup)
+      implicit none
+
+      integer  refpos, infpos
+      double precision iha(la), ila(la), zz(la)
+      double precision refval, infval  
+      integer la, k, j, i, s
+      double precision izu(la+100), iup(la+100), ilo(la+100)
+      double precision dzu(la+100), dup(la+100), dlo(la+100)
+      double precision mahdif, mildif, hdif, ldif, step, zu
+c
+c     Initialize values
+c
+        refval = zz(1)
+        refpos = 1
+      do 13 i=2,la
+        infval=zz(i)
+        infpos=i
+      if( infval .NE. 0 ) then
+        step=((infval-refval)/(infpos-refpos))
+      do 18 j=refpos, infpos
+        zu=refval+step*(j-refpos)
+        hdif=abs(iha(j)-zu)
+        ldif=zu-ila(j)
+        mahdif=max(hdif, mahdif)
+        mildif=max(ldif, mildif)
+   18 continue
+      if ((infval-refval) .GE. 0) then 
+            k = refpos
+            izu(k)=izu(refpos)
+            ilo(k)=izu(k)-mildif
+   19 if  ((10 .GE.(k-infpos))  .AND. (ila(k)*(1.05) .GT. ilo(k)) ) then
+            k=k+1
+            izu(k)=izu(refpos)+step*(k-refpos)
+            iup(k)=izu(refpos)+step*(k-refpos)+mahdif
+            ilo(k)=izu(refpos)+step*(k-refpos)-mildif
+
+            GOTO 19
+      endif 
+      else
+            s = refpos
+            dzu(s)=refval
+            dup(s)=dzu(refpos)+step*(s-refpos)+mahdif
+            
+   17 if  ((10 .GE.(s-infpos)) .AND. (dup(s)*(1.05)  .GE. iha(s))) then
+            s=s+1
+            dzu(s)=dzu(refpos)+step*(s-refpos)
+            dlo(s)=dzu(refpos)+step*(s-refpos)-mildif
+            dup(s)=dzu(refpos)+step*(s-refpos)+mahdif
+
+            GOTO 17
+      endif 
+
+      endif
+      refval=infval
+      refpos=infpos
+      else 
+      endif        
+   13 continue
+
+
+        end

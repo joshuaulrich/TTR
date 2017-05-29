@@ -62,7 +62,8 @@ Get investment data from the internet.
 \details{
 \code{getYahooData} fetches individual stock data from the Yahoo! Finance
 website.  It also adjusts price for splits and dividends, and volume for
-splits.  See the Warning section.
+splits.  See the Warning section, and note that it is deprecated in favor
+of getSymbols in the quantmod package.
 
 \code{stockSymbols} fetches instrument symbols from the nasdaq.com website,
 and adjusts the symbols to be compatible with the Yahoo! Finance website.

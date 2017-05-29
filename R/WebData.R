@@ -23,7 +23,8 @@
 #'
 #'\code{getYahooData} fetches individual stock data from the Yahoo! Finance
 #'website.  It also adjusts price for splits and dividends, and volume for
-#'splits.  See the Warning section.
+#'splits.  See the Warning section, and note that it is deprecated in favor
+#'of getSymbols in the quantmod package.
 #'
 #'\code{stockSymbols} fetches instrument symbols from the nasdaq.com website,
 #'and adjusts the symbols to be compatible with the Yahoo! Finance website.
@@ -190,6 +191,25 @@ function(exchange=c("AMEX","NASDAQ","NYSE"),
 #'@export
 "getYahooData" <-
 function(symbol, start, end, freq="daily", type="price", adjust=TRUE, quiet=FALSE) {
+
+  warn.Deprecated <- function() {
+    .Deprecated("quantmod::getSymbols", package = "TTR",
+                paste("TTR::getYahooData is deprecated and will be removed in a",
+                      "future release.\nPlease use quantmod::getSymbols instead."),
+                old = "getYahooData")
+  }
+
+  callingFun <- sys.call(-1L)[[1]]
+  if(is.null(callingFun)) {
+    # Called from top level
+    warn.Deprecated()
+  } else {
+    if(is.call(callingFun) && any(deparse(callingFun[[1]]) == c("::", ":::"))) {
+       if("getYahooData" != as.character(callingFun[[3]])) warn.Deprecated()
+    } else {
+       if("getYahooData" != deparse(callingFun)) warn.Deprecated()
+    }
+  }
 
   # Thank you to Giorgio Beltrame for the URL to download dividends _and_
   # splits, and for his correct adjustment procedure.

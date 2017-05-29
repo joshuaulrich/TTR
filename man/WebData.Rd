@@ -62,7 +62,7 @@ Get investment data from the internet.
 \details{
 \code{getYahooData} fetches individual stock data from the Yahoo! Finance
 website.  It also adjusts price for splits and dividends, and volume for
-splits.
+splits.  See the Warning section.
 
 \code{stockSymbols} fetches instrument symbols from the nasdaq.com website,
 and adjusts the symbols to be compatible with the Yahoo! Finance website.
@@ -74,6 +74,18 @@ necessary to retrieve data using \code{getYahooData}.
 \code{getYahooData} has only been tested on daily data.  It isn't known if
 the function correctly adjusts data for any other frequency.
 }
+\section{Warning}{
+
+As of TTR 0.23-2, \code{getYahooData} has been patched to work with changes
+to Yahoo Finance, which also included the following changes to the raw data:
+ \itemize{
+   \item The adjusted close column appears to no longer include dividend adjustments
+   \item The open, high, and low columns are adjusted for splits, and
+   \item The raw data may contain missing values.
+   \item The raw data may contain errors.
+ }
+}
+
 \examples{
 
 ### Note: you must have a working internet

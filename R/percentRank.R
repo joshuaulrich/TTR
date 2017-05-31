@@ -56,23 +56,14 @@ runPercentRank <- function(x, n=260, cumulative = FALSE, exact.multiplier = 0.5)
   if (NAs > 0) {
     if (any(is.na(x[-(1:NAs)]))) stop("Series contains non-leading NAs")
   }
-  beg <- 1 + NAs
 
-  len <- NROW(x) - NAs
-  result <- double(NROW(x))
-
-  if (cumulative) {
-    result <- .Fortran("cumprnk", ia = as.double(x[beg:NROW(x)]), lia = as.integer(len), 
-              xmlt = as.double(exact.multiplier), oa = as.double(result[beg:NROW(x)]), 
-              PACKAGE = "TTR", DUP = TRUE)$oa
-  } else if (identical(as.integer(n),1L)) {
+  if (identical(as.integer(n), 1L)) {
+    result <- double(NROW(x))
     result[] <- exact.multiplier
   } else {
-    result <- .Fortran("runprnk", ia = as.double(x[beg:NROW(x)]), lia = as.integer(len), 
-              n = as.integer(n), xmlt = as.double(exact.multiplier), 
-              oa = as.double(result[beg:NROW(x)]), PACKAGE = "TTR", DUP = TRUE)$oa
-    is.na(result) <- c(1:(n - 1))
+    result <- .Call("ttr_rollPercentRank", x, n, isTRUE(cumulative),
+                    exact.multiplier, PACKAGE = "TTR")
   }
-  result <- c(rep(NA, NAs), result)
+
   reclass(result, x)
 }

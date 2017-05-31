@@ -161,7 +161,52 @@ test.runMAD <- function() {
 }
 
 # Percent Rank
-test.runPercentRank.exact.multiplier <- function() {
-  checkException( runPercentRank(input$all$Close, exact.multiplier = -0.1) )
-  checkException( runPercentRank(input$all$Close, exact.multiplier = 1.1) )
+test.runPercentRank_exact.multiplier_bounds <- function() {
+  x <- input$all$Close
+  checkException( runPercentRank(x, 10, exact.multiplier = -0.1) )
+  checkException( runPercentRank(x, 10, exact.multiplier = 1.1) )
+}
+
+xdata <- c(7.9, 5.2, 17.5, -12.7, 22, 4.3, -15.7, -9.3, 0.6, 0,
+           -22.8, 7.6, -5.5, 1.7, 5.6, 15.1, 6.6, 11.2, -7.8, -4.3)
+xrank10_1 <- c(NA, NA, NA, NA, NA, NA, NA, NA, NA, 0.4, 0.1, 0.8,
+               0.5, 0.7, 0.9, 1, 0.8, 0.9, 0.2, 0.4)
+
+xrank10_0 <- c(NA, NA, NA, NA, NA, NA, NA, NA, NA, 0.3, 0, 0.7,
+               0.4, 0.6, 0.8, 0.9, 0.7, 0.8, 0.1, 0.3)
+
+
+test.runPercentRank_exact.multiplier_eq0 <- function() {
+  xrank <- round(xrank10_0, 2)
+  checkIdentical(xrank, runPercentRank(xdata, 10, FALSE, 0))
+}
+
+test.runPercentRank_exact.multiplier_eq0.5 <- function() {
+  xrank <- round(xrank10_0 + 0.05, 2)
+  checkIdentical(xrank, runPercentRank(xdata, 10, FALSE, 0.5))
+}
+
+test.runPercentRank_exact.multiplier_eq1 <- function() {
+  xrank <- round(xrank10_0 + 0.1, 2)
+  checkIdentical(xrank, runPercentRank(xdata, 10, FALSE, 1))
+}
+
+test.runPercentRank_cumulTRUE_exact.multiplier_eq0 <- function() {
+  xrank <- c(0, 0, 2, 0, 4, 1, 0, 2, 3, 3, 0, 8,
+             4, 7, 10, 13, 11, 14, 4, 6) / 1:20
+  checkIdentical(xrank, runPercentRank(xdata, 10, TRUE, 0))
+}
+
+test.runPercentRank_cumulTRUE_exact.multiplier_eq0.5 <- function() {
+  xrank <- (c(0, 0, 2, 0, 4, 1, 0, 2, 3, 3, 0, 8,
+             4, 7, 10, 13, 11, 14, 4, 6) + 0.5) / 1:20
+  #xrank[1] <- 0
+  checkIdentical(xrank, runPercentRank(xdata, 10, TRUE, 0.5))
+}
+
+test.runPercentRank_cumulTRUE_exact.multiplier_eq1 <- function() {
+  xrank <- (c(0, 0, 2, 0, 4, 1, 0, 2, 3, 3, 0, 8,
+             4, 7, 10, 13, 11, 14, 4, 6) + 1) / 1:20
+  #xrank[1] <- 0
+  checkIdentical(xrank, runPercentRank(xdata, 10, TRUE, 1))
 }

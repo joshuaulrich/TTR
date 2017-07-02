@@ -20,131 +20,139 @@
 #include <R.h>
 #include <Rinternals.h>
 
+/* price and its array index */
+typedef struct {
+  double price;
+  int index;
+} price_and_index;
+
 SEXP ttr_zigzag
-(SEXP hi, SEXP lo, SEXP chg, SEXP pct, SEXP retr, SEXP lastex)
+(SEXP _high, SEXP _low, SEXP _change, SEXP _percent, SEXP _retrace,
+ SEXP _last_extreme)
 {
-  int refpos = 0;
-  int infpos = 1;
-  int sig = 0;
+  double* high = REAL(_high);
+  double* low = REAL(_low);
+  double change = asReal(_change);
+  int use_percent = asLogical(_percent);
+  int use_retrace = asLogical(_retrace);
+  int use_last_ex = asLogical(_last_extreme);
 
-  int use_percent = asLogical(pct);
-  int use_retrace = asLogical(retr);
-  int use_last_ex = asLogical(lastex);
-
-  double* high = REAL(hi);
-  double* low = REAL(lo);
-  double change = asReal(chg);
   if (use_percent)
     change = change / 100.0;
 
-  double refval = (high[0] + low[0]) / 2; /* reference */
-  double infval = (high[1] + low[1]) / 2; /* inflection */
+  int n = length(_high);
+  SEXP _zigzag = PROTECT(allocVector(REALSXP, n));
+  double* zigzag = REAL(_zigzag);
 
-  double emin, emax, lmin, lmax;
+  price_and_index reference, inflection;
+  reference.price = (high[0] + low[0]) / 2;
+  reference.index = 0;
+  inflection.price = (high[1] + low[1]) / 2;
+  inflection.index = 1;
 
-  SEXP _result = PROTECT(allocVector(REALSXP, length(hi)));
-  double* result = REAL(_result);
+  double extreme_min, extreme_max, local_min, local_max;
+  int signal = 0;
 
-  for (int i = 1; i < length(hi); i++) {
-    /* Initialize all result values to NA */
-    result[i] = NA_REAL;
+  for (int i = 1; i < n; i++) {
+    /* Initialize all zigzag values to NA */
+    zigzag[i] = NA_REAL;
 
     if (use_percent) {
       /* If % change given (absolute move) */
-      emin = infval * (1.0 - change);
-      emax = infval * (1.0 + change);
+      extreme_min = inflection.price * (1.0 - change);
+      extreme_max = inflection.price * (1.0 + change);
     } else {
       /* If $ change given (only absolute moves make sense) */
-      emin = infval - change;
-      emax = infval + change;
+      extreme_min = inflection.price - change;
+      extreme_max = inflection.price + change;
     }
     /* Find local maximum and minimum */
-    lmax = infval > high[i] ? infval : high[i];
-    lmin = infval < low[i] ? infval : low[i];
+    local_max = inflection.price > high[i] ? inflection.price : high[i];
+    local_min = inflection.price < low[i] ? inflection.price : low[i];
 
     /* Find first trend */
-    if (sig == 0) {
+    if (signal == 0) {
       if (use_retrace) {
         /* Retrace prior move */
-        sig = (infval >= refval) ? 1 : -1;
+        signal = (inflection.price >= reference.price) ? 1 : -1;
       } else {
         /* Absolute move */
-        if (lmin <= emin) {
+        if (local_min <= extreme_min) {
           /* Confirmed Downtrend */
-          sig = -1;
+          signal = -1;
         }
-        if (lmax >= emax) {
+        if (local_max >= extreme_max) {
           /* Confirmed Uptrend */
-          sig = 1;
+          signal = 1;
         }
       }
     }
     /* Downtrend */
-    if (sig == -1) {
+    if (signal == -1) {
       /* New Minimum */
-      if (low[i] == lmin) {
+      if (low[i] == local_min) {
         /* Last Extreme */
         if (use_last_ex) {
-          infval = low[i];
-          infpos = i;
+          inflection.price = low[i];
+          inflection.index = i;
         } else {
           /* First Extreme */
           if (low[i] != low[i-1]) {
-            infval = low[i];
-            infpos = i;
+            inflection.price = low[i];
+            inflection.index = i;
           }
         }
       }
       /* Retrace prior move */
       if (use_retrace) {
-        emax = infval + ((refval - infval) * change);
+        extreme_max = inflection.price +
+          ((reference.price - inflection.price) * change);
       }
       /* Trend Reversal */
-      if (high[i] >= emax) {
-        result[refpos] = refval;
-        refval = infval;
-        refpos = infpos;
-        infval = high[i];
-        infpos = i;
-        sig = 1;
+      if (high[i] >= extreme_max) {
+        zigzag[reference.index] = reference.price;
+        reference = inflection;
+        inflection.price = high[i];
+        inflection.index = i;
+        signal = 1;
         continue;
       }
     }
     /* Uptrend */
-    if (sig == 1) {
+    if (signal == 1) {
       /* New Maximum */
-      if (high[i] == lmax) {
+      if (high[i] == local_max) {
         /* Last Extreme */
         if (use_last_ex) {
-          infval = high[i];
-          infpos = i;
+          inflection.price = high[i];
+          inflection.index = i;
         } else {
           /* First Extreme */
           if (high[i] != high[i-1]) {
-            infval = highighigh[i];
-            infpos = i;
+            inflection.price = high[i];
+            inflection.index = i;
           }
         }
       }
       /* Retrace prior move */
       if (use_retrace) {
-        emin = infval - ((infval - refval) * change);
+        extreme_min = inflection.price -
+          ((inflection.price - reference.price) * change);
       }
       /* Trend Reversal */
-      if (low[i] <= emin) {
-        result[refpos] = refval;
-        refval = infval;
-        refpos = infpos;
-        infval = low[i];
-        infpos = i;
-        sig = -1;
+      if (low[i] <= extreme_min) {
+        zigzag[reference.index] = reference.price;
+        reference = inflection;
+        inflection.price = low[i];
+        inflection.index = i;
+        signal = -1;
         continue;
       }
     }
   }
-  result[refpos] = refval;
-  result[infpos] = infval;
+  zigzag[reference.index] = reference.price;
+  zigzag[inflection.index] = inflection.price;
 
   UNPROTECT(1);
-  return _result;
+  return _zigzag;
 }

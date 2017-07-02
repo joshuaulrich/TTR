@@ -79,28 +79,13 @@ function( HL, change=10, percent=TRUE, retrace=FALSE, lastExtreme=TRUE ) {
 
   stop("Price series must be either High-Low, or Univariate")
   
-  # Initialize necessary parameters
-  nn <- NROW(HL.na$nonNA)
-  zz <- rep(0, nn)
-  if(percent) {
-    change <- change/100
-  }
-
-  # Call Fortran routine
-  zz <- .Fortran("zigzag", iha = as.double( high ),
-                           ila = as.double( low ),
-                           la  = as.integer( nn ),
-                           ch  = as.double( change ),
-                           pct = as.integer( percent ),
-                           rtr = as.integer( retrace ),
-                           lex = as.integer( lastExtreme ),
-                           zz  = as.double( zz ),
-                           PACKAGE = "TTR",
-                           DUP = TRUE )$zz
+  # Call C routine
+  zz <- .Call("ttr_zigzag", as.numeric(high), as.numeric(low),
+              as.numeric(change), as.logical(percent), as.logical(retrace),
+              as.logical(lastExtreme), PACKAGE = "TTR")
   
   # Interpolate results
-  zz <- ifelse( zz==0, NA, zz )
-  zz <- approx( zz, xout=1:nn )$y
+  zz <- na.approx(zz, na.rm = FALSE)
 
   # Prepend NAs from original data
   zz <- c( rep( NA, HL.na$NAs ), zz ) 

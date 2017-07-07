@@ -391,7 +391,7 @@ function(symbol, start, end, freq="daily", type="price", adjust=TRUE, quiet=FALS
 
 .getHandle <- function(force.new = FALSE)
 {
-  h <- get0("_handle_", .env)
+  h <- if (exists("_handle_", .env)) get("_handle_", .env) else NULL
 
   if (is.null(h) || force.new) {
     # create 'h' if it doesn't exist yet
@@ -405,9 +405,14 @@ function(symbol, start, end, freq="daily", type="price", adjust=TRUE, quiet=FALS
       on.exit(unlink(tmp))
 
       for (i in 1:5) {
-        curl::curl_download("https://finance.yahoo.com", tmp, handle = h)
+        h <- curl::new_handle()
+        # random query to avoid cache
+        ru <- paste(sample(c(letters, 0:9), 4), collapse = "")
+        cu <- paste0("https://finance.yahoo.com?", ru)
+        curl::curl_download(cu, tmp, handle = h)
         if (NROW(curl::handle_cookies(h)) > 0)
           break;
+        Sys.sleep(0.1)
       }
 
       if (NROW(curl::handle_cookies(h)) == 0)
@@ -416,7 +421,7 @@ function(symbol, start, end, freq="daily", type="price", adjust=TRUE, quiet=FALS
       return(h)
     }
 
-    h$ch <- new.session(curl::new_handle())
+    h$ch <- new.session()
 
     n <- if (unclass(Sys.time()) %% 1L >= 0.5) 1L else 2L
     query.srv <- paste0("https://query", n, ".finance.yahoo.com/",

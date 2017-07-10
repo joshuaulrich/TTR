@@ -91,11 +91,9 @@ to Yahoo Finance, which also included the following changes to the raw data:
 
 ### Note: you must have a working internet
 ### connection for these examples to work!
-\dontrun{
-ibm <- getYahooData("IBM", 19990404, 20050607)
+ge <- getYahooData("GE", 19990404, 20050607, adjust = FALSE)
 
 nyse.symbols <- stockSymbols("NYSE")
-}
 
 }
 \author{

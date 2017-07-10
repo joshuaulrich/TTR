@@ -47,7 +47,7 @@ stochOsc <- stoch(ttrc[,c("High","Low","Close")])
 nyseSymbols <- stockSymbols("NYSE")
 
 # Fetch Yahoo! Finance data from the internet
-ibm <- getYahooData("IBM", 19990404, 20050607)
+ge <- getYahooData("GE", 19990404, 20050607, adjust = FALSE)
 
 }
 \author{

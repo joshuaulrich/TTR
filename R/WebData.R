@@ -73,11 +73,9 @@
 #'
 #' ### Note: you must have a working internet
 #' ### connection for these examples to work!
-#'\dontrun{
-#' ibm <- getYahooData("IBM", 19990404, 20050607)
+#' ge <- getYahooData("GE", 19990404, 20050607, adjust = FALSE)
 #'
 #' nyse.symbols <- stockSymbols("NYSE")
-#'}
 #'
 #'@section Warning:
 #'As of TTR 0.23-2, \code{getYahooData} has been patched to work with changes

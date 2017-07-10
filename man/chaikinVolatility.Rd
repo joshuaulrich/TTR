@@ -38,9 +38,6 @@ data(ttrc)
 volatility <- chaikinVolatility(ttrc[,c("High","Low")])
 
 }
-\author{
-Joshua Ulrich
-}
 \references{
 The following site(s) were used to code/document this
 indicator:\cr \url{http://www.fmlabs.com/reference/ChaikinVolatility.htm}\cr
@@ -51,5 +48,7 @@ See \code{\link{EMA}}, \code{\link{SMA}}, etc. for moving average
 options; and note Warning section.  See \code{\link{TR}} for another
 volatility measure.
 }
+\author{
+Joshua Ulrich
+}
 \keyword{ts}
-

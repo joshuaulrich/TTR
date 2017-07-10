@@ -38,9 +38,6 @@ data(ttrc)
 ad <- chaikinAD(ttrc[,c("High","Low","Close")], ttrc[,"Volume"])
 
 }
-\author{
-Joshua Ulrich
-}
 \references{
 The following site(s) were used to code/document this
 indicator:\cr \url{http://www.fmlabs.com/reference/AccumDist.htm}\cr
@@ -51,5 +48,7 @@ indicator:\cr \url{http://www.fmlabs.com/reference/AccumDist.htm}\cr
 \seealso{
 See \code{\link{OBV}}, and \code{\link{CLV}}.
 }
+\author{
+Joshua Ulrich
+}
 \keyword{ts}
-

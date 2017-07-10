@@ -48,9 +48,6 @@ data(ttrc)
 cci <- CCI(ttrc[,c("High","Low","Close")])
 
 }
-\author{
-Joshua Ulrich
-}
 \references{
 The following site(s) were used to code/document this
 indicator:\cr \url{http://www.fmlabs.com/reference/CCI.htm}\cr
@@ -64,5 +61,7 @@ options; and note Warning section.  See \code{\link{aroon}},
 \code{\link{ADX}}, \code{\link{TDI}}, \code{\link{VHF}}, \code{\link{GMMA}}
 for other indicators that measure trend direction/strength.
 }
+\author{
+Joshua Ulrich
+}
 \keyword{ts}
-

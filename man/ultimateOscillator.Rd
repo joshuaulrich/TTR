@@ -27,13 +27,12 @@ data(ttrc)
 ult.osc <- ultimateOscillator(ttrc[,c("High","Low","Close")])
 
 }
-\author{
-Ivan Popivanov
-}
 \references{
 The following site(s) were used to code/document this
 indicator:\cr
 \url{http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:ultimate_oscillator}\cr
 }
+\author{
+Ivan Popivanov
+}
 \keyword{ts}
-

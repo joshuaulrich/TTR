@@ -18,6 +18,9 @@ PBands(prices, n = 20, maType = "SMA", sd = 2, ..., fastn = 2,
 
 \item{sd}{The number of standard deviations to use.}
 
+\item{\dots}{any other pass-thru parameters, usually for function named by
+\code{maType}.}
+
 \item{fastn}{Number of periods to use for smoothing higher-frequency 'noise'.}
 
 \item{centered}{Whether to center the bands around a series adjusted for high
@@ -25,9 +28,6 @@ frequency noise, default \code{FALSE}.}
 
 \item{lavg}{Whether to use a longer \code{(n*2)} smoothing period for
 centering, default \code{FALSE}.}
-
-\item{\dots}{any other pass-thru parameters, usually for function named by
-\code{maType}.}
 }
 \value{
 A object of the same class as \code{prices} or a matrix (if
@@ -63,11 +63,10 @@ this function, call this functions using \code{lapply(prices,PBands,...)}.
   pbands.close <- PBands( ttrc[,"Close"] )
 
 }
-\author{
-Brian G. Peterson
-}
 \seealso{
 \code{\link{BBands}}
 }
+\author{
+Brian G. Peterson
+}
 \keyword{ts}
-

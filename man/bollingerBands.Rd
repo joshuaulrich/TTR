@@ -60,9 +60,6 @@ data(ttrc)
 bbands.HLC <- BBands( ttrc[,c("High","Low","Close")] )
 bbands.close <- BBands( ttrc[,"Close"] )
 }
-\author{
-Joshua Ulrich
-}
 \references{
 The following site(s) were used to code/document this
 indicator:\cr \url{http://www.fmlabs.com/reference/Bollinger.htm}\cr
@@ -76,5 +73,7 @@ indicator:\cr \url{http://www.fmlabs.com/reference/Bollinger.htm}\cr
 See \code{\link{EMA}}, \code{\link{SMA}}, etc. for moving average
 options; and note Warning section.
 }
+\author{
+Joshua Ulrich
+}
 \keyword{ts}
-

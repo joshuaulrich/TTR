@@ -45,9 +45,6 @@ priceDPO <- DPO(ttrc[,"Close"])
 volumeDPO <- DPO(ttrc[,"Volume"])
 
 }
-\author{
-Joshua Ulrich
-}
 \references{
 The following site(s) were used to code/document this
 indicator:\cr
@@ -60,5 +57,7 @@ See \code{\link{EMA}}, \code{\link{SMA}}, etc. for moving average
 options; and note Warning section.  See \code{\link{MACD}} for a general
 oscillator.
 }
+\author{
+Joshua Ulrich
+}
 \keyword{ts}
-

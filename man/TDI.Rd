@@ -50,9 +50,6 @@ data(ttrc)
 tdi <- TDI(ttrc[,"Close"], n=30)
 
 }
-\author{
-Joshua Ulrich
-}
 \references{
 The following site(s) were used to code/document this
 indicator:\cr
@@ -63,5 +60,7 @@ See \code{\link{aroon}}, \code{\link{CCI}}, \code{\link{ADX}},
 \code{\link{VHF}}, \code{\link{GMMA}} for other indicators that measure trend
 direction/strength.
 }
+\author{
+Joshua Ulrich
+}
 \keyword{ts}
-

@@ -65,9 +65,6 @@ macd2 <- MACD( ttrc[,"Close"], 12, 26, 9,
          maType=list(list(SMA), list(EMA, wilder=TRUE), list(SMA)) )
 
 }
-\author{
-Joshua Ulrich
-}
 \references{
 The following site(s) were used to code/document this
 indicator:
@@ -89,5 +86,7 @@ indicator:
 See \code{\link{EMA}}, \code{\link{SMA}}, etc. for moving average
 options; and note Warning section.
 }
+\author{
+Joshua Ulrich
+}
 \keyword{ts}
-

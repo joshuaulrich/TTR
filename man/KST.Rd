@@ -63,9 +63,6 @@ kst4MA <- KST(ttrc[,"Close"],
   maType=list(list(SMA),list(EMA),list(DEMA),list(WMA)))
 
 }
-\author{
-Joshua Ulrich
-}
 \references{
 The following site(s) were used to code/document this
 indicator:\cr
@@ -77,5 +74,7 @@ See \code{\link{EMA}}, \code{\link{SMA}}, etc. for moving average
 options; and note Warning section.  See \code{\link{ROC}} for the
 rate-of-change function.  See \code{\link{MACD}} for a generic oscillator.
 }
+\author{
+Joshua Ulrich
+}
 \keyword{ts}
-

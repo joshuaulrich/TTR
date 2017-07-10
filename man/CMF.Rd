@@ -40,9 +40,6 @@ data(ttrc)
 cmf <- CMF(ttrc[,c("High","Low","Close")], ttrc[,"Volume"])
 
 }
-\author{
-Joshua Ulrich
-}
 \references{
 The following site(s) were used to code/document this
 indicator:\cr \url{http://www.fmlabs.com/reference/ChaikinMoneyFlow.htm}\cr
@@ -52,5 +49,7 @@ indicator:\cr \url{http://www.fmlabs.com/reference/ChaikinMoneyFlow.htm}\cr
 \seealso{
 See \code{\link{CLV}}, and \code{\link{chaikinAD}}.
 }
+\author{
+Joshua Ulrich
+}
 \keyword{ts}
-

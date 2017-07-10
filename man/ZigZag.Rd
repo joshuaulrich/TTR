@@ -47,9 +47,6 @@ data(ttrc)
 zz <- ZigZag( ttrc[,c("High", "Low")], change=20 )
 
 }
-\author{
-Joshua Ulrich
-}
 \references{
 The following site(s) were used to code/document this
 indicator:\cr
@@ -59,5 +56,7 @@ indicator:\cr
 \url{http://www.metastock.com/Customer/Resources/TAAZ/#127}\cr
 \url{http://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators:zigzag}\cr
 }
+\author{
+Joshua Ulrich
+}
 \keyword{ts}
-

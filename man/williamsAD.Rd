@@ -32,9 +32,6 @@ data(ttrc)
 ad <- williamsAD(ttrc[,c("High","Low","Close")])
 
 }
-\author{
-Joshua Ulrich
-}
 \references{
 The following site(s) were used to code/document this
 indicator:\cr
@@ -45,5 +42,7 @@ indicator:\cr
 See \code{\link{OBV}}, \code{\link{chaikinAD}}, and
 \code{\link{ATR}}.
 }
+\author{
+Joshua Ulrich
+}
 \keyword{ts}
-

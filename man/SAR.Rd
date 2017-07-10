@@ -35,9 +35,6 @@ data(ttrc)
 sar <- SAR(ttrc[,c("High","Low")])
 
 }
-\author{
-Joshua Ulrich
-}
 \references{
 The following site(s) were used to code/document this
 indicator:\cr
@@ -50,5 +47,7 @@ indicator:\cr
 See \code{\link{ATR}} and \code{\link{ADX}}, which were also
 developed by Welles Wilder.
 }
+\author{
+Joshua Ulrich
+}
 \keyword{ts}
-

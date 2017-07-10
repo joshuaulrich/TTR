@@ -44,9 +44,6 @@ lines(tail(stochWPR, 100), col="blue")
 lines(tail(1-stochWPR, 100), col="red", lty="dashed")
 
 }
-\author{
-Joshua Ulrich
-}
 \references{
 The following site(s) were used to code/document this
 indicator:\cr
@@ -58,5 +55,7 @@ indicator:\cr
 \seealso{
 See \code{\link{stoch}}.
 }
+\author{
+Joshua Ulrich
+}
 \keyword{ts}
-

@@ -29,9 +29,6 @@ data(ttrc)
 clv <- CLV(ttrc[,c("High","Low","Close")])
 
 }
-\author{
-Joshua Ulrich
-}
 \references{
 The following site(s) were used to code/document this
 indicator:\cr
@@ -40,5 +37,7 @@ indicator:\cr
 \seealso{
 See \code{\link{chaikinAD}}, which uses CLV.
 }
+\author{
+Joshua Ulrich
+}
 \keyword{ts}
-

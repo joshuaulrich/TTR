@@ -50,9 +50,6 @@ data(ttrc)
 trend <- aroon( ttrc[,c("High", "Low")], n=20 )
 
 }
-\author{
-Joshua Ulrich
-}
 \references{
 The following site(s) were used to code/document this
 indicator:\cr \url{http://www.fmlabs.com/reference/Aroon.htm}\cr
@@ -65,5 +62,7 @@ See \code{\link{CCI}}, \code{\link{ADX}}, \code{\link{TDI}},
 \code{\link{VHF}}, \code{\link{GMMA}} for other indicators that measure trend
 direction/strength.
 }
+\author{
+Joshua Ulrich
+}
 \keyword{ts}
-

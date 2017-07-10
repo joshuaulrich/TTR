@@ -44,9 +44,6 @@ data(ttrc)
 mfi <- MFI(ttrc[,c("High","Low","Close")], ttrc[,"Volume"])
 
 }
-\author{
-Joshua Ulrich
-}
 \references{
 The following site(s) were used to code/document this
 indicator:\cr
@@ -57,5 +54,7 @@ indicator:\cr
 \seealso{
 See \code{\link{OBV}} and \code{\link{CMF}}.
 }
+\author{
+Joshua Ulrich
+}
 \keyword{ts}
-

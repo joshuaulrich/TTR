@@ -50,9 +50,6 @@ data(ttrc)
 emv <- EMV(ttrc[,c("High","Low")], ttrc[,"Volume"])
 
 }
-\author{
-Joshua Ulrich
-}
 \references{
 The following site(s) were used to code/document this
 indicator:\cr \url{http://www.fmlabs.com/reference/ArmsEMV.htm}\cr
@@ -63,5 +60,7 @@ indicator:\cr \url{http://www.fmlabs.com/reference/ArmsEMV.htm}\cr
 See \code{\link{EMA}}, \code{\link{SMA}}, etc. for moving average
 options; and note Warning section.
 }
+\author{
+Joshua Ulrich
+}
 \keyword{ts}
-

@@ -50,11 +50,6 @@ nyseSymbols <- stockSymbols("NYSE")
 ge <- getYahooData("GE", 19990404, 20050607, adjust = FALSE)
 
 }
-\author{
-Joshua Ulrich
-
-Maintainer: Joshua Ulrich
-}
 \references{
 The following sites were used to code/document this package:\cr
 \url{http://www.fmlabs.com/reference/default.htm}\cr
@@ -62,5 +57,9 @@ The following sites were used to code/document this package:\cr
 \url{https://www.linnsoft.com/indicators}\cr
 \url{http://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators}\cr
 }
-\keyword{package}
+\author{
+Joshua Ulrich
 
+Maintainer: Joshua Ulrich
+}
+\keyword{package}

@@ -42,14 +42,13 @@ data(ttrc)
 dvi <- DVI(ttrc[,"Close"])
 
 }
-\author{
-Joshua Ulrich
-}
 \references{
 The following site(s) were used to code/document this
 indicator:\cr
 \url{http://cssanalytics.wordpress.com/2009/12/13/what-is-the-dvi/}\cr
 \url{http://marketsci.wordpress.com/2010/07/27/css-analytics\%E2\%80\%99-dvi-indicator-revealed/}\cr
 }
+\author{
+Joshua Ulrich
+}
 \keyword{ts}
-

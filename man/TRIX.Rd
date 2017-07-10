@@ -54,9 +54,6 @@ trix4 <- TRIX(ttrc[,"Close"],
 maType=list(list(SMA), list(EMA, wilder=TRUE), list(SMA), list(DEMA)))
 
 }
-\author{
-Joshua Ulrich
-}
 \references{
 The following site(s) were used to code/document this
 indicator:\cr
@@ -69,5 +66,7 @@ indicator:\cr
 See \code{\link{EMA}}, \code{\link{SMA}}, etc. for moving average
 options; and note Warning section.
 }
+\author{
+Joshua Ulrich
+}
 \keyword{ts}
-

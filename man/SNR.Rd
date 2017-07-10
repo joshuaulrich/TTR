@@ -28,18 +28,17 @@ n-day volatility.
 }{SNR = abs(Cl - lag(Cl,n)) / ATR(HLC, n)$atr}
 
 Using average true range as the volatility measure captures more of the
-intraday and overnight volatility in a way that a measurement of Close-to-Close
-price change does not.
+intraday and overnight volatility in a way that a measurement of
+Close-to-Close price change does not.
 
 The interpretation is then relatively intuitive: an SNR value of five
 indicates that the market has moved five times the volatility (average true
 range) over the given look-back period.
 }
-\author{
-Peter Carl
-}
 \references{
 Skeggs, James and Hill, Alex (2015). Back in Black Part 2: The 
 Opportunity Set for Trend Following.
 }
-
+\author{
+Peter Carl
+}

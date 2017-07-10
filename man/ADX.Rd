@@ -47,9 +47,6 @@ data(ttrc)
 dmi.adx <- ADX(ttrc[,c("High","Low","Close")])
 
 }
-\author{
-Joshua Ulrich
-}
 \references{
 The following site(s) were used to code/document this
 indicator:\cr \url{http://www.fmlabs.com/reference/DI.htm}\cr
@@ -69,5 +66,7 @@ options; and note Warning section.  The DX calculation uses
 \code{\link{TDI}}, \code{\link{VHF}}, \code{\link{GMMA}} for other indicators
 that measure trend direction/strength.
 }
+\author{
+Joshua Ulrich
+}
 \keyword{ts}
-

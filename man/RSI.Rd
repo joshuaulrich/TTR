@@ -63,9 +63,6 @@ rsiMA2 <- RSI(price, n=14, maType=list(maUp=list(EMA,ratio=1/5),
 
 
 }
-\author{
-Joshua Ulrich
-}
 \references{
 The following site(s) were used to code/document this
 indicator:
@@ -83,5 +80,7 @@ See \code{\link{EMA}}, \code{\link{SMA}}, etc. for moving average
 options; and note Warning section.  See \code{\link{CMO}} for a variation on
 RSI.
 }
+\author{
+Joshua Ulrich
+}
 \keyword{ts}
-

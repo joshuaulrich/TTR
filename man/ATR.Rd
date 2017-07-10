@@ -46,9 +46,6 @@ data(ttrc)
 atr <- ATR(ttrc[,c("High","Low","Close")], n=14)
 
 }
-\author{
-Joshua Ulrich
-}
 \references{
 The following site(s) were used to code/document this
 indicator:\cr \url{http://www.fmlabs.com/reference/TR.htm}\cr
@@ -62,5 +59,7 @@ See \code{\link{EMA}}, \code{\link{SMA}}, etc. for moving average
 options; and note Warning section.  See \code{\link{DX}}, which uses true
 range.  See \code{\link{chaikinVolatility}} for another volatility measure.
 }
+\author{
+Joshua Ulrich
+}
 \keyword{ts}
-

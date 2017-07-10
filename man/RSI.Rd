@@ -71,12 +71,12 @@ The following site(s) were used to code/document this
 indicator:
 \cr Relative Strength Index:\cr
 \url{http://www.fmlabs.com/reference/RSI.htm}\cr
-\url{http://www.metastock.com/Customer/Resources/TAAZ/#100}\cr
+\url{https://www.metastock.com/Customer/Resources/TAAZ/?p=100}\cr
 \url{https://www.linnsoft.com/techind/relative-strength-index-rsi}\cr
-\url{http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:relative_strength_index_rsi}\cr
+\url{http://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators:relative_strength_index_rsi}\cr
 \cr Stochastic RSI:\cr
 \url{http://www.fmlabs.com/reference/StochRSI.htm}\cr
-\url{http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:stochrsi}\cr
+\url{http://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators:stochrsi}\cr
 }
 \seealso{
 See \code{\link{EMA}}, \code{\link{SMA}}, etc. for moving average

@@ -57,7 +57,7 @@ indicator:\cr
 \url{https://www.linnsoft.com/techind/zig-zag-indicator-zig-zzo}\cr
 \url{https://www.linnsoft.com/techind/zig-zag-oscillator-indicator-zzo}\cr
 \url{http://www.metastock.com/Customer/Resources/TAAZ/#127}\cr
-\url{http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:zigzag}\cr
+\url{http://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators:zigzag}\cr
 }
 \keyword{ts}
 

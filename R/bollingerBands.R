@@ -58,10 +58,10 @@
 #'@references The following site(s) were used to code/document this
 #'indicator:\cr \url{http://www.fmlabs.com/reference/Bollinger.htm}\cr
 #'\url{http://www.fmlabs.com/reference/BollingerWidth.htm}\cr
-#'\url{http://www.metastock.com/Customer/Resources/TAAZ/#36}\cr
+#'\url{https://www.metastock.com/Customer/Resources/TAAZ/?p=36}\cr
 #'\url{https://www.linnsoft.com/techind/bollinger-bands}\cr
-#'\url{http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:bollinger_bands}\cr
-#'\url{http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:bollinger_band_width}\cr
+#'\url{http://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators:bollinger_bands}\cr
+#'\url{http://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators:bollinger_band_width}\cr
 #'@keywords ts
 #'@examples
 #'

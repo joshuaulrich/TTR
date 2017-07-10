@@ -42,8 +42,8 @@
 #'indicator:\cr
 #'\url{https://www.linnsoft.com/techind/parabolic-sar-sar}\cr
 #'\url{http://www.fmlabs.com/reference/SAR.htm}\cr
-#'\url{http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:parabolic_sar}\cr
-#'\url{http://www.metastock.com/Customer/Resources/TAAZ/#87}
+#'\url{http://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators:parabolic_sar}\cr
+#'\url{https://www.metastock.com/Customer/Resources/TAAZ/?p=87}
 #'@keywords ts
 #'@examples
 #'

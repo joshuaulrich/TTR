@@ -36,9 +36,9 @@
 #'@seealso See \code{\link{chaikinAD}}.
 #'@references The following site(s) were used to code/document this
 #'indicator:\cr \url{http://www.fmlabs.com/reference/OBV.htm}\cr
-#'\url{http://www.metastock.com/Customer/Resources/TAAZ/#82}\cr
+#'\url{https://www.metastock.com/Customer/Resources/TAAZ/?p=82}\cr
 #'\url{https://www.linnsoft.com/techind/balance-open-interest}\cr
-#'\url{http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:on_balance_volume_obv}\cr
+#'\url{http://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators:on_balance_volume_obv}\cr
 #'@keywords ts
 #'@examples
 #'

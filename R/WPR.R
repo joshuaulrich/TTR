@@ -42,7 +42,7 @@
 #'\url{http://www.fmlabs.com/reference/WilliamsR.htm}\cr
 #'\url{http://www.metastock.com/Customer/Resources/TAAZ/#126}\cr
 #'\url{https://www.linnsoft.com/techind/williams-r-wpr}\cr
-#'\url{http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:williams_r}\cr
+#'\url{http://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators:williams_r}\cr
 #'@keywords ts
 #'@examples
 #'

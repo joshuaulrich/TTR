@@ -56,7 +56,7 @@ Joshua Ulrich
 \references{
 The following site(s) were used to code/document this
 indicator:\cr \url{http://www.fmlabs.com/reference/ArmsEMV.htm}\cr
-\url{http://www.metastock.com/Customer/Resources/TAAZ/#51}\cr
+\url{https://www.metastock.com/Customer/Resources/TAAZ/?p=51}\cr
 \url{https://www.linnsoft.com/techind/arms-ease-movement}\cr
 }
 \seealso{

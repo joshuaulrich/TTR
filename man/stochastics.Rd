@@ -133,9 +133,9 @@ The following site(s) were used to code/document these
 indicators:
 \cr Stochastic Oscillator:\cr
 \url{http://www.fmlabs.com/reference/StochasticOscillator.htm}\cr
-\url{http://www.metastock.com/Customer/Resources/TAAZ/#106}\cr
+\url{https://www.metastock.com/Customer/Resources/TAAZ/?p=106}\cr
 \url{https://www.linnsoft.com/techind/stochastics}\cr
-\url{http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:stochastic_oscillator_fast_slow_and_full}\cr
+\url{http://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators:stochastic_oscillator_fast_slow_and_full}\cr
 \cr SMI:\cr
 \url{http://www.fmlabs.com/reference/default.htm?url=SMI.htm}\cr
 }

@@ -88,8 +88,8 @@ function(x, n=1, na.pad=TRUE) {
   # Momentum
 
   # http://www.fmlabs.com/reference/Momentum.htm
-  # http://www.metastock.com/Customer/Resources/TAAZ/#95
-  # http://linnsoft.com/tour/techind/momentum.htm
+  # https://www.metastock.com/Customer/Resources/TAAZ/?p=95
+  # https://www.linnsoft.com/tour/techind/momentum.htm
   
   x <- try.xts(x, error=as.matrix)
   if(is.xts(x)) {

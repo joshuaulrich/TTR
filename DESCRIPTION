@@ -1,11 +1,11 @@
 Package: TTR
 Type: Package
 Title: Technical Trading Rules
-Version: 0.23-1
-Date: 2016-03-19
+Version: 0.23-2
+Date: 2017-07-07
 Author: Joshua Ulrich
 Maintainer: Joshua Ulrich <josh.m.ulrich@gmail.com>
-Imports: xts (>= 0.9-3), zoo, curl
+Imports: xts (>= 0.10-0), zoo, curl
 LinkingTo: xts
 Enhances: quantmod
 Suggests: RUnit

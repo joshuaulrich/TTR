@@ -374,7 +374,9 @@ function(symbol, start, end, freq="daily", type="price", adjust=TRUE, quiet=FALS
     }
 
   # Only return requested data
-  ohlc <- ohlc[paste(beg,end,sep='/'),]
+  dateRange <- paste(as.Date(.POSIXct(beg, tz = "UTC")),
+                     as.Date(.POSIXct(end, tz = "UTC")), sep = "/")
+  ohlc <- ohlc[dateRange]
 
   ### Check to see if supplied dates occur in data set
 #  if( max(ohlc[,'Date']) != as.Date(end) ) {

@@ -27,7 +27,7 @@ A object of the same class as \code{HL} and \code{volume} or a matrix
 (if \code{try.xts} fails) containing the columns:
 \describe{
  \item{ emv }{ The ease of movement values. }
- \item{ emvMA }{ The smoothed (as specified by \code{ma}) ease of movement values. }
+ \item{ maEMV }{ The smoothed (as specified by \code{ma}) ease of movement values. }
 }
 }
 \description{

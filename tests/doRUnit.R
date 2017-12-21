@@ -2,13 +2,19 @@
 if(require("RUnit", quietly=TRUE)) {
  
   ## --- Setup ---
+  R_CMD_CHECK <- Sys.getenv("RCMDCHECK") != "FALSE"
  
   pkg <- "TTR" # <-- Change to package name!
 
-  ## Path to unit tests for R CMD check
-  ## PKG.Rcheck/PKG/unitTests
-  path <- system.file("unitTests", package=pkg)
-
+  if (R_CMD_CHECK) {
+    ## Path to unit tests for R CMD check
+    ## PKG.Rcheck/PKG/unitTests
+    path <- system.file("unitTests", package=pkg)
+  } else {
+    ## Path to unit tests for standalone running under Makefile (not R CMD check)
+    ## PKG/tests/../inst/unitTests
+    path <- file.path(getwd(), "..", "inst", "unitTests")
+  }
   cat("\nRunning unit tests\n")
   print(list(pkg=pkg, getwd=getwd(), pathToUnitTests=path))
  
@@ -27,21 +33,25 @@ if(require("RUnit", quietly=TRUE)) {
                                           dirs=path)
   ## Run
   tests <- runTestSuite(testSuite)
- 
-  ## Default report name
-  pathReport <- file.path(path, "report")
- 
-  ## Report to stdout and text files
+
+  ## Report to stdout
   cat("------------------- UNIT TEST SUMMARY ---------------------\n\n")
   printTextProtocol(tests, showDetails=FALSE)
-  printTextProtocol(tests, showDetails=FALSE,
-                    fileName=paste(pathReport, "Summary.txt", sep=""))
-  printTextProtocol(tests, showDetails=TRUE,
-                    fileName=paste(pathReport, ".txt", sep=""))
- 
-  ## Report to HTML file
-  printHTMLProtocol(tests, fileName=paste(pathReport, ".html", sep=""))
- 
+
+  ## Report text files (only if not under R CMD check)
+  if (!R_CMD_CHECK) {
+    ## Default report name
+    pathReport <- file.path(path, "report")
+
+    printTextProtocol(tests, showDetails=FALSE,
+                      fileName=paste(pathReport, "Summary.txt", sep=""))
+    printTextProtocol(tests, showDetails=TRUE,
+                      fileName=paste(pathReport, ".txt", sep=""))
+
+    ## Report to HTML file
+    printHTMLProtocol(tests, fileName=paste(pathReport, ".html", sep=""))
+  }
+
   ## Return stop() to cause R CMD check stop in case of
   ##  - failures i.e. FALSE to unit tests or
   ##  - errors i.e. R errors

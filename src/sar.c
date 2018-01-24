@@ -46,7 +46,7 @@ SEXP sar (SEXP hi, SEXP lo, SEXP xl, SEXP ig) {
     int nr = nrows(hi);
 
     /* Initalize result R object */
-    SEXP sar; PROTECT(sar = allocVector(REALSXP,nr)); P++;
+    SEXP sar; PROTECT(sar = allocMatrix(REALSXP, nr, 1)); P++;
     double *d_sar = REAL(sar);
 
     /* Find first non-NA value */

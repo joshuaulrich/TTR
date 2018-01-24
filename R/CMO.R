@@ -64,5 +64,9 @@ function(x, n=14) {
 
   cmo <- 100 * (up-dn)/(up+dn)
 
+  if (!is.null(dim(cmo)) && ncol(cmo) == 1L) {
+    colnames(cmo) <- "cmo"
+  }
+
   reclass( cmo, x )
 }

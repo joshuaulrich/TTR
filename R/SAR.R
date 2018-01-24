@@ -82,6 +82,7 @@ function(HL, accel=c(.02,.2)) {
 
   # Call C routine
   sar <- .Call("sar", HL[,1], HL[,2], accel, initGap, PACKAGE = "TTR")
+  colnames(sar) <- "sar"
 
   reclass( sar, HL )
 }

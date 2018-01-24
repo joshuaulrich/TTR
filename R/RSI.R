@@ -130,5 +130,9 @@ function(price, n=14, maType, ...) {
 
   rsi <- 100 * mavgUp / ( mavgUp + mavgDn )
 
+  if (!is.null(dim(rsi)) && ncol(rsi) == 1L) {
+    colnames(rsi) <- "rsi"
+  }
+
   reclass( rsi, price )
 }

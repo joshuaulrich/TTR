@@ -230,6 +230,8 @@ function(HLC, n=13, nFast=2, nSlow=25, nSig=9, maType, bounded=TRUE, ...) {
   # http://www.fmlabs.com/reference/default.htm?url=SMI.htm
   # The median in the SMI formula on the above site is incorrect.
 
+  HLC <- try.xts(HLC, error=as.matrix)
+  
   # Calculation if HLC series is given
   if(ncol(HLC)==3) {
     high  <- HLC[,1]

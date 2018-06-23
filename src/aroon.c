@@ -17,10 +17,7 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/*#include <R.h>
-#include <Rinternals.h>*/
-#include <xtsAPI.h>    		/* xts exported functions */
-//#include <xts.h>    		/* xts exported functions */
+#include "ttr.h"
 
 SEXP aroon_max (SEXP x, SEXP n) {
 
@@ -45,9 +42,7 @@ SEXP aroon_max (SEXP x, SEXP n) {
   double *real_result = REAL(result);
 
   /* check for non-leading NAs and get first non-NA location */
-  SEXP first;
-  //PROTECT(first = naCheck(x, ScalarLogical(TRUE))); P++; // xts.h
-  PROTECT(first = xtsNaCheck(x, ScalarLogical(TRUE))); P++; // xtsAPI.h
+  SEXP first = PROTECT(xts_na_check(x, ScalarLogical(TRUE))); P++;
   int int_first = asInteger(first);
   if(int_n + 1 + int_first > nr)
     error("not enough non-NA values");

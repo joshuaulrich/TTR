@@ -216,12 +216,25 @@ function(x, n=10, v=1, wilder=FALSE, ratio=NULL) {
   # Double Exponential Moving Average
   # Thanks to John Gavin for the v-factor generalization
 
+  x <- try.xts(x, error=as.matrix)
+  if( n < 1 || n > NROW(x) )
+    stop(sprintf("n = %d is outside valid range: [1, %d]", n, NROW(x)))
+  if(NCOL(x) > 1) {
+    stop("ncol(x) > 1. DEMA only supports univariate 'x'")
+  }
   if(v < 0 || v > 1) {
     stop("Please ensure 0 <= v <= 1")
   }
 
-  dema <- (1 + v) * EMA(x,n,wilder,ratio) -
-    EMA(EMA(x,n,wilder,ratio),n,wilder,ratio) * v
+  if(missing(n) && !missing(ratio))
+    n <- NULL
+
+  # Call C routine
+  ma1 <- .Call("ema", x, n, ratio, isTRUE(wilder), PACKAGE = "TTR")
+  d <- .Call("ema", ma1, n, ratio, isTRUE(wilder), PACKAGE = "TTR")
+
+  dema <- (1 + v) * ma1 - d * v
+  dema <- reclass(dema, x)
 
   if(!is.null(dim(dema))) {
     colnames(dema) <- "DEMA"

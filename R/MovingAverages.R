@@ -191,16 +191,10 @@ function (x, n=10, wilder=FALSE, ratio=NULL, ...) {
   # If ratio is specified, and n is not, set n to approx 'correct'
   # value backed out from ratio
   if(missing(n) && !missing(ratio))
-    n <- trunc(2/ratio - 1)
-
-  # Determine decay ratio
-  if(is.null(ratio)) {
-    if(wilder) ratio <- 1/n
-    else       ratio <- 2/(n+1)
-  }
+    n <- NULL
 
   # Call C routine
-  ma <- .Call("ema", x, n, ratio, PACKAGE = "TTR")
+  ma <- .Call("ema", x, n, ratio, isTRUE(wilder), PACKAGE = "TTR")
 
   ma <- reclass(ma,x)
   

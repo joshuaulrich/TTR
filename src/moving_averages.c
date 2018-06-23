@@ -19,7 +19,7 @@
 
 #include "ttr.h"
 
-SEXP ema (SEXP x, SEXP n, SEXP ratio) {
+SEXP ema (SEXP x, SEXP n, SEXP ratio, SEXP wilder) {
     
     /* Initalize loop and PROTECT counters */
     int i, P=0;
@@ -28,12 +28,27 @@ SEXP ema (SEXP x, SEXP n, SEXP ratio) {
     if(TYPEOF(x) != REALSXP) {
       PROTECT(x = coerceVector(x, REALSXP)); P++;
     }
-
-    /* Pointers to function arguments */
     double *d_x = REAL(x);
-    int i_n = asInteger(n);
-    double d_ratio = asReal(ratio);
-    
+
+    /* If ratio is specified, and n is not, set n to approx 'correct'
+     * value backed out from ratio
+     */
+    int i_n;
+    if(R_NilValue == n && R_NilValue != ratio) {
+      i_n = (int)(2.0 / asReal(ratio) - 1.0);
+    } else {
+      i_n = asInteger(n);
+    }
+
+    /* Determine decay ratio */
+    int isWilder = LOGICAL(wilder)[0];
+    double d_ratio;
+    if(R_NilValue == ratio) {
+      d_ratio = (isWilder) ? 1.0 / i_n : 2.0 / (i_n + 1);
+    } else {
+      d_ratio = asReal(ratio);
+    }
+
     /* Input object length */
     int nr = nrows(x);
 

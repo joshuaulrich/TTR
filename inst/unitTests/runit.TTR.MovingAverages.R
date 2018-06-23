@@ -37,6 +37,12 @@ test.EMA <- function() {
   checkException( EMA(input$all$Close, n = -1) )
   checkException( EMA(input$all$Close, n = NROW(input$all) + 1) )
 }
+test.EMA.n.ratio <- function() {
+  out <- 0:9 * 1.0
+  is.na(out) <- 1:2
+  checkEqualsNumeric(EMA(1:10, ratio = 0.5), out)
+  checkEqualsNumeric(EMA(1:10, n = 3), out)
+}
 
 # Exponential Moving Average, Wilder ratio
 test.EMA.wilder <- function() {

@@ -188,10 +188,6 @@ function (x, n=10, wilder=FALSE, ratio=NULL, ...) {
     stop("n > number of non-NA values in column(s) ",
          paste(which(nNonNA), collapse=", "))
 
-  # Check for non-leading NAs
-  # Leading NAs are handled in the C code
-  x.na <- naCheck(x, n)
-  
   # If ratio is specified, and n is not, set n to approx 'correct'
   # value backed out from ratio
   if(missing(n) && !missing(ratio))

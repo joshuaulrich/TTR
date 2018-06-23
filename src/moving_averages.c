@@ -17,8 +17,7 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <R.h>
-#include <Rinternals.h>
+#include "ttr.h"
 
 SEXP ema (SEXP x, SEXP n, SEXP ratio) {
     
@@ -43,27 +42,28 @@ SEXP ema (SEXP x, SEXP n, SEXP ratio) {
     PROTECT(result = allocVector(REALSXP,nr)); P++;
     double *d_result = REAL(result);
 
-    /* Find first non-NA input value */
-    int beg = i_n - 1;
-    d_result[beg] = 0;
-    for(i = 0; i <= beg; i++) {
-        /* Account for leading NAs in input */
-        if(ISNA(d_x[i])) {
-            d_result[i] = NA_REAL;
-            beg++;
-            d_result[beg] = 0;
-            continue;
-        }
-        /* Set leading NAs in output */
-        if(i < beg) {
-            d_result[i] = NA_REAL;
-        }
-        /* Raw mean to start EMA */
-        d_result[beg] += d_x[i] / i_n;
+    /* check for non-leading NAs and get first non-NA location */
+    SEXP _first = PROTECT(xts_na_check(x, ScalarLogical(TRUE))); P++;
+    int first = INTEGER(_first)[0];
+    if(i_n + 1 + first > nr) {
+      error("not enough non-NA values");
     }
 
+    /* Set leading NAs in output */
+    for(i = 0; i < first; i++) {
+      d_result[i] = NA_REAL;
+    }
+
+    /* Raw mean to start EMA */
+    double seed = 0.0;
+    for(i = first; i < first + i_n; i++) {
+      d_result[i] = NA_REAL;
+      seed += d_x[i] / i_n;
+    }
+    d_result[first + i_n - 1] = seed;
+
     /* Loop over non-NA input values */
-    for(i = beg+1; i < nr; i++) {
+    for(i = first + i_n; i < nr; i++) {
         d_result[i] = d_x[i] * d_ratio + d_result[i-1] * (1-d_ratio);
     }
 

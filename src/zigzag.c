@@ -41,8 +41,15 @@ SEXP ttr_zigzag
     change = change / 100.0;
 
   int n = length(_high);
-  SEXP _zigzag = PROTECT(allocVector(REALSXP, n));
-  double* zigzag = REAL(_zigzag);
+
+  /* List for returning separate high and low vectors */
+  SEXP _zigzag = PROTECT(allocVector(VECSXP, 2));
+
+  SEXP _zigzag_high = PROTECT(allocVector(REALSXP, n));
+  double* zigzag_high = REAL(_zigzag_high);
+
+  SEXP _zigzag_low = PROTECT(allocVector(REALSXP, n));
+  double* zigzag_low = REAL(_zigzag_low);
 
   price_and_index reference, inflection;
   reference.price = (high[0] + low[0]) / 2;
@@ -52,10 +59,15 @@ SEXP ttr_zigzag
 
   double extreme_min, extreme_max, local_min, local_max;
   int signal = 0;
+  
+  /* Set 0 index to NA */
+  zigzag_low[0] = NA_REAL;
+  zigzag_high[0] = NA_REAL;
 
   for (int i = 1; i < n; i++) {
     /* Initialize all zigzag values to NA */
-    zigzag[i] = NA_REAL;
+    zigzag_low[i] = NA_REAL;
+    zigzag_high[i] = NA_REAL;
 
     if (use_percent) {
       /* If % change given (absolute move) */
@@ -110,7 +122,8 @@ SEXP ttr_zigzag
       }
       /* Trend Reversal */
       if (high[i] >= extreme_max) {
-        zigzag[reference.index] = reference.price;
+        /* Record a high inflection point */
+        zigzag_high[reference.index] = reference.price;
         reference = inflection;
         inflection.price = high[i];
         inflection.index = i;
@@ -141,7 +154,8 @@ SEXP ttr_zigzag
       }
       /* Trend Reversal */
       if (low[i] <= extreme_min) {
-        zigzag[reference.index] = reference.price;
+        /* Record a low inflection point */
+        zigzag_low[reference.index] = reference.price;
         reference = inflection;
         inflection.price = low[i];
         inflection.index = i;
@@ -150,9 +164,20 @@ SEXP ttr_zigzag
       }
     }
   }
-  zigzag[reference.index] = reference.price;
-  zigzag[inflection.index] = inflection.price;
+    /* Record final two inflection points */
+  if(signal > 0){
+    zigzag_low[reference.index] = reference.price;
+    zigzag_high[inflection.index] = inflection.price;
+  } else {
+    zigzag_high[reference.index] = reference.price;
+    zigzag_low[inflection.index] = inflection.price;
+  }
 
-  UNPROTECT(1);
+  /* Add vectors to list */
+  SET_VECTOR_ELT(_zigzag, 0, _zigzag_high);
+  SET_VECTOR_ELT(_zigzag, 1, _zigzag_low);
+
+  UNPROTECT(3);
   return _zigzag;
+
 }

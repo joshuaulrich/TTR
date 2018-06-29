@@ -84,12 +84,13 @@ function( HL, change=10, percent=TRUE, retrace=FALSE, lastExtreme=TRUE ) {
               as.numeric(change), as.logical(percent), as.logical(retrace),
               as.logical(lastExtreme), PACKAGE = "TTR")
   
-  # Interpolate results
-  zz <- na.approx(zz, na.rm = FALSE)
-
-  # Prepend NAs from original data
-  zz <- c( rep( NA, HL.na$NAs ), zz ) 
-
-  reclass( zz, HL )
+  
+  names(zz) <- c("High", "Low")
+  
+  # Return as logical vectors
+  zz$High <- !is.na(zz$High) 
+  zz$Low  <- !is.na(zz$Low) 
+  
+  zz
 }
 

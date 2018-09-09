@@ -92,7 +92,7 @@
 #'  \log \textstyle\frac{L_i}{C_i} \times \log \textstyle\frac{L_i}{O_i} 
 #'  \right)
 #'}{ s2rs <- volatility(OHLC, n, "rogers.satchell", N, ...) }
-#'\deqn{ k=\frac{\alpha}{1+\frac{n+1}{n-1}}
+#'\deqn{ k=\frac{\alpha-1}{alpha+\frac{n+1}{n-1}}
 #'}{ k <- (alpha-1) / (alpha + (n+1)/(n-1)) }
 #'}
 #'

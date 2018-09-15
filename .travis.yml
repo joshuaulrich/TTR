@@ -1,0 +1,49 @@
+# Run Travis CI for R using https://eddelbuettel.github.io/r-travis/
+
+language: c
+
+matrix:
+  include:
+    - name: "Linux tests"
+      os: linux
+      dist: trusty
+      sudo: required
+
+# Uncomment once all Fortran code is replaced with C
+#    - name: "macOS tests"
+#      os: osx
+#      osx_image: xcode8
+
+    - name: "Linux tests conditional Suggests"
+      os: linux
+      dist: trusty
+      sudo: required
+      env: _R_CHECK_DEPENDS_ONLY_=true
+
+before_install:
+  - curl -OLs https://eddelbuettel.github.io/r-travis/run.sh && chmod 0755 run.sh
+  # add our launchpad repo which has (inter alia) the newest QuantLib
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+      sudo add-apt-repository -y ppa:edd/misc;
+    fi
+  - ./run.sh bootstrap
+
+install:
+  - |
+    if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+      ./run.sh install_aptget r-cran-runit r-cran-quantmod r-cran-curl;
+    elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+      ./run.sh install_r RUnit quantmod curl;
+    fi
+
+script:
+  - ./run.sh run_tests
+
+after_failure:
+  - ./run.sh dump_logs
+
+notifications:
+  email:
+    on_success: change
+    on_failure: change
+

@@ -282,16 +282,9 @@ function(x, n=10, wts=1:n, ...) {
     if( any(is.na(wts)) )
       stop("'wts' vector of length 'n' cannot have NA values")
 
-    # Call Fortran routine
-    ma <- .Fortran( "wma", ia = as.double(x),
-                           lia = as.integer(NROW(x)),
-                           wts = as.double(wts),
-                           n = as.integer(n),
-                           oa = as.double(x),
-                           loa = as.integer(NROW(x)),
-                           PACKAGE = "TTR",
-                           DUP = TRUE )$oa
-   
+    # Call C routine
+    ma <- .Call("wma", x, wts, n, PACKAGE = "TTR")
+
   } else {
     
     xw <- na.omit( cbind(x, wts) )

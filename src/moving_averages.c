@@ -204,3 +204,48 @@ SEXP vma (SEXP x, SEXP w, SEXP ratio) {
     return(result);
 }
 
+SEXP wma (SEXP x, SEXP w, SEXP n) {
+
+    /* Initalize loop and PROTECT counters */
+    int i, j, P=0;
+
+    /* ensure that 'x' is double */
+    if(TYPEOF(x) != REALSXP) {
+      PROTECT(x = coerceVector(x, REALSXP)); P++;
+    }
+    /* ensure that 'w' is double */
+    if(TYPEOF(w) != REALSXP) {
+      PROTECT(w = coerceVector(w, REALSXP)); P++;
+    }
+    int i_n = asInteger(n);
+
+    /* Pointers to function arguments */
+    double *d_x = REAL(x);
+    double *d_w = REAL(w);
+
+    /* Input object length */
+    int nr = nrows(x);
+
+    /* Initalize result R object */
+    SEXP result;
+    PROTECT(result = allocVector(REALSXP,nr)); P++;
+    double *d_result = REAL(result);
+
+    /* Loop over non-NA input values */
+    double wtsum = 0.0;
+    for(j = 0; j < i_n; j++) {
+      wtsum += d_w[j];
+    }
+    for(i = (i_n-1); i < nr; i++) {
+      double num = 0.0;
+      int ni = i - i_n + 1;
+      for(j = 0; j < i_n; j++) {
+        num += d_x[ni+j] * d_w[j];
+      }
+      d_result[i] = num / wtsum;
+    }
+
+    /* UNPROTECT R objects and return result */
+    UNPROTECT(P);
+    return(result);
+}

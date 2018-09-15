@@ -74,49 +74,6 @@ c
 
 c-----------------------------------------------------------------------c
 c
-c     Calculate Weighted Moving Average (WMA)
-c
-c http://www.fmlabs.com/reference/WeightedMA.htm
-c http://www.equis.com/Customer/Resources/TAAZ/Default.aspx?c=3&p=74
-c http://linnsoft.com/tour/techind/movAvg.htm
-c
-c     Only for the case of wts(n). If wts(lia), the
-c     WMA can be calculated with 'runSP' ('runSumProd' in R).
-c
-c     ia   : input array
-c     lia  : length of input array
-c     wts  : weight array
-c     n    : number of periods (= length of weight array)
-c     oa   : output array
-c     loa  : length of output array
-c     num  : window numerator
-c     den  : window denominator
-c
-      subroutine wma(ia, lia, wts, n, oa, loa)
-
-      integer lia, n, loa, i, j
-      double precision ia(lia), wts(n), oa(loa)
-      double precision num, den
-      
-      do 10 i=n,lia
-
-         num = 0.0D0
-         den = 0.0D0
-
-        do 20 j=i-n+1,i
-          
-          num = num + ( ia(j) * wts(n-i+j) )
-          den = den + wts(n-i+j)
-
-   20 continue
-
-        oa(i) = num / den
-
-   10 continue
-      end
-
-c-----------------------------------------------------------------------c
-c
 c     Calculate Elastic, Volume-Weighted Moving Average (EVWMA)
 c
 c http://linnsoft.com/tour/techind/evwma.htm

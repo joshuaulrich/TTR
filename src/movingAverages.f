@@ -97,39 +97,3 @@ c
 
    10 continue
       end
-
-c-----------------------------------------------------------------------c
-c
-c     Calculate Zero Lag Exponential Moving Average (ZLEMA)
-c
-c http://www.fmlabs.com/reference/ZeroLagExpMA.htm
-c http://linnsoft.com/tour/techind/movAvg.htm
-c
-c     The above sites do not account for the possibility of 'lag' being
-c     non-integer.  I implement a weighted average of the two nearest
-c     'ia' values if 'lag' is non-integer.
-c
-c     ia    : input array
-c     lia   : length of input array
-c     n     : number of periods
-c     oa    : output array
-c     loa   : length of output array
-c     ratio : weighting/decay ratio
-c
-      subroutine zlema(ia, lia, n, oa, loa, ratio)
-
-      integer lia, n, loa, i, loc 
-      double precision ia(lia), oa(loa)
-      double precision ratio, lag, wt
-
-      lag = 1/ratio
-      wt = DMOD( lag, 1.0D0 )
-
-      do 10 i=n+1,lia
-
-        loc = INT(i-(lag))
-        oa(i) = ratio * ( 2*ia(i) - (ia(loc)*(1-wt) + ia(loc+1)*wt ) )
-     C         + ( 1 - ratio ) * oa(i-1)
-
-   10 continue
-      end

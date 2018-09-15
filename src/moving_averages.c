@@ -249,3 +249,74 @@ SEXP wma (SEXP x, SEXP w, SEXP n) {
     UNPROTECT(P);
     return(result);
 }
+
+SEXP zlema (SEXP x, SEXP n, SEXP ratio) {
+
+    /* Initalize loop and PROTECT counters */
+    int i, P=0;
+
+    /* ensure that 'x' is double */
+    if(TYPEOF(x) != REALSXP) {
+      PROTECT(x = coerceVector(x, REALSXP)); P++;
+    }
+    double *d_x = REAL(x);
+
+    /* If ratio is specified, and n is not, then
+     * set n to approx 'correct' value backed out from ratio
+     */
+    int i_n;
+    double d_ratio;
+    if(R_NilValue == n && R_NilValue != ratio) {
+      d_ratio = asReal(ratio);
+      i_n = (int)(2.0 / d_ratio - 1.0);
+    } else {
+      i_n = asInteger(n);
+    }
+    if(R_NilValue == ratio) {
+      d_ratio = 2.0 / (i_n + 1);
+    }
+
+    /* Input object length */
+    int nr = nrows(x);
+
+    /* Initalize result R object */
+    SEXP result;
+    PROTECT(result = allocVector(REALSXP,nr)); P++;
+    double *d_result = REAL(result);
+
+    /* check for non-leading NAs and get first non-NA location */
+    SEXP _first = PROTECT(xts_na_check(x, ScalarLogical(TRUE))); P++;
+    int first = INTEGER(_first)[0];
+    if(i_n + 1 + first > nr) {
+      error("not enough non-NA values");
+    }
+
+    /* Set leading NAs in output */
+    for(i = 0; i < first; i++) {
+      d_result[i] = NA_REAL;
+    }
+
+    /* Raw mean to start EMA */
+    double seed = 0.0;
+    for(i = first; i < first + i_n; i++) {
+      d_result[i] = NA_REAL;
+      seed += d_x[i] / i_n;
+    }
+    d_result[first + i_n - 1] = seed;
+
+    double lag = 1.0 / d_ratio;
+    double wt = fmod(lag, 1.0);
+    double w1 = 1.0 - wt;
+    double r1 = 1.0 - d_ratio;
+
+    /* Loop over non-NA input values */
+    for(i = first + i_n; i < nr; i++) {
+      int loc = (int)(i - lag);
+      double value = 2 * d_x[i] - (w1 * d_x[loc] + wt * d_x[loc+1]);
+      d_result[i] = d_ratio * value + r1 * d_result[i-1];
+    }
+
+    /* UNPROTECT R objects and return result */
+    UNPROTECT(P);
+    return(result);
+}

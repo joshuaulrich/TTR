@@ -358,37 +358,14 @@ function (x, n=10, ratio=NULL, ...) {
     stop("ncol(x) > 1. ZLEMA only supports univariate 'x'")
   }
   
-  # Count NAs, ensure they're only at beginning of data, then remove.
-  NAs <- sum( is.na(x) )
-  if( NAs > 0 ) {
-    if( any( is.na(x[-(1:NAs)]) ) )
-      stop("Series contains non-leading NAs")
-  }
-  x   <- na.omit(x)
+  # If ratio is specified, and n is not, set n to approx 'correct'
+  # value backed out from ratio
+  if(missing(n) && !missing(ratio))
+    n <- NULL
 
-  # Initialize ma vector
-  ma <- rep(1, NROW(x))
-  ma[n] <- mean(x[1:n])
+  # Call C routine
+  ma <- .Call("zlema", x, n, ratio, PACKAGE = "TTR")
 
-  # Determine decay ratio
-  if(is.null(ratio)) {
-    ratio <- 2/(n+1)
-  }
-
-  # Call Fortran routine
-  ma <- .Fortran( "zlema", ia = as.double(x),
-                           lia = as.integer(NROW(x)),
-                           n = as.integer(n),
-                           oa = as.double(ma),
-                           loa = as.integer(NROW(ma)),
-                           ratio = as.double(ratio),
-                           PACKAGE = "TTR",
-                           DUP = TRUE )$oa
-
-  # replace 1:(n-1) with NAs and prepend NAs from original data
-  ma[1:(n-1)] <- NA
-  ma <- c( rep( NA, NAs ), ma ) 
-  
   if(!is.null(dim(ma))) {
     colnames(ma) <- "ZLEMA"
   }

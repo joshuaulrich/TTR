@@ -214,37 +214,16 @@ function(x, n=10, non.unique="mean", cumulative=FALSE) {
   if( n < 1 || n > NROW(x) )
     stop(sprintf("n = %d is outside valid range: [1, %d]", n, NROW(x)))
 
-  # Count NAs, ensure they're only at beginning of data, then remove.
-  NAs <- sum( is.na(x) )
-  if( NAs > 0 ) {
-    if( any( is.na(x[-(1:NAs)]) ) ) stop("Series contains non-leading NAs")
-    if( NAs + n > NROW(x) ) stop("not enough non-NA values")
-  }
-  beg <- 1 + NAs
-  len <- NROW(x) - NAs
-
   if(NCOL(x) > 1) {
     stop("ncol(x) > 1. runMedian only supports univariate 'x'")
   }
 
   # Non-unique median
   non.unique <- match.arg(non.unique, c('mean','max','min'))
-  non.unique <- switch( non.unique, mean=0, max=1, min=-1 )
-  
-  # Call Fortran routine
-  result <- .Fortran( "runmedian",
-                   ia = as.double(x[beg:NROW(x)]),
-                   n = as.integer(n),
-                   oa = double(len),
-                   la = as.integer(len),
-                   ver = as.integer(non.unique),
-                   cu = as.integer(cumulative),
-                   PACKAGE = "TTR",
-                   DUP = TRUE )$oa
+  non.unique <- switch(non.unique, mean=0L, max=1L, min=-1L)
 
-  # Replace 1:(n-1) with NAs and prepend NAs from original data
-  is.na(result) <- c(1:(n-1))
-  result <- c( rep( NA, NAs ), result )
+  # Call C routine
+  result <- .Call("runmedian", x, n, non.unique, cumulative, PACKAGE = "TTR")
 
   # Convert back to original class
   reclass(result, x)

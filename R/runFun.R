@@ -72,40 +72,28 @@ function(x, n=10, cumulative=FALSE) {
     stop("ncol(x) > 1. runSum only supports univariate 'x'")
   }
 
-  # Count NAs, ensure they're only at beginning of data.
-  NAs <- sum(is.na(x))
-  if( NAs > 0 ) {
-    if( any( is.na(x[-(1:NAs)]) ) ) stop("Series contains non-leading NAs")
-    if( NAs + n > NROW(x) ) stop("not enough non-NA values")
-  }
-  beg <- 1 + NAs
-  len <- NROW(x) - NAs
-
-  # Initialize result vector 
-  result <- double(NROW(x))
-
   if(cumulative) {
-    result[beg:NROW(x)] <- cumsum(x[beg:NROW(x)])
-  } else {
-    result[(n+beg-1)] <- sum(x[beg:(n+beg-1)])
+    # Count NAs, ensure they're only at beginning of data.
+    NAs <- sum(is.na(x))
+    if( NAs > 0 ) {
+      if( any( is.na(x[-(1:NAs)]) ) ) stop("Series contains non-leading NAs")
+      if( NAs + n > NROW(x) ) stop("not enough non-NA values")
+    }
+    beg <- 1 + NAs
+    len <- NROW(x) - NAs
 
-    # Call Fortran routine
-    result <- .Fortran( "runsum",
-                     ia = as.double(x[beg:NROW(x)]),
-                     lia = as.integer(len),
-                     n = as.integer(n),
-                     oa = as.double(result[beg:NROW(x)]),
-                     loa = as.integer(len),
-                     PACKAGE = "TTR",
-                     DUP = TRUE )$oa
-    
-    # Prepend NAs from original data
-    result <- c( rep( NA, NAs ), result )
+    # Initialize result vector
+    result <- double(NROW(x))
+
+    result[beg:NROW(x)] <- cumsum(x[beg:NROW(x)])
+
+    # Replace 1:(n-1) with NAs
+    is.na(result) <- c(1:(n-1+NAs))
+  } else {
+    # Call C routine
+    result <- .Call("runsum", x, n, PACKAGE = "TTR")
   }
   
-  # Replace 1:(n-1) with NAs
-  is.na(result) <- c(1:(n-1+NAs))
-
   # Convert back to original class
   reclass(result, x)
 }
@@ -126,39 +114,28 @@ function(x, n=10, cumulative=FALSE) {
     stop("ncol(x) > 1. runMin only supports univariate 'x'")
   }
 
-  # Count NAs, ensure they're only at beginning of data, then remove.
-  NAs <- sum( is.na(x) )
-  if( NAs > 0 ) {
-    if( any( is.na(x[-(1:NAs)]) ) ) stop("Series contains non-leading NAs")
-    if( NAs + n > NROW(x) ) stop("not enough non-NA values")
-  }
-  beg <- 1 + NAs
-  len <- NROW(x) - NAs
-
-  # Initialize result vector 
-  result <- double(NROW(x))
-  
   if(cumulative) {
+    # Count NAs, ensure they're only at beginning of data, then remove.
+    NAs <- sum( is.na(x) )
+    if( NAs > 0 ) {
+      if( any( is.na(x[-(1:NAs)]) ) ) stop("Series contains non-leading NAs")
+      if( NAs + n > NROW(x) ) stop("not enough non-NA values")
+    }
+    beg <- 1 + NAs
+    len <- NROW(x) - NAs
+
+    # Initialize result vector
+    result <- double(NROW(x))
+
     result[beg:NROW(x)] <- cummin(x[beg:NROW(x)])
+
+    # Replace 1:(n-1) with NAs
+    is.na(result) <- c(1:(n-1+NAs))
   } else {
-    result[(n+beg-1)] <- min(x[beg:(n+beg-1)])
-
-    result <- .Fortran( "runmin",
-                     ia = as.double(x[beg:NROW(x)]),
-                     lia = as.integer(len),
-                     n = as.integer(n),
-                     oa = as.double(result[beg:NROW(x)]),
-                     loa = as.integer(len),
-                     PACKAGE = "TTR",
-                     DUP = TRUE )$oa
-
-    # Prepend NAs from original data
-    result <- c( rep( NA, NAs ), result )
+    # Call C routine
+    result <- .Call("runmin", x, n, PACKAGE = "TTR")
   }
   
-  # Replace 1:(n-1) with NAs
-  is.na(result) <- c(1:(n-1+NAs))
-
   # Convert back to original class
   reclass(result, x)
 }
@@ -175,40 +152,35 @@ function(x, n=10, cumulative=FALSE) {
   if( n < 1 || n > NROW(x) )
     stop(sprintf("n = %d is outside valid range: [1, %d]", n, NROW(x)))
 
-  # Count NAs, ensure they're only at beginning of data, then remove.
-  NAs <- sum( is.na(x) )
-  if( NAs > 0 ) {
-    if( any( is.na(x[-(1:NAs)]) ) ) stop("Series contains non-leading NAs")
-    if( NAs + n > NROW(x) ) stop("not enough non-NA values")
-  }
-  beg <- 1 + NAs
-  len <- NROW(x) - NAs
-
   if(NCOL(x) > 1) {
     stop("ncol(x) > 1. runMax only supports univariate 'x'")
   }
 
-  # Initialize result vector 
-  result <- double(NROW(x))
-
   if(cumulative) {
+    # Count NAs, ensure they're only at beginning of data, then remove.
+    NAs <- sum( is.na(x) )
+    if( NAs > 0 ) {
+      if( any( is.na(x[-(1:NAs)]) ) ) stop("Series contains non-leading NAs")
+      if( NAs + n > NROW(x) ) stop("not enough non-NA values")
+    }
+    beg <- 1 + NAs
+    len <- NROW(x) - NAs
+
+    if(NCOL(x) > 1) {
+      stop("ncol(x) > 1. runMax only supports univariate 'x'")
+    }
+
+    # Initialize result vector
+    result <- double(NROW(x))
+
     result[beg:NROW(x)] <- cummax(x[beg:NROW(x)])
+
+    # Replace 1:(n-1) with NAs and prepend NAs from original data
+    is.na(result) <- c(1:(n-1+NAs))
   } else {
-    result[(n+beg-1)] <- max(x[beg:(n+beg-1)])
-
-    result <- .Fortran( "runmax",
-                     ia = as.double(x[beg:NROW(x)]),
-                     lia = as.integer(len),
-                     n = as.integer(n),
-                     oa = as.double(result[beg:NROW(x)]),
-                     loa = as.integer(len),
-                     PACKAGE = "TTR",
-                     DUP = TRUE )$oa
+    # Call C routine
+    result <- .Call("runmax", x, n, PACKAGE = "TTR")
   }
-
-  # Replace 1:(n-1) with NAs and prepend NAs from original data
-  is.na(result) <- c(1:(n-1))
-  result <- c( rep( NA, NAs ), result )
 
   # Convert back to original class
   reclass(result, x)

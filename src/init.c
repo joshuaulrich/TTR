@@ -38,14 +38,14 @@ extern SEXP vma(SEXP, SEXP, SEXP);
 extern SEXP wilderSum(SEXP, SEXP);
 extern SEXP wma(SEXP, SEXP, SEXP);
 extern SEXP zlema(SEXP, SEXP, SEXP);
+extern SEXP runsum(SEXP, SEXP);
+extern SEXP runmin(SEXP, SEXP);
+extern SEXP runmax(SEXP, SEXP);
 
 /* Declare .Fortran calls */
 extern void F77_NAME(runcov)(double *, double *, double *, double *, int *, int *, int *, double *, int *);
 extern void F77_NAME(runmad)(double *, double *, int *, int *, double *, int *, int *, int *);
-extern void F77_NAME(runmax)(double *, int *, int *, double *, int *);
 extern void F77_NAME(runmedian)(double *, int *, double *, int *, int *, int *);
-extern void F77_NAME(runmin)(double *, int *, int *, double *, int *);
-extern void F77_NAME(runsum)(double *, int *, int *, double *, int *);
 
 static const R_CallMethodDef CallEntries[] = {
   CALLDEF(adjRatios,            3),
@@ -59,16 +59,16 @@ static const R_CallMethodDef CallEntries[] = {
   CALLDEF(wilderSum,            2),
   CALLDEF(wma,                  3),
   CALLDEF(zlema,                3),
+  CALLDEF(runsum,               2),
+  CALLDEF(runmin,               2),
+  CALLDEF(runmax,               2),
   {NULL, NULL, 0}
 };
 
 static const R_FortranMethodDef FortranEntries[] = {
   FORTRANDEF(runcov,     9),
   FORTRANDEF(runmad,     8),
-  FORTRANDEF(runmax,     5),
   FORTRANDEF(runmedian,  6),
-  FORTRANDEF(runmin,     5),
-  FORTRANDEF(runsum,     5),
   {NULL, NULL, 0}
 };
 

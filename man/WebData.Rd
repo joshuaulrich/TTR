@@ -92,9 +92,11 @@ to Yahoo Finance, which also included the following changes to the raw data:
 
 ### Note: you must have a working internet
 ### connection for these examples to work!
-ge <- getYahooData("GE", 19990404, 20050607, adjust = FALSE)
+if (interactive()) {
+  ge <- getYahooData("GE", 19990404, 20050607, adjust = FALSE)
 
-nyse.symbols <- stockSymbols("NYSE")
+  nyse.symbols <- stockSymbols("NYSE")
+}
 
 }
 \author{

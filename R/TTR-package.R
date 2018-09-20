@@ -72,12 +72,13 @@ NULL
 #'
 #' ### Note: you must have a working internet connection
 #' ### for the examples below to work!
+#' if (interactive()) {
+#'   # Fetch U.S. symbols from the internet
+#'   nyseSymbols <- stockSymbols("NYSE")
 #'
-#' # Fetch U.S. symbols from the internet
-#' nyseSymbols <- stockSymbols("NYSE")
-#'
-#' # Fetch Yahoo! Finance data from the internet
-#' ge <- getYahooData("GE", 19990404, 20050607, adjust = FALSE)
+#'   # Fetch Yahoo! Finance data from the internet
+#'   ge <- getYahooData("GE", 19990404, 20050607, adjust = FALSE)
+#' }
 #' 
 #'@rdname TTR
 #'@import xts zoo

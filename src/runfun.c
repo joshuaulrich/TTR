@@ -280,3 +280,118 @@ SEXP runmedian(SEXP _x, SEXP _n, SEXP _tiebreak, SEXP _cumulative)
   UNPROTECT(P);
   return _result;
 }
+
+static inline double
+ttr_mean(double *x, int n)
+{
+  double mean = x[0] / n;
+  int i;
+  for (i = 1; i < n; i++) {
+    mean += x[i] / n;
+  }
+  return mean;
+}
+
+SEXP runmad(SEXP _x, SEXP _center, SEXP _n, SEXP _type,
+    SEXP _tiebreak, SEXP _cumulative)
+{
+  int i, j, P = 0;
+
+  /* ensure 'x' and 'center' are double */
+  if (TYPEOF(_x) != REALSXP) {
+    _x = PROTECT(coerceVector(_x, REALSXP)); P++;
+  }
+  if (TYPEOF(_center) != REALSXP) {
+    _center = PROTECT(coerceVector(_center, REALSXP)); P++;
+  }
+  double *x = REAL(_x);
+  double *center = REAL(_center);
+  int n = asInteger(_n);
+  int type = asInteger(_type);
+  int tiebreak = asInteger(_tiebreak);
+  if (TYPEOF(_cumulative) != LGLSXP) {
+    _cumulative = PROTECT(coerceVector(_cumulative, LGLSXP)); P++;
+  }
+  int cumulative = asLogical(_cumulative);
+
+  /* Input object length */
+  int nr = nrows(_x);
+  if (nr != nrows(_center)) {
+    error("'x' and 'center' must have the same number of observations");
+  }
+
+  /* Initalize result R object */
+  SEXP _result = PROTECT(allocVector(REALSXP, nr)); P++;
+  double *result = REAL(_result);
+
+  /* check for non-leading NAs and get first non-NA location */
+  SEXP _first = PROTECT(xts_na_check(_x, ScalarLogical(TRUE))); P++;
+  int first = INTEGER(_first)[0];
+  if (n + first > nr) {
+    error("not enough non-NA values in 'x'");
+  }
+
+  /* Set leading NAs in output */
+  for (i = 0; i < first + n; i++) {
+    result[i] = NA_REAL;
+  }
+
+  tiebreaker tie_func = NULL;
+  if (tiebreak == 0) {
+    tie_func = tiebreaker_eq;
+  }
+  else if (tiebreak < 0) {
+    tie_func = tiebreaker_lt;
+  }
+  else if (tiebreak > 0) {
+    tie_func = tiebreaker_gt;
+  }
+
+  SEXP _window;
+  double *window;
+  int first_i = first + n - 1;
+
+  if (cumulative) {
+    _window = PROTECT(duplicate(_x)); P++;
+    window = REAL(_window);
+
+    if (type) {
+      for (i = first_i; i < nr; i++) {
+        for (j = 0; j < i; j++) {
+          window[j] = fabs(x[i-j] - center[i]);
+        }
+        result[i] = ttr_median(window, i, tie_func);
+      }
+    } else {
+      for (i = first_i; i < nr; i++) {
+        for (j = 0; j < i; j++) {
+          window[j] = fabs(x[i-j] - center[i]);
+        }
+        result[i] = ttr_mean(window, i);
+      }
+    }
+  } else {
+    _window = PROTECT(allocVector(REALSXP, n)); P++;
+    window = REAL(_window);
+
+    if (type) {
+      for (i = first_i; i < nr; i++) {
+        for (j = 0; j < n; j++) {
+          window[j] = fabs(x[i-j] - center[i]);
+        }
+        result[i] = ttr_median(window, n, tie_func);
+      }
+    } else {
+      for (i = first_i; i < nr; i++) {
+        for (j = 0; j < n; j++) {
+          window[j] = fabs(x[i-j] - center[i]);
+        }
+        result[i] = ttr_mean(window, n);
+      }
+    }
+  }
+
+  /* UNPROTECT R objects and return result */
+  UNPROTECT(P);
+  return _result;
+}

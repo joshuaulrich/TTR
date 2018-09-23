@@ -42,10 +42,10 @@ extern SEXP runsum(SEXP, SEXP);
 extern SEXP runmin(SEXP, SEXP);
 extern SEXP runmax(SEXP, SEXP);
 extern SEXP runmedian(SEXP, SEXP, SEXP, SEXP);
+extern SEXP runmad(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 
 /* Declare .Fortran calls */
 extern void F77_NAME(runcov)(double *, double *, double *, double *, int *, int *, int *, double *, int *);
-extern void F77_NAME(runmad)(double *, double *, int *, int *, double *, int *, int *, int *);
 
 static const R_CallMethodDef CallEntries[] = {
   CALLDEF(adjRatios,            3),
@@ -63,12 +63,12 @@ static const R_CallMethodDef CallEntries[] = {
   CALLDEF(runmin,               2),
   CALLDEF(runmax,               2),
   CALLDEF(runmedian,            4),
+  CALLDEF(runmad,               6),
   {NULL, NULL, 0}
 };
 
 static const R_FortranMethodDef FortranEntries[] = {
   FORTRANDEF(runcov,     9),
-  FORTRANDEF(runmad,     8),
   {NULL, NULL, 0}
 };
 

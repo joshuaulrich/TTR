@@ -350,19 +350,9 @@ function(x, n=10, center=NULL, stat="median",
     stop("ncol(x) > 1. runMAD only supports univariate 'x'")
   }
 
-  # Count NAs, ensure they're only at beginning of data, then remove.
-  NAs <- sum( is.na(x) )
-  if( NAs > 0 ) {
-    if( any( is.na(x[-(1:NAs)]) ) ) stop("Series contains non-leading NAs")
-    if( NAs + n > NROW(x) ) stop("not enough non-NA values")
-  }
-  beg <- 1 + NAs
-  len <- NROW(x) - NAs
-  
   if(is.null(center)) {
     center <- runMedian(x, n, cumulative=cumulative)
   }
-  center[1:(NAs+n-1)] <- 0
 
   # Mean or Median absolute deviation?
   median <- match.arg(stat, c("mean","median"))
@@ -371,25 +361,12 @@ function(x, n=10, center=NULL, stat="median",
   # Non-unique median
   non.unique <- match.arg(non.unique, c('mean','max','min'))
   non.unique <- switch( non.unique, mean=0, max=1, min=-1 )
-  
-  # Call Fortran routine
-  result <- .Fortran( "runMAD",
-                   rs = as.double(x[beg:NROW(x)]),      # raw series
-                   cs = as.double(center[beg:NROW(x)]), # center series
-                   la = as.integer(len),                # length of input arrays
-                   n = as.integer(n),                   # size of rolling window
-                   oa = double(len),                    # output array
-                   stat = as.integer(median),           # center statistic
-                   ver = as.integer(non.unique),        # median type
-                   cu = as.integer(cumulative),         # from inception
-                   PACKAGE = "TTR",
-                   DUP = TRUE )$oa
+
+  # Call C routine
+  result <- .Call("runmad", x, center, n, median, non.unique, cumulative,
+                  PACKAGE = "TTR")
 
   if( median ) result <- result * constant
-
-  # Replace 1:(n-1) with NAs and prepend NAs from original data
-  is.na(result) <- c(1:(n-1))
-  result <- c( rep( NA, NAs ), result )
 
   # Convert back to original class
   reclass(result, x)

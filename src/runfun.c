@@ -198,6 +198,17 @@ tiebreaker_eq(const double a, const double b)
   return (a + b) / 2.0;
 }
 
+static inline double
+ttr_median(double *x, int n, tiebreaker tie_func)
+{
+  int flag = n-2*(n/2);
+  int mid = n/2-1;
+  R_qsort(x, 1, n);
+
+  double median = (flag) ? x[mid+1] : tie_func(x[mid] , x[mid+1]);
+  return median;
+}
+
 SEXP runmedian(SEXP _x, SEXP _n, SEXP _tiebreak, SEXP _cumulative)
 {
   int i, P = 0;
@@ -246,39 +257,22 @@ SEXP runmedian(SEXP _x, SEXP _n, SEXP _tiebreak, SEXP _cumulative)
 
   SEXP _window;
   double *window;
-  double lmed;
-  int mid, flag;
   int first_i = first + n - 1;
 
   if (cumulative) {
     _window = PROTECT(duplicate(_x)); P++;
     window = REAL(_window);
 
-    /* Loop over non-NA input values */
     for (i = first_i; i < nr; i++) {
-      R_qsort(window, 1, i);
-      flag = i-2*(i/2);
-      mid = i/2;
-      if (flag == 0) {
-        lmed = tie_func(window[mid] , window[mid+1]);
-      }
-      result[i] = lmed;
+      result[i] = ttr_median(window, i, tie_func);
     }
   } else {
     _window = PROTECT(allocVector(REALSXP, n)); P++;
     window = REAL(_window);
-    flag = n-2*(n/2);
-    mid = n/2-1;
+
     for (i = first_i; i < nr; i++) {
       memcpy(window, &x[i-n+1], n * sizeof(double));
-      R_qsort(window, 1, n);
-
-      if (flag) {
-        lmed = window[mid+1];
-      } else {
-        lmed = tie_func(window[mid] , window[mid+1]);
-      }
-      result[i] = lmed;
+      result[i] = ttr_median(window, n, tie_func);
     }
   }
 

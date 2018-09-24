@@ -279,7 +279,7 @@ SEXP runmedian(SEXP _x, SEXP _n, SEXP _tiebreak, SEXP _cumulative)
 }
 
 static inline double
-ttr_mean(double *x, int n)
+ttr_mean(const double *x, const int n)
 {
   double mean = x[0] / n;
   int i;

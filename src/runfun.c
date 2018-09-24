@@ -34,7 +34,7 @@ SEXP runsum(SEXP _x, SEXP _n)
   /* Input object length */
   int nr = nrows(_x);
 
-  /* Initalize result R object */
+  /* Initialize result R object */
   SEXP _result = PROTECT(allocVector(REALSXP, nr)); P++;
   double *result = REAL(_result);
 
@@ -82,7 +82,7 @@ SEXP runmin(SEXP _x, SEXP _n)
   /* Input object length */
   int nr = nrows(_x);
 
-  /* Initalize result R object */
+  /* Initialize result R object */
   SEXP _result = PROTECT(allocVector(REALSXP, nr)); P++;
   double *result = REAL(_result);
 
@@ -138,7 +138,7 @@ SEXP runmax(SEXP _x, SEXP _n)
   /* Input object length */
   int nr = nrows(_x);
 
-  /* Initalize result R object */
+  /* Initialize result R object */
   SEXP _result = PROTECT(allocVector(REALSXP, nr)); P++;
   double *result = REAL(_result);
 
@@ -228,7 +228,7 @@ SEXP runmedian(SEXP _x, SEXP _n, SEXP _tiebreak, SEXP _cumulative)
   /* Input object length */
   int nr = nrows(_x);
 
-  /* Initalize result R object */
+  /* Initialize result R object */
   SEXP _result = PROTECT(allocVector(REALSXP, nr)); P++;
   double *result = REAL(_result);
 
@@ -320,7 +320,7 @@ SEXP runmad(SEXP _x, SEXP _center, SEXP _n, SEXP _type,
     error("'x' and 'center' must have the same number of observations");
   }
 
-  /* Initalize result R object */
+  /* Initialize result R object */
   SEXP _result = PROTECT(allocVector(REALSXP, nr)); P++;
   double *result = REAL(_result);
 
@@ -423,7 +423,7 @@ SEXP runcov(SEXP _x, SEXP _y, SEXP _n, SEXP _sample, SEXP _cumulative)
     error("'x' and 'y' must have the same number of observations");
   }
 
-  /* Initalize result R object */
+  /* Initialize result R object */
   SEXP _result = PROTECT(allocVector(REALSXP, nr)); P++;
   double *result = REAL(_result);
 

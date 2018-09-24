@@ -220,9 +220,6 @@ SEXP runmedian(SEXP _x, SEXP _n, SEXP _tiebreak, SEXP _cumulative)
   double *x = REAL(_x);
   int n = asInteger(_n);
   int tiebreak = asInteger(_tiebreak);
-  if (TYPEOF(_cumulative) != LGLSXP) {
-    _cumulative = PROTECT(coerceVector(_cumulative, LGLSXP)); P++;
-  }
   int cumulative = asLogical(_cumulative);
 
   /* Input object length */
@@ -309,9 +306,6 @@ SEXP runmad(SEXP _x, SEXP _center, SEXP _n, SEXP _type,
   int n = asInteger(_n);
   int type = asInteger(_type);
   int tiebreak = asInteger(_tiebreak);
-  if (TYPEOF(_cumulative) != LGLSXP) {
-    _cumulative = PROTECT(coerceVector(_cumulative, LGLSXP)); P++;
-  }
   int cumulative = asLogical(_cumulative);
 
   /* Input object length */
@@ -411,9 +405,6 @@ SEXP runcov(SEXP _x, SEXP _y, SEXP _n, SEXP _sample, SEXP _cumulative)
   double *y = REAL(_y);
   int n = asInteger(_n);
   int samp = asInteger(_sample);
-  if (TYPEOF(_cumulative) != LGLSXP) {
-    _cumulative = PROTECT(coerceVector(_cumulative, LGLSXP)); P++;
-  }
   int cumulative = asLogical(_cumulative);
   int sample = asLogical(_sample);
 

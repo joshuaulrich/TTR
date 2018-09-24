@@ -254,39 +254,8 @@ function(x, y, n=10, use="all.obs", sample=TRUE, cumulative=FALSE) {
 
   # "all.obs", "complete.obs", "pairwise.complete.obs"
 
-  # Count NAs, ensure they're only at beginning of data, then remove.
-  xNAs <- sum( is.na(x) )
-  yNAs <- sum( is.na(y) )
-  NAs <- max( xNAs, yNAs )
-  if( NAs > 0 ) {
-    if( any( is.na(xy[-(1:NAs),]) ) ) stop("Series contain non-leading NAs")
-    if( NAs + n > NROW(x) ) stop("not enough non-NA values")
-  }
-  beg <- 1 + NAs
-  len <- NROW(xy) - NAs
-  
-  xCenter <- runMean(x, n, cumulative)
-  xCenter[1:(NAs+n-1)] <- 0
-  yCenter <- runMean(y, n, cumulative)
-  yCenter[1:(NAs+n-1)] <- 0
-
-  # Call Fortran routine
-  result <- .Fortran( "runCov",
-                   rs1 = as.double(x[beg:NROW(xy)]),
-                   avg1 = as.double(xCenter[beg:NROW(xy)]),
-                   rs2 = as.double(y[beg:NROW(xy)]),
-                   avg2 = as.double(yCenter[beg:NROW(xy)]),
-                   la = as.integer(len),
-                   n = as.integer(n),
-                   samp = as.integer(sample),
-                   oa = double(len),
-                   cu = as.integer(cumulative),
-                   PACKAGE = "TTR",
-                   DUP = TRUE )$oa
-
-  # Replace 1:(n-1) with NAs and prepend NAs from original data
-  is.na(result) <- c(1:(n-1))
-  result <- c( rep( NA, NAs ), result )
+  # Call C routine
+  result <- .Call("runcov", x, y, n, sample, cumulative, PACKAGE = "TTR")
 
   # Convert back to original class
   # Should the attributes of *both* x and y be retained?

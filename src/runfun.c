@@ -395,3 +395,96 @@ SEXP runmad(SEXP _x, SEXP _center, SEXP _n, SEXP _type,
   UNPROTECT(P);
   return _result;
 }
+
+SEXP runcov(SEXP _x, SEXP _y, SEXP _n, SEXP _sample, SEXP _cumulative)
+{
+  int i, j, P = 0;
+
+  /* ensure 'x' and 'y' are double */
+  if (TYPEOF(_x) != REALSXP) {
+    _x = PROTECT(coerceVector(_x, REALSXP)); P++;
+  }
+  if (TYPEOF(_y) != REALSXP) {
+    _y = PROTECT(coerceVector(_y, REALSXP)); P++;
+  }
+  double *x = REAL(_x);
+  double *y = REAL(_y);
+  int n = asInteger(_n);
+  int samp = asInteger(_sample);
+  if (TYPEOF(_cumulative) != LGLSXP) {
+    _cumulative = PROTECT(coerceVector(_cumulative, LGLSXP)); P++;
+  }
+  int cumulative = asLogical(_cumulative);
+  int sample = asLogical(_sample);
+
+  /* Input object length */
+  int nr = nrows(_x);
+  if (nr != nrows(_y)) {
+    error("'x' and 'y' must have the same number of observations");
+  }
+
+  /* Initalize result R object */
+  SEXP _result = PROTECT(allocVector(REALSXP, nr)); P++;
+  double *result = REAL(_result);
+
+  /* check for non-leading NAs and get first non-NA location */
+  SEXP _first_x = PROTECT(xts_na_check(_x, ScalarLogical(TRUE))); P++;
+  int first_x = INTEGER(_first_x)[0];
+  if (n + first_x > nr) {
+    error("not enough non-NA values in 'x'");
+  }
+  SEXP _first_y = PROTECT(xts_na_check(_y, ScalarLogical(TRUE))); P++;
+  int first_y = INTEGER(_first_y)[0];
+  if (n + first_y > nr) {
+    error("not enough non-NA values in 'y'");
+  }
+  int first = (first_x > first_y) ? first_x : first_y;
+
+  /* Set leading NAs in output */
+  for (i = 0; i < first + n; i++) {
+    result[i] = NA_REAL;
+  }
+
+  SEXP _window;
+  double *window, mu_x, mu_y;
+  int first_i = first + n - 1;
+  double denom = sample ? (n-1) : n;
+
+  if (cumulative) {
+    _window = PROTECT(duplicate(_x)); P++;
+    window = REAL(_window);
+
+    for (i = first_i; i < nr; i++) {
+      mu_x = ttr_mean(x, i);
+      mu_y = ttr_mean(y, i);
+
+      result[i] = 0.0;
+      for (j = 0; j < i; j++) {
+        result[j] += (x[i-j] - mu_x) * (y[i-j] - mu_y);
+      }
+      result[i] /= denom;
+    }
+  } else {
+    _window = PROTECT(allocVector(REALSXP, n)); P++;
+    window = REAL(_window);
+
+    size_t window_size = n * sizeof(double);
+
+    for (i = first_i; i < nr; i++) {
+      memcpy(window, &x[i-n+1], window_size);
+      mu_x = ttr_mean(window, n);
+      memcpy(window, &y[i-n+1], window_size);
+      mu_y = ttr_mean(window, n);
+
+      result[i] = 0.0;
+      for (j = 0; j < n; j++) {
+        result[i] += (x[i-j] - mu_x) * (y[i-j] - mu_y);
+      }
+      result[i] /= denom;
+    }
+  }
+
+  /* UNPROTECT R objects and return result */
+  UNPROTECT(P);
+  return _result;
+}

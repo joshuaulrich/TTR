@@ -24,7 +24,6 @@
 #include <R_ext/Rdynload.h>
 
 #define CALLDEF(name, n)  {#name, (DL_FUNC) &name, n}
-#define FORTRANDEF(name, n)  {#name, (DL_FUNC) &F77_NAME(name), n}
 
 /* Declare .Call calls */
 extern SEXP adjRatios(SEXP, SEXP, SEXP);
@@ -43,9 +42,7 @@ extern SEXP runmin(SEXP, SEXP);
 extern SEXP runmax(SEXP, SEXP);
 extern SEXP runmedian(SEXP, SEXP, SEXP, SEXP);
 extern SEXP runmad(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
-
-/* Declare .Fortran calls */
-extern void F77_NAME(runcov)(double *, double *, double *, double *, int *, int *, int *, double *, int *);
+extern SEXP runcov(SEXP, SEXP, SEXP, SEXP, SEXP);
 
 static const R_CallMethodDef CallEntries[] = {
   CALLDEF(adjRatios,            3),
@@ -64,18 +61,14 @@ static const R_CallMethodDef CallEntries[] = {
   CALLDEF(runmax,               2),
   CALLDEF(runmedian,            4),
   CALLDEF(runmad,               6),
-  {NULL, NULL, 0}
-};
-
-static const R_FortranMethodDef FortranEntries[] = {
-  FORTRANDEF(runcov,     9),
+  CALLDEF(runcov,               5),
   {NULL, NULL, 0}
 };
 
 /* Restrict .Call etc to use only registered symbols */
 void R_init_TTR(DllInfo *dll)
 {
-  R_registerRoutines(dll, NULL, CallEntries, FortranEntries, NULL);
+  R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
   R_useDynamicSymbols(dll, FALSE);
   //R_forceSymbols(dll, TRUE);  /* only use R symbols (not strings) */
 

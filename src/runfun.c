@@ -404,7 +404,6 @@ SEXP runcov(SEXP _x, SEXP _y, SEXP _n, SEXP _sample, SEXP _cumulative)
   double *x = REAL(_x);
   double *y = REAL(_y);
   int n = asInteger(_n);
-  int samp = asInteger(_sample);
   int cumulative = asLogical(_cumulative);
   int sample = asLogical(_sample);
 

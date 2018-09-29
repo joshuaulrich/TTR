@@ -261,7 +261,7 @@ SEXP runmedian(SEXP _x, SEXP _n, SEXP _tiebreak, SEXP _cumulative)
     window = REAL(_window);
 
     for (i = first_i; i < nr; i++) {
-      result[i] = ttr_median(window, i, tie_func);
+      result[i] = ttr_median(window, i+1, tie_func);
     }
   } else {
     _window = PROTECT(allocVector(REALSXP, n)); P++;
@@ -351,17 +351,17 @@ SEXP runmad(SEXP _x, SEXP _center, SEXP _n, SEXP _type,
 
     if (type) {
       for (i = first_i; i < nr; i++) {
-        for (j = 0; j < i; j++) {
+        for (j = 0; j <= i; j++) {
           window[j] = fabs(x[i-j] - center[i]);
         }
-        result[i] = ttr_median(window, i, tie_func);
+        result[i] = ttr_median(window, i+1, tie_func);
       }
     } else {
       for (i = first_i; i < nr; i++) {
-        for (j = 0; j < i; j++) {
+        for (j = 0; j <= i; j++) {
           window[j] = fabs(x[i-j] - center[i]);
         }
-        result[i] = ttr_mean(window, i);
+        result[i] = ttr_mean(window, i+1);
       }
     }
   } else {
@@ -442,18 +442,15 @@ SEXP runcov(SEXP _x, SEXP _y, SEXP _n, SEXP _sample, SEXP _cumulative)
   double denom = sample ? (n-1) : n;
 
   if (cumulative) {
-    _window = PROTECT(duplicate(_x)); P++;
-    window = REAL(_window);
-
     for (i = first_i; i < nr; i++) {
-      mu_x = ttr_mean(x, i);
-      mu_y = ttr_mean(y, i);
+      mu_x = ttr_mean(x, i+1);
+      mu_y = ttr_mean(y, i+1);
 
       result[i] = 0.0;
-      for (j = 0; j < i; j++) {
-        result[j] += (x[i-j] - mu_x) * (y[i-j] - mu_y);
+      for (j = 0; j <= i; j++) {
+        result[i] += (x[i-j] - mu_x) * (y[i-j] - mu_y);
       }
-      result[i] /= denom;
+      result[i] /= sample ? i : (i+1);
     }
   } else {
     _window = PROTECT(allocVector(REALSXP, n)); P++;

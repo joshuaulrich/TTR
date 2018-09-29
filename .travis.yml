@@ -9,10 +9,9 @@ matrix:
       dist: trusty
       sudo: required
 
-# Uncomment once all Fortran code is replaced with C
-#    - name: "macOS tests"
-#      os: osx
-#      osx_image: xcode8
+    - name: "macOS tests"
+      os: osx
+      osx_image: xcode8
 
     - name: "Linux tests conditional Suggests"
       os: linux

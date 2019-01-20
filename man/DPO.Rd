@@ -38,6 +38,13 @@ average. The calculation shifts the results \code{shift} periods, so the last
 \code{shift} periods will be zero.\cr
 As stated above, the DPO can be used on any univariate series, not just price.
 }
+\section{Warning}{
+ The detrended price oscillator removes the trend in the
+series by centering the moving average. Centering the moving average causes it
+to include future data. Therefore, even though this indicator looks like a
+classic oscillator, it should not be used for trading rule signals.
+}
+
 \examples{
 
 data(ttrc)
@@ -48,8 +55,6 @@ volumeDPO <- DPO(ttrc[,"Volume"])
 \references{
 The following site(s) were used to code/document this
 indicator:\cr
-\url{http://www.fmlabs.com/reference/DPO.htm}\cr
-\url{https://www.metastock.com/Customer/Resources/TAAZ/?p=48}\cr
 \url{http://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators:detrended_price_osci}\cr
 }
 \seealso{

@@ -53,6 +53,12 @@ test.runMin <- function() {
   checkException( runMin(input$all$Close, n = NROW(input$all) + 1) )
   checkEqualsNumeric( tail(runMin(input$all$Close,250),1), min(input$all$Close) )
 }
+test.runMin.cumulative <- function() {
+  ttr <- runMin(input$all$Close, 1, TRUE)
+  base <- cummin(input$all$Close)
+  is.na(base) <- 1
+  checkEqualsNumeric(base, ttr)
+}
 
 # Max
 test.runMax <- function() {
@@ -65,6 +71,12 @@ test.runMax <- function() {
   checkException( runMax(input$all$Close, n = -1) )
   checkException( runMax(input$all$Close, n = NROW(input$all) + 1) )
   checkEqualsNumeric( tail(runMax(input$all$Close,250),1), max(input$all$Close) )
+}
+test.runMax.cumulative <- function() {
+  ttr <- runMax(input$all$Close, 1, TRUE)
+  base <- cummax(input$all$Close)
+  is.na(base) <- 1
+  checkEqualsNumeric(base, ttr)
 }
 
 # Mean
@@ -79,6 +91,13 @@ test.runMean <- function() {
   checkException( runMean(input$all$Close, n = NROW(input$all) + 1) )
   checkEqualsNumeric( tail(runMean(input$all$Close,250),1), mean(input$all$Close) )
 }
+test.runMean.cumulative <- function() {
+  ttr <- runMean(input$all$Close, 5, TRUE)
+  base <- cumsum(input$all$Close) / seq_along(input$all$Close)
+  is.na(base) <- 1:4
+  checkEqualsNumeric(base, ttr)
+}
+
 
 # Median
 test.runMedian <- function() {
@@ -92,6 +111,26 @@ test.runMedian <- function() {
   checkException( runMedian(input$all$Close, n = NROW(input$all) + 1) )
   checkEqualsNumeric( tail(runMedian(input$all$Close,250),1), median(input$all$Close) )
 }
+test.runMedian.cumulative <- function() {
+  cummedian <- compiler::cmpfun(
+    function(x) {
+      med <- x * NA_real_
+      for (i in seq_along(x)) {
+        med[i] <- median(x[1:i])
+      }
+      med
+    }
+  )
+  base <- cummedian(input$all$Close)
+  is.na(base) <- 1:4
+  ttr <- runMedian(input$all$Close, 5, "mean", TRUE)
+  checkEqualsNumeric(base, ttr)
+
+  is.na(base) <- 1:5
+  ttr <- runMedian(input$all$Close, 6, "mean", TRUE)
+  checkEqualsNumeric(base, ttr)
+}
+
 
 # Covariance
 test.runCov <- function() {
@@ -106,6 +145,28 @@ test.runCov <- function() {
   checkException( runCov(input$all$Close, n = NROW(input$all) + 1) )
   checkEqualsNumeric( tail(runCov(input$all$High, input$all$Low, 250),1), cov(input$all$High, input$all$Low) )
 }
+test.runCov.cumulative <- function() {
+  cumcov <- compiler::cmpfun(
+    function(x) {
+      cov <- x * NA_real_
+      for (i in seq_along(x)) {
+        y <- x[1:i]
+        cov[i] <- cov(y, y)
+      }
+      cov
+    }
+  )
+  x <- input$all$Close
+  base <- cumcov(x)
+  is.na(base) <- 1:4
+  ttr <- runCov(x, x, 5, "all.obs", TRUE, TRUE)
+  checkEqualsNumeric(base, ttr)
+
+  is.na(base) <- 1:5
+  ttr <- runCov(x, x, 6, "all.obs", TRUE, TRUE)
+  checkEqualsNumeric(base, ttr)
+}
+
 
 # Correlation
 test.runCor <- function() {
@@ -158,6 +219,28 @@ test.runMAD <- function() {
   checkException( runMAD(input$all$Close, n = -1) )
   checkException( runMAD(input$all$Close, n = NROW(input$all) + 1) )
   checkEqualsNumeric( tail(runMAD(input$all$Close,250),1), mad(input$all$Close) )
+}
+
+test.runMAD.cumulative <- function() {
+  cummad <- compiler::cmpfun(
+    function(x) {
+      mad <- x * NA_real_
+      for (i in seq_along(x)) {
+        y <- x[1:i]
+        mad[i] <- mad(y)
+      }
+      mad
+    }
+  )
+  x <- input$all$Close
+  base <- cummad(x)
+  is.na(base) <- 1:4
+  ttr <- runMAD(x, 5, cumulative = TRUE)
+  checkEqualsNumeric(base, ttr)
+
+  is.na(base) <- 1:5
+  ttr <- runMAD(x, 6, cumulative = TRUE)
+  checkEqualsNumeric(base, ttr)
 }
 
 # Percent Rank

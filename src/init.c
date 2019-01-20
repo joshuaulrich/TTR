@@ -24,7 +24,6 @@
 #include <R_ext/Rdynload.h>
 
 #define CALLDEF(name, n)  {#name, (DL_FUNC) &name, n}
-#define FORTRANDEF(name, n)  {#name, (DL_FUNC) &F77_NAME(name), n}
 
 /* Declare .Call calls */
 extern SEXP adjRatios(SEXP, SEXP, SEXP);
@@ -36,16 +35,14 @@ extern SEXP ttr_rollPercentRank(SEXP, SEXP, SEXP, SEXP);
 extern SEXP ttr_zigzag(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP vma(SEXP, SEXP, SEXP);
 extern SEXP wilderSum(SEXP, SEXP);
-
-/* Declare .Fortran calls */
-extern void F77_NAME(runcov)(double *, double *, double *, double *, int *, int *, int *, double *, int *);
-extern void F77_NAME(runmad)(double *, double *, int *, int *, double *, int *, int *, int *);
-extern void F77_NAME(runmax)(double *, int *, int *, double *, int *);
-extern void F77_NAME(runmedian)(double *, int *, double *, int *, int *, int *);
-extern void F77_NAME(runmin)(double *, int *, int *, double *, int *);
-extern void F77_NAME(runsum)(double *, int *, int *, double *, int *);
-extern void F77_NAME(wma)(double *, int *, double *, int *, double *, int *);
-extern void F77_NAME(zlema)(double *, int *, int *, double *, int *, double *);
+extern SEXP wma(SEXP, SEXP, SEXP);
+extern SEXP zlema(SEXP, SEXP, SEXP);
+extern SEXP runsum(SEXP, SEXP);
+extern SEXP runmin(SEXP, SEXP);
+extern SEXP runmax(SEXP, SEXP);
+extern SEXP runmedian(SEXP, SEXP, SEXP, SEXP);
+extern SEXP runmad(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP runcov(SEXP, SEXP, SEXP, SEXP, SEXP);
 
 static const R_CallMethodDef CallEntries[] = {
   CALLDEF(adjRatios,            3),
@@ -57,25 +54,21 @@ static const R_CallMethodDef CallEntries[] = {
   CALLDEF(ttr_zigzag,           6),
   CALLDEF(vma,                  3),
   CALLDEF(wilderSum,            2),
-  {NULL, NULL, 0}
-};
-
-static const R_FortranMethodDef FortranEntries[] = {
-  FORTRANDEF(runcov,     9),
-  FORTRANDEF(runmad,     8),
-  FORTRANDEF(runmax,     5),
-  FORTRANDEF(runmedian,  6),
-  FORTRANDEF(runmin,     5),
-  FORTRANDEF(runsum,     5),
-  FORTRANDEF(wma,        6),
-  FORTRANDEF(zlema,      6),
+  CALLDEF(wma,                  3),
+  CALLDEF(zlema,                3),
+  CALLDEF(runsum,               2),
+  CALLDEF(runmin,               2),
+  CALLDEF(runmax,               2),
+  CALLDEF(runmedian,            4),
+  CALLDEF(runmad,               6),
+  CALLDEF(runcov,               5),
   {NULL, NULL, 0}
 };
 
 /* Restrict .Call etc to use only registered symbols */
 void R_init_TTR(DllInfo *dll)
 {
-  R_registerRoutines(dll, NULL, CallEntries, FortranEntries, NULL);
+  R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
   R_useDynamicSymbols(dll, FALSE);
   //R_forceSymbols(dll, TRUE);  /* only use R symbols (not strings) */
 

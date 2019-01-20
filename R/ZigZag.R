@@ -40,6 +40,9 @@
 #'@note If High-Low prices are given, the function calculates the max/min using
 #'the high/low prices.  Otherwise the function calculates the max/min of the
 #'single series.
+#'@section Warning: The last value of the ZigZag indicator is unstable (i.e.
+#'unknown) until the turning point actually occurs. Therefore this indicator
+#'isn't well-suited for use for systematic trading strategies.
 #'@author Joshua Ulrich
 #'@references The following site(s) were used to code/document this
 #'indicator:\cr

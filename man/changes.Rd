@@ -4,7 +4,6 @@
 \alias{ROC}
 \alias{changes}
 \alias{momentum}
-\alias{momentum}
 \title{Rate of Change / Momentum}
 \usage{
 ROC(x, n = 1, type = c("continuous", "discrete"), na.pad = TRUE)

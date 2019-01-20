@@ -3,7 +3,6 @@
 \name{lags}
 \alias{lags}
 \alias{growth}
-\alias{growth}
 \alias{naCheck}
 \title{Miscellaneous Tools}
 \usage{

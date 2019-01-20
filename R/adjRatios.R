@@ -42,7 +42,6 @@
 #'
 #'@author Joshua Ulrich
 #'@keywords ts
-#'@export
 'adjRatios' <-
 function(splits, dividends, close) {
 

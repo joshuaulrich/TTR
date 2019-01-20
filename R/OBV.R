@@ -45,7 +45,6 @@
 #' data(ttrc)
 #' obv <- OBV(ttrc[,"Close"], ttrc[,"Volume"])
 #'
-#'@export
 "OBV" <-
 function(price, volume) {
 

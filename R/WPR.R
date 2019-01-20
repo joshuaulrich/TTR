@@ -56,7 +56,6 @@
 #' lines(tail(stochWPR, 100), col="blue")
 #' lines(tail(1-stochWPR, 100), col="red", lty="dashed")
 #'
-#'@export
 "WPR" <-
 function(HLC, n=14) {
 

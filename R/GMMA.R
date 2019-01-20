@@ -52,7 +52,6 @@
 #' data(ttrc)
 #' gmma <- GMMA(ttrc[,"Close"])
 #'
-#'@export
 "GMMA" <-
 function(x, short=c(3,5,8,10,12,15), long=c(30,35,40,45,50,60), maType) {
 

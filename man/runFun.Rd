@@ -13,16 +13,6 @@
 \alias{runSD}
 \alias{runMAD}
 \alias{wilderSum}
-\alias{runMin}
-\alias{runMax}
-\alias{runMean}
-\alias{runMedian}
-\alias{runCov}
-\alias{runCor}
-\alias{runVar}
-\alias{runSD}
-\alias{runMAD}
-\alias{wilderSum}
 \title{Analysis of Running/Rolling/Moving Windows}
 \usage{
 runSum(x, n = 10, cumulative = FALSE)

@@ -65,7 +65,6 @@
 #'   pbands.close <- PBands( ttrc[,"Close"] )
 #'
 #'@rdname priceBands
-#'@export
 PBands <- function(prices, n=20, maType="SMA", sd=2, ..., fastn=2,
   centered=FALSE, lavg=FALSE ) {
 

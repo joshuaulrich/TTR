@@ -125,7 +125,6 @@
 #'
 #' stochRSI <- stoch( RSI(ttrc[,"Close"]) )
 #'@rdname stochastics
-#'@export
 "stoch" <-
 function(HLC, nFastK=14, nFastD=3, nSlowD=3, maType, bounded=TRUE, smooth=1, ...) {
 
@@ -220,7 +219,6 @@ function(HLC, nFastK=14, nFastD=3, nSlowD=3, maType, bounded=TRUE, smooth=1, ...
 #-------------------------------------------------------------------------#
 
 #'@rdname stochastics
-#'@export
 "SMI" <-
 function(HLC, n=13, nFast=2, nSlow=25, nSig=9, maType, bounded=TRUE, ...) {
 

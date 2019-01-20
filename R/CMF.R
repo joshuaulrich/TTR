@@ -49,7 +49,6 @@
 #' data(ttrc)
 #' cmf <- CMF(ttrc[,c("High","Low","Close")], ttrc[,"Volume"])
 #'
-#'@export
 "CMF" <-
 function(HLC, volume, n=20) {
 

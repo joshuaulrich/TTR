@@ -136,7 +136,6 @@
 #' vParkinson <- volatility(ohlc, calc="parkinson")
 #' vRS <- volatility(ohlc, calc="rogers")
 #'
-#'@export
 "volatility" <-
 function(OHLC, n=10, calc="close", N=260, mean0=FALSE, ...) {
 

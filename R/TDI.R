@@ -60,7 +60,6 @@
 #' data(ttrc)
 #' tdi <- TDI(ttrc[,"Close"], n=30)
 #'
-#'@export
 "TDI" <-
 function(price, n=20, multiple=2) {
 

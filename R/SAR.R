@@ -50,7 +50,6 @@
 #' data(ttrc)
 #' sar <- SAR(ttrc[,c("High","Low")])
 #'
-#'@export
 "SAR" <-
 function(HL, accel=c(.02,.2)) {
 

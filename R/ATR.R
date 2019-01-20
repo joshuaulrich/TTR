@@ -60,7 +60,6 @@
 #' data(ttrc)
 #' atr <- ATR(ttrc[,c("High","Low","Close")], n=14)
 #'
-#'@export
 "ATR" <-
 function(HLC, n=14, maType, ...) {
 

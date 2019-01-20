@@ -60,7 +60,6 @@
 #' data(ttrc)
 #' dc <- DonchianChannel( ttrc[,c("High","Low")] )
 #'
-#'@export
 'DonchianChannel' <-
 function(HL, n=10, include.lag=FALSE) {
 

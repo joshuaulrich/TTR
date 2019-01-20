@@ -58,7 +58,6 @@
 #' data(ttrc)
 #' zz <- ZigZag( ttrc[,c("High", "Low")], change=20 )
 #'
-#'@export
 "ZigZag" <- 
 function( HL, change=10, percent=TRUE, retrace=FALSE, lastExtreme=TRUE ) {
 

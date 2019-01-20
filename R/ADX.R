@@ -64,7 +64,6 @@
 #' data(ttrc)
 #' dmi.adx <- ADX(ttrc[,c("High","Low","Close")])
 #'
-#'@export
 "ADX" <-
 function(HLC, n=14, maType, ...) {
 

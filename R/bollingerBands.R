@@ -72,7 +72,6 @@
 #' bbands.HLC <- BBands( ttrc[,c("High","Low","Close")] )
 #' bbands.close <- BBands( ttrc[,"Close"] )
 #'@rdname bollingerBands
-#'@export
 "BBands" <-
 function(HLC, n=20, maType, sd=2, ...) {
 

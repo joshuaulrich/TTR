@@ -57,7 +57,6 @@
 #' priceDPO <- DPO(ttrc[,"Close"])
 #' volumeDPO <- DPO(ttrc[,"Volume"])
 #'
-#'@export
 "DPO" <-
 function(x, n=10, maType, shift=n/2+1, percent=FALSE, ...) {
 

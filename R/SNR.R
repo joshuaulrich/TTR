@@ -44,7 +44,6 @@
 #'@references Skeggs, James and Hill, Alex (2015). Back in Black Part 2: The 
 #'Opportunity Set for Trend Following.  
 #' 
-#'@export
 SNR <- function(HLC, n, ...) {
   HLC <- try.xts(HLC, error=as.matrix)
 

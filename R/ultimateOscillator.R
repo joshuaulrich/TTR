@@ -38,7 +38,6 @@
 #'data(ttrc)
 #'ult.osc <- ultimateOscillator(ttrc[,c("High","Low","Close")])
 #'
-#'@export
 ultimateOscillator <-
 function(HLC, n=c(7,14,28), wts=c(4,2,1)) {
 

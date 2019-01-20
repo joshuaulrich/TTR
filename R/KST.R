@@ -69,7 +69,6 @@
 #' kst4MA <- KST(ttrc[,"Close"],
 #'   maType=list(list(SMA),list(EMA),list(DEMA),list(WMA)))
 #'
-#'@export
 "KST" <-
 function(price, n=c(10,10,10,15), nROC=c(10,15,20,30), nSig=9,
          maType, wts=1:NROW(n), ...) {

@@ -48,7 +48,6 @@
 #' vhf.close <- VHF(ttrc[,"Close"])
 #' vhf.hilow <- VHF(ttrc[,c("High","Low","Close")])
 #'
-#'@export
 "VHF" <-
 function(price, n=28) {
 

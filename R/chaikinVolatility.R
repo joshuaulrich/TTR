@@ -47,7 +47,6 @@
 #' data(ttrc)
 #' volatility <- chaikinVolatility(ttrc[,c("High","Low")])
 #'
-#'@export
 "chaikinVolatility" <-
 function(HL, n=10, maType, ...) {
 

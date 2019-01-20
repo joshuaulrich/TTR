@@ -42,7 +42,6 @@
 #' roc <- ROC(ttrc[,"Close"])
 #' mom <- momentum(ttrc[,"Close"])
 #'@rdname changes
-#'@export
 "ROC" <-
 function(x, n=1, type=c("continuous","discrete"), na.pad=TRUE) {
 
@@ -81,7 +80,6 @@ function(x, n=1, type=c("continuous","discrete"), na.pad=TRUE) {
 #-------------------------------------------------------------------------#
 
 #'@rdname changes
-#'@export
 "momentum" <-
 function(x, n=1, na.pad=TRUE) {
 

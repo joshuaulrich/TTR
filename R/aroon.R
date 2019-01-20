@@ -63,7 +63,6 @@
 #' data(ttrc)
 #' trend <- aroon( ttrc[,c("High", "Low")], n=20 )
 #'
-#'@export
 "aroon" <-
 function(HL, n=20) {
 

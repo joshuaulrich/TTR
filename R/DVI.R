@@ -47,7 +47,6 @@
 #' data(ttrc)
 #' dvi <- DVI(ttrc[,"Close"])
 #'
-#'@export
 DVI <- function(price, n=252, wts=c(0.8,0.2), smooth=3,
   magnitude=c(5,100,5), stretch=c(10,100,2), exact.multiplier=1) {
 

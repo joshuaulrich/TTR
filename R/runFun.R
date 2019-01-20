@@ -59,7 +59,6 @@
 #'@author Joshua Ulrich
 #'@keywords ts
 #'@rdname runFun
-#'@export
 "runSum" <-
 function(x, n=10, cumulative=FALSE) {
 
@@ -113,7 +112,6 @@ function(x, n=10, cumulative=FALSE) {
 #-------------------------------------------------------------------------#
 
 #'@rdname runFun
-#'@export
 "runMin" <-
 function(x, n=10, cumulative=FALSE) {
 
@@ -166,7 +164,6 @@ function(x, n=10, cumulative=FALSE) {
 #-------------------------------------------------------------------------#
 
 #'@rdname runFun
-#'@export
 "runMax" <-
 function(x, n=10, cumulative=FALSE) {
 
@@ -217,7 +214,6 @@ function(x, n=10, cumulative=FALSE) {
 #-------------------------------------------------------------------------#
 
 #'@rdname runFun
-#'@export
 "runMean" <-
 function(x, n=10, cumulative=FALSE) {
 
@@ -233,7 +229,6 @@ function(x, n=10, cumulative=FALSE) {
 #-------------------------------------------------------------------------#
 
 #'@rdname runFun
-#'@export
 "runMedian" <-
 function(x, n=10, non.unique="mean", cumulative=FALSE) {
 
@@ -281,7 +276,6 @@ function(x, n=10, non.unique="mean", cumulative=FALSE) {
 #-------------------------------------------------------------------------#
 
 #'@rdname runFun
-#'@export
 "runCov" <-
 function(x, y, n=10, use="all.obs", sample=TRUE, cumulative=FALSE) {
 
@@ -345,7 +339,6 @@ function(x, y, n=10, use="all.obs", sample=TRUE, cumulative=FALSE) {
 #-------------------------------------------------------------------------#
 
 #'@rdname runFun
-#'@export
 "runCor" <-
 function(x, y, n=10, use="all.obs", sample=TRUE, cumulative=FALSE) {
 
@@ -359,7 +352,6 @@ function(x, y, n=10, use="all.obs", sample=TRUE, cumulative=FALSE) {
 #-------------------------------------------------------------------------#
 
 #'@rdname runFun
-#'@export
 "runVar" <-
 function(x, y=NULL, n=10, sample=TRUE, cumulative=FALSE) {
 
@@ -372,7 +364,6 @@ function(x, y=NULL, n=10, sample=TRUE, cumulative=FALSE) {
 #-------------------------------------------------------------------------#
 
 #'@rdname runFun
-#'@export
 "runSD" <-
 function(x, n=10, sample=TRUE, cumulative=FALSE) {
 
@@ -385,7 +376,6 @@ function(x, n=10, sample=TRUE, cumulative=FALSE) {
 #-------------------------------------------------------------------------#
 
 #'@rdname runFun
-#'@export
 "runMAD" <-
 function(x, n=10, center=NULL, stat="median",
          constant=1.4826, non.unique="mean", cumulative=FALSE) {
@@ -447,7 +437,6 @@ function(x, n=10, center=NULL, stat="median",
 #-------------------------------------------------------------------------#
 
 #'@rdname runFun
-#'@export
 "wilderSum" <-
 function(x, n=10) {
 

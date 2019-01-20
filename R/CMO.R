@@ -47,7 +47,6 @@
 #' data(ttrc)
 #' cmo <- CMO(ttrc[,"Close"])
 #'
-#'@export
 "CMO" <-
 function(x, n=14) {
 

@@ -79,7 +79,6 @@
 #'              maDown=list(WMA,wts=1:10)))
 #'
 #'
-#'@export
 "RSI" <- 
 function(price, n=14, maType, ...) {
 

@@ -90,7 +90,6 @@
 #'  }
 #'
 #'@rdname WebData
-#'@export
 "stockSymbols" <-
 function(exchange=c("AMEX","NASDAQ","NYSE"),
          sort.by=c("Exchange","Symbol"), quiet=FALSE) {
@@ -190,7 +189,6 @@ function(exchange=c("AMEX","NASDAQ","NYSE"),
 #-------------------------------------------------------------------------#
 
 #'@rdname WebData
-#'@export
 "getYahooData" <-
 function(symbol, start, end, freq="daily", type="price", adjust=TRUE, quiet=FALSE) {
 

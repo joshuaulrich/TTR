@@ -43,7 +43,6 @@
 #'@references The following site(s) were used to code/document this
 #'indicator:\cr \url{http://en.wikipedia.org/wiki/Percentile_rank}\cr
 #'@keywords ts
-#'@export
 runPercentRank <- function(x, n=260, cumulative = FALSE, exact.multiplier = 0.5) {
   x <- try.xts(x, error = as.matrix)
 

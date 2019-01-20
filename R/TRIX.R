@@ -63,7 +63,6 @@
 #' trix4 <- TRIX(ttrc[,"Close"],
 #' maType=list(list(SMA), list(EMA, wilder=TRUE), list(SMA), list(DEMA)))
 #'
-#'@export
 "TRIX" <-
 function(price, n=20, nSig=9, maType, percent=TRUE, ...) {
 

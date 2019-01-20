@@ -57,7 +57,6 @@
 #' data(ttrc)
 #' emv <- EMV(ttrc[,c("High","Low")], ttrc[,"Volume"])
 #'
-#'@export
 "EMV" <-
 function(HL, volume, n=9, maType, vol.divisor=10000, ...) {
 

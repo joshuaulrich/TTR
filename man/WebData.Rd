@@ -4,7 +4,6 @@
 \alias{stockSymbols}
 \alias{WebData}
 \alias{getYahooData}
-\alias{getYahooData}
 \title{Fetch Internet Data}
 \usage{
 stockSymbols(exchange = c("AMEX", "NASDAQ", "NYSE"), sort.by = c("Exchange",

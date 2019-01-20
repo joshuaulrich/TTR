@@ -41,7 +41,6 @@
 #' data(ttrc)
 #' clv <- CLV(ttrc[,c("High","Low","Close")])
 #'
-#'@export
 "CLV" <-
 function(HLC) {
 

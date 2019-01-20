@@ -154,7 +154,6 @@
 #' tail( EMA(x[ 1:100],10), 1 )
 #' 
 #'@rdname MovingAverages
-#'@export
 "SMA" <-
 function(x, n=10, ...) {
 
@@ -172,7 +171,6 @@ function(x, n=10, ...) {
 #-------------------------------------------------------------------------#
 
 #'@rdname MovingAverages
-#'@export
 "EMA" <-
 function (x, n=10, wilder=FALSE, ratio=NULL, ...) {
 
@@ -209,7 +207,6 @@ function (x, n=10, wilder=FALSE, ratio=NULL, ...) {
 #-------------------------------------------------------------------------#
 
 #'@rdname MovingAverages
-#'@export
 "DEMA" <-
 function(x, n=10, v=1, wilder=FALSE, ratio=NULL) {
 
@@ -246,7 +243,6 @@ function(x, n=10, v=1, wilder=FALSE, ratio=NULL) {
 #-------------------------------------------------------------------------#
 
 #'@rdname MovingAverages
-#'@export
 "WMA" <-
 function(x, n=10, wts=1:n, ...) {
 
@@ -312,7 +308,6 @@ function(x, n=10, wts=1:n, ...) {
 #-------------------------------------------------------------------------#
 
 #'@rdname MovingAverages
-#'@export
 "EVWMA" <-
 function(price, volume, n=10, ...) {
 
@@ -354,7 +349,6 @@ function(price, volume, n=10, ...) {
 #-------------------------------------------------------------------------#
 
 #'@rdname MovingAverages
-#'@export
 "ZLEMA" <-
 function (x, n=10, ratio=NULL, ...) {
 
@@ -406,7 +400,6 @@ function (x, n=10, ratio=NULL, ...) {
 #-------------------------------------------------------------------------#
 
 #'@rdname MovingAverages
-#'@export VWAP VWMA
 "VWAP" <- "VWMA" <-
 function(price, volume, n=10, ...) {
 
@@ -425,7 +418,6 @@ function(price, volume, n=10, ...) {
 #-------------------------------------------------------------------------#
 
 #'@rdname MovingAverages
-#'@export
 "VMA" <-
 function (x, w, ratio=1, ...) {
 
@@ -459,7 +451,6 @@ function (x, w, ratio=1, ...) {
 #-------------------------------------------------------------------------#
 
 #'@rdname MovingAverages
-#'@export
 "HMA" <-
 function(x, n=20, ...) {
 
@@ -471,7 +462,6 @@ function(x, n=20, ...) {
 #-------------------------------------------------------------------------#
 
 #'@rdname MovingAverages
-#'@export
 "ALMA" <-
 function(x, n=9, offset=0.85, sigma=6, ...) {
 

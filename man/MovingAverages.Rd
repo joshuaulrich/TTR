@@ -14,13 +14,6 @@
 \alias{VWMA}
 \alias{VMA}
 \alias{MA}
-\alias{EMA}
-\alias{DEMA}
-\alias{WMA}
-\alias{EVWMA}
-\alias{ZLEMA}
-\alias{VWAP}
-\alias{VMA}
 \alias{HMA}
 \alias{ALMA}
 \title{Moving Averages}

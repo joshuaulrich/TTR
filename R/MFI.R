@@ -54,7 +54,6 @@
 #' data(ttrc)
 #' mfi <- MFI(ttrc[,c("High","Low","Close")], ttrc[,"Volume"])
 #'
-#'@export
 "MFI" <-
 function(HLC, volume, n=14) {
 

@@ -43,7 +43,6 @@
 #'@keywords ts
 #'@rdname rollFun
 
-#'@export
 rollSFM <- function(Ra, Rb, n = 60) {
   # Calculate a rolling single-factor model
 #  stopifnot(is.xts(Ra) && is.xts(Rb))

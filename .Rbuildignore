@@ -1,4 +1,5 @@
 R/pivots.R
+LICENSE
 WISHLIST
 ^.*\.Rproj$
 ^\.Rproj\.user$

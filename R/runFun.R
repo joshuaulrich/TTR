@@ -60,7 +60,7 @@
 #'@keywords ts
 #'@rdname runFun
 "runSum" <-
-function(x, n=10, cumulative=FALSE) {
+function(x, n=10, cumulative=FALSE, accurate.instead.of.fast=FALSE) {
 
   x <- try.xts(x, error=as.matrix)
 
@@ -89,7 +89,7 @@ function(x, n=10, cumulative=FALSE) {
       is.na(result) <- c(1:NAs)
   } else {
     # Call C routine
-    result <- .Call("runsum", x, n, PACKAGE = "TTR")
+    result <- .Call("runsum", x, n, accurate.instead.of.fast, PACKAGE = "TTR")
   }
   
   # Convert back to original class
@@ -184,12 +184,12 @@ function(x, n=10, cumulative=FALSE) {
 
 #'@rdname runFun
 "runMean" <-
-function(x, n=10, cumulative=FALSE) {
+function(x, n=10, cumulative=FALSE, accurate.instead.of.fast=FALSE) {
 
   if(cumulative) {
     result <- runSum(x, n, cumulative) / 1:NROW(x)
   } else {
-    result <- runSum(x, n) / n
+    result <- runSum(x, n, accurate.instead.of.fast=accurate.instead.of.fast) / n
   }
 
   return(result)

@@ -79,15 +79,14 @@ function(x, n=10, cumulative=FALSE) {
       if( NAs + n > NROW(x) ) stop("not enough non-NA values")
     }
     beg <- 1 + NAs
-    len <- NROW(x) - NAs
 
     # Initialize result vector
     result <- double(NROW(x))
 
     result[beg:NROW(x)] <- cumsum(x[beg:NROW(x)])
 
-    # Replace 1:(n-1) with NAs
-    is.na(result) <- c(1:(n-1+NAs))
+    if(NAs > 0)
+      is.na(result) <- c(1:NAs)
   } else {
     # Call C routine
     result <- .Call("runsum", x, n, PACKAGE = "TTR")
@@ -120,15 +119,14 @@ function(x, n=10, cumulative=FALSE) {
       if( NAs + n > NROW(x) ) stop("not enough non-NA values")
     }
     beg <- 1 + NAs
-    len <- NROW(x) - NAs
 
     # Initialize result vector
     result <- double(NROW(x))
 
     result[beg:NROW(x)] <- cummin(x[beg:NROW(x)])
 
-    # Replace 1:(n-1) with NAs
-    is.na(result) <- c(1:(n-1+NAs))
+    if(NAs > 0)
+      is.na(result) <- c(1:NAs)
   } else {
     # Call C routine
     result <- .Call("runmin", x, n, PACKAGE = "TTR")
@@ -161,7 +159,6 @@ function(x, n=10, cumulative=FALSE) {
       if( NAs + n > NROW(x) ) stop("not enough non-NA values")
     }
     beg <- 1 + NAs
-    len <- NROW(x) - NAs
 
     if(NCOL(x) > 1) {
       stop("ncol(x) > 1. runMax only supports univariate 'x'")
@@ -172,8 +169,8 @@ function(x, n=10, cumulative=FALSE) {
 
     result[beg:NROW(x)] <- cummax(x[beg:NROW(x)])
 
-    # Replace 1:(n-1) with NAs and prepend NAs from original data
-    is.na(result) <- c(1:(n-1+NAs))
+    if(NAs > 0)
+      is.na(result) <- c(1:NAs)
   } else {
     # Call C routine
     result <- .Call("runmax", x, n, PACKAGE = "TTR")

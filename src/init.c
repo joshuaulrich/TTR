@@ -37,7 +37,7 @@ extern SEXP vma(SEXP, SEXP, SEXP);
 extern SEXP wilderSum(SEXP, SEXP);
 extern SEXP wma(SEXP, SEXP, SEXP);
 extern SEXP zlema(SEXP, SEXP, SEXP);
-extern SEXP runsum(SEXP, SEXP);
+extern SEXP runsum(SEXP, SEXP, SEXP);
 extern SEXP runmin(SEXP, SEXP);
 extern SEXP runmax(SEXP, SEXP);
 extern SEXP runmedian(SEXP, SEXP, SEXP, SEXP);
@@ -56,7 +56,7 @@ static const R_CallMethodDef CallEntries[] = {
   CALLDEF(wilderSum,            2),
   CALLDEF(wma,                  3),
   CALLDEF(zlema,                3),
-  CALLDEF(runsum,               2),
+  CALLDEF(runsum,               3),
   CALLDEF(runmin,               2),
   CALLDEF(runmax,               2),
   CALLDEF(runmedian,            4),

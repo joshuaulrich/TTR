@@ -153,7 +153,7 @@ function(HLC, nFastK=14, nFastD=3, nSlowD=3, maType, bounded=TRUE, smooth=1, ...
     lmin <- runMin( low, nFastK)
   } else {
     hmax <- runMax(c(high[1],high[-NROW(HLC)]), nFastK)
-    lmin <- runMax(c( low[1], low[-NROW(HLC)]), nFastK)
+    lmin <- runMin(c( low[1], low[-NROW(HLC)]), nFastK)
   }
 
   num <- close - lmin
@@ -249,7 +249,7 @@ function(HLC, n=13, nFast=2, nSlow=25, nSig=9, maType, bounded=TRUE, ...) {
     lmin <- runMin( low, n)
   } else {
     hmax <- runMax(c(high[1],high[-NROW(HLC)]), n)
-    lmin <- runMax(c( low[1], low[-NROW(HLC)]), n)
+    lmin <- runMin(c( low[1], low[-NROW(HLC)]), n)
   }
   hmax <- ifelse( is.na(hmax), high, hmax )
   lmin <- ifelse( is.na(lmin),  low, lmin )

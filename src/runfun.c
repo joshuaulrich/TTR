@@ -22,7 +22,7 @@
 
 SEXP runsum(SEXP _x, SEXP _n, SEXP _accurate)
 {
-  int i, P = 0;
+  int i, j, P = 0;
 
   /* ensure that 'x' is double */
   if (TYPEOF(_x) != REALSXP) {

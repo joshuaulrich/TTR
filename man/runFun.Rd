@@ -15,13 +15,13 @@
 \alias{wilderSum}
 \title{Analysis of Running/Rolling/Moving Windows}
 \usage{
-runSum(x, n = 10, cumulative = FALSE)
+runSum(x, n = 10, cumulative = FALSE, accurate.instead.of.fast = FALSE)
 
 runMin(x, n = 10, cumulative = FALSE)
 
 runMax(x, n = 10, cumulative = FALSE)
 
-runMean(x, n = 10, cumulative = FALSE)
+runMean(x, n = 10, cumulative = FALSE, accurate.instead.of.fast = FALSE)
 
 runMedian(x, n = 10, non.unique = "mean", cumulative = FALSE)
 
@@ -64,6 +64,8 @@ which to calculate deviations. The default (\code{NULL}) uses the median.}
 absolute deviation or mean absolute deviation, respectively.)}
 
 \item{constant}{Scale factor applied to approximate the standard deviation.}
+
+\item{accurate.instead.of.fast}{Use more accurate but slower implementation of \code{runSum} and \code{runMean}, default off.}
 }
 \value{
 A object of the same class as \code{x} and \code{y} or a vector (if

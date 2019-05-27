@@ -18,13 +18,13 @@
 \alias{ALMA}
 \title{Moving Averages}
 \usage{
-SMA(x, n = 10, ...)
+SMA(x, n = 10, accurate.instead.of.fast = FALSE, ...)
 
 EMA(x, n = 10, wilder = FALSE, ratio = NULL, ...)
 
 DEMA(x, n = 10, v = 1, wilder = FALSE, ratio = NULL)
 
-WMA(x, n = 10, wts = 1:n, ...)
+WMA(x, n = 10, wts = 1:n, accurate.instead.of.fast = FALSE, ...)
 
 EVWMA(price, volume, n = 10, ...)
 
@@ -67,6 +67,8 @@ corresponds to price series, or a constant.  See Notes.}
 \item{offset}{Percentile at which the center of the distribution should occur.}
 
 \item{sigma}{Standard deviation of the distribution.}
+
+\item{accurate.instead.of.fast}{Use more accurate but slower implementation of \code{runSum} in \code{SMA} and \code{WMA}, default off.}
 }
 \value{
 A object of the same class as \code{x} or \code{price} or a vector

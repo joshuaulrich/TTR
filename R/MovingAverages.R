@@ -155,11 +155,11 @@
 #' 
 #'@rdname MovingAverages
 "SMA" <-
-function(x, n=10, ...) {
+function(x, n=10, accurate.instead.of.fast=FALSE, ...) {
 
   # Simple Moving Average
 
-  ma <- runMean( x, n )
+  ma <- runMean( x, n, accurate.instead.of.fast=accurate.instead.of.fast )
   
   if(!is.null(dim(ma))) {
     colnames(ma) <- "SMA"
@@ -244,7 +244,7 @@ function(x, n=10, v=1, wilder=FALSE, ratio=NULL) {
 
 #'@rdname MovingAverages
 "WMA" <-
-function(x, n=10, wts=1:n, ...) {
+function(x, n=10, wts=1:n, accurate.instead.of.fast=FALSE, ...) {
 
   # Weighted Moving Average
 
@@ -284,7 +284,7 @@ function(x, n=10, wts=1:n, ...) {
   } else {
     
     xw <- na.omit( cbind(x, wts) )
-    ma <- runSum( xw[,1]*xw[,2], n) / runSum(xw[,2], n)
+    ma <- runSum(xw[,1]*xw[,2], n, accurate.instead.of.fast=accurate.instead.of.fast) / runSum(xw[,2], n, accurate.instead.of.fast=accurate.instead.of.fast)
   }
 
   # replace 1:(n-1) with NAs and prepend NAs from original data
@@ -376,7 +376,7 @@ function(price, volume, n=10, ...) {
   # Volume-weighted average price
   # Volume-weighted moving average
 
-  res <- WMA(price, n=n, volume)
+  res <- WMA(price, n=n, volume, accurate.instead.of.fast=TRUE)
   
   if(!is.null(dim(res))) {
     colnames(res) <- "VWAP"

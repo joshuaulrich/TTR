@@ -40,6 +40,7 @@
 #'@param stat Statistic to calculate, one of 'median' or 'mean' (e.g. median
 #'absolute deviation or mean absolute deviation, respectively.)
 #'@param constant Scale factor applied to approximate the standard deviation.
+#'@param accurate.instead.of.fast Use more accurate but slower implementation of \code{runSum} and \code{runMean}, default off.
 #'@return A object of the same class as \code{x} and \code{y} or a vector (if
 #'\code{try.xts} fails).
 #' \describe{

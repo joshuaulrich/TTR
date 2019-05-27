@@ -71,6 +71,7 @@
 #'in \code{EMA}, and provides additional smoothing in \code{VMA}.
 #'@param offset Percentile at which the center of the distribution should occur.
 #'@param sigma Standard deviation of the distribution.
+#'@param accurate.instead.of.fast Use more accurate but slower implementation of \code{runSum} in \code{SMA} and \code{WMA}, default off.
 #'@param \dots any other passthrough parameters
 #'@return A object of the same class as \code{x} or \code{price} or a vector
 #'(if \code{try.xts} fails) containing the columns:

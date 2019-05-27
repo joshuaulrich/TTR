@@ -32,7 +32,6 @@
 #'position, '1' for long position, and '-1' for short position.
 #'@param x Object that is coercible to xts or matrix.
 #'@param n Number of periods to use.
-#'@param \dots Further arguments to be passed from or to other methods.
 #'@return \code{growth} returns a vector of the growth of the investment.
 #'
 #'\code{lags} returns a matrix of lagged values of the original vector.

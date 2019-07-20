@@ -64,6 +64,12 @@ test.RSI <- function() {
   checkException( RSI(input$mid$Close) )
 }
 
+test.RSI.does.not.overwrite.maArgs <- function() {
+  wilder.and.matype <- RSI(input$all$Close, maType = "EMA", wilder = FALSE)
+  wilder.only <- RSI(input$all$Close, wilder = FALSE)
+  checkEqualsNumeric( wilder.and.matype, wilder.only )
+}
+
 # Chande Momentum Oscillator
 test.CMO <- function() {
   checkEqualsNumeric( CMO(input$all$Close), output$allCMO )

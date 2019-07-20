@@ -33,6 +33,12 @@ test.ADX <- function() {
   #checkException( ADX(iMid[,hlc]) )
 }
 
+test.ADX.does.not.overwrite.maArgs <- function() {
+  wilder.and.matype <- ADX(iAll[,hlc], maType = "EMA", wilder = FALSE)
+  wilder.only <- ADX(iAll[,hlc], wilder = FALSE)
+  checkEqualsNumeric( wilder.and.matype, wilder.only )
+}
+
 # Aroon
 test.aroon.orig <- function() {
   # non-xts
@@ -81,6 +87,12 @@ test.ATR.xts <- function() {
   checkEqualsNumeric( ATR(iTop[,hlc]), output$topATR )
   checkEquals( attributes(ATR(iTop[,hlc])), attributes(output$topATR) )
   #checkException( ATR(iMid[,hlc]) )
+}
+
+test.ATR.does.not.overwrite.maArgs <- function() {
+  wilder.and.matype <- ATR(iAll[,hlc], maType = "EMA", wilder = FALSE)
+  wilder.only <- ATR(iAll[,hlc], wilder = FALSE)
+  checkEqualsNumeric( wilder.and.matype, wilder.only )
 }
 
 # Commodity Channel Index

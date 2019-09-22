@@ -122,7 +122,7 @@ function(exchange=c("AMEX","NASDAQ","NYSE"),
     flush.console()
 
     # Fetch Symbols
-    url  <- paste("https://www.nasdaq.com/screening/companies-by-name.aspx",
+    url  <- paste("https://old.nasdaq.com/screening/companies-by-name.aspx",
                   "?letter=0&exchange=",i,"&render=download",sep="")
     exch <- read.csv(url, header=TRUE, as.is=TRUE, na="n/a")
 

@@ -9,6 +9,6 @@ LinkingTo: xts
 Enhances: quantmod
 Suggests: RUnit
 Description: Functions and data to construct technical trading rules with R.
-License: GPL-2
+License: GPL (>= 2)
 URL: https://github.com/joshuaulrich/TTR
 BugReports: https://github.com/joshuaulrich/TTR/issues

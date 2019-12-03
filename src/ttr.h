@@ -4,5 +4,5 @@
 #include <Rinternals.h>
 
 /* imported from xts */
-SEXP (*xts_na_check)(SEXP, SEXP);
+extern SEXP (*xts_na_check)(SEXP, SEXP);
 #endif

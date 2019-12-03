@@ -43,6 +43,7 @@ extern SEXP runmax(SEXP, SEXP);
 extern SEXP runmedian(SEXP, SEXP, SEXP, SEXP);
 extern SEXP runmad(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP runcov(SEXP, SEXP, SEXP, SEXP, SEXP);
+SEXP (*xts_na_check)(SEXP,SEXP);
 
 static const R_CallMethodDef CallEntries[] = {
   CALLDEF(adjRatios,            3),

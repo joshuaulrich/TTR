@@ -272,8 +272,12 @@ SEXP zlema (SEXP x, SEXP n, SEXP ratio) {
     } else {
       i_n = asInteger(n);
     }
+
+    /* Determine decay ratio */
     if(R_NilValue == ratio) {
       d_ratio = 2.0 / (i_n + 1);
+    } else {
+      d_ratio = asReal(ratio);
     }
 
     /* Input object length */

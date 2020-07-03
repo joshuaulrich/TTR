@@ -42,6 +42,7 @@ test.EMA.n.ratio <- function() {
   is.na(out) <- 1:2
   checkEqualsNumeric(EMA(1:10, ratio = 0.5), out)
   checkEqualsNumeric(EMA(1:10, n = 3), out)
+  checkEqualsNumeric(EMA(1:10, n = 3, ratio = 0.5), out)
 }
 
 # Exponential Moving Average, Wilder ratio
@@ -109,4 +110,11 @@ test.ZLEMA <- function() {
   checkEquals( attributes(ZLEMA(input$top$Close)), attributes(output$topZLEMA) )
   checkException( ZLEMA(input$mid$Close) )
   checkException( ZLEMA(input$all[,1:2]) )
+}
+
+test.ZLEMA.n.ratio <- function() {
+  out <- c(rep(NA, 6), 4.0, 6.0, 7.75, 9.3125)
+  checkEqualsNumeric(ZLEMA(1:10, ratio = 0.25), out)
+  checkEqualsNumeric(ZLEMA(1:10, n = 7), out)
+  checkEqualsNumeric(ZLEMA(1:10, n = 7, ratio = 0.25), out)
 }

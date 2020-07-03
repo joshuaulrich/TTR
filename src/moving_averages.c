@@ -47,6 +47,9 @@ SEXP ema (SEXP x, SEXP n, SEXP ratio, SEXP wilder) {
       d_ratio = (isWilder) ? 1.0 / i_n : 2.0 / (i_n + 1);
     } else {
       d_ratio = asReal(ratio);
+      if(d_ratio <= 0.0) {
+        error("'ratio' must be > 0");
+      }
     }
 
     /* Input object length */
@@ -278,6 +281,9 @@ SEXP zlema (SEXP x, SEXP n, SEXP ratio) {
       d_ratio = 2.0 / (i_n + 1);
     } else {
       d_ratio = asReal(ratio);
+      if(d_ratio <= 0.0) {
+        error("'ratio' must be > 0");
+      }
     }
 
     /* Input object length */

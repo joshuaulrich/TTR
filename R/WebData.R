@@ -117,6 +117,8 @@ function(exchange=c("AMEX","NASDAQ","NYSE"),
   exchange <- match.arg(exchange, several.ok=TRUE)
   sort.by  <- match.arg(sort.by, symbols.colnames, several.ok=TRUE)
 
+  tmp <- tempfile()
+
   for(i in exchange) {
     if(!quiet) message("Fetching ",i," symbols...")
     flush.console()
@@ -124,7 +126,8 @@ function(exchange=c("AMEX","NASDAQ","NYSE"),
     # Fetch Symbols
     url  <- paste("https://old.nasdaq.com/screening/companies-by-name.aspx",
                   "?letter=0&exchange=",i,"&render=download",sep="")
-    exch <- read.csv(url, header=TRUE, as.is=TRUE, na="n/a")
+    curl::curl_download(url, destfile=tmp)
+    exch <- read.csv(tmp, header=TRUE, as.is=TRUE, na="n/a")
 
     # Find and order by necessary columns
     col.loc <- sapply(symbols.colnames, grep, names(exch), ignore.case=TRUE)

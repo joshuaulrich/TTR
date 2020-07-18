@@ -131,6 +131,14 @@ test.runMedian.cumulative <- function() {
   checkEqualsNumeric(base, ttr)
 }
 
+test.runMedian.cumulative.leading.NA <- function() {
+  na <- rep(NA, 10)
+  x <- input$all$Close
+  xmed <- runMedian(x, 1, "mean", TRUE)
+  y <- c(na, input$all$Close)
+  ymed <- runMedian(y, 1, "mean", TRUE)
+  checkEqualsNumeric(ymed, c(na, xmed))
+}
 
 # Covariance
 test.runCov <- function() {

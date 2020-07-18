@@ -199,11 +199,13 @@ tiebreaker_eq(const double a, const double b)
 }
 
 static inline double
-ttr_median(double *x, int n, tiebreaker tie_func)
+ttr_median(double *x, int i, int n, tiebreaker tie_func)
 {
-  int flag = n-2*(n/2);
-  int mid = n/2-1;
-  R_qsort(x, 1, n);
+  /* NOTE: 'i' and 'n' are 1-based */
+  int N = n-i+1;          // number of observations in the window
+  int flag = N-2*(N/2);   // even number of observations?
+  int mid = (i-1)+N/2-1;  // 0-based index midpoint
+  R_qsort(x, i, n);
 
   double median = (flag) ? x[mid+1] : tie_func(x[mid] , x[mid+1]);
   return median;
@@ -261,7 +263,7 @@ SEXP runmedian(SEXP _x, SEXP _n, SEXP _tiebreak, SEXP _cumulative)
     window = REAL(_window);
 
     for (i = first_i; i < nr; i++) {
-      result[i] = ttr_median(window, i+1, tie_func);
+      result[i] = ttr_median(window, first+1, i+1, tie_func);
     }
   } else {
     _window = PROTECT(allocVector(REALSXP, n)); P++;
@@ -269,7 +271,7 @@ SEXP runmedian(SEXP _x, SEXP _n, SEXP _tiebreak, SEXP _cumulative)
 
     for (i = first_i; i < nr; i++) {
       memcpy(window, &x[i-n+1], n * sizeof(double));
-      result[i] = ttr_median(window, n, tie_func);
+      result[i] = ttr_median(window, 1, n, tie_func);
     }
   }
 
@@ -354,7 +356,7 @@ SEXP runmad(SEXP _x, SEXP _center, SEXP _n, SEXP _type,
         for (j = 0; j <= i; j++) {
           window[j] = fabs(x[i-j] - center[i]);
         }
-        result[i] = ttr_median(window, i+1, tie_func);
+        result[i] = ttr_median(window, 1, i+1, tie_func);
       }
     } else {
       for (i = first_i; i < nr; i++) {
@@ -373,7 +375,7 @@ SEXP runmad(SEXP _x, SEXP _center, SEXP _n, SEXP _type,
         for (j = 0; j < n; j++) {
           window[j] = fabs(x[i-j] - center[i]);
         }
-        result[i] = ttr_median(window, n, tie_func);
+        result[i] = ttr_median(window, 1, n, tie_func);
       }
     } else {
       for (i = first_i; i < nr; i++) {

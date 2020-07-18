@@ -234,12 +234,31 @@ SEXP wma (SEXP x, SEXP w, SEXP n) {
     PROTECT(result = allocVector(REALSXP,nr)); P++;
     double *d_result = REAL(result);
 
-    /* Loop over non-NA input values */
+    /* Find first non-NA input value */
+    int beg = 0;
+    d_result[beg] = 0;
+    for(i = 0; i <= beg; i++) {
+        /* Account for leading NAs in input */
+        if(ISNA(d_x[i])) {
+            d_result[i] = NA_REAL;
+            beg++;
+            d_result[beg] = 0;
+            continue;
+        }
+        /* Set leading NAs in output */
+        if(i < beg) {
+            d_result[i] = NA_REAL;
+        }
+    }
+
+    /* Sum of weights (w does not have NA) */
     double wtsum = 0.0;
     for(j = 0; j < i_n; j++) {
       wtsum += d_w[j];
     }
-    for(i = (i_n-1); i < nr; i++) {
+
+    /* Loop over non-NA input values */
+    for(i = beg; i < nr; i++) {
       double num = 0.0;
       int ni = i - i_n + 1;
       for(j = 0; j < i_n; j++) {

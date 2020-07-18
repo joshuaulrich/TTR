@@ -93,6 +93,12 @@ test.WMAvol <- function() {
   checkException( WMA(input$all$Close, wts=input$all[,1:2]) )
 }
 
+test.WMA_returns_xts <- function() {
+  x <- xts::.xts(x = c(NA, 1:3), 1:4)
+  wma <- WMA(x, 2)
+  checkTrue(inherits(wma, "xts"))
+}
+
 # Exponential, Volume-Weighted Moving Average
 test.EVWMA <- function() {
   checkEqualsNumeric( EVWMA(input$all$Close, input$all$Volume), output$allEVWMA )

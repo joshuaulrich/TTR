@@ -272,7 +272,6 @@ function(x, n=10, wts=1:n, ...) {
   
   if( NROW(wts) == n ) {
     
-    x <- na.omit(x)
     NAs <- NAx
 
     if( any(is.na(wts)) )
@@ -283,13 +282,12 @@ function(x, n=10, wts=1:n, ...) {
 
   } else {
     
-    xw <- na.omit( cbind(x, wts) )
+    xw <- cbind(x, wts)
     ma <- runSum( xw[,1]*xw[,2], n) / runSum(xw[,2], n)
   }
 
   # replace 1:(n-1) with NAs and prepend NAs from original data
   ma[1:(n-1)] <- NA
-  ma <- c( rep( NA, NAs ), ma )
 
   if(!is.null(dim(ma))) {
     colnames(ma) <- "WMA"

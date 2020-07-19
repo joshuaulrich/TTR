@@ -353,10 +353,11 @@ SEXP runmad(SEXP _x, SEXP _center, SEXP _n, SEXP _type,
 
     if (type) {
       for (i = first_i; i < nr; i++) {
-        for (j = 0; j <= i; j++) {
+        int N = i-first+1;
+        for (j = 0; j < N; j++) {
           window[j] = fabs(x[i-j] - center[i]);
         }
-        result[i] = ttr_median(window, 1, i+1, tie_func);
+        result[i] = ttr_median(window, 1, N, tie_func);
       }
     } else {
       for (i = first_i; i < nr; i++) {

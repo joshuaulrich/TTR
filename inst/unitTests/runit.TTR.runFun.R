@@ -251,6 +251,16 @@ test.runMAD.cumulative <- function() {
   checkEqualsNumeric(base, ttr)
 }
 
+test.runMAD.cumulative.leading.NA <- function() {
+  na <- rep(NA, 10)
+  x <- input$all$Close
+  xmed <- runMAD(x, 1, cumulative = TRUE)
+  y <- c(na, input$all$Close)
+  ymed <- runMAD(y, 1, cumulative = TRUE)
+  checkEqualsNumeric(ymed, c(na, xmed))
+}
+
+
 # Percent Rank
 test.runPercentRank_exact.multiplier_bounds <- function() {
   x <- input$all$Close

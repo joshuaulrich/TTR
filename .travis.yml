@@ -6,7 +6,7 @@ matrix:
   include:
     - name: "Linux tests"
       os: linux
-      dist: trusty
+      dist: bionic
       sudo: required
 
     - name: "macOS tests"
@@ -14,16 +14,16 @@ matrix:
 
     - name: "Linux tests conditional Suggests"
       os: linux
-      dist: trusty
+      dist: bionic
       sudo: required
       env: _R_CHECK_DEPENDS_ONLY_=true
 
+env:
+  global:
+    - R_VERSION="4.0"
+
 before_install:
   - curl -OLs https://eddelbuettel.github.io/r-travis/run.sh && chmod 0755 run.sh
-  # add our launchpad repo which has (inter alia) the newest QuantLib
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-      sudo add-apt-repository -y ppa:edd/misc;
-    fi
   - ./run.sh bootstrap
 
 install:

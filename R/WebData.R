@@ -215,6 +215,8 @@ function(exchange = c("AMEX", "NASDAQ", "NYSE", "ARCA", "BATS", "IEX"),
     other$Name <- other$Security.Name
     other$Symbol <- other$NASDAQ.Symbol
     other[, setdiff(symbols.colnames, colnames(other))] <- NA
+    # convert exchange symbol to name
+    other$Exchange <- .exchange[other$Exchange]
     # order columns
     other <- other[, symbols.colnames]
   }

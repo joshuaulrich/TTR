@@ -1,3 +1,41 @@
+#-#-#-#-#-#-#-#-#-#    Changes in TTR version 0.24-0    #-#-#-#-#-#-#-#-#-#
+
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+  - Updated stockSymbols() to use the NASDAQ FTP site instead of downloading
+    the CSV from the NASDAQ stock screener page. Some columns are no longer
+    populated because they are not provided in the FTP file:
+      LastSale ,MarketCap, IPOyear, Sector, Industry
+    These columns will be removed in a future version. (#98, #5, #97)
+
+  - runPercentRank(x, n, cumulative = TRUE) now sets observations in the
+    initialization period to NA. This is consistent with the other
+    running/rolling functions in TTR. If you want the previous behavior,
+    you should use runPercentRank(x, n = 1, cumulative = TRUE). Thanks to
+    GitHub user httassadar for the report. (#73)
+
+
+NEW FEATURES
+
+  - Add Ehler's Correlation Trend Indicator. Thanks to Evelyn Mitchell for
+    the suggestion, and for Ethan Smith for the initial implementation. (#92)
+
+
+BUG FIXES
+
+  - runMAD() returned incorrect values when 'cumulative = TRUE' and the input
+    contained leading NA. Thanks to GitHub user stellathecat for the report.
+    This also affected runMedian() also. (#93)
+
+  - ZLEMA() would crash when 'ratio = 0.0' and 'n' was not specified. Thanks
+    to GitHub user yogat3ch for the report! (#95)
+
+  - WMA() did not return an xts object when passed an xts object for 'x' that
+    had leading NA, with the default 'wts = 1:n'. Thanks to Cory Fletcher for
+    reporting this issue via email. (#96)
+
+
 #-#-#-#-#-#-#-#-#-#    Changes in TTR version 0.23-0    #-#-#-#-#-#-#-#-#-#
 
 

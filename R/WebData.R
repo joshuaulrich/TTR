@@ -232,6 +232,10 @@ function(exchange = c("AMEX", "NASDAQ", "NYSE", "ARCA", "BATS", "IEX"),
   # Append data from all exchanges
   symbols <- rbind(nasdaq, other)
 
+  # convert ETF and Test.Issue to logical
+  symbols$ETF <- ("Y" == symbols$ETF)
+  symbols$Test.Issue <- ("Y" == symbols$Test.Issue)
+
   # Sort
   symbols <- symbols[do.call("order", symbols[,sort.by]),]
 

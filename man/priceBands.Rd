@@ -6,8 +6,16 @@
 \title{Construct (optionally further smoothed and centered ) volatility bands around
 prices}
 \usage{
-PBands(prices, n = 20, maType = "SMA", sd = 2, ..., fastn = 2,
-  centered = FALSE, lavg = FALSE)
+PBands(
+  prices,
+  n = 20,
+  maType = "SMA",
+  sd = 2,
+  ...,
+  fastn = 2,
+  centered = FALSE,
+  lavg = FALSE
+)
 }
 \arguments{
 \item{prices}{A univariate series of prices.}

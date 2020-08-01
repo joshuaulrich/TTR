@@ -6,11 +6,21 @@
 \alias{getYahooData}
 \title{Fetch Internet Data}
 \usage{
-stockSymbols(exchange = c("AMEX", "NASDAQ", "NYSE"), sort.by = c("Exchange",
-  "Symbol"), quiet = FALSE)
+stockSymbols(
+  exchange = c("AMEX", "NASDAQ", "NYSE", "ARCA", "BATS", "IEX"),
+  sort.by = c("Exchange", "Symbol"),
+  quiet = FALSE
+)
 
-getYahooData(symbol, start, end, freq = "daily", type = "price",
-  adjust = TRUE, quiet = FALSE)
+getYahooData(
+  symbol,
+  start,
+  end,
+  freq = "daily",
+  type = "price",
+  adjust = TRUE,
+  quiet = FALSE
+)
 }
 \arguments{
 \item{exchange}{Character vector of exchange names on which desired
@@ -97,6 +107,13 @@ if (interactive()) {
   nyse.symbols <- stockSymbols("NYSE")
 }
 
+}
+\references{
+\itemize{
+  \item \href{Quant StackExchange: Download list of all stock symbols?}{https://quant.stackexchange.com/questions/1640/where-to-download-list-of-all-common-stocks-traded-on-nyse-nasdaq-and-amex/1862#1862}
+  \item \href{CQS symbol convention}{http://www.nasdaqtrader.com/trader.aspx?id=CQSsymbolconvention}
+  \item \href{Yahoo Finance symbol conventions}{http://web.archive.org/web/20111023221931/http://help.yahoo.com/l/us/yahoo/finance/quotes/quote-02.html}
+}
 }
 \author{
 Joshua Ulrich

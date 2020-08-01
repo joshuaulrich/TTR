@@ -5,8 +5,7 @@
 \alias{zigzag}
 \title{Zig Zag}
 \usage{
-ZigZag(HL, change = 10, percent = TRUE, retrace = FALSE,
-  lastExtreme = TRUE)
+ZigZag(HL, change = 10, percent = TRUE, retrace = FALSE, lastExtreme = TRUE)
 }
 \arguments{
 \item{HL}{Object that is coercible to xts or matrix and contains either a

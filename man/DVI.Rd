@@ -4,8 +4,15 @@
 \alias{DVI}
 \title{DV Intermediate Oscillator}
 \usage{
-DVI(price, n = 252, wts = c(0.8, 0.2), smooth = 3, magnitude = c(5, 100,
-  5), stretch = c(10, 100, 2), exact.multiplier = 1)
+DVI(
+  price,
+  n = 252,
+  wts = c(0.8, 0.2),
+  smooth = 3,
+  magnitude = c(5, 100, 5),
+  stretch = c(10, 100, 2),
+  exact.multiplier = 1
+)
 }
 \arguments{
 \item{price}{Price series that is coercible to xts or matrix.}

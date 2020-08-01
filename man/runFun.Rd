@@ -33,8 +33,15 @@ runVar(x, y = NULL, n = 10, sample = TRUE, cumulative = FALSE)
 
 runSD(x, n = 10, sample = TRUE, cumulative = FALSE)
 
-runMAD(x, n = 10, center = NULL, stat = "median", constant = 1.4826,
-  non.unique = "mean", cumulative = FALSE)
+runMAD(
+  x,
+  n = 10,
+  center = NULL,
+  stat = "median",
+  constant = 1.4826,
+  non.unique = "mean",
+  cumulative = FALSE
+)
 
 wilderSum(x, n = 10)
 }

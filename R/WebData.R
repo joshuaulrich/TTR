@@ -93,7 +93,6 @@
 #'
 #' \itemize{
 #'   \item \href{Quant StackExchange: Download list of all stock symbols?}{https://quant.stackexchange.com/questions/1640/where-to-download-list-of-all-common-stocks-traded-on-nyse-nasdaq-and-amex/1862#1862}
-#'   \item \href{Symbol Look-Up/Directory Data Fields & Definitions}{http://web.archive.org/web/20111023221931/http://help.yahoo.com/l/us/yahoo/finance/quotes/quote-02.html}
 #'   \item \href{CQS symbol convention}{http://www.nasdaqtrader.com/trader.aspx?id=CQSsymbolconvention}
 #'   \item \href{Yahoo Finance symbol conventions}{http://web.archive.org/web/20111023221931/http://help.yahoo.com/l/us/yahoo/finance/quotes/quote-02.html}
 #' }
@@ -133,13 +132,13 @@ function(exchange = c("AMEX", "NASDAQ", "NYSE", "ARCA", "BATS", "IEX"),
 
   # nasdaqlisted.txt
   nasdaq.colnames <-
-    c("Symbol",#
-      "Security.Name",#
-      "Market.Category",#
-      "Test.Issue",#
-      "Financial.Status",#
-      "Round.Lot.Size",#
-      "ETF",#
+    c("Symbol",
+      "Security.Name",
+      "Market.Category",
+      "Test.Issue",
+      "Financial.Status",
+      "Round.Lot.Size",
+      "ETF",
       "NextShares")
 
   market.category <-
@@ -150,12 +149,12 @@ function(exchange = c("AMEX", "NASDAQ", "NYSE", "ARCA", "BATS", "IEX"),
   # otherlisted.txt
   other.colnames <-
     c("ACT.Symbol",
-      "Security.Name",#
-      "Exchange",#
+      "Security.Name",
+      "Exchange",
       "CQS.Symbol",
-      "ETF",#
-      "Round.Lot.Size",#
-      "Test.Issue",#
+      "ETF",
+      "Round.Lot.Size",
+      "Test.Issue",
       "NASDAQ.Symbol")
 
   .exchange <-

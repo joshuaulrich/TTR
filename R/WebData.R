@@ -141,7 +141,7 @@ function(exchange = c("AMEX", "NASDAQ", "NYSE", "ARCA", "BATS", "IEX"),
       "ETF",
       "NextShares")
 
-  market.category <-
+  .market.category <-
     c(Q = "NASDAQ Global Select MarketSM",
       G = "NASDAQ Global MarketSM",
       S = "NASDAQ Capital Market")
@@ -193,8 +193,15 @@ function(exchange = c("AMEX", "NASDAQ", "NYSE", "ARCA", "BATS", "IEX"),
     nasdaq$Name <- nasdaq$Security.Name
     nasdaq$Exchange <- "NASDAQ"
     nasdaq[, setdiff(symbols.colnames, colnames(nasdaq))] <- NA
+
     # order columns
     nasdaq <- nasdaq[, symbols.colnames]
+
+    # convert market category code to name
+    nasdaq$Market.Category <- .market.category[nasdaq$Market.Category]
+
+    # convert financial status code to name
+    nasdaq$Financial.Status <- .financial.status[nasdaq$Financial.Status]
   }
 
   other <- NULL
@@ -214,8 +221,10 @@ function(exchange = c("AMEX", "NASDAQ", "NYSE", "ARCA", "BATS", "IEX"),
     other$Name <- other$Security.Name
     other$Symbol <- other$NASDAQ.Symbol
     other[, setdiff(symbols.colnames, colnames(other))] <- NA
-    # convert exchange symbol to name
+
+    # convert exchange code to name
     other$Exchange <- .exchange[other$Exchange]
+
     # order columns
     other <- other[, symbols.colnames]
   }

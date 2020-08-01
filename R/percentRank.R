@@ -56,7 +56,7 @@ runPercentRank <- function(x, n=260, cumulative = FALSE, exact.multiplier = 0.5)
     if (any(is.na(x[-(1:NAs)]))) stop("Series contains non-leading NAs")
   }
 
-  if (identical(as.integer(n), 1L)) {
+  if (!isTRUE(cumulative) && identical(as.integer(n), 1L)) {
     result <- double(NROW(x))
     result[] <- exact.multiplier
   } else {

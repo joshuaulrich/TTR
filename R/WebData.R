@@ -232,6 +232,20 @@ function(exchange = c("AMEX", "NASDAQ", "NYSE", "ARCA", "BATS", "IEX"),
   # Append data from all exchanges
   symbols <- rbind(nasdaq, other)
 
+  # Convert symbol from NASDAQ to Yahoo format
+  # symbols[grep("[-.*$+!@%^=#].?$", symbols$NASDAQ.Symbol),c("Symbol", "NASDAQ.Symbol")]
+  symbols$NASDAQ.Symbol <- symbols$Symbol
+  # preferreds
+  symbols$Symbol <- sub("-(.?)$", "-P\\1", symbols$Symbol)
+  # classes
+  symbols$Symbol <- sub("\\.(.?)$", "-\\1", symbols$Symbol)
+  # warrants
+  symbols$Symbol <- sub("\\+(.?)$", "-WT\\1", symbols$Symbol)
+  # units
+  symbols$Symbol <- sub("\\=$", "-UN", symbols$Symbol)
+  # rights
+  symbols$Symbol <- sub("\\^$", "-R", symbols$Symbol)
+
   # convert ETF and Test.Issue to logical
   symbols$ETF <- ("Y" == symbols$ETF)
   symbols$Test.Issue <- ("Y" == symbols$Test.Issue)

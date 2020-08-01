@@ -7,6 +7,7 @@ WISHLIST
 \.gitignore
 \.orig$
 \.md$
+\.sw.
 .travis.yml
 ^0.*\.patch$
 ^.*\.tar.gz$

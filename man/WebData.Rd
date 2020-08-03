@@ -110,9 +110,9 @@ if (interactive()) {
 }
 \references{
 \itemize{
-  \item \href{Quant StackExchange: Download list of all stock symbols?}{https://quant.stackexchange.com/questions/1640/where-to-download-list-of-all-common-stocks-traded-on-nyse-nasdaq-and-amex/1862}
-  \item \href{CQS symbol convention}{http://www.nasdaqtrader.com/trader.aspx?id=CQSsymbolconvention}
-  \item \href{Yahoo Finance symbol conventions}{http://web.archive.org/web/20111023221931/http://help.yahoo.com/l/us/yahoo/finance/quotes/quote-02.html}
+  \item \href{https://quant.stackexchange.com/questions/1640/where-to-download-list-of-all-common-stocks-traded-on-nyse-nasdaq-and-amex/1862}{Quant StackExchange: Download list of all stock symbols?}
+  \item \href{http://www.nasdaqtrader.com/trader.aspx?id=CQSsymbolconvention}{CQS symbol convention}
+  \item \href{http://web.archive.org/web/20111023221931/http://help.yahoo.com/l/us/yahoo/finance/quotes/quote-02.html}{Yahoo Finance symbol conventions}
 }
 }
 \author{

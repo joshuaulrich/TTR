@@ -4,11 +4,11 @@ TTR is an [R](https://www.r-project.org) package that provides the most popular
 technical analysis functions for financial market data. Many of these functions
 are used as components of systematic trading strategies and financial charts.
 
-### Professionally-supported TTR now available
+### TTR for enterprise
 
-Tidelift gives software development teams a single source for purchasing and maintaining their software, with professional-grade assurances from the experts who know it best, while seamlessly integrating with existing tools.
+Available as part of the Tidelift Subscription.
 
-[Get supported TTR with the Tidelift Subscription](https://tidelift.com/subscription/pkg/cran-ttr?utm_source=cran-ttr&utm_medium=referral&utm_campaign=readme)
+The maintainers of `TTR` and thousands of other packages are working with Tidelift to deliver commercial support and maintenance for the open source dependencies you use to build your applications. Save time, reduce risk, and improve code health, while paying the maintainers of the exact dependencies you use. [Learn more.](https://tidelift.com/subscription/pkg/cran-ttr?utm_source=cran-ttr&utm_medium=referral&utm_campaign=enterprise&utm_term=repo)
 
 ### Supporting TTR through Patreon
 

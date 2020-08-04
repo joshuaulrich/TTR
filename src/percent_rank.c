@@ -50,9 +50,6 @@ SEXP ttr_rollPercentRank(SEXP _x, SEXP _n, SEXP _cumul, SEXP _mult)
   int cumul = asLogical(_cumul);
   double mult = asReal(_mult);
 
-  if (cumul)
-    n = 1;
-
   int nr = nrows(_x);
 
   /* Initialize result R object */

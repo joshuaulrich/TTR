@@ -6,8 +6,12 @@
 \alias{guppy}
 \title{Guppy Multiple Moving Averages}
 \usage{
-GMMA(x, short = c(3, 5, 8, 10, 12, 15), long = c(30, 35, 40, 45, 50, 60),
-  maType)
+GMMA(
+  x,
+  short = c(3, 5, 8, 10, 12, 15),
+  long = c(30, 35, 40, 45, 50, 60),
+  maType
+)
 }
 \arguments{
 \item{x}{Price, volume, etc. series that is coercible to xts or matrix.}

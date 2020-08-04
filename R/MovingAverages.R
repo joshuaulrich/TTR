@@ -273,7 +273,6 @@ function(x, n=10, wts=1:n, accurate.instead.of.fast=FALSE, ...) {
   
   if( NROW(wts) == n ) {
     
-    x <- na.omit(x)
     NAs <- NAx
 
     if( any(is.na(wts)) )
@@ -284,13 +283,12 @@ function(x, n=10, wts=1:n, accurate.instead.of.fast=FALSE, ...) {
 
   } else {
     
-    xw <- na.omit( cbind(x, wts) )
-    ma <- runSum(xw[,1]*xw[,2], n, accurate.instead.of.fast=accurate.instead.of.fast) / runSum(xw[,2], n, accurate.instead.of.fast=accurate.instead.of.fast)
+    xw <- cbind(x, wts)
+    ma <- runSum( xw[,1]*xw[,2], n, accurate.instead.of.fast=accurate.instead.of.fast) / runSum(xw[,2], n, accurate.instead.of.fast=accurate.instead.of.fast)
   }
 
   # replace 1:(n-1) with NAs and prepend NAs from original data
   ma[1:(n-1)] <- NA
-  ma <- c( rep( NA, NAs ), ma )
 
   if(!is.null(dim(ma))) {
     colnames(ma) <- "WMA"

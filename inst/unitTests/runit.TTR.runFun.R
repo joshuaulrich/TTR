@@ -128,6 +128,14 @@ test.runMedian.cumulative <- function() {
   checkEqualsNumeric(base, ttr)
 }
 
+test.runMedian.cumulative.leading.NA <- function() {
+  na <- rep(NA, 10)
+  x <- input$all$Close
+  xmed <- runMedian(x, 1, "mean", TRUE)
+  y <- c(na, input$all$Close)
+  ymed <- runMedian(y, 1, "mean", TRUE)
+  checkEqualsNumeric(ymed, c(na, xmed))
+}
 
 # Covariance
 test.runCov <- function() {
@@ -240,6 +248,16 @@ test.runMAD.cumulative <- function() {
   checkEqualsNumeric(base, ttr)
 }
 
+test.runMAD.cumulative.leading.NA <- function() {
+  na <- rep(NA, 10)
+  x <- input$all$Close
+  xmed <- runMAD(x, 1, cumulative = TRUE)
+  y <- c(na, input$all$Close)
+  ymed <- runMAD(y, 1, cumulative = TRUE)
+  checkEqualsNumeric(ymed, c(na, xmed))
+}
+
+
 # Percent Rank
 test.runPercentRank_exact.multiplier_bounds <- function() {
   x <- input$all$Close
@@ -274,19 +292,23 @@ test.runPercentRank_exact.multiplier_eq1 <- function() {
 test.runPercentRank_cumulTRUE_exact.multiplier_eq0 <- function() {
   xrank <- c(0, 0, 2, 0, 4, 1, 0, 2, 3, 3, 0, 8,
              4, 7, 10, 13, 11, 14, 4, 6) / 1:20
+  xrank[1:9] <- NA
+  xrank[10] <- 0
   checkIdentical(xrank, runPercentRank(xdata, 10, TRUE, 0))
 }
 
 test.runPercentRank_cumulTRUE_exact.multiplier_eq0.5 <- function() {
   xrank <- (c(0, 0, 2, 0, 4, 1, 0, 2, 3, 3, 0, 8,
              4, 7, 10, 13, 11, 14, 4, 6) + 0.5) / 1:20
-  #xrank[1] <- 0
+  xrank[1:9] <- NA
+  xrank[10] <- 0.5
   checkIdentical(xrank, runPercentRank(xdata, 10, TRUE, 0.5))
 }
 
 test.runPercentRank_cumulTRUE_exact.multiplier_eq1 <- function() {
   xrank <- (c(0, 0, 2, 0, 4, 1, 0, 2, 3, 3, 0, 8,
              4, 7, 10, 13, 11, 14, 4, 6) + 1) / 1:20
-  #xrank[1] <- 0
+  xrank[1:9] <- NA
+  xrank[10] <- 1
   checkIdentical(xrank, runPercentRank(xdata, 10, TRUE, 1))
 }

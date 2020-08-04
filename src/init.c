@@ -25,24 +25,8 @@
 
 #define CALLDEF(name, n)  {#name, (DL_FUNC) &name, n}
 
-/* Declare .Call calls */
-extern SEXP adjRatios(SEXP, SEXP, SEXP);
-extern SEXP aroon_max(SEXP, SEXP);
-extern SEXP ema(SEXP, SEXP, SEXP, SEXP);
-extern SEXP evwma(SEXP, SEXP, SEXP);
-extern SEXP sar(SEXP, SEXP, SEXP, SEXP);
-extern SEXP ttr_rollPercentRank(SEXP, SEXP, SEXP, SEXP);
-extern SEXP ttr_zigzag(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
-extern SEXP vma(SEXP, SEXP, SEXP);
-extern SEXP wilderSum(SEXP, SEXP);
-extern SEXP wma(SEXP, SEXP, SEXP);
-extern SEXP zlema(SEXP, SEXP, SEXP);
-extern SEXP runsum(SEXP, SEXP, SEXP);
-extern SEXP runmin(SEXP, SEXP);
-extern SEXP runmax(SEXP, SEXP);
-extern SEXP runmedian(SEXP, SEXP, SEXP, SEXP);
-extern SEXP runmad(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
-extern SEXP runcov(SEXP, SEXP, SEXP, SEXP, SEXP);
+/* define xts imports */
+SEXP (*xts_na_check)(SEXP,SEXP);
 
 static const R_CallMethodDef CallEntries[] = {
   CALLDEF(adjRatios,            3),

@@ -89,17 +89,26 @@
 #'    \item The raw data may contain errors.
 #'  }
 #'
+#'@references
+#'
+#' \itemize{
+#'   \item \href{https://quant.stackexchange.com/questions/1640/where-to-download-list-of-all-common-stocks-traded-on-nyse-nasdaq-and-amex/1862}{Quant StackExchange: Download list of all stock symbols?}
+#'   \item \href{http://www.nasdaqtrader.com/trader.aspx?id=CQSsymbolconvention}{CQS symbol convention}
+#'   \item \href{http://web.archive.org/web/20111023221931/http://help.yahoo.com/l/us/yahoo/finance/quotes/quote-02.html}{Yahoo Finance symbol conventions}
+#' }
+#'
 #'@rdname WebData
 "stockSymbols" <-
-function(exchange=c("AMEX","NASDAQ","NYSE"),
-         sort.by=c("Exchange","Symbol"), quiet=FALSE) {
+function(exchange = c("AMEX", "NASDAQ", "NYSE", "ARCA", "BATS", "IEX"),
+         sort.by = c("Exchange", "Symbol"),
+         quiet = FALSE)
+{
 
   # Many thanks to Ion Georgiadis for helpful suggestions and testing.
 
   # See "NYSE "behind the dot" or Nasdaq 5th-letter codes and other special
   # codes" here:
   # http://en.wikipedia.org/wiki/Ticker_symbol
-  # http://help.yahoo.com/l/us/yahoo/finance/quotes/quote-02.html
   # 
   # AMEX / NYSE Mappings (NASDAQ doesn't need transformation?):
   # Exchanges -> Yahoo
@@ -112,76 +121,140 @@ function(exchange=c("AMEX","NASDAQ","NYSE"),
   # $         -> NA (NYSE Only)
   # ~         -> NA (NYSE Only)
 
-  symbols  <- NULL
-  symbols.colnames <- c("Symbol","Name","LastSale","MarketCap","IPOyear","Sector","Industry","Exchange")
+  symbols.colnames <-
+    c("Symbol","Name","LastSale","MarketCap","IPOyear","Sector","Industry",
+      "Exchange", "Test.Issue", "Round.Lot.Size", "ETF",
+      "Market.Category", "Financial.Status", "Next.Shares", "ACT.Symbol",
+      "CQS.Symbol")
+
   exchange <- match.arg(exchange, several.ok=TRUE)
   sort.by  <- match.arg(sort.by, symbols.colnames, several.ok=TRUE)
 
-  for(i in exchange) {
-    if(!quiet) message("Fetching ",i," symbols...")
-    flush.console()
+  # nasdaqlisted.txt
+  nasdaq.colnames <-
+    c("Symbol",
+      "Security.Name",
+      "Market.Category",
+      "Test.Issue",
+      "Financial.Status",
+      "Round.Lot.Size",
+      "ETF",
+      "NextShares")
 
-    # Fetch Symbols
-    url  <- paste("https://www.nasdaq.com/screening/companies-by-name.aspx",
-                  "?letter=0&exchange=",i,"&render=download",sep="")
-    exch <- read.csv(url, header=TRUE, as.is=TRUE, na="n/a")
+  .market.category <-
+    c(Q = "NASDAQ Global Select MarketSM",
+      G = "NASDAQ Global MarketSM",
+      S = "NASDAQ Capital Market")
 
-    # Find and order by necessary columns
-    col.loc <- sapply(symbols.colnames, grep, names(exch), ignore.case=TRUE)
-    exch <- exch[,c(col.loc, recursive=TRUE)]
-    
-    # Create "Exchange" column
-    exch <- data.frame(exch, Exchange=i, stringsAsFactors=FALSE)
-    colnames(exch) <- symbols.colnames
+  # otherlisted.txt
+  other.colnames <-
+    c("ACT.Symbol",
+      "Security.Name",
+      "Exchange",
+      "CQS.Symbol",
+      "ETF",
+      "Round.Lot.Size",
+      "Test.Issue",
+      "NASDAQ.Symbol")
 
-    # Clean up any whitespace in Symbol
-    exch$Symbol <- gsub("[[:space:]]","",exch$Symbol)
+  .exchange <-
+    c(A = "AMEX",
+      N = "NYSE",
+      P = "ARCA",
+      Z = "BATS",
+      V = "IEX")
 
-    # Exchange-specific scrubbing
-    if(i=="AMEX") {
-      # Transform Symbols to Yahoo format
-      exch$Symbol <- gsub("/WS$", "-WT", exch$Symbol)  # AMEX, NYSE
-      exch$Symbol <- gsub("/WS/", "-WT", exch$Symbol)  # AMEX, NYSE
-      exch$Symbol <- gsub("/U",   "-U",  exch$Symbol)  # AMEX
-      exch$Symbol <- gsub("\\^",  "-P",  exch$Symbol)  # AMEX, NYSE
-      exch$Symbol <- gsub("/",    "-",   exch$Symbol)  # AMEX, NYSE
+  .financial.status <-
+    c(D = "Deficient",
+      E = "Delinquent",
+      Q = "Bankrupt",
+      N = "Normal (Default)",
+      G = "Deficient and Bankrupt",
+      H = "Deficient and Delinquent",
+      J = "Delinquent and Bankrupt",
+      K = "Deficient, Delinquent, and Bankrupt")
 
-      # Drop symbols Yahoo doesn't provide
-      drop <- c( grep("\\.", exch$Symbol),   # AMEX
-                 grep("\\$", exch$Symbol),   # AMEX, NYSE
-                 grep(":",   exch$Symbol) )  # AMEX, NYSE
-      if(NROW(drop)!=0) {
-        exch <- exch[-drop,]
-      }
+  tmp <- tempfile()
 
-    } else
-    # More exchange-specific scrubbing
-    if(i=="NYSE") {
-      # Transform Symbols to Yahoo format
-      exch$Symbol <- gsub("/WS$", "-WT", exch$Symbol)  # AMEX, NYSE
-      exch$Symbol <- gsub("/WS/", "-WT", exch$Symbol)  # AMEX, NYSE
-      exch$Symbol <- gsub("\\^",  "-P",  exch$Symbol)  # AMEX, NYSE
-      exch$Symbol <- gsub("/",    "-",   exch$Symbol)  # AMEX, NYSE
+  base.url <- "ftp://ftp.nasdaqtrader.com/SymbolDirectory/"
+  nasdaq.url <- paste0(base.url, "nasdaqlisted.txt")
+  other.url <- paste0(base.url, "otherlisted.txt")
 
-      # Drop symbols Yahoo doesn't provide
-      drop <- c( grep("\\$", exch$Symbol),   # AMEX
-                 grep(":",   exch$Symbol),   # AMEX, NYSE
-                 grep("~",   exch$Symbol) )  # AMEX, NYSE
-      if(NROW(drop)!=0) {
-        exch <- exch[-drop,]
-      }
+  nasdaq <- NULL
+  if ("NASDAQ" %in% exchange) {
+    if (!quiet) {
+      message("Fetching NASDAQ symbols...")
+      flush.console()
+    }
+    curl::curl_download(nasdaq.url, destfile = tmp)
+    nasdaq <- read.table(tmp, header = TRUE, sep = "|", quote = "", fill = TRUE)
 
+    # add symbols columns not in file
+    nasdaq$Name <- nasdaq$Security.Name
+    nasdaq$Exchange <- "NASDAQ"
+    nasdaq[, setdiff(symbols.colnames, colnames(nasdaq))] <- NA
+
+    # order columns
+    nasdaq <- nasdaq[, symbols.colnames]
+
+    # convert market category code to name
+    nasdaq$Market.Category <- .market.category[nasdaq$Market.Category]
+
+    # convert financial status code to name
+    nasdaq$Financial.Status <- .financial.status[nasdaq$Financial.Status]
+  }
+
+  other <- NULL
+  if (length(exchange) > 1L) {
+    if (!quiet) {
+      message("Fetching non-NASDAQ symbols...")
+      flush.console()
     }
 
-    # Append data from all exchanges
-    symbols <- rbind( symbols, exch )
+    curl::curl_download(other.url, destfile = tmp)
+    other <- read.table(tmp, header = TRUE, sep = "|", quote = "", fill = TRUE)
+
+    # remove last row (File creation time)
+    other <- other[-nrow(other),]
+
+    # add symbols columns not in file
+    other$Name <- other$Security.Name
+    other$Symbol <- other$NASDAQ.Symbol
+    other[, setdiff(symbols.colnames, colnames(other))] <- NA
+
+    # convert exchange code to name
+    other$Exchange <- .exchange[other$Exchange]
+
+    # order columns
+    other <- other[, symbols.colnames]
   }
+
+  # Append data from all exchanges
+  symbols <- rbind(nasdaq, other)
+
+  # Convert symbol from NASDAQ to Yahoo format
+  # symbols[grep("[-.*$+!@%^=#].?$", symbols$NASDAQ.Symbol),c("Symbol", "NASDAQ.Symbol")]
+  symbols$NASDAQ.Symbol <- symbols$Symbol
+  # preferreds
+  symbols$Symbol <- sub("-(.?)$", "-P\\1", symbols$Symbol)
+  # classes
+  symbols$Symbol <- sub("\\.(.?)$", "-\\1", symbols$Symbol)
+  # warrants
+  symbols$Symbol <- sub("\\+(.?)$", "-WT\\1", symbols$Symbol)
+  # units
+  symbols$Symbol <- sub("\\=$", "-UN", symbols$Symbol)
+  # rights
+  symbols$Symbol <- sub("\\^$", "-R", symbols$Symbol)
+
+  # convert ETF and Test.Issue to logical
+  symbols$ETF <- ("Y" == symbols$ETF)
+  symbols$Test.Issue <- ("Y" == symbols$Test.Issue)
 
   # Sort
   symbols <- symbols[do.call("order", symbols[,sort.by]),]
 
   # Pretty rownames
-  rownames(symbols) <- 1:NROW(symbols)
+  rownames(symbols) <- NULL
   
   return(symbols)
 }

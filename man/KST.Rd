@@ -4,8 +4,15 @@
 \alias{KST}
 \title{Know Sure Thing}
 \usage{
-KST(price, n = c(10, 10, 10, 15), nROC = c(10, 15, 20, 30), nSig = 9,
-  maType, wts = 1:NROW(n), ...)
+KST(
+  price,
+  n = c(10, 10, 10, 15),
+  nROC = c(10, 15, 20, 30),
+  nSig = 9,
+  maType,
+  wts = 1:NROW(n),
+  ...
+)
 }
 \arguments{
 \item{price}{Price series that is coercible to xts or matrix.}

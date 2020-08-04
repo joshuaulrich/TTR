@@ -37,11 +37,17 @@ test.EMA <- function() {
   checkException( EMA(input$all$Close, n = -1) )
   checkException( EMA(input$all$Close, n = NROW(input$all) + 1) )
 }
+
 test.EMA.n.ratio <- function() {
   out <- 0:9 * 1.0
   is.na(out) <- 1:2
   checkEqualsNumeric(EMA(1:10, ratio = 0.5), out)
   checkEqualsNumeric(EMA(1:10, n = 3), out)
+  checkEqualsNumeric(EMA(1:10, n = 3, ratio = 0.5), out)
+}
+
+test.EMA.ratio.eq.0 <- function() {
+  checkException(EMA(1:10, ratio = 0.0))
 }
 
 # Exponential Moving Average, Wilder ratio
@@ -87,6 +93,12 @@ test.WMAvol <- function() {
   checkException( WMA(input$all$Close, wts=input$all[,1:2]) )
 }
 
+test.WMA_returns_xts <- function() {
+  x <- xts::.xts(x = c(NA, 1:3), 1:4)
+  wma <- WMA(x, 2)
+  checkTrue(inherits(wma, "xts"))
+}
+
 # Exponential, Volume-Weighted Moving Average
 test.EVWMA <- function() {
   checkEqualsNumeric( EVWMA(input$all$Close, input$all$Volume), output$allEVWMA )
@@ -109,4 +121,15 @@ test.ZLEMA <- function() {
   checkEquals( attributes(ZLEMA(input$top$Close)), attributes(output$topZLEMA) )
   checkException( ZLEMA(input$mid$Close) )
   checkException( ZLEMA(input$all[,1:2]) )
+}
+
+test.ZLEMA.n.ratio <- function() {
+  out <- c(rep(NA, 6), 4.0, 6.0, 7.75, 9.3125)
+  checkEqualsNumeric(ZLEMA(1:10, ratio = 0.25), out)
+  checkEqualsNumeric(ZLEMA(1:10, n = 7), out)
+  checkEqualsNumeric(ZLEMA(1:10, n = 7, ratio = 0.25), out)
+}
+
+test.ZLEMA.ratio.eq.0 <- function() {
+  checkException(ZLEMA(1:10, ratio = 0.0))
 }

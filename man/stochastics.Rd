@@ -7,14 +7,20 @@
 \alias{SMI}
 \alias{\%K}
 \alias{\%D}
-\alias{SMI}
 \title{Stochastic Oscillator / Stochastic Momentum Index}
 \usage{
-stoch(HLC, nFastK = 14, nFastD = 3, nSlowD = 3, maType, bounded = TRUE,
-  smooth = 1, ...)
+stoch(
+  HLC,
+  nFastK = 14,
+  nFastD = 3,
+  nSlowD = 3,
+  maType,
+  bounded = TRUE,
+  smooth = 1,
+  ...
+)
 
-SMI(HLC, n = 13, nFast = 2, nSlow = 25, nSig = 9, maType,
-  bounded = TRUE, ...)
+SMI(HLC, n = 13, nFast = 2, nSlow = 25, nSig = 9, maType, bounded = TRUE, ...)
 }
 \arguments{
 \item{HLC}{Object that is coercible to xts or matrix and contains

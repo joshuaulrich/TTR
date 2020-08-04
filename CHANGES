@@ -1,5 +1,12 @@
 #-#-#-#-#-#-#-#-#-#    Changes in TTR version 0.24-0    #-#-#-#-#-#-#-#-#-#
 
+BUG FIXES
+
+  - stoch() was wrong when 'bounded = FALSE'. Thanks to GitHub user rfinfun
+    for the report and patch. (#74)
+
+#-#-#-#-#-#-#-#-#-#    Changes in TTR version 0.24-0    #-#-#-#-#-#-#-#-#-#
+
 
 SIGNIFICANT USER-VISIBLE CHANGES
 

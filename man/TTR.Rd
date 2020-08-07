@@ -52,10 +52,10 @@ if (interactive()) {
 }
 \references{
 The following sites were used to code/document this package:\cr
-\url{http://www.fmlabs.com/reference/default.htm}\cr
+\url{https://www.fmlabs.com/reference/default.htm}\cr
 \url{https://www.metastock.com/Customer/Resources/TAAZ/}\cr
 \url{https://www.linnsoft.com/indicators}\cr
-\url{http://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators}\cr
+\url{https://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators}\cr
 }
 \author{
 Joshua Ulrich

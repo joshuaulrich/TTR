@@ -40,7 +40,7 @@ rank values that are not found within the lookback window.
 }
 \references{
 The following site(s) were used to code/document this
-indicator:\cr \url{http://en.wikipedia.org/wiki/Percentile_rank}\cr
+indicator:\cr \url{https://en.wikipedia.org/wiki/Percentile_rank}\cr
 }
 \author{
 Charlie Friedemann

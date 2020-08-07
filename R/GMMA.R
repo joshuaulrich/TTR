@@ -45,7 +45,7 @@
 #'direction/strength.
 #'@references The following site(s) were used to code/document this
 #'indicator:\cr
-#'\url{http://www.investopedia.com/terms/g/guppy-multiple-moving-average.asp}\cr
+#'\url{https://www.investopedia.com/terms/g/guppy-multiple-moving-average.asp}\cr
 #'@keywords ts
 #'@examples
 #'

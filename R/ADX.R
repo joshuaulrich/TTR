@@ -49,15 +49,15 @@
 #'\code{\link{TDI}}, \code{\link{VHF}}, \code{\link{GMMA}} for other indicators
 #'that measure trend direction/strength.
 #'@references The following site(s) were used to code/document this
-#'indicator:\cr \url{http://www.fmlabs.com/reference/DI.htm}\cr
-#'\url{http://www.fmlabs.com/reference/DX.htm}\cr
-#'\url{http://www.fmlabs.com/reference/ADX.htm}\cr
-#'\url{http://www.fmlabs.com/reference/ADXR.htm}\cr
+#'indicator:\cr \url{https://www.fmlabs.com/reference/DI.htm}\cr
+#'\url{https://www.fmlabs.com/reference/DX.htm}\cr
+#'\url{https://www.fmlabs.com/reference/ADX.htm}\cr
+#'\url{https://www.fmlabs.com/reference/ADXR.htm}\cr
 #'\url{https://www.metastock.com/Customer/Resources/TAAZ/?p=49}\cr
 #'\url{https://www.linnsoft.com/techind/directional-indicator-diplus-diminus}\cr
 #'\url{https://www.linnsoft.com/techind/adx-avg-directional-movement}\cr
 #'\url{https://www.linnsoft.com/techind/adxr-avg-directional-movement-rating}\cr
-#'\url{http://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators:average_directional_index_adx}\cr
+#'\url{https://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators:average_directional_index_adx}\cr
 #'@keywords ts
 #'@examples
 #'

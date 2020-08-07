@@ -111,8 +111,8 @@ if (interactive()) {
 \references{
 \itemize{
   \item \href{https://quant.stackexchange.com/questions/1640/where-to-download-list-of-all-common-stocks-traded-on-nyse-nasdaq-and-amex/1862}{Quant StackExchange: Download list of all stock symbols?}
-  \item \href{http://www.nasdaqtrader.com/trader.aspx?id=CQSsymbolconvention}{CQS symbol convention}
-  \item \href{http://web.archive.org/web/20111023221931/http://help.yahoo.com/l/us/yahoo/finance/quotes/quote-02.html}{Yahoo Finance symbol conventions}
+  \item \href{https://www.nasdaqtrader.com/trader.aspx?id=CQSsymbolconvention}{CQS symbol convention}
+  \item \href{https://web.archive.org/web/20111023221931/http://help.yahoo.com/l/us/yahoo/finance/quotes/quote-02.html}{Yahoo Finance symbol conventions}
 }
 }
 \author{

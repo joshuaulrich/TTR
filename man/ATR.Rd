@@ -48,11 +48,11 @@ atr <- ATR(ttrc[,c("High","Low","Close")], n=14)
 }
 \references{
 The following site(s) were used to code/document this
-indicator:\cr \url{http://www.fmlabs.com/reference/TR.htm}\cr
-\url{http://www.fmlabs.com/reference/ATR.htm}\cr
+indicator:\cr \url{https://www.fmlabs.com/reference/TR.htm}\cr
+\url{https://www.fmlabs.com/reference/ATR.htm}\cr
 \url{https://www.metastock.com/Customer/Resources/TAAZ/?p=35}\cr
 \url{https://www.linnsoft.com/techind/true-range-tr}\cr
-\url{http://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators:average_true_range_atr}\cr
+\url{https://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators:average_true_range_atr}\cr
 }
 \seealso{
 See \code{\link{EMA}}, \code{\link{SMA}}, etc. for moving average

@@ -55,11 +55,11 @@ zz <- ZigZag( ttrc[,c("High", "Low")], change=20 )
 \references{
 The following site(s) were used to code/document this
 indicator:\cr
-\url{http://www.fmlabs.com/reference/default.htm?url=ZigZag.htm}\cr
+\url{https://www.fmlabs.com/reference/default.htm?url=ZigZag.htm}\cr
 \url{https://www.linnsoft.com/techind/zig-zag-indicator-zig-zzo}\cr
 \url{https://www.linnsoft.com/techind/zig-zag-oscillator-indicator-zzo}\cr
-\url{http://www.metastock.com/Customer/Resources/TAAZ/#127}\cr
-\url{http://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators:zigzag}\cr
+\url{https://www.metastock.com/Customer/Resources/TAAZ/#127}\cr
+\url{https://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators:zigzag}\cr
 }
 \author{
 Joshua Ulrich

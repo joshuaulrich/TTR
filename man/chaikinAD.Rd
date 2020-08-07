@@ -40,10 +40,10 @@ ad <- chaikinAD(ttrc[,c("High","Low","Close")], ttrc[,"Volume"])
 }
 \references{
 The following site(s) were used to code/document this
-indicator:\cr \url{http://www.fmlabs.com/reference/AccumDist.htm}\cr
+indicator:\cr \url{https://www.fmlabs.com/reference/AccumDist.htm}\cr
 \url{https://www.metastock.com/Customer/Resources/TAAZ/?p=27}\cr
 \url{https://www.linnsoft.com/techind/accumulation-distribution}\cr
-\url{http://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators:accumulation_distribution_line}\cr
+\url{https://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators:accumulation_distribution_line}\cr
 }
 \seealso{
 See \code{\link{OBV}}, and \code{\link{CLV}}.

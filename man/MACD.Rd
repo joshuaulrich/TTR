@@ -69,17 +69,17 @@ macd2 <- MACD( ttrc[,"Close"], 12, 26, 9,
 The following site(s) were used to code/document this
 indicator:
 \cr Moving Average Convergence/Divergence (MACD):\cr
-\url{http://www.fmlabs.com/reference/MACD.htm}\cr
+\url{https://www.fmlabs.com/reference/MACD.htm}\cr
 \url{https://www.metastock.com/Customer/Resources/TAAZ/?p=66}\cr
 \url{https://www.linnsoft.com/techind/macd}\cr
-\url{http://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators:moving_average_convergence_divergence_macd}\cr
+\url{https://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators:moving_average_convergence_divergence_macd}\cr
 \cr Price Oscillator:\cr
-\url{http://www.fmlabs.com/reference/PriceOscillator.htm}\cr
-\url{http://www.fmlabs.com/reference/PriceOscillatorPct.htm}\cr
+\url{https://www.fmlabs.com/reference/PriceOscillator.htm}\cr
+\url{https://www.fmlabs.com/reference/PriceOscillatorPct.htm}\cr
 \url{https://www.metastock.com/Customer/Resources/TAAZ/?p=94}\cr
-\url{http://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators:price_oscillators_ppo}\cr
+\url{https://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators:price_oscillators_ppo}\cr
 \cr Volume Oscillator:\cr
-\url{http://www.fmlabs.com/reference/PVO.htm}\cr
+\url{https://www.fmlabs.com/reference/PVO.htm}\cr
 \url{https://www.metastock.com/Customer/Resources/TAAZ/?p=122}\cr
 }
 \seealso{

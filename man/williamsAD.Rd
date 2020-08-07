@@ -35,8 +35,8 @@ ad <- williamsAD(ttrc[,c("High","Low","Close")])
 \references{
 The following site(s) were used to code/document this
 indicator:\cr
-\url{http://www.fmlabs.com/reference/WilliamsAD.htm}\cr
-\url{http://www.metastock.com/Customer/Resources/TAAZ/#125}\cr
+\url{https://www.fmlabs.com/reference/WilliamsAD.htm}\cr
+\url{https://www.metastock.com/Customer/Resources/TAAZ/#125}\cr
 }
 \seealso{
 See \code{\link{OBV}}, \code{\link{chaikinAD}}, and

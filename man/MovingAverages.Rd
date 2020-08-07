@@ -182,15 +182,15 @@ tail( EMA(x[ 1:100],10), 1 )
 }
 \references{
 The following site(s) were used to code/document this
-indicator:\cr \url{http://www.fmlabs.com/reference/ExpMA.htm}\cr
-\url{http://www.fmlabs.com/reference/WeightedMA.htm}\cr
-\url{http://www.fmlabs.com/reference/DEMA.htm}\cr
-\url{http://www.fmlabs.com/reference/T3.htm}\cr
+indicator:\cr \url{https://www.fmlabs.com/reference/ExpMA.htm}\cr
+\url{https://www.fmlabs.com/reference/WeightedMA.htm}\cr
+\url{https://www.fmlabs.com/reference/DEMA.htm}\cr
+\url{https://www.fmlabs.com/reference/T3.htm}\cr
 \url{https://www.linnsoft.com/techind/evwma-elastic-volume-weighted-moving-average}\cr
-\url{http://www.fmlabs.com/reference/ZeroLagExpMA.htm}\cr
-\url{http://www.fmlabs.com/reference/VIDYA.htm}\cr
-\url{http://www.traderslog.com/hullmovingaverage}\cr
-\url{http://www.arnaudlegoux.com/}\cr
+\url{https://www.fmlabs.com/reference/ZeroLagExpMA.htm}\cr
+\url{https://www.fmlabs.com/reference/VIDYA.htm}\cr
+\url{https://www.traderslog.com/hullmovingaverage}\cr
+\url{https://www.arnaudlegoux.com/}\cr
 }
 \seealso{
 See \code{\link{wilderSum}}, which is used in calculating a Welles

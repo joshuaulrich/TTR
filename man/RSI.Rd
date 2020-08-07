@@ -67,13 +67,13 @@ rsiMA2 <- RSI(price, n=14, maType=list(maUp=list(EMA,ratio=1/5),
 The following site(s) were used to code/document this
 indicator:
 \cr Relative Strength Index:\cr
-\url{http://www.fmlabs.com/reference/RSI.htm}\cr
+\url{https://www.fmlabs.com/reference/RSI.htm}\cr
 \url{https://www.metastock.com/Customer/Resources/TAAZ/?p=100}\cr
 \url{https://www.linnsoft.com/techind/relative-strength-index-rsi}\cr
-\url{http://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators:relative_strength_index_rsi}\cr
+\url{https://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators:relative_strength_index_rsi}\cr
 \cr Stochastic RSI:\cr
-\url{http://www.fmlabs.com/reference/StochRSI.htm}\cr
-\url{http://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators:stochrsi}\cr
+\url{https://www.fmlabs.com/reference/StochRSI.htm}\cr
+\url{https://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators:stochrsi}\cr
 }
 \seealso{
 See \code{\link{EMA}}, \code{\link{SMA}}, etc. for moving average

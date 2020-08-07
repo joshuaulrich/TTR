@@ -32,7 +32,7 @@ clv <- CLV(ttrc[,c("High","Low","Close")])
 \references{
 The following site(s) were used to code/document this
 indicator:\cr
-\url{http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:accumulation_distribution_line}\cr
+\url{https://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:accumulation_distribution_line}\cr
 }
 \seealso{
 See \code{\link{chaikinAD}}, which uses CLV.

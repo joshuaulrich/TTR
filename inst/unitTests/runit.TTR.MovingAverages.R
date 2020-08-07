@@ -69,6 +69,16 @@ test.DEMA <- function() {
   checkException( DEMA(input$all[,1:2]) )
 }
 
+# Hull Moving Average
+test.HMA <- function() {
+  hma <- HMA(1:10, 2)
+  checkEqualsNumeric(hma, c(NA, 2:10 + 1/3))
+}
+test.HMA.odd.n <- function() {
+  hma <- HMA(1:10, 3)
+  checkEqualsNumeric(hma, c(rep(NA, 2), 3:10 + 2/3))
+}
+
 # Weighted Moving Average, 1:n
 test.WMA <- function() {
   checkEqualsNumeric( WMA(input$all$Close), output$allWMA )

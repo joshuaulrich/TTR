@@ -424,7 +424,11 @@ function(x, n=20, ...) {
 
   # Hull Moving Average
 
-  reclass(WMA(2*WMA(x, n=n/2, ...) - WMA(x, n=n, ...), n=trunc(sqrt(n)), ...), x)
+  madiff <- 2 * WMA(x, n = trunc(n / 2), ...) - WMA(x, n = n, ...)
+
+  hma <- WMA(madiff, n = trunc(sqrt(n)), ...)
+
+  reclass(hma, x)
 }
 
 #-------------------------------------------------------------------------#

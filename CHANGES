@@ -1,17 +1,5 @@
 #-#-#-#-#-#-#-#-#-#    Changes in TTR version 0.24-0    #-#-#-#-#-#-#-#-#-#
 
-BUG FIXES
-
-  - stoch() was wrong when 'bounded = FALSE'. Thanks to GitHub user rfinfun
-    for the report and patch. (#74)
-
-  - HMA() threw an error when 'n' was an odd number. This was because the
-    first call to WMA() used 'n = n / 2' which caused 'n' to not be an
-    integer. Thanks to GitHub user dragie for the report. (#76)
-
-
-#-#-#-#-#-#-#-#-#-#    Changes in TTR version 0.24-0    #-#-#-#-#-#-#-#-#-#
-
 
 SIGNIFICANT USER-VISIBLE CHANGES
 
@@ -46,6 +34,13 @@ BUG FIXES
   - WMA() did not return an xts object when passed an xts object for 'x' that
     had leading NA, with the default 'wts = 1:n'. Thanks to Cory Fletcher for
     reporting this issue via email. (#96)
+
+  - stoch() was wrong when 'bounded = FALSE'. Thanks to GitHub user rfinfun
+    for the report and patch. (#74)
+
+  - HMA() threw an error when 'n' was an odd number. This was because the
+    first call to WMA() used 'n = n / 2' which caused 'n' to not be an
+    integer. Thanks to GitHub user dragie for the report. (#76)
 
 
 #-#-#-#-#-#-#-#-#-#    Changes in TTR version 0.23-0    #-#-#-#-#-#-#-#-#-#

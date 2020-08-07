@@ -126,7 +126,7 @@
 #'\url{https://www.fmlabs.com/reference/ZeroLagExpMA.htm}\cr
 #'\url{https://www.fmlabs.com/reference/VIDYA.htm}\cr
 #'\url{https://www.traderslog.com/hullmovingaverage}\cr
-#'\url{https://www.arnaudlegoux.com/}\cr
+#'\url{https://web.archive.org/web/20180222085959/http://arnaudlegoux.com/}\cr
 #'@keywords ts
 #'@examples
 #'

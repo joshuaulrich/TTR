@@ -35,6 +35,9 @@ SEXP ema (SEXP x, SEXP n, SEXP ratio, SEXP wilder) {
      */
     int i_n;
     if(R_NilValue == n && R_NilValue != ratio) {
+      if(asReal(ratio) <= 0.0) {
+        error("cannot approximate 'n'; 'ratio' must be > 0");
+      }
       i_n = (int)(2.0 / asReal(ratio) - 1.0);
     } else {
       i_n = asInteger(n);

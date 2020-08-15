@@ -235,14 +235,12 @@ SEXP wma (SEXP x, SEXP w, SEXP n) {
     double *d_result = REAL(result);
 
     /* Find first non-NA input value */
-    int beg = 0;
-    d_result[beg] = 0;
-    for(i = 0; i <= beg; i++) {
+    int beg = i_n - 1;
+    for(i = 0; i < beg; i++) {
         /* Account for leading NAs in input */
         if(ISNA(d_x[i])) {
             d_result[i] = NA_REAL;
             beg++;
-            d_result[beg] = 0;
             continue;
         }
         /* Set leading NAs in output */

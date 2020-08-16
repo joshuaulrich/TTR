@@ -152,6 +152,10 @@ test.runCov <- function() {
   checkException( runCov(input$all$Close, n = -1) )
   checkException( runCov(input$all$Close, n = NROW(input$all) + 1) )
   checkEqualsNumeric( tail(runCov(input$all$High, input$all$Low, 250),1), cov(input$all$High, input$all$Low) )
+  # x argument as xts object
+  checkEqualsNumeric( runCov(xts::as.xts(input$all)$High, input$all$Low), output$allCov )
+  # x and y arguments as xts objects
+  checkEqualsNumeric( runCov(xts::as.xts(input$all)$High, xts::as.xts(input$all)$Low), output$allCov )
 }
 test.runCov.cumulative <- function() {
   cumcov <- compiler::cmpfun(

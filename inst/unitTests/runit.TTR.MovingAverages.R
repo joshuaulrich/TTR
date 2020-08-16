@@ -16,6 +16,15 @@ load(system.file("unitTests/output.MA.rda", package="TTR"))
 
 #################################################
 
+# ALMA
+test.ALMA.output.length.eq.input.length <- function() {
+  v <- 1:10
+  x <- xts::.xts(v, seq_along(v))
+  av <- ALMA(v)
+  ax <- ALMA(x)
+  checkEquals(NROW(av), NROW(ax))
+}
+
 # Simple Moving Average
 test.SMA <- function() {
   checkEqualsNumeric( SMA(input$all$Close), output$allSMA )

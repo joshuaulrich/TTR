@@ -21,7 +21,7 @@
 
 SEXP aroon_max (SEXP x, SEXP n) {
 
-  /* Initalize loop, loc, and PROTECT counters */
+  /* Initialize loop, loc, and PROTECT counters */
   int i, j, loc=0, P=0;
 
   /* Ensure x argument is double */
@@ -36,7 +36,7 @@ SEXP aroon_max (SEXP x, SEXP n) {
   /* Input object length */
   int nr = length(x);
 
-  /* Initalize result R object */
+  /* Initialize result R object */
   SEXP result;
   PROTECT(result = allocVector(REALSXP, nr)); P++;
   double *real_result = REAL(result);

@@ -21,7 +21,7 @@
 
 SEXP ema (SEXP x, SEXP n, SEXP ratio, SEXP wilder) {
     
-    /* Initalize loop and PROTECT counters */
+    /* Initialize loop and PROTECT counters */
     int i, P=0;
 
     /* ensure that 'x' is double */
@@ -60,7 +60,7 @@ SEXP ema (SEXP x, SEXP n, SEXP ratio, SEXP wilder) {
     /* Input object length */
     int nr = nrows(x);
 
-    /* Initalize result R object */
+    /* Initialize result R object */
     SEXP result;
     PROTECT(result = allocVector(REALSXP,nr)); P++;
     double *d_result = REAL(result);
@@ -97,7 +97,7 @@ SEXP ema (SEXP x, SEXP n, SEXP ratio, SEXP wilder) {
 
 SEXP evwma (SEXP pr, SEXP vo, SEXP n) {
     
-    /* Initalize loop and PROTECT counters */
+    /* Initialize loop and PROTECT counters */
     int i, P=0;
 
     /* ensure that 'pr' is double */
@@ -117,7 +117,7 @@ SEXP evwma (SEXP pr, SEXP vo, SEXP n) {
     /* Input object length */
     int nr = nrows(pr);
 
-    /* Initalize result R object */
+    /* Initialize result R object */
     SEXP result;
     PROTECT(result = allocVector(REALSXP,nr)); P++;
     double *d_result = REAL(result);
@@ -158,7 +158,7 @@ SEXP evwma (SEXP pr, SEXP vo, SEXP n) {
 
 SEXP vma (SEXP x, SEXP w, SEXP ratio) {
     
-    /* Initalize loop and PROTECT counters */
+    /* Initialize loop and PROTECT counters */
     int i, P=0;
 
     /* ensure that 'x' is double */
@@ -178,7 +178,7 @@ SEXP vma (SEXP x, SEXP w, SEXP ratio) {
     /* Input object length */
     int nr = nrows(x);
 
-    /* Initalize result R object */
+    /* Initialize result R object */
     SEXP result;
     PROTECT(result = allocVector(REALSXP,nr)); P++;
     double *d_result = REAL(result);
@@ -214,7 +214,7 @@ SEXP vma (SEXP x, SEXP w, SEXP ratio) {
 
 SEXP wma (SEXP x, SEXP w, SEXP n) {
 
-    /* Initalize loop and PROTECT counters */
+    /* Initialize loop and PROTECT counters */
     int i, j, P=0;
 
     /* ensure that 'x' is double */
@@ -234,7 +234,7 @@ SEXP wma (SEXP x, SEXP w, SEXP n) {
     /* Input object length */
     int nr = nrows(x);
 
-    /* Initalize result R object */
+    /* Initialize result R object */
     SEXP result;
     PROTECT(result = allocVector(REALSXP,nr)); P++;
     double *d_result = REAL(result);
@@ -277,7 +277,7 @@ SEXP wma (SEXP x, SEXP w, SEXP n) {
 
 SEXP zlema (SEXP x, SEXP n, SEXP ratio) {
 
-    /* Initalize loop and PROTECT counters */
+    /* Initialize loop and PROTECT counters */
     int i, P=0;
 
     /* ensure that 'x' is double */
@@ -311,7 +311,7 @@ SEXP zlema (SEXP x, SEXP n, SEXP ratio) {
     /* Input object length */
     int nr = nrows(x);
 
-    /* Initalize result R object */
+    /* Initialize result R object */
     SEXP result;
     PROTECT(result = allocVector(REALSXP,nr)); P++;
     double *d_result = REAL(result);

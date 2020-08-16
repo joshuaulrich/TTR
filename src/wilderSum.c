@@ -22,7 +22,7 @@
 
 SEXP wilderSum (SEXP x, SEXP n) {
 
-    /* Initalize loop and PROTECT counters */
+    /* Initialize loop and PROTECT counters */
     int i, P=0;
 
     /* assure that 'x' is double */
@@ -37,7 +37,7 @@ SEXP wilderSum (SEXP x, SEXP n) {
     /* Input object length */
     int nr = nrows(x);
 
-    /* Initalize result R object */
+    /* Initialize result R object */
     SEXP result;
     PROTECT(result = allocVector(REALSXP,nr)); P++;
     double *d_result = REAL(result);

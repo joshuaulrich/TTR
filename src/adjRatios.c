@@ -27,12 +27,12 @@ SEXP adjRatios (SEXP split, SEXP div, SEXP close) {
     double *real_split = REAL(split);
     double *real_div   = REAL(div);
     
-    /* Initalize loop and PROTECT counters */
+    /* Initialize loop and PROTECT counters */
     int i, P = 0;
-    /* Initalize object length (NOTE: all arguments are the same length) */
+    /* Initialize object length (NOTE: all arguments are the same length) */
     int N = length(close);
 
-    /* Initalize result R objects */
+    /* Initialize result R objects */
     SEXP result;    PROTECT(result  = allocVector(VECSXP, 2)); P++;
     SEXP s_ratio;   PROTECT(s_ratio = allocVector(REALSXP,N)); P++;
     SEXP d_ratio;   PROTECT(d_ratio = allocVector(REALSXP,N)); P++;

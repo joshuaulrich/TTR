@@ -21,7 +21,7 @@
 
 SEXP ema (SEXP x, SEXP n, SEXP ratio, SEXP wilder) {
     
-    /* Initalize loop and PROTECT counters */
+    /* Initialize loop and PROTECT counters */
     int i, P=0;
 
     /* ensure that 'x' is double */
@@ -30,32 +30,37 @@ SEXP ema (SEXP x, SEXP n, SEXP ratio, SEXP wilder) {
     }
     double *d_x = REAL(x);
 
-    /* If ratio is specified, and n is not, set n to approx 'correct'
-     * value backed out from ratio
-     */
-    int i_n;
-    if(R_NilValue == n && R_NilValue != ratio) {
-      i_n = (int)(2.0 / asReal(ratio) - 1.0);
-    } else {
-      i_n = asInteger(n);
+    if(ncols(x) > 1) {
+      error("ncol(x) > 1; EMA only supports univariate 'x'");
     }
 
-    /* Determine decay ratio */
-    int isWilder = LOGICAL(wilder)[0];
-    double d_ratio;
-    if(R_NilValue == ratio) {
-      d_ratio = (isWilder) ? 1.0 / i_n : 2.0 / (i_n + 1);
+    int i_n = asInteger(n);
+    double d_ratio = asReal(ratio);
+
+    if(R_NilValue == n || i_n <= 0) {
+      if(R_NilValue == ratio || d_ratio <= 0.0) {
+        error("either 'n' or 'ratio' must be specified and > 0\n",
+              "'n' is ", n, " 'ratio' is ", ratio);
+      } else {
+        /* If ratio is specified, and n is not, set n to approx 'correct'
+         * value backed out from ratio */
+        i_n  = (int)(2.0 / d_ratio - 1.0);
+      }
     } else {
-      d_ratio = asReal(ratio);
-      if(d_ratio <= 0.0) {
-        error("'ratio' must be > 0");
+      /* Determine decay ratio */
+      if(R_NilValue == ratio) {
+        int isWilder = asInteger(wilder);
+        d_ratio = (isWilder) ? 1.0 / i_n : 2.0 / (i_n + 1);
+      } else {
+        /* ratio != NULL -> warn that 'n' will be used instead */
+        warning("both 'n' and 'ratio' are specified; using 'n'");
       }
     }
 
     /* Input object length */
     int nr = nrows(x);
 
-    /* Initalize result R object */
+    /* Initialize result R object */
     SEXP result;
     PROTECT(result = allocVector(REALSXP,nr)); P++;
     double *d_result = REAL(result);
@@ -92,7 +97,7 @@ SEXP ema (SEXP x, SEXP n, SEXP ratio, SEXP wilder) {
 
 SEXP evwma (SEXP pr, SEXP vo, SEXP n) {
     
-    /* Initalize loop and PROTECT counters */
+    /* Initialize loop and PROTECT counters */
     int i, P=0;
 
     /* ensure that 'pr' is double */
@@ -112,7 +117,7 @@ SEXP evwma (SEXP pr, SEXP vo, SEXP n) {
     /* Input object length */
     int nr = nrows(pr);
 
-    /* Initalize result R object */
+    /* Initialize result R object */
     SEXP result;
     PROTECT(result = allocVector(REALSXP,nr)); P++;
     double *d_result = REAL(result);
@@ -153,7 +158,7 @@ SEXP evwma (SEXP pr, SEXP vo, SEXP n) {
 
 SEXP vma (SEXP x, SEXP w, SEXP ratio) {
     
-    /* Initalize loop and PROTECT counters */
+    /* Initialize loop and PROTECT counters */
     int i, P=0;
 
     /* ensure that 'x' is double */
@@ -173,7 +178,7 @@ SEXP vma (SEXP x, SEXP w, SEXP ratio) {
     /* Input object length */
     int nr = nrows(x);
 
-    /* Initalize result R object */
+    /* Initialize result R object */
     SEXP result;
     PROTECT(result = allocVector(REALSXP,nr)); P++;
     double *d_result = REAL(result);
@@ -209,7 +214,7 @@ SEXP vma (SEXP x, SEXP w, SEXP ratio) {
 
 SEXP wma (SEXP x, SEXP w, SEXP n) {
 
-    /* Initalize loop and PROTECT counters */
+    /* Initialize loop and PROTECT counters */
     int i, j, P=0;
 
     /* ensure that 'x' is double */
@@ -229,20 +234,18 @@ SEXP wma (SEXP x, SEXP w, SEXP n) {
     /* Input object length */
     int nr = nrows(x);
 
-    /* Initalize result R object */
+    /* Initialize result R object */
     SEXP result;
     PROTECT(result = allocVector(REALSXP,nr)); P++;
     double *d_result = REAL(result);
 
     /* Find first non-NA input value */
-    int beg = 0;
-    d_result[beg] = 0;
-    for(i = 0; i <= beg; i++) {
+    int beg = i_n - 1;
+    for(i = 0; i < beg; i++) {
         /* Account for leading NAs in input */
         if(ISNA(d_x[i])) {
             d_result[i] = NA_REAL;
             beg++;
-            d_result[beg] = 0;
             continue;
         }
         /* Set leading NAs in output */
@@ -274,7 +277,7 @@ SEXP wma (SEXP x, SEXP w, SEXP n) {
 
 SEXP zlema (SEXP x, SEXP n, SEXP ratio) {
 
-    /* Initalize loop and PROTECT counters */
+    /* Initialize loop and PROTECT counters */
     int i, P=0;
 
     /* ensure that 'x' is double */
@@ -308,7 +311,7 @@ SEXP zlema (SEXP x, SEXP n, SEXP ratio) {
     /* Input object length */
     int nr = nrows(x);
 
-    /* Initalize result R object */
+    /* Initialize result R object */
     SEXP result;
     PROTECT(result = allocVector(REALSXP,nr)); P++;
     double *d_result = REAL(result);

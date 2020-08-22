@@ -55,7 +55,7 @@ volumeDPO <- DPO(ttrc[,"Volume"])
 \references{
 The following site(s) were used to code/document this
 indicator:\cr
-\url{http://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators:detrended_price_osci}\cr
+\url{https://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators:detrended_price_osci}\cr
 }
 \seealso{
 See \code{\link{EMA}}, \code{\link{SMA}}, etc. for moving average

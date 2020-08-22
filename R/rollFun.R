@@ -39,7 +39,7 @@
 #'@author Joshua Ulrich
 #'@references The following site(s) were used to code/document this
 #'indicator:
-#'\url{http://en.wikipedia.org/wiki/Simple_linear_regression}\cr
+#'\url{https://en.wikipedia.org/wiki/Simple_linear_regression}\cr
 #'@keywords ts
 #'@rdname rollFun
 

@@ -41,7 +41,7 @@ cmo <- CMO(ttrc[,"Close"])
 }
 \references{
 The following site(s) were used to code/document this
-indicator:\cr \url{http://www.fmlabs.com/reference/CMO.htm}\cr
+indicator:\cr \url{https://www.fmlabs.com/reference/CMO.htm}\cr
 }
 \seealso{
 See \code{\link{RSI}}.

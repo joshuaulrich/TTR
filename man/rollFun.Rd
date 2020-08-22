@@ -30,7 +30,7 @@ Various functions to analyze data over a moving window of periods.
 \references{
 The following site(s) were used to code/document this
 indicator:
-\url{http://en.wikipedia.org/wiki/Simple_linear_regression}\cr
+\url{https://en.wikipedia.org/wiki/Simple_linear_regression}\cr
 }
 \author{
 Joshua Ulrich

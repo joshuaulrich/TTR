@@ -38,7 +38,7 @@ appendix in the [R Installation and Administration manual](https://cran.r-projec
 for your operating system:
 
 - [Windows](https://cran.r-project.org/doc/manuals/r-release/R-admin.html#The-Windows-toolset)
-- [MacOS](https://cran.r-project.org/doc/manuals/r-release/R-admin.html#macOS) (the [R for Mac OS X Developer's Page](https://r.research.att.com/) might also be helpful)
+- [MacOS](https://cran.r-project.org/doc/manuals/r-release/R-admin.html#macOS) (the [R for Mac OS X Developer's Page](https://mac.R-project.org/) might also be helpful)
 - [Unix-alike](https://cran.r-project.org/doc/manuals/r-release/R-admin.html#Essential-and-useful-other-programs-under-a-Unix_002dalike)
 
 ### Getting Started
@@ -87,7 +87,7 @@ addRSI()
 
 ###### Have a question?
 
-Ask your question on [Stack Overflow](http://stackoverflow.com/questions/tagged/r)
+Ask your question on [Stack Overflow](https://stackoverflow.com/questions/tagged/r)
 or the [R-SIG-Finance](https://stat.ethz.ch/mailman/listinfo/r-sig-finance)
 mailing list (you must subscribe to post).
 

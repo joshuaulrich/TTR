@@ -30,7 +30,7 @@ ult.osc <- ultimateOscillator(ttrc[,c("High","Low","Close")])
 \references{
 The following site(s) were used to code/document this
 indicator:\cr
-\url{http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:ultimate_oscillator}\cr
+\url{https://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:ultimate_oscillator}\cr
 }
 \author{
 Ivan Popivanov

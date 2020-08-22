@@ -57,10 +57,10 @@ maType=list(list(SMA), list(EMA, wilder=TRUE), list(SMA), list(DEMA)))
 \references{
 The following site(s) were used to code/document this
 indicator:\cr
-\url{http://www.fmlabs.com/reference/default.htm?url=TRIX.htm}\cr
+\url{https://www.fmlabs.com/reference/default.htm?url=TRIX.htm}\cr
 \url{https://www.metastock.com/Customer/Resources/TAAZ/?p=114}\cr
 \url{https://www.linnsoft.com/techind/trix-triple-smoothed-exponential-oscillator}\cr
-\url{http://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators:trix}\cr
+\url{https://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators:trix}\cr
 }
 \seealso{
 See \code{\link{EMA}}, \code{\link{SMA}}, etc. for moving average

@@ -45,9 +45,9 @@
 #'@seealso See \code{\link{OBV}} and \code{\link{CMF}}.
 #'@references The following site(s) were used to code/document this
 #'indicator:\cr
-#'\url{http://www.fmlabs.com/reference/default.htm?url=MoneyFlowIndex.htm}\cr
+#'\url{https://www.fmlabs.com/reference/default.htm?url=MoneyFlowIndex.htm}\cr
 #'\url{https://www.linnsoft.com/techind/money-flow-index-mfi}\cr
-#'\url{http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:money_flow_index_mfi}\cr
+#'\url{https://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:money_flow_index_mfi}\cr
 #'@keywords ts
 #'@examples
 #'
@@ -91,8 +91,13 @@ function(HLC, volume, n=14) {
   nmf <- ifelse( HLC < priceLag, mf, 0 )
 
   # Calculate Money Ratio and Money Flow Index
-  mr <- runSum( pmf, n, accurate.instead.of.fast=TRUE ) / runSum( nmf, n, accurate.instead.of.fast=TRUE )
+  num <- runSum( pmf, n, accurate.instead.of.fast=TRUE )
+  den <- runSum( nmf, n, accurate.instead.of.fast=TRUE )
+  mr <- num / den
   mfi <- 100 - ( 100 / ( 1 + mr ) )
+  mfi[0 == den] <- 100
+  mfi[0 == den & 0 == num] <- 50
+
   if(is.xts(mfi)) colnames(mfi) <- 'mfi'
 
   reclass( mfi, HLC )

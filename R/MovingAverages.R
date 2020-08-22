@@ -119,15 +119,15 @@
 #'@seealso See \code{\link{wilderSum}}, which is used in calculating a Welles
 #'Wilder type MA.
 #'@references The following site(s) were used to code/document this
-#'indicator:\cr \url{http://www.fmlabs.com/reference/ExpMA.htm}\cr
-#'\url{http://www.fmlabs.com/reference/WeightedMA.htm}\cr
-#'\url{http://www.fmlabs.com/reference/DEMA.htm}\cr
-#'\url{http://www.fmlabs.com/reference/T3.htm}\cr
+#'indicator:\cr \url{https://www.fmlabs.com/reference/ExpMA.htm}\cr
+#'\url{https://www.fmlabs.com/reference/WeightedMA.htm}\cr
+#'\url{https://www.fmlabs.com/reference/DEMA.htm}\cr
+#'\url{https://www.fmlabs.com/reference/T3.htm}\cr
 #'\url{https://www.linnsoft.com/techind/evwma-elastic-volume-weighted-moving-average}\cr
-#'\url{http://www.fmlabs.com/reference/ZeroLagExpMA.htm}\cr
-#'\url{http://www.fmlabs.com/reference/VIDYA.htm}\cr
-#'\url{http://www.traderslog.com/hullmovingaverage}\cr
-#'\url{http://www.arnaudlegoux.com/}\cr
+#'\url{https://www.fmlabs.com/reference/ZeroLagExpMA.htm}\cr
+#'\url{https://www.fmlabs.com/reference/VIDYA.htm}\cr
+#'\url{https://www.traderslog.com/hullmovingaverage}\cr
+#'\url{https://web.archive.org/web/20180222085959/http://arnaudlegoux.com/}\cr
 #'@keywords ts
 #'@examples
 #'
@@ -180,12 +180,6 @@ function (x, n=10, wilder=FALSE, ratio=NULL, ...) {
   x <- try.xts(x, error=as.matrix)
   if( n < 1 || n > NROW(x) )
     stop(sprintf("n = %d is outside valid range: [1, %d]", n, NROW(x)))
-  if(NCOL(x) > 1) {
-    stop("ncol(x) > 1. EMA only supports univariate 'x'")
-  }
-  if( any(nNonNA <- n > colSums(!is.na(x))) )
-    stop("n > number of non-NA values in column(s) ",
-         paste(which(nNonNA), collapse=", "))
 
   # If ratio is specified, and n is not, set n to approx 'correct'
   # value backed out from ratio
@@ -425,7 +419,11 @@ function(x, n=20, ...) {
 
   # Hull Moving Average
 
-  reclass(WMA(2*WMA(x, n=n/2, ...) - WMA(x, n=n, ...), n=trunc(sqrt(n)), ...), x)
+  madiff <- 2 * WMA(x, n = trunc(n / 2), ...) - WMA(x, n = n, ...)
+
+  hma <- WMA(madiff, n = trunc(sqrt(n)), ...)
+
+  reclass(hma, x)
 }
 
 #-------------------------------------------------------------------------#
@@ -448,6 +446,7 @@ function(x, n=9, offset=0.85, sigma=6, ...) {
   sumWeights <- sum(wts)
   if(sumWeights != 0)
     wts <- wts/sumWeights
-  alma <- rollapply(x, width=n, FUN=function(xx) sum(xx*wts), align="right")
+  alma <- rollapply(x, width=n, FUN=function(xx) sum(xx*wts),
+                    fill=NA, align="right")
   reclass(alma, x)
 }

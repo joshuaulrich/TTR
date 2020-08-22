@@ -98,12 +98,12 @@
 #'@references The following site(s) were used to code/document these
 #'indicators:
 #'\cr Stochastic Oscillator:\cr
-#'\url{http://www.fmlabs.com/reference/StochasticOscillator.htm}\cr
+#'\url{https://www.fmlabs.com/reference/StochasticOscillator.htm}\cr
 #'\url{https://www.metastock.com/Customer/Resources/TAAZ/?p=106}\cr
 #'\url{https://www.linnsoft.com/techind/stochastics}\cr
-#'\url{http://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators:stochastic_oscillator_fast_slow_and_full}\cr
+#'\url{https://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators:stochastic_oscillator_fast_slow_and_full}\cr
 #'\cr SMI:\cr
-#'\url{http://www.fmlabs.com/reference/default.htm?url=SMI.htm}\cr
+#'\url{https://www.fmlabs.com/reference/default.htm?url=SMI.htm}\cr
 #'@keywords ts
 #'@examples
 #'
@@ -191,7 +191,7 @@ function(HLC, nFastK=14, nFastD=3, nSlowD=3, maType, bounded=TRUE, smooth=1, ...
     denMA <- do.call( maType[[3]][[1]], c( list(den), maType[[3]][-1] ) )
 
     fastK <- numMA / denMA
-    fastK[is.nan(fastK)] <- 0.5
+    fastK[!is.finite(fastK) & !is.na(fastK)] <- 0.5
     fastD <- do.call( maType[[1]][[1]], c( list(fastK), maType[[1]][-1] ) )
     slowD <- do.call( maType[[2]][[1]], c( list(fastD), maType[[2]][-1] ) )
   }
@@ -204,7 +204,7 @@ function(HLC, nFastK=14, nFastD=3, nSlowD=3, maType, bounded=TRUE, smooth=1, ...
     denMA <- do.call( maType, c( list(den), list(n=smooth) ) )
 
     fastK <- numMA / denMA
-    fastK[is.nan(fastK)] <- 0.5
+    fastK[!is.finite(fastK) & !is.na(fastK)] <- 0.5
     fastD <- do.call( maType, c( list(fastK), list(n=nFastD, ...) ) )
     slowD <- do.call( maType, c( list(fastD), list(n=nSlowD, ...) ) )
 

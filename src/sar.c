@@ -22,7 +22,7 @@
 
 SEXP sar (SEXP hi, SEXP lo, SEXP xl, SEXP ig) {
 
-    /* Initalize loop and PROTECT counters */
+    /* Initialize loop and PROTECT counters */
     int i, P=0;
 
     /* Ensure all arguments are double */
@@ -45,7 +45,7 @@ SEXP sar (SEXP hi, SEXP lo, SEXP xl, SEXP ig) {
     /* Input object length */
     int nr = nrows(hi);
 
-    /* Initalize result R object */
+    /* Initialize result R object */
     SEXP sar; PROTECT(sar = allocMatrix(REALSXP, nr, 1)); P++;
     double *d_sar = REAL(sar);
 

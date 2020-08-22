@@ -91,8 +91,13 @@ function(HLC, volume, n=14) {
   nmf <- ifelse( HLC < priceLag, mf, 0 )
 
   # Calculate Money Ratio and Money Flow Index
-  mr <- runSum( pmf, n ) / runSum( nmf, n )
+  num <- runSum( pmf, n )
+  den <- runSum( nmf, n )
+  mr <- num / den
   mfi <- 100 - ( 100 / ( 1 + mr ) )
+  mfi[0 == den] <- 100
+  mfi[0 == den & 0 == num] <- 50
+
   if(is.xts(mfi)) colnames(mfi) <- 'mfi'
 
   reclass( mfi, HLC )

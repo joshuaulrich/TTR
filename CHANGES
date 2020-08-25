@@ -1,4 +1,39 @@
-#-#-#-#-#-#-#-#-#-#    Changes in TTR version 0.24-0    #-#-#-#-#-#-#-#-#-#
+#-#-#-#-#-#-#-#-#-#    Changes in TTR version 0.24.1    #-#-#-#-#-#-#-#-#-#
+
+
+BUG FIXES
+
+  - Fix leading NA accounting in wma() C code. The prior code caused invalid
+    reads under valgrind. Thanks to Prof Brian Ripley for the report. (#99)
+
+  - Check for 'ratio > 0' before calculating 'n' in ema() C code. The prior
+    code could result in division by 0, which was flagged by UBSAN. Thanks to
+    Prof Brian Ripley for the report. (#100)
+
+  - Make ALMA() output length equal input length when the input can not be
+    converted to xts. This was caused by the difference between
+    rollapply.default() and rollapply.xts(). Thanks to GitHub user
+    marksimmonds for the report. (#29)
+
+  - Fix stoch() in very rare cases where fastK is Inf. I could only reproduce
+    this if the Close is > High and High and Low are equal, but that is a data
+    error. I fixed anyway because there may be other cases I don't anticipate.
+    Thanks to GitHub user cjuncosa for the report. (#52)
+
+  - Fix MFI() when money flow is always zero or positive. The denominator of
+    the money ratio will be zero if there is no negative money flow for 'n'
+    consecutive observations (e.g. during a strong up-trend), which causes the
+    money flow index to be Inf. Set the money flow index to 100 in this case.
+
+    And the money ratio will be NaN if there's no money flow for 'n'
+    consecutive observations (e.g. if there are no trades), which causes the
+    money flow index to be NaN. Set the money flow index to 50 in this case.
+
+    Thanks to GitHub user jgehw for the report, reproducible example, and
+    suggested patch. (#81)
+
+
+#-#-#-#-#-#-#-#-#-#    Changes in TTR version 0.24.0    #-#-#-#-#-#-#-#-#-#
 
 
 SIGNIFICANT USER-VISIBLE CHANGES

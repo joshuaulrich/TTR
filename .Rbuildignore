@@ -5,9 +5,9 @@ WISHLIST
 ^\.Rproj\.user$
 \.git
 \.gitignore
-\.orig$
-\.md$
-\.sw.
+^.*\.orig$
+^.*\.md$
+^.*\.sw.
 .travis.yml
 ^0.*\.patch$
 ^.*\.tar.gz$

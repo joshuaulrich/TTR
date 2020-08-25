@@ -54,7 +54,7 @@
 #'\url{https://www.fmlabs.com/reference/default.htm?url=TRIX.htm}\cr
 #'\url{https://www.metastock.com/Customer/Resources/TAAZ/?p=114}\cr
 #'\url{https://www.linnsoft.com/techind/trix-triple-smoothed-exponential-oscillator}\cr
-#'\url{https://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators:trix}\cr
+#'\url{https://school.stockcharts.com/doku.php?id=technical_indicators:trix}\cr
 #'@keywords ts
 #'@examples
 #'

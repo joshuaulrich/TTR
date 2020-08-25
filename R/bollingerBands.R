@@ -60,8 +60,8 @@
 #'\url{https://www.fmlabs.com/reference/BollingerWidth.htm}\cr
 #'\url{https://www.metastock.com/Customer/Resources/TAAZ/?p=36}\cr
 #'\url{https://www.linnsoft.com/techind/bollinger-bands}\cr
-#'\url{https://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators:bollinger_bands}\cr
-#'\url{https://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators:bollinger_band_width}\cr
+#'\url{https://school.stockcharts.com/doku.php?id=technical_indicators:bollinger_bands}\cr
+#'\url{https://school.stockcharts.com/doku.php?id=technical_indicators:bollinger_band_width}\cr
 #'@keywords ts
 #'@examples
 #'

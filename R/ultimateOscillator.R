@@ -31,7 +31,7 @@
 #'@author Ivan Popivanov
 #'@references The following site(s) were used to code/document this
 #'indicator:\cr
-#'\url{https://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:ultimate_oscillator}\cr
+#'\url{https://school.stockcharts.com/doku.php?id=technical_indicators:ultimate_oscillator}\cr
 #'@keywords ts
 #'@examples
 #'

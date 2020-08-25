@@ -139,7 +139,7 @@ indicators:
 \url{https://www.fmlabs.com/reference/StochasticOscillator.htm}\cr
 \url{https://www.metastock.com/Customer/Resources/TAAZ/?p=106}\cr
 \url{https://www.linnsoft.com/techind/stochastics}\cr
-\url{https://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators:stochastic_oscillator_fast_slow_and_full}\cr
+\url{https://school.stockcharts.com/doku.php?id=technical_indicators:stochastic_oscillator_fast_slow_and_full}\cr
 \cr SMI:\cr
 \url{https://www.fmlabs.com/reference/default.htm?url=SMI.htm}\cr
 }

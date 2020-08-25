@@ -64,12 +64,12 @@
 #'\url{https://www.fmlabs.com/reference/MACD.htm}\cr
 #'\url{https://www.metastock.com/Customer/Resources/TAAZ/?p=66}\cr
 #'\url{https://www.linnsoft.com/techind/macd}\cr
-#'\url{https://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators:moving_average_convergence_divergence_macd}\cr
+#'\url{https://school.stockcharts.com/doku.php?id=technical_indicators:moving_average_convergence_divergence_macd}\cr
 #'\cr Price Oscillator:\cr
 #'\url{https://www.fmlabs.com/reference/PriceOscillator.htm}\cr
 #'\url{https://www.fmlabs.com/reference/PriceOscillatorPct.htm}\cr
 #'\url{https://www.metastock.com/Customer/Resources/TAAZ/?p=94}\cr
-#'\url{https://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators:price_oscillators_ppo}\cr
+#'\url{https://school.stockcharts.com/doku.php?id=technical_indicators:price_oscillators_ppo}\cr
 #'\cr Volume Oscillator:\cr
 #'\url{https://www.fmlabs.com/reference/PVO.htm}\cr
 #'\url{https://www.metastock.com/Customer/Resources/TAAZ/?p=122}\cr

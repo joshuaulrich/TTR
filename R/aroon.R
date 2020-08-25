@@ -55,7 +55,7 @@
 #'indicator:\cr \url{https://www.fmlabs.com/reference/Aroon.htm}\cr
 #'\url{https://www.fmlabs.com/reference/AroonOscillator.htm}\cr
 #'\url{https://www.linnsoft.com/techind/aroon-arn}\cr
-#'\url{https://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:aroon}\cr
+#'\url{https://school.stockcharts.com/doku.php?id=technical_indicators:aroon}\cr
 #'@keywords ts
 #'@examples
 #'

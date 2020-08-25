@@ -39,7 +39,7 @@ The following site(s) were used to code/document this
 indicator:\cr \url{https://www.fmlabs.com/reference/OBV.htm}\cr
 \url{https://www.metastock.com/Customer/Resources/TAAZ/?p=82}\cr
 \url{https://www.linnsoft.com/techind/balance-open-interest}\cr
-\url{https://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators:on_balance_volume_obv}\cr
+\url{https://school.stockcharts.com/doku.php?id=technical_indicators:on_balance_volume_obv}\cr
 }
 \seealso{
 See \code{\link{chaikinAD}}.

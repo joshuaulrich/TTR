@@ -47,7 +47,7 @@
 #'indicator:\cr
 #'\url{https://www.fmlabs.com/reference/default.htm?url=MoneyFlowIndex.htm}\cr
 #'\url{https://www.linnsoft.com/techind/money-flow-index-mfi}\cr
-#'\url{https://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:money_flow_index_mfi}\cr
+#'\url{https://school.stockcharts.com/doku.php?id=technical_indicators:money_flow_index_mfi}\cr
 #'@keywords ts
 #'@examples
 #'

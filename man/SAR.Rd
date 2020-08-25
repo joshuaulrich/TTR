@@ -40,7 +40,7 @@ The following site(s) were used to code/document this
 indicator:\cr
 \url{https://www.linnsoft.com/techind/parabolic-sar-sar}\cr
 \url{https://www.fmlabs.com/reference/SAR.htm}\cr
-\url{https://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators:parabolic_sar}\cr
+\url{https://school.stockcharts.com/doku.php?id=technical_indicators:parabolic_sar}\cr
 \url{https://www.metastock.com/Customer/Resources/TAAZ/?p=87}
 }
 \seealso{

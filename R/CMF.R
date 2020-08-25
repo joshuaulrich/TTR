@@ -42,7 +42,7 @@
 #'@references The following site(s) were used to code/document this
 #'indicator:\cr \url{https://www.fmlabs.com/reference/ChaikinMoneyFlow.htm}\cr
 #'\url{https://www.linnsoft.com/techind/chaikin-money-flow-cmf}\cr
-#'\url{https://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:chaikin_money_flow_cmf}\cr
+#'\url{https://school.stockcharts.com/doku.php?id=technical_indicators:chaikin_money_flow_cmf}\cr
 #'@keywords ts
 #'@examples
 #'

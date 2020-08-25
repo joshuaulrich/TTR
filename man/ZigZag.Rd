@@ -59,7 +59,7 @@ indicator:\cr
 \url{https://www.linnsoft.com/techind/zig-zag-indicator-zig-zzo}\cr
 \url{https://www.linnsoft.com/techind/zig-zag-oscillator-indicator-zzo}\cr
 \url{https://www.metastock.com/Customer/Resources/TAAZ/#127}\cr
-\url{https://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators:zigzag}\cr
+\url{https://school.stockcharts.com/doku.php?id=technical_indicators:zigzag}\cr
 }
 \author{
 Joshua Ulrich

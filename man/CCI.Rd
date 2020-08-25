@@ -53,7 +53,7 @@ The following site(s) were used to code/document this
 indicator:\cr \url{https://www.fmlabs.com/reference/CCI.htm}\cr
 \url{https://www.metastock.com/Customer/Resources/TAAZ/?p=42}\cr
 \url{https://www.linnsoft.com/techind/cci-commodity-channel-index}\cr
-\url{https://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators:commodity_channel_index_cci}\cr
+\url{https://school.stockcharts.com/doku.php?id=technical_indicators:commodity_channel_index_cci}\cr
 }
 \seealso{
 See \code{\link{EMA}}, \code{\link{SMA}}, etc. for moving average

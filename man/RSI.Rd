@@ -58,8 +58,7 @@ rsi <- RSI(price)
 rsiMA1 <- RSI(price, n=14, maType="WMA", wts=ttrc[,"Volume"])
 
 # Case of two different 'maType's for both MAs
-rsiMA2 <- RSI(price, n=14, maType=list(maUp=list(EMA,ratio=1/5),
-             maDown=list(WMA,wts=1:10)))
+rsiMA2 <- RSI(price, n=14, maType=list(maUp=list(EMA),maDown=list(WMA)))
 
 
 }

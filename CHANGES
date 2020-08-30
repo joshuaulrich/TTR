@@ -1,3 +1,13 @@
+#-#-#-#-#-#-#-#-#-#    Changes in TTR version 0.24.2    #-#-#-#-#-#-#-#-#-#
+
+
+BUG FIXES
+
+  - Check for 'ratio > 0' before calculating 'n' zlin ema() C code. The prior
+    code could result in division by 0, which was flagged by clang-UBSAN.
+    Thanks to Prof Brian Ripley for the report. (#100)
+
+
 #-#-#-#-#-#-#-#-#-#    Changes in TTR version 0.24.1    #-#-#-#-#-#-#-#-#-#
 
 

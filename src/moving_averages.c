@@ -286,25 +286,29 @@ SEXP zlema (SEXP x, SEXP n, SEXP ratio) {
     }
     double *d_x = REAL(x);
 
-    /* If ratio is specified, and n is not, then
-     * set n to approx 'correct' value backed out from ratio
-     */
-    int i_n;
-    double d_ratio;
-    if(R_NilValue == n && R_NilValue != ratio) {
-      d_ratio = asReal(ratio);
-      i_n = (int)(2.0 / d_ratio - 1.0);
-    } else {
-      i_n = asInteger(n);
+    if(ncols(x) > 1) {
+      error("ncol(x) > 1; ZLEMA only supports univariate 'x'");
     }
 
-    /* Determine decay ratio */
-    if(R_NilValue == ratio) {
-      d_ratio = 2.0 / (i_n + 1);
+    int i_n = asInteger(n);
+    double d_ratio = asReal(ratio);
+
+    if(R_NilValue == n || i_n <= 0) {
+      if(R_NilValue == ratio || d_ratio <= 0.0) {
+        error("either 'n' or 'ratio' must be specified and > 0\n",
+              "'n' is ", n, " 'ratio' is ", ratio);
+      } else {
+        /* If ratio is specified, and n is not, set n to approx 'correct'
+         * value backed out from ratio */
+        i_n  = (int)(2.0 / d_ratio - 1.0);
+      }
     } else {
-      d_ratio = asReal(ratio);
-      if(d_ratio <= 0.0) {
-        error("'ratio' must be > 0");
+      /* Determine decay ratio */
+      if(R_NilValue == ratio) {
+        d_ratio = 2.0 / (i_n + 1);
+      } else {
+        /* ratio != NULL -> warn that 'n' will be used instead */
+        warning("both 'n' and 'ratio' are specified; using 'n'");
       }
     }
 

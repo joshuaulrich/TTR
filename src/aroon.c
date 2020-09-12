@@ -44,45 +44,44 @@ SEXP aroon_max (SEXP x, SEXP n) {
   /* check for non-leading NAs and get first non-NA location */
   SEXP first = PROTECT(xts_na_check(x, ScalarLogical(TRUE))); P++;
   int int_first = asInteger(first);
-  if(int_n + 1 + int_first > nr)
+  if(int_n + int_first > nr)
     error("not enough non-NA values");
 
   double real_max = real_x[0];
 
-  /* This portion is a modified version of roll_max from xts/zoo */
-  for(i=0; i<nr; i++) {
-    /* set leading NAs and find initial max value */
-    //if(i < int_first + int_n - 1) {  // roll_max
-    if(i < int_first + int_n) {
-      real_result[i] = NA_REAL;
-      if(real_x[i] >= real_max) {
-        real_max = real_x[i];  /* set max value */
-        loc = 0;               /* set max location in window */
+  /* set leading NAs and find initial max value */
+  for (i = 0; i < int_first + int_n; i++) {
+    real_result[i] = NA_REAL;
+    if(real_x[i] >= real_max) {
+      real_max = real_x[i];  /* set max value */
+      loc = 0;               /* set max location in window */
+    }
+    loc++;
+    continue;
+  }
+
+  /* Loop over non-NA input values */
+  for (i = int_first + int_n; i < nr; i++) {
+    /* if the max leaves the window */
+    if(loc > int_n) {
+      /* find the max over the (n+1) window */
+      real_max = real_x[i];
+      loc = 0;
+      //for(j=0; j<int_n; j++) {  // roll_max
+      for(j=1; j<int_n+1; j++) {
+        if(real_x[i-j] > real_max) {
+          real_max = real_x[i-j];
+          loc = j;
+        }
       }
-      loc++;
-      continue;
     } else {
-      /* if the max leaves the window */
-      //if(loc >= int_n-1) {  // roll_max
-      if(loc > int_n) {
-        /* find the max over the (n+1) window */
+      /* if the new value is the new max */
+      if(real_x[i] >= real_max) {
         real_max = real_x[i];
         loc = 0;
-        //for(j=0; j<int_n; j++) {  // roll_max
-        for(j=1; j<int_n+1; j++) {
-          if(real_x[i-j] > real_max) {
-            real_max = real_x[i-j];
-            loc = j;
-          }
-        }
-      } else {
-        /* if the new value is the new max */
-        if(real_x[i] >= real_max) {
-          real_max = real_x[i];
-          loc = 0;
-        }
       }
     }
+
     /* set result, increment location */
     real_result[i] = (100.0 * (int_n - loc)) / int_n;
     loc++;

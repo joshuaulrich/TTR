@@ -50,7 +50,7 @@ SEXP aroon_max (SEXP x, SEXP n) {
   double real_max = real_x[0];
 
   /* set leading NAs and find initial max value */
-  for (i = 0; i < int_first + int_n; i++) {
+  for (i = 0; i < int_first + int_n-1; i++) {
     real_result[i] = NA_REAL;
     if(real_x[i] >= real_max) {
       real_max = real_x[i];  /* set max value */
@@ -61,7 +61,7 @@ SEXP aroon_max (SEXP x, SEXP n) {
   }
 
   /* Loop over non-NA input values */
-  for (i = int_first + int_n; i < nr; i++) {
+  for (i = int_first + int_n-1; i < nr; i++) {
     /* if the max leaves the window */
     if(loc > int_n) {
       /* find the max over the (n+1) window */

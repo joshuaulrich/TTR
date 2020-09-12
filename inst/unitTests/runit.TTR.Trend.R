@@ -64,6 +64,14 @@ test.aroon.xts <- function() {
   #checkException( aroon(iMid[,hl]) )
 }
 
+test.aroon.non.na.eq.n.does.not.error <- function() {
+  # xts
+  x <- c(NA, rnorm(10))
+  a <- aroon(x, 10)
+  # error will prevent reaching here, failing test
+  return(TRUE)
+}
+
 # Average True Range
 test.ATR.orig <- function() {
   # non-xts

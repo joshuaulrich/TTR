@@ -68,7 +68,7 @@ SEXP ema (SEXP x, SEXP n, SEXP ratio, SEXP wilder) {
     /* check for non-leading NAs and get first non-NA location */
     SEXP _first = PROTECT(xts_na_check(x, ScalarLogical(TRUE))); P++;
     int first = INTEGER(_first)[0];
-    if(i_n + 1 + first > nr) {
+    if(i_n + first > nr) {
       error("not enough non-NA values");
     }
 
@@ -323,7 +323,7 @@ SEXP zlema (SEXP x, SEXP n, SEXP ratio) {
     /* check for non-leading NAs and get first non-NA location */
     SEXP _first = PROTECT(xts_na_check(x, ScalarLogical(TRUE))); P++;
     int first = INTEGER(_first)[0];
-    if(i_n + 1 + first > nr) {
+    if(i_n + first > nr) {
       error("not enough non-NA values");
     }
 

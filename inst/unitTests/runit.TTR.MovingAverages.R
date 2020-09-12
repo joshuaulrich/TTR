@@ -152,3 +152,12 @@ test.ZLEMA.n.ratio <- function() {
 test.ZLEMA.ratio.eq.0 <- function() {
   checkException(ZLEMA(1:10, ratio = 0.0))
 }
+
+test.EMA.non.na.eq.n.does.not.error <- function() {
+  x <- c(NA, rnorm(10))
+  e <- EMA(x, 10)
+  z <- ZLEMA(x, 10)
+  # error will prevent reaching here, failing test
+  return(TRUE)
+}
+

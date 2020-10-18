@@ -89,6 +89,11 @@
 #'    \item The raw data may contain errors.
 #'  }
 #'
+#'As of TTR 0.24.2, \code{stockSymbols} began using data from NASDAQ's FTP
+#'site because the data from the original site is no longer available. This
+#'new file does not contain data for the columns: LastSale, MarketCap,
+#'IPOyear, Sector, and Industry. All the columns still appear in the results,#'but all the values in the columns are set to \code{NA}.
+#'
 #'@references
 #'
 #' \itemize{

@@ -1,0 +1,43 @@
+# Run CI for R using https://eddelbuettel.github.io/r-ci/
+
+name: ci
+
+on:
+  push:
+  pull_request:
+
+env:
+  USE_BSPM: "true"
+  _R_CHECK_FORCE_SUGGESTS_: "false"
+  _R_CHECK_CRAN_INCOMING_ : "false"
+  _R_S3_METHOD_LOOKUP_BASEENV_AFTER_GLOBALENV_: "true"
+  _R_CHECK_CODETOOLS_PROFILE_: "suppressLocalUnused=false"
+  _R_CHECK_LENGTH_1_CONDITION_: "true"
+  _R_CHECK_LENGTH_1_LOGIC2_: "true"
+
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        config:
+          #- {os: macOS-latest}
+          - {os: ubuntu-latest}
+
+    runs-on: ${{ matrix.config.os }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Bootstrap
+        run: |
+          curl -OLs https://eddelbuettel.github.io/r-travis/run.sh
+          chmod 0755 run.sh
+          ./run.sh bootstrap
+
+      - name: Dependencies
+        run: ./run.sh install_all
+
+      - name: Test
+        run: ./run.sh run_tests
+

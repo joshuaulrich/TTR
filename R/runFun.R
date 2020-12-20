@@ -79,7 +79,6 @@ function(x, n=10, cumulative=FALSE) {
       if( NAs + n > NROW(x) ) stop("not enough non-NA values")
     }
     beg <- 1 + NAs
-    len <- NROW(x) - NAs
 
     # Initialize result vector
     result <- double(NROW(x))
@@ -120,7 +119,6 @@ function(x, n=10, cumulative=FALSE) {
       if( NAs + n > NROW(x) ) stop("not enough non-NA values")
     }
     beg <- 1 + NAs
-    len <- NROW(x) - NAs
 
     # Initialize result vector
     result <- double(NROW(x))
@@ -161,7 +159,6 @@ function(x, n=10, cumulative=FALSE) {
       if( NAs + n > NROW(x) ) stop("not enough non-NA values")
     }
     beg <- 1 + NAs
-    len <- NROW(x) - NAs
 
     if(NCOL(x) > 1) {
       stop("ncol(x) > 1. runMax only supports univariate 'x'")

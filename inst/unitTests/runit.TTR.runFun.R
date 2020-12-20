@@ -157,6 +157,13 @@ test.runCov <- function() {
   # x and y arguments as xts objects
   checkEqualsNumeric( runCov(xts::as.xts(input$all)$High, xts::as.xts(input$all)$Low), output$allCov )
 }
+
+test.runCov.xts.nonleading.na <- function() {
+  top <- input$top$Close
+  mid <- input$mid$Close
+  checkException(runCov(top, mid))
+}
+
 test.runCov.cumulative <- function() {
   cumcov <- compiler::cmpfun(
     function(x) {

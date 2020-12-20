@@ -246,7 +246,7 @@ function(x, y, n=10, use="all.obs", sample=TRUE, cumulative=FALSE) {
   # "all.obs", "complete.obs", "pairwise.complete.obs"
 
   # Call C routine
-  result <- .Call("runcov", x, y, n, sample, cumulative, PACKAGE = "TTR")
+  result <- .Call("runcov", xy[,1], xy[,2], n, sample, cumulative, PACKAGE = "TTR")
 
   # Convert back to original class
   # Should the attributes of *both* x and y be retained?

@@ -29,14 +29,28 @@ This function computes a running/rolling percentage rank.
 }
 \details{
 The computation for a percentage rank can vary depending on the weight given
-to values in the window identical to the value being ranked.  This weight can
-be set using the \code{exact.multiplier} argument which defaults to 0.5.
+to values in the window that are equal to the value being ranked. This weight
+can be set using the \code{exact.multiplier} argument which defaults to 0.5.
+
+\code{exact.multiplier = 0} scores equal values in the lookback window as
+always being greater than the value being ranked. \code{exact.multiplier = 1}
+scores equal values as being below the value being ranked. Any multiplier
+between 0 and 1 counts that proportion of the equal values as being below
+the value being ranked.
+
+The value of \code{exact.multiplier} has the most impact when the window is
+relatively small or when the number of discrete values in the window is
+small. For non-repeating values, changing \code{exact.multiplier = 0} to
+\code{exact.multiplier = 1} for a window of size \code{N} will shift the
+resulting percentile rankings by \code{1/N}. It is equivalent to changing
+the question from, "how many values are < the value" to "how many values
+are <= the value".
 }
 \note{
-It may be important to note that this computation is different from the
-one used in Microsoft Excel's PERCENTRANK formula.  Excel's computation is
-rather strange and gives inconsistent results as it uses interpolation to
-rank values that are not found within the lookback window.
+This computation is different from the one used in Microsoft Excel's
+\code{PERCENTRANK} formula. Excel's computation is rather strange and gives
+inconsistent results as it uses interpolation to rank values that are not
+found within the lookback window.
 }
 \references{
 The following site(s) were used to code/document this

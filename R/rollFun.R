@@ -49,11 +49,11 @@ rollSFM <- function(Ra, Rb, n = 60) {
   # calculate beta
   beta <- runCov(Ra, Rb, n) / runVar(Rb, n=n)
   # calculate alpha
-  alpha <- runMean(Ra, n) - beta * runMean(Rb, n)
+  alpha <- runMean(Ra, n, accurate.instead.of.fast=TRUE) - beta * runMean(Rb, n, accurate.instead.of.fast=TRUE)
   # calculate R-squared
   se.resid <-
-    1/(n*(n-2)) * (n*runSum(Ra^2,n)-runSum(Ra,n)^2
-       - beta^2 * (n*runSum(Rb^2,n)-runSum(Rb,n)^2))
+    1/(n*(n-2)) * (n*runSum(Ra^2,n,accurate.instead.of.fast=TRUE)-runSum(Ra,n,accurate.instead.of.fast=TRUE)^2
+       - beta^2 * (n*runSum(Rb^2,n,accurate.instead.of.fast=TRUE)-runSum(Rb,n,accurate.instead.of.fast=TRUE)^2))
   se.Ra <- runVar(Ra, n=n) * (n-1)/(n-2)
   r.squared <- 1 - se.resid / se.Ra
   result <- merge(alpha, beta, r.squared)

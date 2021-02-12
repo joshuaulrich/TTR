@@ -40,6 +40,7 @@
 #'@param stat Statistic to calculate, one of 'median' or 'mean' (e.g. median
 #'absolute deviation or mean absolute deviation, respectively.)
 #'@param constant Scale factor applied to approximate the standard deviation.
+#'@param accurate.instead.of.fast Use more accurate but slower implementation of \code{runSum} and \code{runMean}, default off.
 #'@return A object of the same class as \code{x} and \code{y} or a vector (if
 #'\code{try.xts} fails).
 #' \describe{
@@ -60,7 +61,7 @@
 #'@keywords ts
 #'@rdname runFun
 "runSum" <-
-function(x, n=10, cumulative=FALSE) {
+function(x, n=10, cumulative=FALSE, accurate.instead.of.fast=FALSE) {
 
   x <- try.xts(x, error=as.matrix)
 
@@ -85,11 +86,11 @@ function(x, n=10, cumulative=FALSE) {
 
     result[beg:NROW(x)] <- cumsum(x[beg:NROW(x)])
 
-    # Replace 1:(n-1) with NAs
-    is.na(result) <- c(1:(n-1+NAs))
+    if(NAs > 0)
+      is.na(result) <- c(1:NAs)
   } else {
     # Call C routine
-    result <- .Call("runsum", x, n, PACKAGE = "TTR")
+    result <- .Call("runsum", x, n, accurate.instead.of.fast, PACKAGE = "TTR")
   }
   
   # Convert back to original class
@@ -125,8 +126,8 @@ function(x, n=10, cumulative=FALSE) {
 
     result[beg:NROW(x)] <- cummin(x[beg:NROW(x)])
 
-    # Replace 1:(n-1) with NAs
-    is.na(result) <- c(1:(n-1+NAs))
+    if(NAs > 0)
+      is.na(result) <- c(1:NAs)
   } else {
     # Call C routine
     result <- .Call("runmin", x, n, PACKAGE = "TTR")
@@ -169,8 +170,8 @@ function(x, n=10, cumulative=FALSE) {
 
     result[beg:NROW(x)] <- cummax(x[beg:NROW(x)])
 
-    # Replace 1:(n-1) with NAs and prepend NAs from original data
-    is.na(result) <- c(1:(n-1+NAs))
+    if(NAs > 0)
+      is.na(result) <- c(1:NAs)
   } else {
     # Call C routine
     result <- .Call("runmax", x, n, PACKAGE = "TTR")
@@ -184,12 +185,12 @@ function(x, n=10, cumulative=FALSE) {
 
 #'@rdname runFun
 "runMean" <-
-function(x, n=10, cumulative=FALSE) {
+function(x, n=10, cumulative=FALSE, accurate.instead.of.fast=FALSE) {
 
   if(cumulative) {
     result <- runSum(x, n, cumulative) / 1:NROW(x)
   } else {
-    result <- runSum(x, n) / n
+    result <- runSum(x, n, accurate.instead.of.fast=accurate.instead.of.fast) / n
   }
 
   return(result)

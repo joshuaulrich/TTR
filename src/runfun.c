@@ -20,9 +20,9 @@
 #include <string.h>  /* for memcpy */
 #include "ttr.h"
 
-SEXP runsum(SEXP _x, SEXP _n)
+SEXP runsum(SEXP _x, SEXP _n, SEXP _accurate)
 {
-  int i, P = 0;
+  int i, j, P = 0;
 
   /* ensure that 'x' is double */
   if (TYPEOF(_x) != REALSXP) {
@@ -30,6 +30,7 @@ SEXP runsum(SEXP _x, SEXP _n)
   }
   double *x = REAL(_x);
   int n = asInteger(_n);
+  int accurate = asLogical(_accurate);
 
   /* Input object length */
   int nr = nrows(_x);
@@ -59,8 +60,23 @@ SEXP runsum(SEXP _x, SEXP _n)
   result[first + n - 1] = seed;
 
   /* Loop over non-NA input values */
-  for (i = first + n; i < nr; i++) {
-    result[i] = result[i-1] + x[i] - x[i-n];
+  if (accurate) {
+    /* if x contains a mixture of very large and small numbers,
+     * the fast version becomes inaccurate; this can lead to
+     * small negative running sums on all positive input data,
+     * which can lead to various secondary errors in other TTR
+     * functions built upon runSum */
+    for (i = first + n; i < nr; i++) {
+      seed = x[i];
+      for (j = 1; j < n; j++) {
+        seed += x[i-j];
+      }
+      result[i] = seed;
+    }
+  } else {
+    for (i = first + n; i < nr; i++) {
+      result[i] = result[i-1] + x[i] - x[i-n];
+    }
   }
 
   /* UNPROTECT R objects and return result */

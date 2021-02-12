@@ -61,12 +61,12 @@ DVI <- function(price, n=252, wts=c(0.8,0.2), smooth=3,
   wts[2] <- wts[2] / wts.sum
 
   # calculate magnitude, based on average price return
-  r <- price/SMA(price,smooth)-1
-  mag <- SMA( ( SMA(r,magnitude[1]) + SMA(r,magnitude[2])/10 )/2, magnitude[3] )
+  r <- price/SMA(price,smooth,accurate.instead.of.fast=TRUE)-1
+  mag <- SMA( ( SMA(r,magnitude[1],accurate.instead.of.fast=TRUE) + SMA(r,magnitude[2],accurate.instead.of.fast=TRUE)/10 )/2, magnitude[3], accurate.instead.of.fast=TRUE )
 
   # calculate stretch, based on whether return is +/-
   b <- ifelse( price > lag.xts(price), 1, -1 )
-  str <- SMA( ( runSum(b,stretch[1]) + runSum(b,stretch[2])/10 )/2, stretch[3] )
+  str <- SMA( ( runSum(b,stretch[1],accurate.instead.of.fast=TRUE) + runSum(b,stretch[2],accurate.instead.of.fast=TRUE)/10 )/2, stretch[3], accurate.instead.of.fast=TRUE )
 
 
   # calculate the DVI magnitude and stretch for each period

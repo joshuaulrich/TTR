@@ -32,7 +32,6 @@
 #'position, '1' for long position, and '-1' for short position.
 #'@param x Object that is coercible to xts or matrix.
 #'@param n Number of periods to use.
-#'@param \dots Further arguments to be passed from or to other methods.
 #'@return \code{growth} returns a vector of the growth of the investment.
 #'
 #'\code{lags} returns a matrix of lagged values of the original vector.
@@ -65,17 +64,21 @@ function(x, n=1) {
 #-------------------------------------------------------------------------#
 #'@rdname TTRtools
 "growth" <-
-function(price, signals, ...) {
+function(price, signals) {
 
   # Calculate growth of $1 for a series of returns (and signals).
 
   if(missing(signals)) {
-    signals <- rep(1,NROW(price))
+    signals <- rep(1,NROW(price)-1)
   } else {
     signals <- as.vector(signals)
+    if (length(signals) == NROW(price))
+      signals <- signals[-NROW(price)]
   }
   price  <- as.vector(price)
-  growth <- cumprod( 1 + ROC(price, ...) * signals )
+
+  changes <- 1 + c(0, ROC(price, type = "discrete", na.pad = FALSE) * abs(signals))
+  growth <- cumprod(ifelse(c(0, signals) >= 0, changes, 1 / changes))
 
   return( growth )
 }

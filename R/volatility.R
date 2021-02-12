@@ -163,7 +163,7 @@ function(OHLC, n=10, calc="close", N=260, mean0=FALSE, ...) {
     }
     if( isTRUE(mean0) ) {
       # This is an alternative SD calculation using an effective mean of 0
-      s <- sqrt(N) * sqrt(runSum(r^2, n-1) / (n-2))
+      s <- sqrt(N) * sqrt(runSum(r^2, n-1, accurate.instead.of.fast=TRUE) / (n-2))
     } else {
       # This is the standard SD calculation using the sample mean
       s <- sqrt(N) * runSD(r, n-1)
@@ -174,13 +174,13 @@ function(OHLC, n=10, calc="close", N=260, mean0=FALSE, ...) {
   # http://www.sitmo.com/eq/402
   if( calc=="garman.klass" ) {
     s <- sqrt( N/n * runSum( .5 * log(OHLC[,2]/OHLC[,3])^2 -
-               (2*log(2)-1) * log(OHLC[,4]/OHLC[,1])^2 , n ) )
+               (2*log(2)-1) * log(OHLC[,4]/OHLC[,1])^2, n, accurate.instead.of.fast=TRUE ) )
   }
 
   if( calc=="parkinson" ) {
     # Historical High-Low Volatility: Parkinson
     # http://www.sitmo.com/eq/173
-    s <- sqrt( N/(4*n*log(2)) * runSum( log(OHLC[,2]/OHLC[,3])^2, n ) )
+    s <- sqrt( N/(4*n*log(2)) * runSum( log(OHLC[,2]/OHLC[,3])^2, n, accurate.instead.of.fast=TRUE ) )
   }
 
   if( calc=="rogers.satchell" ) {
@@ -188,7 +188,7 @@ function(OHLC, n=10, calc="close", N=260, mean0=FALSE, ...) {
     # http://www.sitmo.com/eq/414
     s <- sqrt( N/n * runSum(
                log(OHLC[,2]/OHLC[,4]) * log(OHLC[,2]/OHLC[,1]) +
-               log(OHLC[,3]/OHLC[,4]) * log(OHLC[,3]/OHLC[,1]), n ) )
+               log(OHLC[,3]/OHLC[,4]) * log(OHLC[,3]/OHLC[,1]), n, accurate.instead.of.fast=TRUE ) )
   }
 
   if( calc=="gk.yz" ) {
@@ -203,7 +203,7 @@ function(OHLC, n=10, calc="close", N=260, mean0=FALSE, ...) {
     s <- sqrt( N/n * runSum(
                log(OHLC[,1]/Cl1)^2 +
                .5 * log(OHLC[,2]/OHLC[,3])^2 -
-               (2*log(2)-1) * log(OHLC[,4]/OHLC[,1])^2 , n) )
+               (2*log(2)-1) * log(OHLC[,4]/OHLC[,1])^2 , n, accurate.instead.of.fast=TRUE) )
 
     #s <- sqrt( Z/n * runSum(
     #          log(op/cl[-1])^2 +

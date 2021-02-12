@@ -63,7 +63,7 @@ function(HLC, volume, n=20) {
   }
   clv <- CLV(HLC)
 
-  cmf <- runSum(clv*volume, n) / runSum(volume, n)
+  cmf <- runSum(clv*volume, n, accurate.instead.of.fast=TRUE) / runSum(volume, n, accurate.instead.of.fast=TRUE)
 
   reclass(cmf, HLC)
 }

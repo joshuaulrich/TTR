@@ -40,7 +40,7 @@ static const R_CallMethodDef CallEntries[] = {
   CALLDEF(wilderSum,            2),
   CALLDEF(wma,                  3),
   CALLDEF(zlema,                3),
-  CALLDEF(runsum,               2),
+  CALLDEF(runsum,               3),
   CALLDEF(runmin,               2),
   CALLDEF(runmax,               2),
   CALLDEF(runmedian,            4),

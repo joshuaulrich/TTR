@@ -8,7 +8,7 @@
 \usage{
 lags(x, n = 1)
 
-growth(price, signals, ...)
+growth(price, signals)
 
 naCheck(x, n = 0)
 }

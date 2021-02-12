@@ -91,8 +91,8 @@ function(HLC, volume, n=14) {
   nmf <- ifelse( HLC < priceLag, mf, 0 )
 
   # Calculate Money Ratio and Money Flow Index
-  num <- runSum( pmf, n )
-  den <- runSum( nmf, n )
+  num <- runSum( pmf, n, accurate.instead.of.fast=TRUE )
+  den <- runSum( nmf, n, accurate.instead.of.fast=TRUE )
   mr <- num / den
   mfi <- 100 - ( 100 / ( 1 + mr ) )
   mfi[0 == den] <- 100

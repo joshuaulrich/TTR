@@ -56,7 +56,6 @@ test.runMin <- function() {
 test.runMin.cumulative <- function() {
   ttr <- runMin(input$all$Close, 1, TRUE)
   base <- cummin(input$all$Close)
-  is.na(base) <- 1
   checkEqualsNumeric(base, ttr)
 }
 
@@ -75,7 +74,6 @@ test.runMax <- function() {
 test.runMax.cumulative <- function() {
   ttr <- runMax(input$all$Close, 1, TRUE)
   base <- cummax(input$all$Close)
-  is.na(base) <- 1
   checkEqualsNumeric(base, ttr)
 }
 
@@ -94,7 +92,6 @@ test.runMean <- function() {
 test.runMean.cumulative <- function() {
   ttr <- runMean(input$all$Close, 5, TRUE)
   base <- cumsum(input$all$Close) / seq_along(input$all$Close)
-  is.na(base) <- 1:4
   checkEqualsNumeric(base, ttr)
 }
 

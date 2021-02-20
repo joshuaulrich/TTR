@@ -125,6 +125,7 @@ test.runMedian.cumulative <- function() {
     }
   )
   base <- cummedian(input$all$Close)
+
   is.na(base) <- 1:4
   ttr <- runMedian(input$all$Close, 5, "mean", TRUE)
   checkEqualsNumeric(base, ttr)
@@ -132,6 +133,7 @@ test.runMedian.cumulative <- function() {
   ttr <- runMedian(input$all$Close, 6, "mean", TRUE)
   checkEqualsNumeric(base, ttr)
 }
+
 test.runMedian.cumulative.leading.NA <- function() {
   na <- rep(NA, 10)
   x <- input$all$Close

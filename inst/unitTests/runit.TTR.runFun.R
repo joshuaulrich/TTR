@@ -59,6 +59,7 @@ test.runMin.cumulative <- function() {
   checkEqualsNumeric(base, ttr)
   ttr <- runMin(input$all$Close, 2, TRUE)
   base <- cummin(input$all$Close)
+  is.na(base) <- 1
   checkEqualsNumeric(base, ttr)
 }
 

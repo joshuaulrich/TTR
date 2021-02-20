@@ -133,7 +133,6 @@ test.runMedian.cumulative <- function() {
   ttr <- runMedian(input$all$Close, 6, "mean", TRUE)
   checkEqualsNumeric(base, ttr)
 }
-
 test.runMedian.cumulative.leading.NA <- function() {
   na <- rep(NA, 10)
   x <- input$all$Close

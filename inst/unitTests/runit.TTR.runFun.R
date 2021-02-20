@@ -56,7 +56,6 @@ test.runMin <- function() {
 test.runMin.cumulative <- function() {
   ttr <- runMin(input$all$Close, 1, TRUE)
   base <- cummin(input$all$Close)
-  is.na(base) <- 1
   checkEqualsNumeric(base, ttr)
 }
 
@@ -75,7 +74,6 @@ test.runMax <- function() {
 test.runMax.cumulative <- function() {
   ttr <- runMax(input$all$Close, 1, TRUE)
   base <- cummax(input$all$Close)
-  is.na(base) <- 1
   checkEqualsNumeric(base, ttr)
 }
 
@@ -96,6 +94,11 @@ test.runMean.cumulative <- function() {
   base <- cumsum(input$all$Close) / seq_along(input$all$Close)
   is.na(base) <- 1:4
   checkEqualsNumeric(base, ttr)
+}
+test.runMean.cumulative.n.equals.1 <- function() {
+  n.1.cum <- runMean(1, n = 1, cumulative = T)
+  n.1.noncum <- runMean(1, n = 1, cumulative = F)
+  checkEqualsNumeric(n.1.cum, n.1.noncum)
 }
 
 
@@ -125,12 +128,10 @@ test.runMedian.cumulative <- function() {
   is.na(base) <- 1:4
   ttr <- runMedian(input$all$Close, 5, "mean", TRUE)
   checkEqualsNumeric(base, ttr)
-
   is.na(base) <- 1:5
   ttr <- runMedian(input$all$Close, 6, "mean", TRUE)
   checkEqualsNumeric(base, ttr)
 }
-
 test.runMedian.cumulative.leading.NA <- function() {
   na <- rep(NA, 10)
   x <- input$all$Close
@@ -138,6 +139,11 @@ test.runMedian.cumulative.leading.NA <- function() {
   y <- c(na, input$all$Close)
   ymed <- runMedian(y, 1, "mean", TRUE)
   checkEqualsNumeric(ymed, c(na, xmed))
+}
+test.runMedian.cumulative.n.equals.1 <- function() {
+  n.1.cum <- runMedian(1, n = 1, cumulative = T)
+  n.1.noncum <- runMedian(1, n = 1, cumulative = F)
+  checkEqualsNumeric(n.1.cum, n.1.noncum)
 }
 
 # Covariance

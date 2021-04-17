@@ -96,8 +96,8 @@ test.runMean.cumulative <- function() {
   checkEqualsNumeric(base, ttr)
 }
 test.runMean.cumulative.n.equals.1 <- function() {
-  n.1.cum <- runMean(1, n = 1, cumulative = T)
-  n.1.noncum <- runMean(1, n = 1, cumulative = F)
+  n.1.cum <- runMean(1, n = 1, cumulative = TRUE)
+  n.1.noncum <- runMean(1, n = 1, cumulative = FALSE)
   checkEqualsNumeric(n.1.cum, n.1.noncum)
 }
 
@@ -128,10 +128,12 @@ test.runMedian.cumulative <- function() {
   is.na(base) <- 1:4
   ttr <- runMedian(input$all$Close, 5, "mean", TRUE)
   checkEqualsNumeric(base, ttr)
+
   is.na(base) <- 1:5
   ttr <- runMedian(input$all$Close, 6, "mean", TRUE)
   checkEqualsNumeric(base, ttr)
 }
+
 test.runMedian.cumulative.leading.NA <- function() {
   na <- rep(NA, 10)
   x <- input$all$Close
@@ -141,8 +143,8 @@ test.runMedian.cumulative.leading.NA <- function() {
   checkEqualsNumeric(ymed, c(na, xmed))
 }
 test.runMedian.cumulative.n.equals.1 <- function() {
-  n.1.cum <- runMedian(1, n = 1, cumulative = T)
-  n.1.noncum <- runMedian(1, n = 1, cumulative = F)
+  n.1.cum <- runMedian(1, n = 1, cumulative = TRUE)
+  n.1.noncum <- runMedian(1, n = 1, cumulative = FALSE)
   checkEqualsNumeric(n.1.cum, n.1.noncum)
 }
 

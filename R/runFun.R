@@ -86,7 +86,7 @@ function(x, n=10, cumulative=FALSE) {
     result[beg:NROW(x)] <- cumsum(x[beg:NROW(x)])
 
     # Replace 1:(n-1) with NAs
-    is.na(result) <- c(0:(n-1+NAs))
+    is.na(result) <- seq_len(n-1+NAs)
   } else {
     # Call C routine
     result <- .Call("runsum", x, n, PACKAGE = "TTR")
@@ -126,7 +126,7 @@ function(x, n=10, cumulative=FALSE) {
     result[beg:NROW(x)] <- cummin(x[beg:NROW(x)])
 
     # Replace 1:(n-1) with NAs
-    is.na(result) <- c(0:(n-1+NAs))
+    is.na(result) <- seq_len(n-1+NAs)
   } else {
     # Call C routine
     result <- .Call("runmin", x, n, PACKAGE = "TTR")
@@ -170,7 +170,7 @@ function(x, n=10, cumulative=FALSE) {
     result[beg:NROW(x)] <- cummax(x[beg:NROW(x)])
 
     # Replace 1:(n-1) with NAs and prepend NAs from original data
-    is.na(result) <- c(0:(n-1+NAs))
+    is.na(result) <- seq_len(n-1+NAs)
   } else {
     # Call C routine
     result <- .Call("runmax", x, n, PACKAGE = "TTR")

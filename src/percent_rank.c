@@ -59,16 +59,18 @@ SEXP ttr_rollPercentRank(SEXP _x, SEXP _n, SEXP _cumul, SEXP _mult)
 
   /* Find first non-NA input value */
   int beg = n - 1;
-  for (i = 0; i <= beg; i++) {
+  int n_na = 0;
+  for (i = 0; i < beg; i++) {
+    /* first 'n' observations are set to NA */
+    d_result[i] = NA_REAL;
     /* Account for leading NAs in input */
     if (ISNA(d_x[i])) {
-      d_result[i] = NA_REAL;
       beg++;
-      continue;
-    }
-    /* Set leading NAs in output */
-    if (i < beg) {
-      d_result[i] = NA_REAL;
+      n_na++;
+      if (beg >= nr) {
+        error("runPercentRank input has %d rows, %d NA. Cannot calculate result with n = %d.",
+            nr, n_na, n);
+      }
     }
   }
 

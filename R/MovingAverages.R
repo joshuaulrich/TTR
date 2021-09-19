@@ -432,6 +432,7 @@ function(x, n=20, ...) {
 function(x, n=9, offset=0.85, sigma=6, ...) {
 
   # ALMA (Arnaud Legoux Moving Average)
+  x <- try.xts(x, error=as.matrix)
 
   if(offset < 0 || offset > 1) {
     stop("Please ensure 0 <= offset <= 1")
@@ -445,7 +446,10 @@ function(x, n=9, offset=0.85, sigma=6, ...) {
   sumWeights <- sum(wts)
   if(sumWeights != 0)
     wts <- wts/sumWeights
-  alma <- rollapply(x, width=n, FUN=function(xx) sum(xx*wts),
-                    fill=NA, align="right")
+
+  alma <- x * NA_real_
+  for(i in seq_len(NCOL(x))) {
+    alma[,i] <- WMA(x[,i], n, wts)
+  }
   reclass(alma, x)
 }

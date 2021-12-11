@@ -40,7 +40,7 @@ vhf.hilow <- VHF(ttrc[,c("High","Low","Close")])
 \references{
 The following site(s) were used to code/document this
 indicator:\cr
-\url{https://www.metastock.com/Customer/Resources/TAAZ/#119}\cr
+\url{https://www.metastock.com/Customer/Resources/TAAZ/?p=119}\cr
 }
 \seealso{
 See \code{\link{aroon}}, \code{\link{CCI}}, \code{\link{ADX}},

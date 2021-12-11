@@ -40,7 +40,7 @@
 #'@references The following site(s) were used to code/document this
 #'indicator:\cr
 #'\url{https://www.fmlabs.com/reference/WilliamsR.htm}\cr
-#'\url{https://www.metastock.com/Customer/Resources/TAAZ/#126}\cr
+#'\url{https://www.metastock.com/Customer/Resources/TAAZ/?p=126}\cr
 #'\url{https://www.linnsoft.com/techind/williams-r-wpr}\cr
 #'\url{https://school.stockcharts.com/doku.php?id=technical_indicators:williams_r}\cr
 #'@keywords ts

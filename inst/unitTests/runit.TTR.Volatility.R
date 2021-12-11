@@ -30,23 +30,26 @@ test.Close <- function() {
 
 # Garman Klass 
 test.garman.klass <- function() {
-  checkEqualsNumeric( volatility(input$all[,c('Open','High','Low','Close')],calc='garman.klass'), output$allGK )
-  checkEqualsNumeric( volatility(input$top[,c('Open','High','Low','Close')],calc='garman.klass'), output$topGK )
-  checkException( volatility(input$mid[,c('Open','High','Low','Close')],calc='garman.klass') )
+  ohlc <- c('Open','High','Low','Close')
+  checkEqualsNumeric( volatility(input$all[,ohlc],calc='garman.klass')[["x"]], output$allGK[["x"]] )
+  checkEqualsNumeric( volatility(input$top[,ohlc],calc='garman.klass')[["x"]], output$topGK[["x"]] )
+  checkException( volatility(input$mid[,ohlc],calc='garman.klass') )
 }
 
 # Parkinson
 test.parkinson <- function() {
-  checkEqualsNumeric( volatility(input$all[,c('Open','High','Low','Close')],calc='parkinson'), output$allParkinson )
-  checkEqualsNumeric( volatility(input$top[,c('Open','High','Low','Close')],calc='parkinson'), output$topParkinson )
-  checkException( volatility(input$mid[,c('Open','High','Low','Close')],calc='parkinson') )
+  ohlc <- c('Open','High','Low','Close')
+  checkEqualsNumeric( volatility(input$all[,ohlc],calc='parkinson')[["x"]], output$allParkinson[["x"]] )
+  checkEqualsNumeric( volatility(input$top[,ohlc],calc='parkinson')[["x"]], output$topParkinson[["x"]] )
+  checkException( volatility(input$mid[,ohlc],calc='parkinson') )
 }
 
 # Rogers Satchell
 test.rogers.satchell <- function() {
-  checkEqualsNumeric( volatility(input$all[,c('Open','High','Low','Close')],calc='rogers.satchell'), output$allRS )
-  checkEqualsNumeric( volatility(input$top[,c('Open','High','Low','Close')],calc='rogers.satchell'), output$topRS )
-  checkException( volatility(input$mid[,c('Open','High','Low','Close')],calc='rogers.satchell') )
+  ohlc <- c('Open','High','Low','Close')
+  checkEqualsNumeric( volatility(input$all[,ohlc],calc='rogers.satchell')[["x"]], output$allRS[["x"]] )
+  checkEqualsNumeric( volatility(input$top[,ohlc],calc='rogers.satchell')[["x"]], output$topRS[["x"]] )
+  checkException( volatility(input$mid[,ohlc],calc='rogers.satchell') )
 }
 
 # Chaikin Volatility

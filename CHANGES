@@ -1,3 +1,30 @@
+#-#-#-#-#-#-#-#-#-#    Changes in TTR version 0.24.3    #-#-#-#-#-#-#-#-#-#
+
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+  - Significant improvement to ALMA() calculation speed. Thanks to
+    Ethan B. Smith for the report and suggested fix. (#117)
+
+
+NEW FEATURES
+
+  - Added Keltner Channels. Thanks to Nick Procyk for the patch and docs (#106)
+
+
+BUG FIXES
+
+  - runPercentRank() would segfault if 'x' had fewer non-NA observations
+    than the value for 'n'. Thanks to Ian Fellows for the report. (#112)
+
+  - The runXYZ() functions would return NA for the first value when 'n = 1'
+    and 'cumulative = TRUE'. Thanks to Ethan B. Smith for the report and PR!
+    (#111, #108, #88)
+
+  - Fix NA check off-by-one error in aroon() that caused it to fail if there
+    were exactly enough non-NA values. (#102)
+
+
 #-#-#-#-#-#-#-#-#-#    Changes in TTR version 0.24.2    #-#-#-#-#-#-#-#-#-#
 
 

@@ -122,7 +122,7 @@ function(price, n=20, nSig=9, maType, percent=TRUE, ...) {
   if( is.list(maType) ) {
     signal <- do.call( maType[[4]][[1]], c( list(TRIX), maType[[4]][-1] ) )
   } else {
-    signal <- do.call( maType, c( list(TRIX), list(n=n, ...) ) )
+    signal <- do.call( maType, c( list(TRIX), list(n=nSig, ...) ) )
   }
 
   result <- cbind( TRIX, signal )

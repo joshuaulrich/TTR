@@ -37,8 +37,8 @@ Selected volatility estimators/indicators; various authors.
 \item Close-to-Close Volatility (\code{calc="close"})\cr
 \deqn{ \sigma_{cl} = \sqrt{\frac{N}{n-2} \sum_{i=1}^{n-1}(r_i-\bar{r})^2}
 }{sqrt(N) * runSD(ROC(Cl), n-1)}
-\deqn{where\;\; r_i = \log \left(\frac{C_i}{C_{i-1}}\right) }{}
-\deqn{and\;\; \bar{r} = \frac{r_1+r_2+\ldots +r_{n-1}}{n-1} }{}
+\deqn{where\;\; r_i = \log \left(\frac{C_i}{C_{i-1}}\right) }
+\deqn{and\;\; \bar{r} = \frac{r_1+r_2+\ldots +r_{n-1}}{n-1} }
 
 \item OHLC Volatility: Garman and Klass (\code{calc="garman.klass"})\cr The
 Garman and Klass estimator for estimating historical volatility assumes
@@ -94,11 +94,11 @@ ignored, if both are provided.\cr
 \deqn{ \sigma_o^2 =\textstyle \frac{N}{n-1} \sum
  \left( \log \frac{O_i}{C_{i-1}}-\mu_o \right)^2
 }{ s2o <- N * runVar(log(Op/lag(Cl,1)), n=n) }
-\deqn{ \mu_o=\textstyle \frac{1}{n} \sum \log \frac{O_i}{C_{i-1}} }{}
+\deqn{ \mu_o=\textstyle \frac{1}{n} \sum \log \frac{O_i}{C_{i-1}} }
 \deqn{ \sigma_c^2 =\textstyle \frac{N}{n-1} \sum
  \left( \log \frac{C_i}{O_i}-\mu_c \right)^2
 }{ s2c <- N * runVar(log(Cl/Op), n=n) }
-\deqn{ \mu_c=\textstyle \frac{1}{n} \sum \log \frac{C_i}{O_i} }{}
+\deqn{ \mu_c=\textstyle \frac{1}{n} \sum \log \frac{C_i}{O_i} }
 \deqn{ \sigma_{rs}^2 = \textstyle\frac{N}{n} \sum \left(
  \log \textstyle\frac{H_i}{C_i} \times \log \textstyle\frac{H_i}{O_i} + 
  \log \textstyle\frac{L_i}{C_i} \times \log \textstyle\frac{L_i}{O_i} 

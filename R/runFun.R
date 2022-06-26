@@ -345,7 +345,7 @@ function(x, n=10) {
 
   # Check for non-leading NAs
   # Leading NAs are handled in the C code
-  x.na <- naCheck(x, n)
+  naCheck(x, n)  # called for error handling side-effect
 
   # Call C routine
   result <- .Call("wilderSum", x, n, PACKAGE = "TTR")

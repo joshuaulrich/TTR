@@ -318,7 +318,7 @@ function(price, volume, n=10, ...) {
 
   # Check for non-leading NAs
   # Leading NAs are handled in the C code
-  pv.na <- naCheck(pv, n)
+  naCheck(pv, n)  # called for error handling side-effect
 
   # Call C routine
   ma <- .Call("evwma", pv[,1], pv[,2], n, PACKAGE = "TTR")
@@ -397,8 +397,8 @@ function (x, w, ratio=1, ...) {
 
   # Check for non-leading NAs
   # Leading NAs are handled in the C code
-  x.na <- naCheck(x, 1)
-  w.na <- naCheck(w, 1)
+  naCheck(x, 1)  # called for error handling side-effect
+  naCheck(w, 1)  # called for error handling side-effect
   
   # Call C routine
   ma <- .Call("vma", x, abs(w), ratio, PACKAGE = "TTR")

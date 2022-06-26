@@ -74,7 +74,7 @@ function(HL, accel=c(.02,.2)) {
 
   # Check for non-leading NAs
   # Leading NAs are handled in the C code
-  HL.na <- naCheck(HL, 0)
+  naCheck(HL, 0)  # called for error handling side-effect
 
   # Gap for inital SAR
   initGap <- sd(drop(coredata(HL[,1] - HL[,2])), na.rm=TRUE)

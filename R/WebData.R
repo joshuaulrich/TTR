@@ -135,32 +135,32 @@ function(exchange = c("AMEX", "NASDAQ", "NYSE", "ARCA", "BATS", "IEX"),
   exchange <- match.arg(exchange, several.ok=TRUE)
   sort.by  <- match.arg(sort.by, symbols.colnames, several.ok=TRUE)
 
-  # nasdaqlisted.txt
-  nasdaq.colnames <-
-    c("Symbol",
-      "Security.Name",
-      "Market.Category",
-      "Test.Issue",
-      "Financial.Status",
-      "Round.Lot.Size",
-      "ETF",
-      "NextShares")
+  ### nasdaqlisted.txt
+  ##nasdaq.colnames <-
+  ##  c("Symbol",
+  ##    "Security.Name",
+  ##    "Market.Category",
+  ##    "Test.Issue",
+  ##    "Financial.Status",
+  ##    "Round.Lot.Size",
+  ##    "ETF",
+  ##    "NextShares")
 
   .market.category <-
     c(Q = "NASDAQ Global Select MarketSM",
       G = "NASDAQ Global MarketSM",
       S = "NASDAQ Capital Market")
 
-  # otherlisted.txt
-  other.colnames <-
-    c("ACT.Symbol",
-      "Security.Name",
-      "Exchange",
-      "CQS.Symbol",
-      "ETF",
-      "Round.Lot.Size",
-      "Test.Issue",
-      "NASDAQ.Symbol")
+  ### otherlisted.txt
+  ##other.colnames <-
+  ##  c("ACT.Symbol",
+  ##    "Security.Name",
+  ##    "Exchange",
+  ##    "CQS.Symbol",
+  ##    "ETF",
+  ##    "Round.Lot.Size",
+  ##    "Test.Issue",
+  ##    "NASDAQ.Symbol")
 
   .exchange <-
     c(A = "AMEX",

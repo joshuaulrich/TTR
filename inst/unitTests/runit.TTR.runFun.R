@@ -185,6 +185,11 @@ test.runCov.cumulative <- function() {
   )
   x <- input$all$Close
   base <- cumcov(x)
+
+  is.na(base) <- 1
+  ttr <- runCov(x, x, 1, "all.obs", TRUE, TRUE)
+  checkEqualsNumeric(base, ttr)
+
   is.na(base) <- 1:4
   ttr <- runCov(x, x, 5, "all.obs", TRUE, TRUE)
   checkEqualsNumeric(base, ttr)

@@ -432,9 +432,10 @@ SEXP runcov(SEXP _x, SEXP _y, SEXP _n, SEXP _sample, SEXP _cumulative)
     error("not enough non-NA values in 'y'");
   }
   int first = (first_x > first_y) ? first_x : first_y;
+  int first_i = first + n - 1;
 
   /* Set leading NAs in output */
-  for (i = 0; i < first + n; i++) {
+  for (i = 0; i < first_i; i++) {
     result[i] = NA_REAL;
   }
 
@@ -445,8 +446,16 @@ SEXP runcov(SEXP _x, SEXP _y, SEXP _n, SEXP _sample, SEXP _cumulative)
     double sum_x = 0.0;
     double sum_y = 0.0;
 
-    for (i = first; i < nr; i++) {
-      double n_window = (double)(i-first+n);
+    // Initialize means
+    for (i = first; i < first_i; i++) {
+      sum_x += x[i];
+      sum_y += y[i];
+    }
+    mu_x = sum_x / (first+1);
+    mu_y = sum_y / (first+1);
+
+    for (i = first_i; i < nr; i++) {
+      double n_window = (double)(i-first_i+n);
 
       sum_x += x[i];
       sum_y += y[i];
@@ -460,10 +469,10 @@ SEXP runcov(SEXP _x, SEXP _y, SEXP _n, SEXP _sample, SEXP _cumulative)
       }
       result[i] /= sample ? (n_window-1.0) : n_window;
     }
-    // Set first result to NA to match var() and sd()
+    /* Set first non-NA element to NA to match var() and sd()
+     * because var/sd of 1 observation is not defined */
     result[first] = NA_REAL;
   } else {
-    int first_i = first + n - 1;
     double denom = sample ? (n-1) : n;
 
     _window = PROTECT(allocVector(REALSXP, n)); P++;

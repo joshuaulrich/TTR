@@ -80,7 +80,7 @@ function(HL, accel=c(.02,.2)) {
   initGap <- sd(drop(coredata(HL[,1] - HL[,2])), na.rm=TRUE)
 
   # Call C routine
-  sar <- .Call("sar", HL[,1], HL[,2], accel, initGap, PACKAGE = "TTR")
+  sar <- .Call(C_sar, HL[,1], HL[,2], accel, initGap)
   colnames(sar) <- "sar"
 
   reclass( sar, HL )

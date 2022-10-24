@@ -85,8 +85,8 @@ function(HL, n=20) {
   stop("Price series must be either High-Low, or Close")
 
   # Calculate Aroon UP and DOWN
-  aroonUp <- .Call("aroon_max", high, n, PACKAGE="TTR")
-  aroonDn <- .Call("aroon_max", -low, n, PACKAGE="TTR")
+  aroonUp <- .Call(C_aroon_max, high, n)
+  aroonDn <- .Call(C_aroon_max, -low, n)
 
   oscillator <- aroonUp - aroonDn
   result <- cbind( aroonUp, aroonDn, oscillator )

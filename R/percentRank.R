@@ -79,8 +79,8 @@ runPercentRank <- function(x, n=260, cumulative = FALSE, exact.multiplier = 0.5)
     result <- double(NROW(x))
     result[] <- exact.multiplier
   } else {
-    result <- .Call("ttr_rollPercentRank", x, n, isTRUE(cumulative),
-                    exact.multiplier, PACKAGE = "TTR")
+    result <- .Call(C_ttr_rollPercentRank, x, n, isTRUE(cumulative),
+                    exact.multiplier)
   }
 
   reclass(result, x)

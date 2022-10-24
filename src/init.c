@@ -54,7 +54,8 @@ void R_init_TTR(DllInfo *dll)
 {
   R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
   R_useDynamicSymbols(dll, FALSE);
-  //R_forceSymbols(dll, TRUE);  /* only use R symbols (not strings) */
+  R_forceSymbols(dll, TRUE);
 
+  /* imports from xts C code */
   xts_na_check = (SEXP(*)(SEXP,SEXP)) R_GetCCallable("xts", "naCheck");
 }

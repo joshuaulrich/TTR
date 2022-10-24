@@ -76,7 +76,7 @@ function(splits, dividends, close) {
   if(!isTRUE(is.na(close))) {
     obj <- obj[!is.na(obj[,1]),]  # drop rows missing close prices
   }
-  adj <- .Call('adjRatios',obj[,2],obj[,3],obj[,1],PACKAGE="TTR")
+  adj <- .Call(C_adjRatios, obj[,2], obj[,3], obj[,1])
   adj <- xts(cbind(adj[[1]],adj[[2]]),index(obj))
   colnames(adj) <- c('Split','Div')
   

@@ -186,7 +186,7 @@ function (x, n=10, wilder=FALSE, ratio=NULL, ...) {
     n <- NULL
 
   # Call C routine
-  ma <- .Call("ema", x, n, ratio, isTRUE(wilder), PACKAGE = "TTR")
+  ma <- .Call("ema", x, n, ratio, isTRUE(wilder))
 
   ma <- reclass(ma,x)
   
@@ -221,8 +221,8 @@ function(x, n=10, v=1, wilder=FALSE, ratio=NULL) {
     n <- NULL
 
   # Call C routine
-  ma1 <- .Call("ema", x, n, ratio, isTRUE(wilder), PACKAGE = "TTR")
-  d <- .Call("ema", ma1, n, ratio, isTRUE(wilder), PACKAGE = "TTR")
+  ma1 <- .Call(C_ema, x, n, ratio, isTRUE(wilder))
+  d <- .Call(C_ema, ma1, n, ratio, isTRUE(wilder))
 
   dema <- (1 + v) * ma1 - d * v
   dema <- reclass(dema, x)
@@ -272,7 +272,7 @@ function(x, n=10, wts=1:n, ...) {
       stop("'wts' vector of length 'n' cannot have NA values")
 
     # Call C routine
-    ma <- .Call("wma", x, wts, n, PACKAGE = "TTR")
+    ma <- .Call(C_wma, x, wts, n)
 
   } else {
     
@@ -321,7 +321,7 @@ function(price, volume, n=10, ...) {
   naCheck(pv, n)  # called for error handling side-effect
 
   # Call C routine
-  ma <- .Call("evwma", pv[,1], pv[,2], n, PACKAGE = "TTR")
+  ma <- .Call(C_evwma, pv[,1], pv[,2], n)
 
   if(!is.null(dim(ma))) {
     colnames(ma) <- "EVWMA"
@@ -350,7 +350,7 @@ function (x, n=10, ratio=NULL, ...) {
     n <- NULL
 
   # Call C routine
-  ma <- .Call("zlema", x, n, ratio, PACKAGE = "TTR")
+  ma <- .Call(C_zlema, x, n, ratio)
 
   if(!is.null(dim(ma))) {
     colnames(ma) <- "ZLEMA"
@@ -401,7 +401,7 @@ function (x, w, ratio=1, ...) {
   naCheck(w, 1)  # called for error handling side-effect
   
   # Call C routine
-  ma <- .Call("vma", x, abs(w), ratio, PACKAGE = "TTR")
+  ma <- .Call(C_vma, x, abs(w), ratio)
 
   if(!is.null(dim(ma))) {
     colnames(ma) <- "VMA"

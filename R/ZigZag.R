@@ -82,9 +82,9 @@ function( HL, change=10, percent=TRUE, retrace=FALSE, lastExtreme=TRUE ) {
   stop("Price series must be either High-Low, or Univariate")
   
   # Call C routine
-  zz <- .Call("ttr_zigzag", as.numeric(high), as.numeric(low),
+  zz <- .Call(C_ttr_zigzag, as.numeric(high), as.numeric(low),
               as.numeric(change), as.logical(percent), as.logical(retrace),
-              as.logical(lastExtreme), PACKAGE = "TTR")
+              as.logical(lastExtreme))
   
   # Interpolate results
   zz <- na.approx(zz, na.rm = FALSE)

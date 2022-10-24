@@ -78,4 +78,5 @@ importFrom(stats,cor)
 importFrom(utils,flush.console)
 importFrom(utils,read.csv)
 importFrom(utils,read.table)
-useDynLib(TTR)
+
+useDynLib(TTR, .registration = TRUE, .fixes = "C_")

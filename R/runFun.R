@@ -89,7 +89,7 @@ function(x, n=10, cumulative=FALSE) {
     is.na(result) <- seq_len(n-1+NAs)
   } else {
     # Call C routine
-    result <- .Call("runsum", x, n, PACKAGE = "TTR")
+    result <- .Call(C_runsum, x, n)
   }
   
   # Convert back to original class
@@ -129,7 +129,7 @@ function(x, n=10, cumulative=FALSE) {
     is.na(result) <- seq_len(n-1+NAs)
   } else {
     # Call C routine
-    result <- .Call("runmin", x, n, PACKAGE = "TTR")
+    result <- .Call(C_runmin, x, n)
   }
   
   # Convert back to original class
@@ -173,7 +173,7 @@ function(x, n=10, cumulative=FALSE) {
     is.na(result) <- seq_len(n-1+NAs)
   } else {
     # Call C routine
-    result <- .Call("runmax", x, n, PACKAGE = "TTR")
+    result <- .Call(C_runmax, x, n)
   }
 
   # Convert back to original class
@@ -215,7 +215,7 @@ function(x, n=10, non.unique="mean", cumulative=FALSE) {
   non.unique <- switch(non.unique, mean=0L, max=1L, min=-1L)
 
   # Call C routine
-  result <- .Call("runmedian", x, n, non.unique, cumulative, PACKAGE = "TTR")
+  result <- .Call(C_runmedian, x, n, non.unique, cumulative)
 
   # Convert back to original class
   reclass(result, x)
@@ -246,7 +246,7 @@ function(x, y, n=10, use="all.obs", sample=TRUE, cumulative=FALSE) {
   # "all.obs", "complete.obs", "pairwise.complete.obs"
 
   # Call C routine
-  result <- .Call("runcov", xy[,1], xy[,2], n, sample, cumulative, PACKAGE = "TTR")
+  result <- .Call(C_runcov, xy[,1], xy[,2], n, sample, cumulative)
 
   # Convert back to original class
   # Should the attributes of *both* x and y be retained?
@@ -319,8 +319,7 @@ function(x, n=10, center=NULL, stat="median",
   non.unique <- switch( non.unique, mean=0, max=1, min=-1 )
 
   # Call C routine
-  result <- .Call("runmad", x, center, n, median, non.unique, cumulative,
-                  PACKAGE = "TTR")
+  result <- .Call(C_runmad, x, center, n, median, non.unique, cumulative)
 
   if( median ) result <- result * constant
 
@@ -348,7 +347,7 @@ function(x, n=10) {
   naCheck(x, n)  # called for error handling side-effect
 
   # Call C routine
-  result <- .Call("wilderSum", x, n, PACKAGE = "TTR")
+  result <- .Call(C_wilderSum, x, n)
 
   # Convert back to original class
   reclass(result, x)

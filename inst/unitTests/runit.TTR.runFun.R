@@ -100,7 +100,13 @@ test.runMean.cumulative.n.equals.1 <- function() {
   n.1.noncum <- runMean(1, n = 1, cumulative = FALSE)
   checkEqualsNumeric(n.1.cum, n.1.noncum)
 }
+test.runMean.cumulative.accounts.for.leading.NA <- function() {
+  x <- c(rep(NA_real_, 5), 1:5)
+  target <- c(rep(NA_real_, 5), cumsum(1:5) / 1:5)
+  result <- runMean(x, n = 1, cumulative = TRUE)
 
+  checkEqualsNumeric(target, result)
+}
 
 # Median
 test.runMedian <- function() {

@@ -235,6 +235,17 @@ test.runSD <- function() {
   checkEqualsNumeric( tail(runSD(input$all$Close,250),1), sd(input$all$Close) )
 }
 
+test.runSD.cumulative.with.leading.NA <- function() {
+  x <- c(rep(NA_real_, 5), 1:5)
+
+  target <- sapply(1:5, function(i) sd(seq_len(i)))
+  target <- c(rep(NA, 5), target)
+
+  result <- runSD(x, n = 1, cumulative = TRUE)
+
+  checkEqualsNumeric(target, result)
+}
+
 # Absolute deviation
 test.runMAD <- function() {
   checkEqualsNumeric( runMAD(input$all$Close), output$allMAD )

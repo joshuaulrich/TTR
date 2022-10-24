@@ -440,21 +440,32 @@ SEXP runcov(SEXP _x, SEXP _y, SEXP _n, SEXP _sample, SEXP _cumulative)
 
   SEXP _window;
   double *window, mu_x, mu_y;
-  int first_i = first + n - 1;
-  double denom = sample ? (n-1) : n;
 
   if (cumulative) {
-    for (i = first_i; i < nr; i++) {
-      mu_x = ttr_mean(x, i+1);
-      mu_y = ttr_mean(y, i+1);
+    double sum_x = 0.0;
+    double sum_y = 0.0;
+
+    for (i = first; i < nr; i++) {
+      double n_window = (double)(i-first+n);
+
+      sum_x += x[i];
+      sum_y += y[i];
+
+      mu_x = sum_x / n_window;
+      mu_y = sum_y / n_window;
 
       result[i] = 0.0;
-      for (j = 0; j <= i; j++) {
-        result[i] += (x[i-j] - mu_x) * (y[i-j] - mu_y);
+      for (j = first; j <= i; j++) {
+        result[i] += (x[j] - mu_x) * (y[j] - mu_y);
       }
-      result[i] /= sample ? i : (i+1);
+      result[i] /= sample ? (n_window-1.0) : n_window;
     }
+    // Set first result to NA to match var() and sd()
+    result[first] = NA_REAL;
   } else {
+    int first_i = first + n - 1;
+    double denom = sample ? (n-1) : n;
+
     _window = PROTECT(allocVector(REALSXP, n)); P++;
     window = REAL(_window);
 

@@ -172,6 +172,13 @@ test.runCov.xts.nonleading.na <- function() {
   checkException(runCov(top, mid))
 }
 
+test.runCov.n.1.and.cumulative.FALSE.warns <- function() {
+  op <- options("warn")
+  options(warn = 2)
+  on.exit(options(warn = op$warn))
+  checkException(runCov(1:10, 1:10, n = 1, cumulative = FALSE))
+}
+
 test.runCov.cumulative <- function() {
   cumcov <- compiler::cmpfun(
     function(x) {

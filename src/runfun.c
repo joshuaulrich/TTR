@@ -475,22 +475,29 @@ SEXP runcov(SEXP _x, SEXP _y, SEXP _n, SEXP _sample, SEXP _cumulative)
   } else {
     double denom = sample ? (n-1) : n;
 
-    _window = PROTECT(allocVector(REALSXP, n)); P++;
-    window = REAL(_window);
-
-    size_t window_size = n * sizeof(double);
-
-    for (i = first_i; i < nr; i++) {
-      memcpy(window, &x[i-n+1], window_size);
-      mu_x = ttr_mean(window, n);
-      memcpy(window, &y[i-n+1], window_size);
-      mu_y = ttr_mean(window, n);
-
-      result[i] = 0.0;
-      for (j = 0; j < n; j++) {
-        result[i] += (x[i-j] - mu_x) * (y[i-j] - mu_y);
+    if (n == 1) {
+      warning("(co-)variance is not defined for one observation; returning NA");
+      for (i = first_i; i < nr; i++) {
+        result[i] = NA_REAL;
       }
-      result[i] /= denom;
+    } else {
+      _window = PROTECT(allocVector(REALSXP, n)); P++;
+      window = REAL(_window);
+
+      size_t window_size = n * sizeof(double);
+
+      for (i = first_i; i < nr; i++) {
+        memcpy(window, &x[i-n+1], window_size);
+        mu_x = ttr_mean(window, n);
+        memcpy(window, &y[i-n+1], window_size);
+        mu_y = ttr_mean(window, n);
+
+        result[i] = 0.0;
+        for (j = 0; j < n; j++) {
+          result[i] += (x[i-j] - mu_x) * (y[i-j] - mu_y);
+        }
+        result[i] /= denom;
+      }
     }
   }
 

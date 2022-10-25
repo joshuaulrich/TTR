@@ -17,6 +17,26 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+"TR" <- function(HLC) {
+  # True Range
+  HLC <- try.xts(HLC, error=as.matrix)
+  
+  if(is.xts(HLC)) {
+    closeLag <- lag.xts(HLC[,3])
+  } else {
+    closeLag <- c( NA, HLC[-NROW(HLC),3] )
+  }
+
+  trueHigh <- pmax( HLC[,1], closeLag, na.rm=FALSE )
+  trueLow  <- pmin( HLC[,2], closeLag, na.rm=FALSE )
+  tr       <- trueHigh - trueLow
+
+  result <- cbind(tr, trueHigh, trueLow )
+  colnames(result) <- c('tr','trueHigh','trueLow')
+  
+  reclass( result, HLC )
+}
+
 #'True Range / Average True Range
 #'
 #'True range (TR) is a measure of volatility of a High-Low-Close series;
@@ -58,6 +78,7 @@
 #'@examples
 #'
 #' data(ttrc)
+#' tr <- TR(ttrc[,c("High","Low","Close")])
 #' atr <- ATR(ttrc[,c("High","Low","Close")], n=14)
 #'
 "ATR" <-
@@ -66,16 +87,7 @@ function(HLC, n=14, maType, ...) {
   # Average True Range / True Range
 
   HLC <- try.xts(HLC, error=as.matrix)
-  
-  if(is.xts(HLC)) {
-    closeLag <- lag.xts(HLC[,3])
-  } else {
-    closeLag <- c( NA, HLC[-NROW(HLC),3] )
-  }
-
-  trueHigh <- pmax( HLC[,1], closeLag, na.rm=FALSE )
-  trueLow  <- pmin( HLC[,2], closeLag, na.rm=FALSE )
-  tr       <- trueHigh - trueLow
+  tr <- TR(HLC)
 
   maArgs <- list(n=n, ...)
   
@@ -88,9 +100,9 @@ function(HLC, n=14, maType, ...) {
     }
   }
 
-  atr <- do.call( maType, c( list(tr), maArgs ) )
+  atr <- do.call( maType, c( list(tr[,"tr"]), maArgs ) )
 
-  result <- cbind( tr, atr, trueHigh, trueLow )
+  result <- cbind( tr[,"tr"], atr, tr[,c("trueHigh", "trueLow")])
   colnames(result) <- c('tr','atr','trueHigh','trueLow')
   
   reclass( result, HLC )

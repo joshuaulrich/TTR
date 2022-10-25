@@ -61,6 +61,7 @@
 #' tr <- TR(ttrc[,c("High","Low","Close")])
 #' atr <- ATR(ttrc[,c("High","Low","Close")], n=14)
 #'
+#' @rdname TR
 "TR" <-
 function(HLC) {
   # True Range
@@ -83,6 +84,7 @@ function(HLC) {
   reclass( result, HLC )
 }
 
+#' @rdname ATR
 "ATR" <-
 function(HLC, n=14, maType, ...) {
 

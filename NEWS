@@ -1,3 +1,19 @@
+#-#-#-#-#-#-#-#-#-#    Changes in TTR version 0.24.X    #-#-#-#-#-#-#-#-#-#
+
+  - runMean(..., cumulative = TRUE) didn't account for leading NAs in the
+    denominator. (#122)
+
+  - runSD(x, cumulative = TRUE) returned all NA when 'x' had any leading NAs.
+    Thanks to Ethan B. Smith for the report. (#121)
+
+  - Added a TR() function to calculate the true high, true low, and true
+    range. Refactored ATR() to use the TR() function. Thanks to @openbmsjsc
+    and Steve Bronder for the reports, and Ethan B. Smith for the PR.
+    (#18, #114, #124)
+
+  - The TRIX() signal line did not use 'nSig' unless you provided 'maType'.
+    Thanks to @SatoshiReport for the report. (#120)
+
 #-#-#-#-#-#-#-#-#-#    Changes in TTR version 0.24.3    #-#-#-#-#-#-#-#-#-#
 
 

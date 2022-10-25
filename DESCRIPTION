@@ -1,9 +1,11 @@
 Package: TTR
 Type: Package
 Title: Technical Trading Rules
-Version: 0.24.3
-Author: Joshua Ulrich
-Maintainer: Joshua Ulrich <josh.m.ulrich@gmail.com>
+Version: 0.24.3.1
+Authors@R: c(
+  person(given=c("Joshua","M."), family="Ulrich", role=c("cre","aut"), email="josh.m.ulrich@gmail.com"),
+  person(given=c("Ethan","B."), family="Smith", role="ctb")
+  )
 Imports: xts (>= 0.10-0), zoo, curl
 LinkingTo: xts
 Enhances: quantmod

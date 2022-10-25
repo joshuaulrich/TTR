@@ -76,8 +76,8 @@ function(HLC, n=14, maType, ...) {
   DMIp <- ifelse( dH==dL | (dH< 0 & dL< 0), 0, ifelse( dH >dL, dH, 0 ) )
   DMIn <- ifelse( dH==dL | (dH< 0 & dL< 0), 0, ifelse( dH <dL, dL, 0 ) )
 
-  TR    <- ATR(HLC)[,"tr"]
-  TRsum <- wilderSum(TR, n=n)
+  tr    <- TR(HLC)[,"tr"]
+  TRsum <- wilderSum(tr, n=n)
 
   DIp <- 100 * wilderSum(DMIp, n=n) / TRsum
   DIn <- 100 * wilderSum(DMIn, n=n) / TRsum

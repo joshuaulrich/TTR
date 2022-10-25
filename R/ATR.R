@@ -61,7 +61,7 @@
 #' tr <- TR(ttrc[,c("High","Low","Close")])
 #' atr <- ATR(ttrc[,c("High","Low","Close")], n=14)
 #'
-#' @rdname TR
+#' @rdname ATR
 "TR" <-
 function(HLC) {
   # True Range

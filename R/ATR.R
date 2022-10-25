@@ -58,13 +58,14 @@
 #'@examples
 #'
 #' data(ttrc)
+#' tr <- TR(ttrc[,c("High","Low","Close")])
 #' atr <- ATR(ttrc[,c("High","Low","Close")], n=14)
 #'
-"ATR" <-
-function(HLC, n=14, maType, ...) {
-
-  # Average True Range / True Range
-
+#' @rdname ATR
+"TR" <-
+function(HLC) {
+  # True Range
+  
   HLC <- try.xts(HLC, error=as.matrix)
   
   if(is.xts(HLC)) {
@@ -77,6 +78,21 @@ function(HLC, n=14, maType, ...) {
   trueLow  <- pmin( HLC[,2], closeLag, na.rm=FALSE )
   tr       <- trueHigh - trueLow
 
+  result <- cbind(tr, trueHigh, trueLow )
+  colnames(result) <- c('tr','trueHigh','trueLow')
+  
+  reclass( result, HLC )
+}
+
+#' @rdname ATR
+"ATR" <-
+function(HLC, n=14, maType, ...) {
+
+  # Average True Range / True Range
+
+  HLC <- try.xts(HLC, error=as.matrix)
+  tr <- TR(HLC)
+
   maArgs <- list(n=n, ...)
   
   # Default Welles Wilder EMA
@@ -88,9 +104,9 @@ function(HLC, n=14, maType, ...) {
     }
   }
 
-  atr <- do.call( maType, c( list(tr), maArgs ) )
+  atr <- do.call( maType, c( list(tr[,1]), maArgs ) )
 
-  result <- cbind( tr, atr, trueHigh, trueLow )
+  result <- cbind( tr[,1], atr, tr[,2:3])
   colnames(result) <- c('tr','atr','trueHigh','trueLow')
   
   reclass( result, HLC )

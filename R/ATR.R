@@ -61,8 +61,8 @@
 #' tr <- TR(ttrc[,c("High","Low","Close")])
 #' atr <- ATR(ttrc[,c("High","Low","Close")], n=14)
 #'
-"TR" <- function(HLC) {
-
+"TR" <-
+function(HLC) {
   # True Range
   
   HLC <- try.xts(HLC, error=as.matrix)

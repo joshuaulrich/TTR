@@ -186,7 +186,7 @@ function (x, n=10, wilder=FALSE, ratio=NULL, ...) {
     n <- NULL
 
   # Call C routine
-  ma <- .Call("ema", x, n, ratio, isTRUE(wilder))
+  ma <- .Call(C_ema, x, n, ratio, isTRUE(wilder))
 
   ma <- reclass(ma,x)
   

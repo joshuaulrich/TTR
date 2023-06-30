@@ -19,16 +19,20 @@ R_LIB ?= $(shell Rscript -e 'cat(.libPaths()[1L])')
 PKG_INST_FILE = $(R_LIB)/${PKG_NAME}/DESCRIPTION
 
 PKG_R_FILES := $(wildcard ${PKG_PATH}/R/*.R)
+PKG_RD_FILES := $(wildcard ${PKG_PATH}/man/*.Rd)
 PKG_SRC_FILES := $(wildcard ${PKG_PATH}/src/*)
-PKG_ALL_FILES := ${PKG_PATH}/.Rbuildignore ${PKG_PATH}/DESCRIPTION \
-  ${PKG_PATH}/NAMESPACE $(PKG_R_FILES) $(PKG_SRC_FILES)
+PKG_ALL_FILES := ${PKG_PATH}/DESCRIPTION ${PKG_PATH}/NAMESPACE \
+  $(PKG_R_FILES) $(PKG_RD_FILES) $(PKG_SRC_FILES) ${PKG_PATH}/.Rbuildignore
+
+HTML_FILES := $(patsubst %.Rmd, %.html, $(wildcard *.Rmd)) \
+              $(patsubst %.md, %.html, $(wildcard *.md))
 
 UNIT_TEST_SUITE = ${PKG_PATH}/tests/doRUnit.R
 UNIT_TEST_FILES = $(wildcard ${PKG_PATH}/inst/unitTests/runit*.R)
 
 BENCHMARK_FILE = ${PKG_PATH}/inst/benchmarks/benchmark.subset.R
 
-.PHONY: build install check tests test
+.PHONY: docs build install check tests test clean
 
 all: check #benchmark
 
@@ -49,12 +53,15 @@ $(PKG_INST_FILE): $(PKG_TARGZ)
 	@${R_HOME}/bin/R CMD INSTALL ${PKG_TARGZ} --no-byte-compile
 
 # Run R CMD check
-check: docs install
+check: docs build
 	@_R_CHECK_CRAN_INCOMING_=false \
 	${R_HOME}/bin/R CMD check ${PKG_TARGZ} --as-cran
 
 docs: ${PKG_R_FILES}
-	@${R_HOME}/bin/Rscript -e "roxygen2::roxygenize(roclets='rd')"
+	@${R_HOME}/bin/Rscript -e "roxygen2::roxygenize(roclets='rd')" \
+	  && sed -i '/^RoxygenNote/d' ${PKG_PATH}/DESCRIPTION \
+	  && /bin/rm ${PKG_PATH}/src/*.o \
+	  && /bin/rm ${PKG_PATH}/src/*.so
 
 # Build for CRAN
 #build-cran: $(PKG_TARGZ)
@@ -86,30 +93,5 @@ ifndef file
 endif
 	@${R_HOME}/bin/Rscript -e ${TEST_CMD}
 
-# Run individual unit test file
-#%::
-#	@THING=$(wildcard unitTests/runit*$@*);\
-#	echo $(foreach f, $(THING), $(echo $(f)))
-#	@echo $(value ut)
-
-#% :: unitTests/runit%.R
-#	@echo $<
-
-#runit%.R: runit%.R
-#	@echo "yay!"#${R_HOME}/bin/Rscript -e 'require(RUnit); runTestFile("unitTests/$@")'"
-
-#	@echo "$(filter $(wildcard unitTests/runit*$@*), $(UNIT_TEST_FILES))"
-
-#$(filter $(wildcard unitTests/runit*$@*), $(UNIT_TEST_FILES))"
-
-#.PHONY: runit
-#runit: ;
-#	@echo "$(filter $(wildcard unitTests/runit*$@*), $(UNIT_TEST_FILES))"
-
-#$(filter unitTests/runit.%.R, $(UNIT_TEST_FILES)): runit.%.R
-#	echo "yay!"
-#	@${R_HOME}/bin/Rscript -e 'require(RUnit); runTestFile("unitTests/$@")'
-
-# Run benchmarks
-#benchmark:
-#	@${R_HOME}/bin/Rscript ${BENCHMARK_FILE}
+clean:
+	$(RM) $(HTML_FILES) ${PKG_PATH}/src/*.o ${PKG_PATH}/src/*.so

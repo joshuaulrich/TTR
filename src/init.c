@@ -36,7 +36,6 @@ static const R_CallMethodDef CallEntries[] = {
   CALLDEF(sar,                  4),
   CALLDEF(ttr_rollPercentRank,  4),
   CALLDEF(ttr_zigzag,           6),
-  CALLDEF(vma,                  3),
   CALLDEF(wilderSum,            2),
   CALLDEF(wma,                  3),
   CALLDEF(zlema,                3),

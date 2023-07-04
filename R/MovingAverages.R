@@ -44,17 +44,13 @@
 #'\code{VWMA} and \code{VWAP} calculate the volume-weighted moving average
 #'price.
 #'
-#'\code{VMA} calculate a variable-length moving average based on the absolute
-#'value of \code{w}.  Higher (lower) values of \code{w} will cause \code{VMA}
-#'to react faster (slower).
-#'
 #'\code{HMA} a WMA of the difference of two other WMAs, making it very
 #'reponsive.
 #'
 #'\code{ALMA} inspired by Gaussian filters. Tends to put less weight on most
 #'recent observations, reducing tendency to overshoot.
 #'
-#'@aliases MovingAverages SMA EMA WMA DEMA GD T3 EVWMA ZLEMA VWAP VWMA VMA MA
+#'@aliases MovingAverages SMA EMA WMA DEMA GD T3 EVWMA ZLEMA VWAP VWMA MA
 #'@param x Price, volume, etc. series that is coercible to xts or matrix.
 #'@param price Price series that is coercible to xts or matrix.
 #'@param volume Volume series that is coercible to xts or matrix, that
@@ -68,7 +64,7 @@
 #'@param wilder logical; if \code{TRUE}, a Welles Wilder type EMA will be
 #'calculated; see notes.
 #'@param ratio A smoothing/decay ratio.  \code{ratio} overrides \code{wilder}
-#'in \code{EMA}, and provides additional smoothing in \code{VMA}.
+#'in \code{EMA}.
 #'@param offset Percentile at which the center of the distribution should occur.
 #'@param sigma Standard deviation of the distribution.
 #'@param \dots any other passthrough parameters
@@ -371,39 +367,6 @@ function(price, volume, n=10, ...) {
   }
 
   return(res)
-}
-
-#-------------------------------------------------------------------------#
-
-#'@rdname MovingAverages
-"VMA" <-
-function (x, w, ratio=1, ...) {
-
-  # Variable Moving Average
-
-  x <- try.xts(x, error=as.matrix)
-  w <- try.xts(w, error=as.matrix)
-
-  if( NROW(w) != NROW(x) )
-    stop("Length of 'w' must equal the length of 'x'")
-
-  if(NCOL(x) > 1 || NCOL(w) > 1) {
-    stop("ncol(x) > 1 or ncol(w) > 1. VMA only supports univariate 'x' and 'w'")
-  }
-
-  # Check for non-leading NAs
-  # Leading NAs are handled in the C code
-  naCheck(x, 1)  # called for error handling side-effect
-  naCheck(w, 1)  # called for error handling side-effect
-  
-  # Call C routine
-  ma <- .Call(C_vma, x, abs(w), ratio)
-
-  if(!is.null(dim(ma))) {
-    colnames(ma) <- "VMA"
-  }
-
-  reclass(ma,x)
 }
 
 #-------------------------------------------------------------------------#

@@ -12,7 +12,6 @@
 \alias{ZLEMA}
 \alias{VWAP}
 \alias{VWMA}
-\alias{VMA}
 \alias{MA}
 \alias{HMA}
 \alias{ALMA}
@@ -32,8 +31,6 @@ ZLEMA(x, n = 10, ratio = NULL, ...)
 
 VWAP(price, volume, n = 10, ...)
 
-VMA(x, w, ratio = 1, ...)
-
 HMA(x, n = 20, ...)
 
 ALMA(x, n = 9, offset = 0.85, sigma = 6, ...)
@@ -50,7 +47,7 @@ ALMA(x, n = 9, offset = 0.85, sigma = 6, ...)
 calculated; see notes.}
 
 \item{ratio}{A smoothing/decay ratio.  \code{ratio} overrides \code{wilder}
-in \code{EMA}, and provides additional smoothing in \code{VMA}.}
+in \code{EMA}.}
 
 \item{v}{The 'volume factor' (a number in [0,1]).  See Notes.}
 
@@ -62,11 +59,11 @@ length of \code{x}, or \code{n} (the default).}
 \item{volume}{Volume series that is coercible to xts or matrix, that
 corresponds to price series, or a constant.  See Notes.}
 
-\item{w}{Vector of weights (in [0,1]) the same length as \code{x}.}
-
 \item{offset}{Percentile at which the center of the distribution should occur.}
 
 \item{sigma}{Standard deviation of the distribution.}
+
+\item{w}{Vector of weights (in [0,1]) the same length as \code{x}.}
 }
 \value{
 A object of the same class as \code{x} or \code{price} or a vector
@@ -111,10 +108,6 @@ observations, but attempts to remove lag by subtracting data prior to
 
 \code{VWMA} and \code{VWAP} calculate the volume-weighted moving average
 price.
-
-\code{VMA} calculate a variable-length moving average based on the absolute
-value of \code{w}.  Higher (lower) values of \code{w} will cause \code{VMA}
-to react faster (slower).
 
 \code{HMA} a WMA of the difference of two other WMAs, making it very
 reponsive.

@@ -316,10 +316,6 @@ function(price, volume, n=10, ...) {
     stop("n > number of non-NA values in ",
          paste(c("price","volume")[which(nNonNA)], collapse=", "))
 
-  # Check for non-leading NAs
-  # Leading NAs are handled in the C code
-  naCheck(pv, n)  # called for error handling side-effect
-
   # Call C routine
   ma <- .Call(C_evwma, pv[,1], pv[,2], n)
 

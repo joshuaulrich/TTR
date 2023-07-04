@@ -122,31 +122,37 @@ SEXP evwma (SEXP pr, SEXP vo, SEXP n) {
     PROTECT(result = allocVector(REALSXP,nr)); P++;
     double *d_result = REAL(result);
 
-    /* Volume Sum */
-    double volSum = 0;
-
-    /* Find first non-NA input value */
-    int beg = i_n - 1;
-    for(i = 0; i <= beg; i++) {
-        /* Account for leading NAs in input */
-        if(ISNA(d_pr[i]) || ISNA(d_vo[i])) {
-            d_result[i] = NA_REAL;
-            beg++;
-            continue;
-        }
-        /* Set leading NAs in output */
-        if(i < beg) {
-            d_result[i] = NA_REAL;
-        /* First result value is first price value */
-        } else {
-            d_result[i] = d_pr[i];
-        }
-        /* Keep track of volume Sum */
-        volSum += d_vo[i];
+    /* check for non-leading NAs and get first non-NA location */
+    SEXP _first_pr = PROTECT(xts_na_check(pr, ScalarLogical(TRUE))); P++;
+    int first_pr = asInteger(_first_pr);
+    if(i_n + first_pr > nr) {
+      error("not enough non-NA values in 'price'");
+    }
+    SEXP _first_vo = PROTECT(xts_na_check(vo, ScalarLogical(TRUE))); P++;
+    int first_vo = asInteger(_first_vo);
+    if(i_n + first_vo > nr) {
+      error("not enough non-NA values in 'volume'");
     }
 
-    /* Loop over non-NA input values */
-    for(i = beg+1; i < nr; i++) {
+    int first = first_pr > first_vo ? first_pr : first_vo;
+    int begin = first + i_n - 1;
+
+    /* Set leading NAs in output */
+    for(i = 0; i < begin; i++) {
+      d_result[i] = NA_REAL;
+    }
+
+    /* First non-NA result is the first non-NA value of 'x' */
+    d_result[begin] = d_pr[begin];
+
+    /* Initialize volume sum */
+    double volSum = 0.0;
+    for(i = first; i < begin+1; i++) {
+      volSum += d_vo[i];
+    }
+
+    /* Loop over the rest of the values */
+    for(i = begin + 1; i < nr; i++) {
         volSum = volSum + d_vo[i] - d_vo[i-i_n];
         d_result[i] = ((volSum-d_vo[i])*d_result[i-1]+d_vo[i]*d_pr[i])/volSum;
     }

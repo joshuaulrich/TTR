@@ -11,6 +11,17 @@
 
 ### BUG FIXES
 
+- `CTI()` did not pad its result with leading NA when the input was not
+  coerced to an xts object. This was different from other TTR functions
+  (e.g. `SMA()`, `RSI()`, `ROC()`). (#127).
+
+- Removed the `VMA()` function, which was never correct because the
+  results made no sense.
+
+- Check that the `wma()` C function has enough non-NA values and throw
+  an error if it doesn't. This could cause the `WMA()` function to crash
+  the user's R session. (#126)
+
 - `runMean(..., cumulative = TRUE)` didn't account for leading NA in the
   denominator. (#122)
 
@@ -19,6 +30,11 @@
 
 - The `TRIX()` signal line did not use `nSig` unless `maType` was provided.
   Thanks to @SatoshiReport for the... report. (#120)
+
+### MISCELLANEOUS
+
+- Use symbols for native routine entry points to make them explicit and
+  unable to be found accidentally. (#123)
 
 # Changes in 0.24.3
 

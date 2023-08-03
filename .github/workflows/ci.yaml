@@ -14,6 +14,7 @@ env:
   _R_CHECK_CODETOOLS_PROFILE_: "suppressLocalUnused=false"
   _R_CHECK_LENGTH_1_CONDITION_: "true"
   _R_CHECK_LENGTH_1_LOGIC2_: "true"
+  _R_CHECK_UNDOC_USE_ALL_NAMES_: "true"
 
 
 jobs:
@@ -27,11 +28,11 @@ jobs:
     runs-on: ${{ matrix.config.os }}
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Bootstrap
         run: |
-          curl -OLs https://eddelbuettel.github.io/r-travis/run.sh
+          curl -OLs https://eddelbuettel.github.io/r-ci/run.sh
           chmod 0755 run.sh
           ./run.sh bootstrap
 

@@ -62,7 +62,7 @@ function(price, n = 20, slope = 1)
   f <- function(.) {
     cor(.[,1], .[,2], method = "spearman")
   }
-  cti <- rollapplyr(cbind(x, y), n, f, by.column = FALSE)
+  cti <- rollapplyr(cbind(x, y), n, f, by.column = FALSE, fill = NA)
 
   if(!is.null(dim(cti))) {
     colnames(cti) <- "cti"

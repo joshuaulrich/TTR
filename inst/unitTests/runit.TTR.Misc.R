@@ -86,3 +86,8 @@ test.KST <- function() {
   #checkEqualsNumeric( KST(input$top$Close), output$topKST )
   #checkException( KST(input$mid$Close) )
 }
+
+# CTI
+test.CTI <- function() {
+  checkEquals(length(input$all$Close), length(CTI(input$all$Close)))
+}

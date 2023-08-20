@@ -24,7 +24,7 @@ examples do not necessitate an internet connection.
 }
 \examples{
 
-data(ttrc)
-plot(tail(ttrc[,"Close"],100), type="l")
+ data(ttrc)
+ plot(tail(ttrc[,"Close"],100), type="l")
 }
 \keyword{datasets}

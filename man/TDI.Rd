@@ -16,10 +16,10 @@ TDI(price, n = 20, multiple = 2)
 \value{
 A object of the same class as \code{price} or a matrix (if
 \code{try.xts} fails) containing the columns:
-\describe{
- \item{ tdi }{ The Trend Detection Index. }
- \item{ di }{ The Direction Indicator. }
-}
+ \describe{
+  \item{ tdi }{ The Trend Detection Index. }
+  \item{ di }{ The Direction Indicator. }
+ }
 }
 \description{
 The Trend Detection Index (TDI) attempts to identify starting and ending
@@ -46,8 +46,8 @@ while the direction indicator is negative.
 }
 \examples{
 
-data(ttrc)
-tdi <- TDI(ttrc[,"Close"], n=30)
+ data(ttrc)
+ tdi <- TDI(ttrc[,"Close"], n=30)
 
 }
 \references{

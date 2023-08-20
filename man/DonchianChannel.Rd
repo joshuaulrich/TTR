@@ -19,11 +19,11 @@ included in the calculation? See Note.}
 \value{
 A object of the same class as \code{HL} or a matrix (if
 \code{try.xts} fails) containing the columns:
-\describe{
- \item{ high }{ The highest high series. }
- \item{ mid }{ The average of \code{high} and \code{low}. }
- \item{ low }{ The lowest low series. }
-}
+ \describe{
+  \item{ high }{ The highest high series. }
+  \item{ mid }{ The average of \code{high} and \code{low}. }
+  \item{ low }{ The lowest low series. }
+ }
 }
 \description{
 Donchian Channels were created by Richard Donchian and were used to generate
@@ -49,8 +49,8 @@ The default of this argument may change in the future.
 }
 \examples{
 
-data(ttrc)
-dc <- DonchianChannel( ttrc[,c("High","Low")] )
+ data(ttrc)
+ dc <- DonchianChannel( ttrc[,c("High","Low")] )
 
 }
 \references{

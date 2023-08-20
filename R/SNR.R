@@ -17,33 +17,33 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-#'Signal to Noise Ratio
+#' Signal to Noise Ratio
 #'
-#'The n-day SNR for a given market is calculated by taking the absolute
-#'price change over an n-day period and dividing it by the average
-#'n-day volatility.
+#' The n-day SNR for a given market is calculated by taking the absolute
+#' price change over an n-day period and dividing it by the average
+#' n-day volatility.
 #'
-#'\deqn{SNR_n = \frac{|C_t - C_{t-n}|}{ATR_n}
-#'}{SNR = abs(Cl - lag(Cl,n)) / ATR(HLC, n)$atr}
+#' \deqn{SNR_n = \frac{|C_t - C_{t-n}|}{ATR_n}
+#' }{SNR = abs(Cl - lag(Cl,n)) / ATR(HLC, n)$atr}
 #'
-#'Using average true range as the volatility measure captures more of the
-#'intraday and overnight volatility in a way that a measurement of
-#'Close-to-Close price change does not.
+#' Using average true range as the volatility measure captures more of the
+#' intraday and overnight volatility in a way that a measurement of
+#' Close-to-Close price change does not.
 #'
-#'The interpretation is then relatively intuitive: an SNR value of five
-#'indicates that the market has moved five times the volatility (average true
-#'range) over the given look-back period.
+#' The interpretation is then relatively intuitive: an SNR value of five
+#' indicates that the market has moved five times the volatility (average true
+#' range) over the given look-back period.
 #'
-#'@param HLC Object that is coercible to xts or matrix and contains
-#'High-Low-Close prices.
-#'@param n Number of periods for moving average.
-#'@param ... Other arguments to be passed to \code{\link{ATR}}.
-#'@return A object of the same class as HLC or a matrix (if try.xts fails)
-#'containing the signal to noise ratio.
-#'@author Peter Carl
-#'@references Skeggs, James and Hill, Alex (2015). Back in Black Part 2: The 
-#'Opportunity Set for Trend Following.  
-#' 
+#' @param HLC Object that is coercible to xts or matrix and contains
+#' High-Low-Close prices.
+#' @param n Number of periods for moving average.
+#' @param ... Other arguments to be passed to \code{\link{ATR}}.
+#' @return A object of the same class as HLC or a matrix (if try.xts fails)
+#' containing the signal to noise ratio.
+#' @author Peter Carl
+#' @references Skeggs, James and Hill, Alex (2015). Back in Black Part 2: The
+#' Opportunity Set for Trend Following.
+#'
 SNR <- function(HLC, n, ...) {
   HLC <- try.xts(HLC, error=as.matrix)
 

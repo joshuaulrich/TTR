@@ -36,8 +36,8 @@ it indicates a probable reversal.
 }
 \examples{
 
-data(ttrc)
-cmf <- CMF(ttrc[,c("High","Low","Close")], ttrc[,"Volume"])
+ data(ttrc)
+ cmf <- CMF(ttrc[,c("High","Low","Close")], ttrc[,"Volume"])
 
 }
 \references{

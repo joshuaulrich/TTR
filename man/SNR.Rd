@@ -36,7 +36,7 @@ indicates that the market has moved five times the volatility (average true
 range) over the given look-back period.
 }
 \references{
-Skeggs, James and Hill, Alex (2015). Back in Black Part 2: The 
+Skeggs, James and Hill, Alex (2015). Back in Black Part 2: The
 Opportunity Set for Trend Following.
 }
 \author{

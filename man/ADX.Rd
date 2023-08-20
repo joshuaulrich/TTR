@@ -21,12 +21,12 @@ High-Low-Close prices.}
 \value{
 A object of the same class as \code{HLC} or a matrix (if
 \code{try.xts} fails) containing the columns:
-\describe{
- \item{ DIp }{ The positive Direction Index. }
- \item{ DIn }{ The negative Direction Index. }
- \item{ DX }{ The Direction Index. }
- \item{ ADX }{ The Average Direction Index (trend strength). }
-}
+ \describe{
+  \item{ DIp }{ The positive Direction Index. }
+  \item{ DIn }{ The negative Direction Index. }
+  \item{ DX }{ The Direction Index. }
+  \item{ ADX }{ The Average Direction Index (trend strength). }
+ }
 }
 \description{
 Directional Movement Index; developed by J. Welles Wilder.
@@ -43,8 +43,8 @@ ADX).
 }
 \examples{
 
-data(ttrc)
-dmi.adx <- ADX(ttrc[,c("High","Low","Close")])
+ data(ttrc)
+ dmi.adx <- ADX(ttrc[,c("High","Low","Close")])
 
 }
 \references{

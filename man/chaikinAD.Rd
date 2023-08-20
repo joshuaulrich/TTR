@@ -34,8 +34,8 @@ divergence in the direction of the indicator relative to price.
 }
 \examples{
 
-data(ttrc)
-ad <- chaikinAD(ttrc[,c("High","Low","Close")], ttrc[,"Volume"])
+ data(ttrc)
+ ad <- chaikinAD(ttrc[,c("High","Low","Close")], ttrc[,"Volume"])
 
 }
 \references{

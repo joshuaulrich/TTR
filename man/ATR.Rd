@@ -22,12 +22,12 @@ High-Low-Close prices.}
 \value{
 A object of the same class as \code{HLC} or a matrix (if
 \code{try.xts} fails) containing the columns:
-\describe{
- \item{ tr }{ The true range of the series. }
- \item{ atr }{ The average (as specified by \code{ma}) true range of the series. }
- \item{ trueHigh }{ The true high of the series. }
- \item{ trueLow }{ The true low of the series. }
-}
+ \describe{
+  \item{ tr }{ The true range of the series. }
+  \item{ atr }{ The average (as specified by \code{ma}) true range of the series. }
+  \item{ trueHigh }{ The true high of the series. }
+  \item{ trueLow }{ The true low of the series. }
+ }
 }
 \description{
 True range (TR) is a measure of volatility of a High-Low-Close series;

@@ -17,32 +17,32 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-#'Miscellaneous Tools
+#' Miscellaneous Tools
 #'
-#'Various functions that may be useful in designing technical trading rules.
+#' Various functions that may be useful in designing technical trading rules.
 #'
-#'\code{growth} calculates the growth of an investment using given prices and
-#'signals.
+#' \code{growth} calculates the growth of an investment using given prices and
+#' signals.
 #'
-#'\code{lags} calculates the lags of a given series.
+#' \code{lags} calculates the lags of a given series.
 #'
-#'@aliases growth lags
-#'@param price Price series that is coercible to xts or matrix.
-#'@param signals Signals to use (defaults to vector of ones).  Use '0' for no
-#'position, '1' for long position, and '-1' for short position.
-#'@param x Object that is coercible to xts or matrix.
-#'@param n Number of periods to use.
-#'@param \dots Further arguments to be passed from or to other methods.
-#'@return \code{growth} returns a vector of the growth of the investment.
+#' @aliases growth lags
+#' @param price Price series that is coercible to xts or matrix.
+#' @param signals Signals to use (defaults to vector of ones).  Use '0' for no
+#' position, '1' for long position, and '-1' for short position.
+#' @param x Object that is coercible to xts or matrix.
+#' @param n Number of periods to use.
+#' @param \dots Further arguments to be passed from or to other methods.
+#' @return \code{growth} returns a vector of the growth of the investment.
 #'
-#'\code{lags} returns a matrix of lagged values of the original vector.
+#' \code{lags} returns a matrix of lagged values of the original vector.
 #'
-#'@note In \code{growth} you can specify the number of periods and type of
-#'compounding to use when calculating returns of the price series via the
-#'\code{'\dots'} argument.
-#'@author Joshua Ulrich
-#'@keywords ts
-#'@rdname TTRtools
+#' @note In \code{growth} you can specify the number of periods and type of
+#' compounding to use when calculating returns of the price series via the
+#' \code{'\dots'} argument.
+#' @author Joshua Ulrich
+#' @keywords ts
+#' @rdname TTRtools
 "lags" <-
 function(x, n=1) {
 
@@ -63,7 +63,7 @@ function(x, n=1) {
 }
 
 #-------------------------------------------------------------------------#
-#'@rdname TTRtools
+#' @rdname TTRtools
 "growth" <-
 function(price, signals, ...) {
 
@@ -82,7 +82,7 @@ function(price, signals, ...) {
 
 #-------------------------------------------------------------------------#
 
-#'@rdname TTRtools
+#' @rdname TTRtools
 'naCheck' <-
 function(x, n=0) {
 
@@ -98,7 +98,7 @@ function(x, n=0) {
       if( any( is.na(x[-(1:NAs),]) ) ) stop("Series contains non-leading NAs")
     }
   }
-  
+
   res <- list()
   res$NAs <- NAs
   res$nonNA <- (1+NAs):NROW(x)

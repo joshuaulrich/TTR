@@ -43,8 +43,8 @@ long/short-term averages.
 }
 \examples{
 
-data(ttrc)
-gmma <- GMMA(ttrc[,"Close"])
+ data(ttrc)
+ gmma <- GMMA(ttrc[,"Close"])
 
 }
 \references{

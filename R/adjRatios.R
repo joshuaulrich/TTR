@@ -17,38 +17,38 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-#'Split and dividend adjustment ratios
+#' Split and dividend adjustment ratios
 #'
-#'Create split and dividend adjustment ratio vectors.
+#' Create split and dividend adjustment ratio vectors.
 #'
-#'@aliases adjRatios adjust
-#'@param splits Split series that is coercible to xts.
-#'@param dividends Dividend series that is coercible to xts.
-#'@param close Close price series that is coercible to xts.
-#'@return A xts object containing the columns:
-#' \describe{
-#'   \item{ Split }{ The split adjustment ratio. }
-#'   \item{ Div }{ The dividend adjustment ratio. }
-#' }
-#'@details
-#' \itemize{
-#'   \item If only \code{splits} is provided, the resulting object will
-#'     only have as many observations as \code{splits}.
-#'   \item If \code{splits} and \code{close} are provided, the resulting
-#'     object will have as many observations as \code{max(NROW(splits),
-#'     NROW(close))}.
-#'   \item \code{close} is required if \code{dividends} is provided.
-#' }
+#' @aliases adjRatios adjust
+#' @param splits Split series that is coercible to xts.
+#' @param dividends Dividend series that is coercible to xts.
+#' @param close Close price series that is coercible to xts.
+#' @return A xts object containing the columns:
+#'  \describe{
+#'    \item{ Split }{ The split adjustment ratio. }
+#'    \item{ Div }{ The dividend adjustment ratio. }
+#'  }
+#' @details
+#'  \itemize{
+#'    \item If only \code{splits} is provided, the resulting object will
+#'      only have as many observations as \code{splits}.
+#'    \item If \code{splits} and \code{close} are provided, the resulting
+#'      object will have as many observations as \code{max(NROW(splits),
+#'      NROW(close))}.
+#'    \item \code{close} is required if \code{dividends} is provided.
+#'  }
 #'
-#'@author Joshua Ulrich
-#'@keywords ts
+#' @author Joshua Ulrich
+#' @keywords ts
 'adjRatios' <-
 function(splits, dividends, close) {
 
   if( !missing(dividends) &&
        missing(close) )
     stop('"close" must be specified to adjust dividends')
-       
+
   # Really need a better error message if as.xts fails... seriously
   if(missing(close) || all(is.na(close)) || NROW(close)==0) {
     close <- NA
@@ -79,7 +79,7 @@ function(splits, dividends, close) {
   adj <- .Call(C_adjRatios, obj[,2], obj[,3], obj[,1])
   adj <- xts(cbind(adj[[1]],adj[[2]]),index(obj))
   colnames(adj) <- c('Split','Div')
-  
+
   return(adj)
 
 }

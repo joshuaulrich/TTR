@@ -17,35 +17,35 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-#'Chaikin Volatility
+#' Chaikin Volatility
 #'
-#'Chaikin Volatility measures the rate of change of the security's trading
-#'range.  Developed by Marc Chaikin.
+#' Chaikin Volatility measures the rate of change of the security's trading
+#' range.  Developed by Marc Chaikin.
 #'
-#'The Chaikin Volatility indicator defines volatility as an increase in the
-#'difference between the high and low.
+#' The Chaikin Volatility indicator defines volatility as an increase in the
+#' difference between the high and low.
 #'
-#'@param HL Object that is coercible to xts or matrix and contains High-Low
-#'prices.
-#'@param n Number of periods for moving average.
-#'@param maType A function or a string naming the function to be called.
-#'@param \dots Other arguments to be passed to the \code{maType} function.
-#'@return A object of the same class as \code{HL} or a vector (if
-#'\code{try.xts} fails) containing the Chaikin Volatility values.
-#'@note A rapid increase in Chaikin Volatility indicates an approaching bottom.
-#'A slow decrease in Chaikin Volatility indicates an approaching top.
-#'@author Joshua Ulrich
-#'@seealso See \code{\link{EMA}}, \code{\link{SMA}}, etc. for moving average
-#'options; and note Warning section.  See \code{\link{TR}} for another
-#'volatility measure.
-#'@references The following site(s) were used to code/document this
-#'indicator:\cr \url{https://www.fmlabs.com/reference/ChaikinVolatility.htm}\cr
-#'\url{https://www.metastock.com/Customer/Resources/TAAZ/?p=120}\cr
-#'@keywords ts
-#'@examples
+#' @param HL Object that is coercible to xts or matrix and contains High-Low
+#' prices.
+#' @param n Number of periods for moving average.
+#' @param maType A function or a string naming the function to be called.
+#' @param \dots Other arguments to be passed to the \code{maType} function.
+#' @return A object of the same class as \code{HL} or a vector (if
+#' \code{try.xts} fails) containing the Chaikin Volatility values.
+#' @note A rapid increase in Chaikin Volatility indicates an approaching bottom.
+#' A slow decrease in Chaikin Volatility indicates an approaching top.
+#' @author Joshua Ulrich
+#' @seealso See \code{\link{EMA}}, \code{\link{SMA}}, etc. for moving average
+#' options; and note Warning section.  See \code{\link{TR}} for another
+#' volatility measure.
+#' @references The following site(s) were used to code/document this
+#' indicator:\cr \url{https://www.fmlabs.com/reference/ChaikinVolatility.htm}\cr
+#' \url{https://www.metastock.com/Customer/Resources/TAAZ/?p=120}\cr
+#' @keywords ts
+#' @examples
 #'
-#' data(ttrc)
-#' volatility <- chaikinVolatility(ttrc[,c("High","Low")])
+#'  data(ttrc)
+#'  volatility <- chaikinVolatility(ttrc[,c("High","Low")])
 #'
 "chaikinVolatility" <-
 function(HL, n=10, maType, ...) {

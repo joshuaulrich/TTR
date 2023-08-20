@@ -57,14 +57,14 @@ dividends.}
 
 \code{stockSymbols} returns a character vector containing all the listed
 symbols for the given exchanges.
-\describe{
-   \item{ Date }{ Trade date, in CCYYMMDD format. }
-   \item{ Open }{ Open price. }
-   \item{ High }{ High price. }
-   \item{ Low }{ Low price. }
-   \item{ Close }{ Close price. }
-   \item{ Volume }{ Volume. }
-}
+ \describe{
+    \item{ Date }{ Trade date, in CCYYMMDD format. }
+    \item{ Open }{ Open price. }
+    \item{ High }{ High price. }
+    \item{ Low }{ Low price. }
+    \item{ Close }{ Close price. }
+    \item{ Volume }{ Volume. }
+ }
 }
 \description{
 Get investment data from the internet.
@@ -89,36 +89,36 @@ the function correctly adjusts data for any other frequency.
 
 As of TTR 0.23-2, \code{getYahooData} has been patched to work with changes
 to Yahoo Finance, which also included the following changes to the raw data:
- \itemize{
-   \item The adjusted close column appears to no longer include dividend adjustments
-   \item The open, high, and low columns are adjusted for splits, and
-   \item The raw data may contain missing values.
-   \item The raw data may contain errors.
- }
+  \itemize{
+    \item The adjusted close column appears to no longer include dividend adjustments
+    \item The open, high, and low columns are adjusted for splits, and
+    \item The raw data may contain missing values.
+    \item The raw data may contain errors.
+  }
 
 As of TTR 0.24.2, \code{stockSymbols} began using data from NASDAQ's FTP
 site because the data from the original site is no longer available. This
 new file does not contain data for the columns: LastSale, MarketCap,
-IPOyear, Sector, and Industry. All the columns still appear in the results,#'but all the values in the columns are set to \code{NA}.
+IPOyear, Sector, and Industry. All the columns still appear in the results,#' but all the values in the columns are set to \code{NA}.
 }
 
 \examples{
 
-### Note: you must have a working internet
-### connection for these examples to work!
-if (interactive()) {
-  ge <- getYahooData("GE", 19990404, 20050607, adjust = FALSE)
+ ### Note: you must have a working internet
+ ### connection for these examples to work!
+ if (interactive()) {
+   ge <- getYahooData("GE", 19990404, 20050607, adjust = FALSE)
 
-  nyse.symbols <- stockSymbols("NYSE")
-}
+   nyse.symbols <- stockSymbols("NYSE")
+ }
 
 }
 \references{
 \itemize{
-  \item \href{https://quant.stackexchange.com/questions/1640/where-to-download-list-of-all-common-stocks-traded-on-nyse-nasdaq-and-amex/1862}{Quant StackExchange: Download list of all stock symbols?}
-  \item \href{https://www.nasdaqtrader.com/trader.aspx?id=CQSsymbolconvention}{CQS symbol convention}
-  \item \href{https://web.archive.org/web/20111023221931/http://help.yahoo.com/l/us/yahoo/finance/quotes/quote-02.html}{Yahoo Finance symbol conventions}
-}
+   \item \href{https://quant.stackexchange.com/questions/1640/where-to-download-list-of-all-common-stocks-traded-on-nyse-nasdaq-and-amex/1862}{Quant StackExchange: Download list of all stock symbols?}
+   \item \href{https://www.nasdaqtrader.com/trader.aspx?id=CQSsymbolconvention}{CQS symbol convention}
+   \item \href{https://web.archive.org/web/20111023221931/http://help.yahoo.com/l/us/yahoo/finance/quotes/quote-02.html}{Yahoo Finance symbol conventions}
+ }
 }
 \author{
 Joshua Ulrich

@@ -17,52 +17,52 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-#'Welles Wilder's Directional Movement Index
+#' Welles Wilder's Directional Movement Index
 #'
-#'Directional Movement Index; developed by J. Welles Wilder.
+#' Directional Movement Index; developed by J. Welles Wilder.
 #'
-#'The \code{DIp}/\code{DIn} (positive/negative) is the percentage of the true
-#'range that is up/down.
+#' The \code{DIp}/\code{DIn} (positive/negative) is the percentage of the true
+#' range that is up/down.
 #'
-#'@aliases ADX DI DX
-#'@param HLC Object that is coercible to xts or matrix and contains
-#'High-Low-Close prices.
-#'@param n Number of periods to use for DX calculation (not ADX calculation).
-#'@param maType A function or a string naming the function to be called.
-#'@param \dots Other arguments to be passed to the \code{maType} function.
-#'@return A object of the same class as \code{HLC} or a matrix (if
-#'\code{try.xts} fails) containing the columns:
-#' \describe{
-#'  \item{ DIp }{ The positive Direction Index. }
-#'  \item{ DIn }{ The negative Direction Index. }
-#'  \item{ DX }{ The Direction Index. }
-#'  \item{ ADX }{ The Average Direction Index (trend strength). }
-#' }
-#'@note A buy/sell signal is generated when the +/-DI crosses up over the
-#'-/+DI, when the DX/ADX signals a strong trend.  A high/low DX signals a
-#'strong/weak trend.  DX is usually smoothed with a moving average (i.e. the
-#'ADX).
-#'@author Joshua Ulrich
-#'@seealso See \code{\link{EMA}}, \code{\link{SMA}}, etc. for moving average
-#'options; and note Warning section.  The DX calculation uses
-#'\code{\link{ATR}}.  See \code{\link{aroon}}, \code{\link{CCI}},
-#'\code{\link{TDI}}, \code{\link{VHF}}, \code{\link{GMMA}} for other indicators
-#'that measure trend direction/strength.
-#'@references The following site(s) were used to code/document this
-#'indicator:\cr \url{https://www.fmlabs.com/reference/DI.htm}\cr
-#'\url{https://www.fmlabs.com/reference/DX.htm}\cr
-#'\url{https://www.fmlabs.com/reference/ADX.htm}\cr
-#'\url{https://www.fmlabs.com/reference/ADXR.htm}\cr
-#'\url{https://www.metastock.com/Customer/Resources/TAAZ/?p=49}\cr
-#'\url{https://www.linnsoft.com/techind/directional-indicator-diplus-diminus}\cr
-#'\url{https://www.linnsoft.com/techind/adx-avg-directional-movement}\cr
-#'\url{https://www.linnsoft.com/techind/adxr-avg-directional-movement-rating}\cr
-#'\url{https://school.stockcharts.com/doku.php?id=technical_indicators:average_directional_index_adx}\cr
-#'@keywords ts
-#'@examples
+#' @aliases ADX DI DX
+#' @param HLC Object that is coercible to xts or matrix and contains
+#' High-Low-Close prices.
+#' @param n Number of periods to use for DX calculation (not ADX calculation).
+#' @param maType A function or a string naming the function to be called.
+#' @param \dots Other arguments to be passed to the \code{maType} function.
+#' @return A object of the same class as \code{HLC} or a matrix (if
+#' \code{try.xts} fails) containing the columns:
+#'  \describe{
+#'   \item{ DIp }{ The positive Direction Index. }
+#'   \item{ DIn }{ The negative Direction Index. }
+#'   \item{ DX }{ The Direction Index. }
+#'   \item{ ADX }{ The Average Direction Index (trend strength). }
+#'  }
+#' @note A buy/sell signal is generated when the +/-DI crosses up over the
+#' -/+DI, when the DX/ADX signals a strong trend.  A high/low DX signals a
+#' strong/weak trend.  DX is usually smoothed with a moving average (i.e. the
+#' ADX).
+#' @author Joshua Ulrich
+#' @seealso See \code{\link{EMA}}, \code{\link{SMA}}, etc. for moving average
+#' options; and note Warning section.  The DX calculation uses
+#' \code{\link{ATR}}.  See \code{\link{aroon}}, \code{\link{CCI}},
+#' \code{\link{TDI}}, \code{\link{VHF}}, \code{\link{GMMA}} for other indicators
+#' that measure trend direction/strength.
+#' @references The following site(s) were used to code/document this
+#' indicator:\cr \url{https://www.fmlabs.com/reference/DI.htm}\cr
+#' \url{https://www.fmlabs.com/reference/DX.htm}\cr
+#' \url{https://www.fmlabs.com/reference/ADX.htm}\cr
+#' \url{https://www.fmlabs.com/reference/ADXR.htm}\cr
+#' \url{https://www.metastock.com/Customer/Resources/TAAZ/?p=49}\cr
+#' \url{https://www.linnsoft.com/techind/directional-indicator-diplus-diminus}\cr
+#' \url{https://www.linnsoft.com/techind/adx-avg-directional-movement}\cr
+#' \url{https://www.linnsoft.com/techind/adxr-avg-directional-movement-rating}\cr
+#' \url{https://school.stockcharts.com/doku.php?id=technical_indicators:average_directional_index_adx}\cr
+#' @keywords ts
+#' @examples
 #'
-#' data(ttrc)
-#' dmi.adx <- ADX(ttrc[,c("High","Low","Close")])
+#'  data(ttrc)
+#'  dmi.adx <- ADX(ttrc[,c("High","Low","Close")])
 #'
 "ADX" <-
 function(HLC, n=14, maType, ...) {
@@ -85,7 +85,7 @@ function(HLC, n=14, maType, ...) {
   DX  <- 100 * ( abs(DIp - DIn) / (DIp + DIn) )
 
   maArgs <- list(n=n, ...)
-  
+
   # Default Welles Wilder EMA
   if(missing(maType)) {
     maType <- 'EMA'

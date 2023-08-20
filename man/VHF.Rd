@@ -32,9 +32,9 @@ calculates the max/min using the high/low prices (added for flexibility).
 }
 \examples{
 
-data(ttrc)
-vhf.close <- VHF(ttrc[,"Close"])
-vhf.hilow <- VHF(ttrc[,c("High","Low","Close")])
+ data(ttrc)
+ vhf.close <- VHF(ttrc[,"Close"])
+ vhf.hilow <- VHF(ttrc[,c("High","Low","Close")])
 
 }
 \references{

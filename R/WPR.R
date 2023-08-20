@@ -17,44 +17,44 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-#'William's \%R
+#' William's \%R
 #'
-#'William's \% R.
+#' William's \% R.
 #'
-#'If an High-Low-Close series is provided, the indicator is calculated using
-#'the high/low values.  If a vector is provided, the calculation only uses that
-#'series.
+#' If an High-Low-Close series is provided, the indicator is calculated using
+#' the high/low values.  If a vector is provided, the calculation only uses that
+#' series.
 #'
-#'@param HLC Object that is coercible to xts or matrix and contains
-#'High-Low-Close prices.  If only a univariate series is given, it will be
-#'used.  See details.
-#'@param n Number of periods to use.
-#'@return A object of the same class as \code{HLC} or a vector (if
-#'\code{try.xts} fails) containing the William's \%R values.
-#'@note The William's \%R calculation is similar to stochastics' fast \%K.
+#' @param HLC Object that is coercible to xts or matrix and contains
+#' High-Low-Close prices.  If only a univariate series is given, it will be
+#' used.  See details.
+#' @param n Number of periods to use.
+#' @return A object of the same class as \code{HLC} or a vector (if
+#' \code{try.xts} fails) containing the William's \%R values.
+#' @note The William's \%R calculation is similar to stochastics' fast \%K.
 #'
-#'The value for William's \%R will be 0.5 whenever the highest high and
-#'lowest low are the same over the last \code{n} periods.
-#'@author Joshua Ulrich
-#'@seealso See \code{\link{stoch}}.
-#'@references The following site(s) were used to code/document this
-#'indicator:\cr
-#'\url{https://www.fmlabs.com/reference/WilliamsR.htm}\cr
-#'\url{https://www.metastock.com/Customer/Resources/TAAZ/?p=126}\cr
-#'\url{https://www.linnsoft.com/techind/williams-r-wpr}\cr
-#'\url{https://school.stockcharts.com/doku.php?id=technical_indicators:williams_r}\cr
-#'@keywords ts
-#'@examples
+#' The value for William's \%R will be 0.5 whenever the highest high and
+#' lowest low are the same over the last \code{n} periods.
+#' @author Joshua Ulrich
+#' @seealso See \code{\link{stoch}}.
+#' @references The following site(s) were used to code/document this
+#' indicator:\cr
+#' \url{https://www.fmlabs.com/reference/WilliamsR.htm}\cr
+#' \url{https://www.metastock.com/Customer/Resources/TAAZ/?p=126}\cr
+#' \url{https://www.linnsoft.com/techind/williams-r-wpr}\cr
+#' \url{https://school.stockcharts.com/doku.php?id=technical_indicators:williams_r}\cr
+#' @keywords ts
+#' @examples
 #'
-#' data(ttrc)
-#' stochOsc <- stoch(ttrc[,c("High","Low","Close")])
-#' stochWPR<- WPR(ttrc[,c("High","Low","Close")])
+#'  data(ttrc)
+#'  stochOsc <- stoch(ttrc[,c("High","Low","Close")])
+#'  stochWPR<- WPR(ttrc[,c("High","Low","Close")])
 #'
-#' plot(tail(stochOsc[,"fastK"], 100), type="l",
-#'     main="Fast %K and Williams %R", ylab="",
-#'     ylim=range(cbind(stochOsc, stochWPR), na.rm=TRUE) )
-#' lines(tail(stochWPR, 100), col="blue")
-#' lines(tail(1-stochWPR, 100), col="red", lty="dashed")
+#'  plot(tail(stochOsc[,"fastK"], 100), type="l",
+#'      main="Fast %K and Williams %R", ylab="",
+#'      ylim=range(cbind(stochOsc, stochWPR), na.rm=TRUE) )
+#'  lines(tail(stochWPR, 100), col="blue")
+#'  lines(tail(1-stochWPR, 100), col="red", lty="dashed")
 #'
 "WPR" <-
 function(HLC, n=14) {
@@ -62,7 +62,7 @@ function(HLC, n=14) {
   # William's Percent R (similar to Stochastics' fast %K)
 
   HLC <- try.xts(HLC, error=as.matrix)
-  
+
   # Calculation if HLC series is given
   if(NCOL(HLC)==3) {
     high  <- HLC[,1]

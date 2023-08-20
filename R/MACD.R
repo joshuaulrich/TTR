@@ -17,70 +17,70 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-#'MACD Oscillator
+#' MACD Oscillator
 #'
-#'The MACD was developed by Gerald Appel and is probably the most popular price
-#'oscillator.  The MACD function documented in this page compares a fast moving
-#'average (MA) of a series with a slow MA of the same series.  It can be used
-#'as a generic oscillator for any univariate series, not only price.
+#' The MACD was developed by Gerald Appel and is probably the most popular price
+#' oscillator.  The MACD function documented in this page compares a fast moving
+#' average (MA) of a series with a slow MA of the same series.  It can be used
+#' as a generic oscillator for any univariate series, not only price.
 #'
-#'The MACD function either subtracts the fast MA from the slow MA, or finds the
-#'rate of change between the fast MA and the slow MA.
+#' The MACD function either subtracts the fast MA from the slow MA, or finds the
+#' rate of change between the fast MA and the slow MA.
 #'
-#'@param x Object that is coercible to xts or matrix; usually price, but can be
-#'volume, etc.
-#'@param nFast Number of periods for fast moving average.
-#'@param nSlow Number of periods for slow moving average.
-#'@param nSig Number of periods for signal moving average.
-#'@param maType Either:
-#' \enumerate{
-#'   \item A function or a string naming the function to be called.
-#'   \item A \emph{list} with the first component like (1) above, and
-#'     additional parameters specified as \emph{named} components.
-#'     See Examples.
-#' }
-#'@param percent logical; if \code{TRUE}, the percentage difference between the
-#'fast and slow moving averages is returned, otherwise the difference between
-#'the respective averages is returned.
-#'@param \dots Other arguments to be passed to the \code{maType} function in
-#'case (1) above.
-#'@return A object of the same class as \code{x} or a matrix (if \code{try.xts}
-#'fails) containing the columns:
-#' \describe{
-#'  \item{ macd }{ The price (volume, etc.) oscillator. }
-#'  \item{ signal }{ The oscillator signal line (a moving average of the oscillator). }
-#' }
-#'@note The MACD is a special case of the general oscillator applied to price.
-#'The MACD can be used as a general oscillator applied to any series. Time
-#'periods for the MACD are often given as 26 and 12, but the original formula
-#'used exponential constants of 0.075 and 0.15, which are closer to
-#'25.6667 and 12.3333 periods.
-#'@author Joshua Ulrich
-#'@seealso See \code{\link{EMA}}, \code{\link{SMA}}, etc. for moving average
-#'options; and note Warning section.
-#'@references The following site(s) were used to code/document this
-#'indicator:
-#'\cr Moving Average Convergence/Divergence (MACD):\cr
-#'\url{https://www.fmlabs.com/reference/MACD.htm}\cr
-#'\url{https://www.metastock.com/Customer/Resources/TAAZ/?p=66}\cr
-#'\url{https://www.linnsoft.com/techind/macd}\cr
-#'\url{https://school.stockcharts.com/doku.php?id=technical_indicators:moving_average_convergence_divergence_macd}\cr
-#'\cr Price Oscillator:\cr
-#'\url{https://www.fmlabs.com/reference/PriceOscillator.htm}\cr
-#'\url{https://www.fmlabs.com/reference/PriceOscillatorPct.htm}\cr
-#'\url{https://www.metastock.com/Customer/Resources/TAAZ/?p=94}\cr
-#'\url{https://school.stockcharts.com/doku.php?id=technical_indicators:price_oscillators_ppo}\cr
-#'\cr Volume Oscillator:\cr
-#'\url{https://www.fmlabs.com/reference/PVO.htm}\cr
-#'\url{https://www.metastock.com/Customer/Resources/TAAZ/?p=122}\cr
-#'@keywords ts
-#'@examples
+#' @param x Object that is coercible to xts or matrix; usually price, but can be
+#' volume, etc.
+#' @param nFast Number of periods for fast moving average.
+#' @param nSlow Number of periods for slow moving average.
+#' @param nSig Number of periods for signal moving average.
+#' @param maType Either:
+#'  \enumerate{
+#'    \item A function or a string naming the function to be called.
+#'    \item A \emph{list} with the first component like (1) above, and
+#'      additional parameters specified as \emph{named} components.
+#'      See Examples.
+#'  }
+#' @param percent logical; if \code{TRUE}, the percentage difference between the
+#' fast and slow moving averages is returned, otherwise the difference between
+#' the respective averages is returned.
+#' @param \dots Other arguments to be passed to the \code{maType} function in
+#' case (1) above.
+#' @return A object of the same class as \code{x} or a matrix (if \code{try.xts}
+#' fails) containing the columns:
+#'  \describe{
+#'   \item{ macd }{ The price (volume, etc.) oscillator. }
+#'   \item{ signal }{ The oscillator signal line (a moving average of the oscillator). }
+#'  }
+#' @note The MACD is a special case of the general oscillator applied to price.
+#' The MACD can be used as a general oscillator applied to any series. Time
+#' periods for the MACD are often given as 26 and 12, but the original formula
+#' used exponential constants of 0.075 and 0.15, which are closer to
+#' 25.6667 and 12.3333 periods.
+#' @author Joshua Ulrich
+#' @seealso See \code{\link{EMA}}, \code{\link{SMA}}, etc. for moving average
+#' options; and note Warning section.
+#' @references The following site(s) were used to code/document this
+#' indicator:
+#' \cr Moving Average Convergence/Divergence (MACD):\cr
+#' \url{https://www.fmlabs.com/reference/MACD.htm}\cr
+#' \url{https://www.metastock.com/Customer/Resources/TAAZ/?p=66}\cr
+#' \url{https://www.linnsoft.com/techind/macd}\cr
+#' \url{https://school.stockcharts.com/doku.php?id=technical_indicators:moving_average_convergence_divergence_macd}\cr
+#' \cr Price Oscillator:\cr
+#' \url{https://www.fmlabs.com/reference/PriceOscillator.htm}\cr
+#' \url{https://www.fmlabs.com/reference/PriceOscillatorPct.htm}\cr
+#' \url{https://www.metastock.com/Customer/Resources/TAAZ/?p=94}\cr
+#' \url{https://school.stockcharts.com/doku.php?id=technical_indicators:price_oscillators_ppo}\cr
+#' \cr Volume Oscillator:\cr
+#' \url{https://www.fmlabs.com/reference/PVO.htm}\cr
+#' \url{https://www.metastock.com/Customer/Resources/TAAZ/?p=122}\cr
+#' @keywords ts
+#' @examples
 #'
-#' data(ttrc)
+#'  data(ttrc)
 #'
-#' macd  <- MACD( ttrc[,"Close"], 12, 26, 9, maType="EMA" )
-#' macd2 <- MACD( ttrc[,"Close"], 12, 26, 9,
-#'          maType=list(list(SMA), list(EMA, wilder=TRUE), list(SMA)) )
+#'  macd  <- MACD( ttrc[,"Close"], 12, 26, 9, maType="EMA" )
+#'  macd2 <- MACD( ttrc[,"Close"], 12, 26, 9,
+#'           maType=list(list(SMA), list(EMA, wilder=TRUE), list(SMA)) )
 #'
 "MACD" <-
 function(x, nFast=12, nSlow=26, nSig=9, maType, percent=TRUE, ...) {
@@ -118,20 +118,20 @@ function(x, nFast=12, nSlow=26, nSig=9, maType, percent=TRUE, ...) {
     if( !is.null( formals(maType[[3]][[1]])$n ) && is.null( maType[[3]]$n ) ) {
       maType[[3]]$n <- nSig
     }
-    
+
     mavg.fast <- do.call( maType[[1]][[1]], c( list(x), maType[[1]][-1] ) )
     mavg.slow <- do.call( maType[[2]][[1]], c( list(x), maType[[2]][-1] ) )
 
   }
-  
+
   # Case of one 'maType' for both MAs.
   else {
-  
+
     mavg.fast <- do.call( maType, c( list(x), list(n=nFast, ...) ) )
     mavg.slow <- do.call( maType, c( list(x), list(n=nSlow, ...) ) )
 
   }
-  
+
   if(percent) {
     macd <- 100 * ( mavg.fast / mavg.slow - 1 )
   } else {
@@ -145,6 +145,6 @@ function(x, nFast=12, nSlow=26, nSig=9, maType, percent=TRUE, ...) {
 
   result <- cbind( macd, signal )
   colnames(result) <- c( "macd", "signal" )
-  
+
   return( result )
 }

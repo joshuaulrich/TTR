@@ -17,35 +17,35 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-#'Chande Momentum Oscillator
+#' Chande Momentum Oscillator
 #'
-#'The Chande Momentum Oscillator (CMO) is a modified RSI.  Developed by Tushar
-#'S. Chande.
+#' The Chande Momentum Oscillator (CMO) is a modified RSI.  Developed by Tushar
+#' S. Chande.
 #'
-#'The CMO divides the total movement by the net movement ([up - down] / [up +
-#'down]), where RSI divides the upward movement by the net movement (up / [up +
-#'down]).
+#' The CMO divides the total movement by the net movement ([up - down] / [up +
+#' down]), where RSI divides the upward movement by the net movement (up / [up +
+#' down]).
 #'
-#'@param x Price, volume, etc. series that is coercible to xts or matrix.
-#'@param n Number of periods to use.
-#'@return A object of the same class as \code{x} or a vector (if \code{try.xts}
-#'fails) containing Chande Momentum Oscillator values.
-#'@note There are several ways to interpret the CMO:
-#' \enumerate{
-#'   \item Values over/under +/- 50 indicate overbought/oversold conditions.
-#'   \item High CMO values indicate strong trends.
-#'   \item When the CMO crosses above/below a moving average of the CMO,
-#'         it is a buy/sell signal.
-#' }
-#'@author Joshua Ulrich
-#'@seealso See \code{\link{RSI}}.
-#'@references The following site(s) were used to code/document this
-#'indicator:\cr \url{https://www.fmlabs.com/reference/CMO.htm}\cr
-#'@keywords ts
-#'@examples
+#' @param x Price, volume, etc. series that is coercible to xts or matrix.
+#' @param n Number of periods to use.
+#' @return A object of the same class as \code{x} or a vector (if \code{try.xts}
+#' fails) containing Chande Momentum Oscillator values.
+#' @note There are several ways to interpret the CMO:
+#'  \enumerate{
+#'    \item Values over/under +/- 50 indicate overbought/oversold conditions.
+#'    \item High CMO values indicate strong trends.
+#'    \item When the CMO crosses above/below a moving average of the CMO,
+#'          it is a buy/sell signal.
+#'  }
+#' @author Joshua Ulrich
+#' @seealso See \code{\link{RSI}}.
+#' @references The following site(s) were used to code/document this
+#' indicator:\cr \url{https://www.fmlabs.com/reference/CMO.htm}\cr
+#' @keywords ts
+#' @examples
 #'
-#' data(ttrc)
-#' cmo <- CMO(ttrc[,"Close"])
+#'  data(ttrc)
+#'  cmo <- CMO(ttrc[,"Close"])
 #'
 "CMO" <-
 function(x, n=14) {
@@ -53,7 +53,7 @@ function(x, n=14) {
   # Chande Momentum Oscillator
 
   x <- try.xts(x, error=as.matrix)
-  
+
   up <- momentum(x, n=1)
   dn <- ifelse(up<0, abs(up), 0)
   up <- ifelse(up>0,     up , 0)

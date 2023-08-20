@@ -48,17 +48,17 @@ on RSI values.
 }
 \examples{
 
-data(ttrc)
-price <- ttrc[,"Close"]
+ data(ttrc)
+ price <- ttrc[,"Close"]
 
-# Default case
-rsi <- RSI(price)
+ # Default case
+ rsi <- RSI(price)
 
-# Case of one 'maType' for both MAs
-rsiMA1 <- RSI(price, n=14, maType="WMA", wts=ttrc[,"Volume"])
+ # Case of one 'maType' for both MAs
+ rsiMA1 <- RSI(price, n=14, maType="WMA", wts=ttrc[,"Volume"])
 
-# Case of two different 'maType's for both MAs
-rsiMA2 <- RSI(price, n=14, maType=list(maUp=list(EMA),maDown=list(WMA)))
+ # Case of two different 'maType's for both MAs
+ rsiMA2 <- RSI(price, n=14, maType=list(maUp=list(EMA),maDown=list(WMA)))
 
 
 }

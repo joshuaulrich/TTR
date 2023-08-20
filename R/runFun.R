@@ -17,48 +17,48 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-#'Analysis of Running/Rolling/Moving Windows
+#' Analysis of Running/Rolling/Moving Windows
 #'
-#'Various functions to analyze data over a moving window of periods.
+#' Various functions to analyze data over a moving window of periods.
 #'
 #'
-#'@aliases runFun runSum runMin runMax runMean runMedian runCov runCor runVar
-#'runSD runMAD wilderSum
-#'@param x Object coercible to xts or matrix.
-#'@param y Object coercible to xts or matrix.
-#'@param n Number of periods to use in the window or, if
-#'\code{cumulative=TRUE}, the number of observations to use before the first
-#'result is returned. Must be between 1 and \code{nrow(x)}, inclusive.
-#'@param cumulative Logical, use from-inception calculation?
-#'@param sample Logical, sample covariance if \code{TRUE} (denominator of
-#'\code{n-1})
-#'@param use Only \code{"all.obs"} currently implemented.
-#'@param non.unique One of 'mean', 'max', or 'min'; which compute their
-#'respective statistics for the two middle values of even-sized samples.
-#'@param center The values to use as the measure of central tendency, around
-#'which to calculate deviations. The default (\code{NULL}) uses the median.
-#'@param stat Statistic to calculate, one of 'median' or 'mean' (e.g. median
-#'absolute deviation or mean absolute deviation, respectively.)
-#'@param constant Scale factor applied to approximate the standard deviation.
-#'@return A object of the same class as \code{x} and \code{y} or a vector (if
-#'\code{try.xts} fails).
-#' \describe{
-#'  \item{runSum}{returns sums over a n-period moving window.}
-#'  \item{runMin}{returns minimums over a n-period moving window.}
-#'  \item{runMax}{returns maximums over a n-period moving window.}
-#'  \item{runMean}{returns means over a n-period moving window.}
-#'  \item{runMedian}{returns medians over a n-period moving window.}
-#'  \item{runCov}{returns covariances over a n-period moving window.}
-#'  \item{runCor}{returns correlations over a n-period moving window.}
-#'  \item{runVar}{returns variances over a n-period moving window.}
-#'  \item{runSD}{returns standard deviations over a n-period moving window.}
-#'  \item{runMAD}{returns median/mean absolute deviations over a n-period moving window.}
-#'  \item{wilderSum}{retuns a Welles Wilder style weighted sum over a n-period moving window.}
-#' }
-#' 
-#'@author Joshua Ulrich
-#'@keywords ts
-#'@rdname runFun
+#' @aliases runFun runSum runMin runMax runMean runMedian runCov runCor runVar
+#' runSD runMAD wilderSum
+#' @param x Object coercible to xts or matrix.
+#' @param y Object coercible to xts or matrix.
+#' @param n Number of periods to use in the window or, if
+#' \code{cumulative=TRUE}, the number of observations to use before the first
+#' result is returned. Must be between 1 and \code{nrow(x)}, inclusive.
+#' @param cumulative Logical, use from-inception calculation?
+#' @param sample Logical, sample covariance if \code{TRUE} (denominator of
+#' \code{n-1})
+#' @param use Only \code{"all.obs"} currently implemented.
+#' @param non.unique One of 'mean', 'max', or 'min'; which compute their
+#' respective statistics for the two middle values of even-sized samples.
+#' @param center The values to use as the measure of central tendency, around
+#' which to calculate deviations. The default (\code{NULL}) uses the median.
+#' @param stat Statistic to calculate, one of 'median' or 'mean' (e.g. median
+#' absolute deviation or mean absolute deviation, respectively.)
+#' @param constant Scale factor applied to approximate the standard deviation.
+#' @return A object of the same class as \code{x} and \code{y} or a vector (if
+#' \code{try.xts} fails).
+#'  \describe{
+#'   \item{runSum}{returns sums over a n-period moving window.}
+#'   \item{runMin}{returns minimums over a n-period moving window.}
+#'   \item{runMax}{returns maximums over a n-period moving window.}
+#'   \item{runMean}{returns means over a n-period moving window.}
+#'   \item{runMedian}{returns medians over a n-period moving window.}
+#'   \item{runCov}{returns covariances over a n-period moving window.}
+#'   \item{runCor}{returns correlations over a n-period moving window.}
+#'   \item{runVar}{returns variances over a n-period moving window.}
+#'   \item{runSD}{returns standard deviations over a n-period moving window.}
+#'   \item{runMAD}{returns median/mean absolute deviations over a n-period moving window.}
+#'   \item{wilderSum}{retuns a Welles Wilder style weighted sum over a n-period moving window.}
+#'  }
+#'
+#' @author Joshua Ulrich
+#' @keywords ts
+#' @rdname runFun
 "runSum" <-
 function(x, n=10, cumulative=FALSE) {
 
@@ -91,14 +91,14 @@ function(x, n=10, cumulative=FALSE) {
     # Call C routine
     result <- .Call(C_runsum, x, n)
   }
-  
+
   # Convert back to original class
   reclass(result, x)
 }
 
 #-------------------------------------------------------------------------#
 
-#'@rdname runFun
+#' @rdname runFun
 "runMin" <-
 function(x, n=10, cumulative=FALSE) {
 
@@ -131,19 +131,19 @@ function(x, n=10, cumulative=FALSE) {
     # Call C routine
     result <- .Call(C_runmin, x, n)
   }
-  
+
   # Convert back to original class
   reclass(result, x)
 }
 
 #-------------------------------------------------------------------------#
 
-#'@rdname runFun
+#' @rdname runFun
 "runMax" <-
 function(x, n=10, cumulative=FALSE) {
 
   x <- try.xts(x, error=as.matrix)
-  
+
   if( n < 1 || n > NROW(x) )
     stop(sprintf("n = %d is outside valid range: [1, %d]", n, NROW(x)))
 
@@ -182,7 +182,7 @@ function(x, n=10, cumulative=FALSE) {
 
 #-------------------------------------------------------------------------#
 
-#'@rdname runFun
+#' @rdname runFun
 "runMean" <-
 function(x, n=10, cumulative=FALSE) {
 
@@ -199,7 +199,7 @@ function(x, n=10, cumulative=FALSE) {
 
 #-------------------------------------------------------------------------#
 
-#'@rdname runFun
+#' @rdname runFun
 "runMedian" <-
 function(x, n=10, non.unique="mean", cumulative=FALSE) {
 
@@ -225,7 +225,7 @@ function(x, n=10, non.unique="mean", cumulative=FALSE) {
 
 #-------------------------------------------------------------------------#
 
-#'@rdname runFun
+#' @rdname runFun
 "runCov" <-
 function(x, y, n=10, use="all.obs", sample=TRUE, cumulative=FALSE) {
 
@@ -257,7 +257,7 @@ function(x, y, n=10, use="all.obs", sample=TRUE, cumulative=FALSE) {
 
 #-------------------------------------------------------------------------#
 
-#'@rdname runFun
+#' @rdname runFun
 "runCor" <-
 function(x, y, n=10, use="all.obs", sample=TRUE, cumulative=FALSE) {
 
@@ -270,7 +270,7 @@ function(x, y, n=10, use="all.obs", sample=TRUE, cumulative=FALSE) {
 
 #-------------------------------------------------------------------------#
 
-#'@rdname runFun
+#' @rdname runFun
 "runVar" <-
 function(x, y=NULL, n=10, sample=TRUE, cumulative=FALSE) {
 
@@ -282,7 +282,7 @@ function(x, y=NULL, n=10, sample=TRUE, cumulative=FALSE) {
 
 #-------------------------------------------------------------------------#
 
-#'@rdname runFun
+#' @rdname runFun
 "runSD" <-
 function(x, n=10, sample=TRUE, cumulative=FALSE) {
 
@@ -294,7 +294,7 @@ function(x, n=10, sample=TRUE, cumulative=FALSE) {
 
 #-------------------------------------------------------------------------#
 
-#'@rdname runFun
+#' @rdname runFun
 "runMAD" <-
 function(x, n=10, center=NULL, stat="median",
          constant=1.4826, non.unique="mean", cumulative=FALSE) {
@@ -331,7 +331,7 @@ function(x, n=10, center=NULL, stat="median",
 
 #-------------------------------------------------------------------------#
 
-#'@rdname runFun
+#' @rdname runFun
 "wilderSum" <-
 function(x, n=10) {
 

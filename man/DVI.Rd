@@ -45,8 +45,8 @@ relative number of up versus down days (stretch) over different time windows.
 }
 \examples{
 
-data(ttrc)
-dvi <- DVI(ttrc[,"Close"])
+ data(ttrc)
+ dvi <- DVI(ttrc[,"Close"])
 
 }
 \references{

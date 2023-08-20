@@ -47,9 +47,9 @@ classic oscillator, it should not be used for trading rule signals.
 
 \examples{
 
-data(ttrc)
-priceDPO <- DPO(ttrc[,"Close"])
-volumeDPO <- DPO(ttrc[,"Volume"])
+ data(ttrc)
+ priceDPO <- DPO(ttrc[,"Close"])
+ volumeDPO <- DPO(ttrc[,"Volume"])
 
 }
 \references{

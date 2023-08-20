@@ -34,8 +34,8 @@ A slow decrease in Chaikin Volatility indicates an approaching top.
 }
 \examples{
 
-data(ttrc)
-volatility <- chaikinVolatility(ttrc[,c("High","Low")])
+ data(ttrc)
+ volatility <- chaikinVolatility(ttrc[,c("High","Low")])
 
 }
 \references{

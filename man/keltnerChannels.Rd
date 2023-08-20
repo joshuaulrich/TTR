@@ -22,10 +22,10 @@ See details.}
 \value{
 A object of the same class as \code{HLC} or a matrix (if
 \code{try.xts} fails) containing the columns:
-\describe{
-   \item{SMA}{ Simple moving average. }
-   \item{EMA}{ Exponential moving average. }
-}
+ \describe{
+    \item{SMA}{ Simple moving average. }
+    \item{EMA}{ Exponential moving average. }
+ }
 
 \item{dn}{ The lower Keltner Channel. }
 \item{mavg}{ The middle moving average. }

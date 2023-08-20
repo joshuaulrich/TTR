@@ -17,45 +17,45 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-#'De-Trended Price Oscillator
+#' De-Trended Price Oscillator
 #'
-#'The Detrended Price Oscillator (DPO) removes the trend in prices - or other
-#'series - by subtracting a moving average of the price from the price.
+#' The Detrended Price Oscillator (DPO) removes the trend in prices - or other
+#' series - by subtracting a moving average of the price from the price.
 #'
-#'The Detrended Price shows cycles and overbought / oversold conditions.
+#' The Detrended Price shows cycles and overbought / oversold conditions.
 #'
-#'@param x Price, volume, etc. series that is coercible to xts or matrix.
-#'@param n Number of periods for moving average.
-#'@param maType A function or a string naming the function to be called.
-#'@param shift The number of periods to shift the moving average.
-#'@param percent logical; if \code{TRUE}, the percentage difference between the
-#'slow and fast moving averages is returned, otherwise the difference between
-#'the respective averages is returned.
-#'@param \dots Other arguments to be passed to the \code{maType} function.
-#'@return A object of the same class as \code{x} or a vector (if \code{try.xts}
-#'fails) containing the DPO values.
-#'@note
-#'DPO does not extend to the last date because it is based on a displaced moving
-#'average. The calculation shifts the results \code{shift} periods, so the last
-#'\code{shift} periods will be zero.\cr
-#'As stated above, the DPO can be used on any univariate series, not just price.
-#'@section Warning: The detrended price oscillator removes the trend in the
-#'series by centering the moving average. Centering the moving average causes it
-#'to include future data. Therefore, even though this indicator looks like a
-#'classic oscillator, it should not be used for trading rule signals.
-#'@author Joshua Ulrich
-#'@seealso See \code{\link{EMA}}, \code{\link{SMA}}, etc. for moving average
-#'options; and note Warning section.  See \code{\link{MACD}} for a general
-#'oscillator.
-#'@references The following site(s) were used to code/document this
-#'indicator:\cr
-#'\url{https://school.stockcharts.com/doku.php?id=technical_indicators:detrended_price_osci}\cr
-#'@keywords ts
-#'@examples
+#' @param x Price, volume, etc. series that is coercible to xts or matrix.
+#' @param n Number of periods for moving average.
+#' @param maType A function or a string naming the function to be called.
+#' @param shift The number of periods to shift the moving average.
+#' @param percent logical; if \code{TRUE}, the percentage difference between the
+#' slow and fast moving averages is returned, otherwise the difference between
+#' the respective averages is returned.
+#' @param \dots Other arguments to be passed to the \code{maType} function.
+#' @return A object of the same class as \code{x} or a vector (if \code{try.xts}
+#' fails) containing the DPO values.
+#' @note
+#' DPO does not extend to the last date because it is based on a displaced moving
+#' average. The calculation shifts the results \code{shift} periods, so the last
+#' \code{shift} periods will be zero.\cr
+#' As stated above, the DPO can be used on any univariate series, not just price.
+#' @section Warning: The detrended price oscillator removes the trend in the
+#' series by centering the moving average. Centering the moving average causes it
+#' to include future data. Therefore, even though this indicator looks like a
+#' classic oscillator, it should not be used for trading rule signals.
+#' @author Joshua Ulrich
+#' @seealso See \code{\link{EMA}}, \code{\link{SMA}}, etc. for moving average
+#' options; and note Warning section.  See \code{\link{MACD}} for a general
+#' oscillator.
+#' @references The following site(s) were used to code/document this
+#' indicator:\cr
+#' \url{https://school.stockcharts.com/doku.php?id=technical_indicators:detrended_price_osci}\cr
+#' @keywords ts
+#' @examples
 #'
-#' data(ttrc)
-#' priceDPO <- DPO(ttrc[,"Close"])
-#' volumeDPO <- DPO(ttrc[,"Volume"])
+#'  data(ttrc)
+#'  priceDPO <- DPO(ttrc[,"Close"])
+#'  volumeDPO <- DPO(ttrc[,"Volume"])
 #'
 "DPO" <-
 function(x, n=10, maType, shift=n/2+1, percent=FALSE, ...) {

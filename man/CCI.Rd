@@ -44,8 +44,8 @@ instead of the typical price.
 }
 \examples{
 
-data(ttrc)
-cci <- CCI(ttrc[,c("High","Low","Close")])
+ data(ttrc)
+ cci <- CCI(ttrc[,c("High","Low","Close")])
 
 }
 \references{

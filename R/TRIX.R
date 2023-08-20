@@ -17,51 +17,51 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-#'Triple Smoothed Exponential Oscillator
+#' Triple Smoothed Exponential Oscillator
 #'
-#'The TRIX indicator calculates the rate of change of a triple exponential
-#'moving average.  Developed by Jack K. Hutson.
+#' The TRIX indicator calculates the rate of change of a triple exponential
+#' moving average.  Developed by Jack K. Hutson.
 #'
-#'The TRIX is calculated as follows:\cr 3MA = \code{MA}( \code{MA}(
-#'\code{MA}(\code{price}) ) )\cr trix = 100 * [ 3MA(t) / 3MA(t-1) - 1 ]
+#' The TRIX is calculated as follows:\cr 3MA = \code{MA}( \code{MA}(
+#' \code{MA}(\code{price}) ) )\cr trix = 100 * [ 3MA(t) / 3MA(t-1) - 1 ]
 #'
-#'@param price Price series that is coercible to xts or matrix.
-#'@param n Number of periods for moving average.
-#'@param nSig Number of periods for signal line moving average.
-#'@param maType Either:
-#' \enumerate{
-#'   \item A function or a string naming the function to be called.
-#'   \item A \emph{list} with the first component like (1) above, and
-#'     additional parameters specified as \emph{named} components.
-#'     See Examples.
-#' }
-#'@param percent logical; if \code{TRUE}, the rate of change is calculated
-#'using the \code{ROC} function, otherwise the \code{momentum} function is
-#'used.
-#'@param \dots Other arguments to be passed to the \code{maType} function in
-#'case (1) above.
-#'@return A object of the same class as \code{price} or a vector (if
-#'\code{try.xts} fails) containing the TRIX values.
-#'@note Buy/sell signals are generated when the TRIX crosses above/below zero.
-#'A nine-period EMA of the TRIX is used as a default signal line.  Buy/sell
-#'signals are generated when the TRIX crosses above/below the signal line and
-#'is also above/below zero.
-#'@author Joshua Ulrich
-#'@seealso See \code{\link{EMA}}, \code{\link{SMA}}, etc. for moving average
-#'options; and note Warning section.
-#'@references The following site(s) were used to code/document this
-#'indicator:\cr
-#'\url{https://www.fmlabs.com/reference/default.htm?url=TRIX.htm}\cr
-#'\url{https://www.metastock.com/Customer/Resources/TAAZ/?p=114}\cr
-#'\url{https://www.linnsoft.com/techind/trix-triple-smoothed-exponential-oscillator}\cr
-#'\url{https://school.stockcharts.com/doku.php?id=technical_indicators:trix}\cr
-#'@keywords ts
-#'@examples
+#' @param price Price series that is coercible to xts or matrix.
+#' @param n Number of periods for moving average.
+#' @param nSig Number of periods for signal line moving average.
+#' @param maType Either:
+#'  \enumerate{
+#'    \item A function or a string naming the function to be called.
+#'    \item A \emph{list} with the first component like (1) above, and
+#'      additional parameters specified as \emph{named} components.
+#'      See Examples.
+#'  }
+#' @param percent logical; if \code{TRUE}, the rate of change is calculated
+#' using the \code{ROC} function, otherwise the \code{momentum} function is
+#' used.
+#' @param \dots Other arguments to be passed to the \code{maType} function in
+#' case (1) above.
+#' @return A object of the same class as \code{price} or a vector (if
+#' \code{try.xts} fails) containing the TRIX values.
+#' @note Buy/sell signals are generated when the TRIX crosses above/below zero.
+#' A nine-period EMA of the TRIX is used as a default signal line.  Buy/sell
+#' signals are generated when the TRIX crosses above/below the signal line and
+#' is also above/below zero.
+#' @author Joshua Ulrich
+#' @seealso See \code{\link{EMA}}, \code{\link{SMA}}, etc. for moving average
+#' options; and note Warning section.
+#' @references The following site(s) were used to code/document this
+#' indicator:\cr
+#' \url{https://www.fmlabs.com/reference/default.htm?url=TRIX.htm}\cr
+#' \url{https://www.metastock.com/Customer/Resources/TAAZ/?p=114}\cr
+#' \url{https://www.linnsoft.com/techind/trix-triple-smoothed-exponential-oscillator}\cr
+#' \url{https://school.stockcharts.com/doku.php?id=technical_indicators:trix}\cr
+#' @keywords ts
+#' @examples
 #'
-#' data(ttrc)
-#' trix  <- TRIX(ttrc[,"Close"])
-#' trix4 <- TRIX(ttrc[,"Close"],
-#' maType=list(list(SMA), list(EMA, wilder=TRUE), list(SMA), list(DEMA)))
+#'  data(ttrc)
+#'  trix  <- TRIX(ttrc[,"Close"])
+#'  trix4 <- TRIX(ttrc[,"Close"],
+#'  maType=list(list(SMA), list(EMA, wilder=TRUE), list(SMA), list(DEMA)))
 #'
 "TRIX" <-
 function(price, n=20, nSig=9, maType, percent=TRUE, ...) {
@@ -97,16 +97,16 @@ function(price, n=20, nSig=9, maType, percent=TRUE, ...) {
     if( !is.null( formals(maType[[4]][[1]])$n ) && is.null( maType[[4]]$n ) ) {
       maType[[4]]$n <- nSig
     }
-    
+
     mavg1 <- do.call( maType[[1]][[1]], c( list(price), maType[[1]][-1] ) )
     mavg2 <- do.call( maType[[2]][[1]], c( list(mavg1), maType[[2]][-1] ) )
     mavg3 <- do.call( maType[[3]][[1]], c( list(mavg2), maType[[3]][-1] ) )
 
   }
-  
+
   # Case of one 'maType' for all MAs.
   else {
-  
+
     mavg1 <- do.call( maType, c( list(price), list(n=n, ...) ) )
     mavg2 <- do.call( maType, c( list(mavg1), list(n=n, ...) ) )
     mavg3 <- do.call( maType, c( list(mavg2), list(n=n, ...) ) )
@@ -118,7 +118,7 @@ function(price, n=20, nSig=9, maType, percent=TRUE, ...) {
   } else {
     TRIX <- momentum( mavg3, n=1, na.pad=TRUE )
   }
-  
+
   if( is.list(maType) ) {
     signal <- do.call( maType[[4]][[1]], c( list(TRIX), maType[[4]][-1] ) )
   } else {

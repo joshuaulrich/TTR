@@ -30,8 +30,8 @@ to look for divergences/confirmation.
 }
 \examples{
 
-data(ttrc)
-obv <- OBV(ttrc[,"Close"], ttrc[,"Volume"])
+ data(ttrc)
+ obv <- OBV(ttrc[,"Close"], ttrc[,"Volume"])
 
 }
 \references{

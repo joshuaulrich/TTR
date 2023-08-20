@@ -26,17 +26,17 @@ down]).
 }
 \note{
 There are several ways to interpret the CMO:
-\enumerate{
-  \item Values over/under +/- 50 indicate overbought/oversold conditions.
-  \item High CMO values indicate strong trends.
-  \item When the CMO crosses above/below a moving average of the CMO,
-        it is a buy/sell signal.
-}
+ \enumerate{
+   \item Values over/under +/- 50 indicate overbought/oversold conditions.
+   \item High CMO values indicate strong trends.
+   \item When the CMO crosses above/below a moving average of the CMO,
+         it is a buy/sell signal.
+ }
 }
 \examples{
 
-data(ttrc)
-cmo <- CMO(ttrc[,"Close"])
+ data(ttrc)
+ cmo <- CMO(ttrc[,"Close"])
 
 }
 \references{

@@ -34,10 +34,10 @@ case (1) above.}
 \value{
 A object of the same class as \code{x} or a matrix (if \code{try.xts}
 fails) containing the columns:
-\describe{
- \item{ macd }{ The price (volume, etc.) oscillator. }
- \item{ signal }{ The oscillator signal line (a moving average of the oscillator). }
-}
+ \describe{
+  \item{ macd }{ The price (volume, etc.) oscillator. }
+  \item{ signal }{ The oscillator signal line (a moving average of the oscillator). }
+ }
 }
 \description{
 The MACD was developed by Gerald Appel and is probably the most popular price
@@ -58,11 +58,11 @@ used exponential constants of 0.075 and 0.15, which are closer to
 }
 \examples{
 
-data(ttrc)
+ data(ttrc)
 
-macd  <- MACD( ttrc[,"Close"], 12, 26, 9, maType="EMA" )
-macd2 <- MACD( ttrc[,"Close"], 12, 26, 9,
-         maType=list(list(SMA), list(EMA, wilder=TRUE), list(SMA)) )
+ macd  <- MACD( ttrc[,"Close"], 12, 26, 9, maType="EMA" )
+ macd2 <- MACD( ttrc[,"Close"], 12, 26, 9,
+          maType=list(list(SMA), list(EMA, wilder=TRUE), list(SMA)) )
 
 }
 \references{

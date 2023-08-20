@@ -17,51 +17,51 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-#'Percent Rank over a Moving Window
+#' Percent Rank over a Moving Window
 #'
-#'This function computes a running/rolling percentage rank.
+#' This function computes a running/rolling percentage rank.
 #'
-#'The computation for a percentage rank can vary depending on the weight given
-#'to values in the window that are equal to the value being ranked. This weight
-#'can be set using the \code{exact.multiplier} argument which defaults to 0.5.
+#' The computation for a percentage rank can vary depending on the weight given
+#' to values in the window that are equal to the value being ranked. This weight
+#' can be set using the \code{exact.multiplier} argument which defaults to 0.5.
 #'
-#'\code{exact.multiplier = 0} scores equal values in the lookback window as
-#'always being greater than the value being ranked. \code{exact.multiplier = 1}
-#'scores equal values as being below the value being ranked. Any multiplier
-#'between 0 and 1 counts that proportion of the equal values as being below
-#'the value being ranked.
+#' \code{exact.multiplier = 0} scores equal values in the lookback window as
+#' always being greater than the value being ranked. \code{exact.multiplier = 1}
+#' scores equal values as being below the value being ranked. Any multiplier
+#' between 0 and 1 counts that proportion of the equal values as being below
+#' the value being ranked.
 #'
-#'The value of \code{exact.multiplier} has the most impact when the window is
-#'relatively small or when the number of discrete values in the window is
-#'small. For non-repeating values, changing \code{exact.multiplier = 0} to
-#'\code{exact.multiplier = 1} for a window of size \code{N} will shift the
-#'resulting percentile rankings by \code{1/N}. It is equivalent to changing
-#'the question from, "how many values are < the value" to "how many values
-#'are <= the value".
+#' The value of \code{exact.multiplier} has the most impact when the window is
+#' relatively small or when the number of discrete values in the window is
+#' small. For non-repeating values, changing \code{exact.multiplier = 0} to
+#' \code{exact.multiplier = 1} for a window of size \code{N} will shift the
+#' resulting percentile rankings by \code{1/N}. It is equivalent to changing
+#' the question from, "how many values are < the value" to "how many values
+#' are <= the value".
 #'
-#'@aliases runPercentRank percentRank PercentRank
-#'@param x Object coercible to xts or matrix.
-#'@param n Number of periods to use in the window or, if
-#'\code{cumulative=TRUE}, the number of observations to use before the first
-#'result is returned. Must be between 1 and \code{nrow(x)}, inclusive.
-#'@param cumulative Logical, use from-inception calculation?
-#'@param exact.multiplier The weight applied to identical values in the window.
-#'Must be between 0 and 1, inclusive. See details.
+#' @aliases runPercentRank percentRank PercentRank
+#' @param x Object coercible to xts or matrix.
+#' @param n Number of periods to use in the window or, if
+#' \code{cumulative=TRUE}, the number of observations to use before the first
+#' result is returned. Must be between 1 and \code{nrow(x)}, inclusive.
+#' @param cumulative Logical, use from-inception calculation?
+#' @param exact.multiplier The weight applied to identical values in the window.
+#' Must be between 0 and 1, inclusive. See details.
 #'
-#'@return A object of percent ranks over a n-period moving window of the same
-#'class as \code{x} and \code{y} or a vector (if \code{try.xts} fails).
+#' @return A object of percent ranks over a n-period moving window of the same
+#' class as \code{x} and \code{y} or a vector (if \code{try.xts} fails).
 #'
-#'@note This computation is different from the one used in Microsoft Excel's
-#'\code{PERCENTRANK} formula. Excel's computation is rather strange and gives
-#'inconsistent results as it uses interpolation to rank values that are not
-#'found within the lookback window.
+#' @note This computation is different from the one used in Microsoft Excel's
+#' \code{PERCENTRANK} formula. Excel's computation is rather strange and gives
+#' inconsistent results as it uses interpolation to rank values that are not
+#' found within the lookback window.
 #'
-#'@author Charlie Friedemann
+#' @author Charlie Friedemann
 #'
-#'@references The following site(s) were used to code/document this
-#'indicator:\cr \url{https://en.wikipedia.org/wiki/Percentile_rank}\cr
+#' @references The following site(s) were used to code/document this
+#' indicator:\cr \url{https://en.wikipedia.org/wiki/Percentile_rank}\cr
 #'
-#'@keywords ts
+#' @keywords ts
 runPercentRank <- function(x, n=260, cumulative = FALSE, exact.multiplier = 0.5) {
   x <- try.xts(x, error = as.matrix)
 

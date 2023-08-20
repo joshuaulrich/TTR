@@ -17,26 +17,26 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-#'The Ultimate Oscillator
+#' The Ultimate Oscillator
 #'
-#'The Ultimate Oscillator is a momentum oscillator designed to capture momentum across three
-#'different time frames.
-#' 
-#'Created by Larry Williams in 1976.
-#' 
-#'@param HLC Object that is coercible to xts or matrix and contains
-#'High-Low-Close prices.
-#'@param n A vector of the number of periods to use for each average calculation.
-#'@param wts The weights applied to each average.
-#'@author Ivan Popivanov
-#'@references The following site(s) were used to code/document this
-#'indicator:\cr
-#'\url{https://school.stockcharts.com/doku.php?id=technical_indicators:ultimate_oscillator}\cr
-#'@keywords ts
-#'@examples
+#' The Ultimate Oscillator is a momentum oscillator designed to capture momentum across three
+#' different time frames.
 #'
-#'data(ttrc)
-#'ult.osc <- ultimateOscillator(ttrc[,c("High","Low","Close")])
+#' Created by Larry Williams in 1976.
+#'
+#' @param HLC Object that is coercible to xts or matrix and contains
+#' High-Low-Close prices.
+#' @param n A vector of the number of periods to use for each average calculation.
+#' @param wts The weights applied to each average.
+#' @author Ivan Popivanov
+#' @references The following site(s) were used to code/document this
+#' indicator:\cr
+#' \url{https://school.stockcharts.com/doku.php?id=technical_indicators:ultimate_oscillator}\cr
+#' @keywords ts
+#' @examples
+#'
+#' data(ttrc)
+#' ult.osc <- ultimateOscillator(ttrc[,c("High","Low","Close")])
 #'
 ultimateOscillator <-
 function(HLC, n=c(7,14,28), wts=c(4,2,1)) {

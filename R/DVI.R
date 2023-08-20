@@ -17,35 +17,35 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-#'DV Intermediate Oscillator
+#' DV Intermediate Oscillator
 #'
-#'The DV Intermediate oscillator (DVI) is a very smooth momentum oscillator
-#'that can also be used as a trend indicator.  Created by David Varadi.
+#' The DV Intermediate oscillator (DVI) is a very smooth momentum oscillator
+#' that can also be used as a trend indicator.  Created by David Varadi.
 #'
-#'The DVI combines smoothed returns over different time windows and the
-#'relative number of up versus down days (stretch) over different time windows.
+#' The DVI combines smoothed returns over different time windows and the
+#' relative number of up versus down days (stretch) over different time windows.
 #'
-#'@param price Price series that is coercible to xts or matrix.
-#'@param n Number of periods for the percent rank.
-#'@param wts The weight given to the smoothed returns (magnitude) component and
-#'the up/down days (stretch) component, respectively.
-#'@param smooth The number of periods to smooth price.
-#'@param magnitude A set of 3 periods used to smooth magnitude.
-#'@param stretch A set of 3 periods used to smooth stretch.
-#'@param exact.multiplier The weight applied to identical values in the window.
-#'See \code{runPercentRank}.
-#'@return A object of the same class as \code{price} or a vector (if
-#'\code{try.xts} fails) containing the DVI values.
-#'@author Joshua Ulrich
-#'@references The following site(s) were used to code/document this
-#'indicator:\cr
-#'\url{https://cssanalytics.wordpress.com/2009/12/13/what-is-the-dvi/}\cr
-#'\url{https://marketsci.wordpress.com/2010/07/27/css-analytics\%E2\%80\%99-dvi-indicator-revealed/}\cr
-#'@keywords ts
-#'@examples
+#' @param price Price series that is coercible to xts or matrix.
+#' @param n Number of periods for the percent rank.
+#' @param wts The weight given to the smoothed returns (magnitude) component and
+#' the up/down days (stretch) component, respectively.
+#' @param smooth The number of periods to smooth price.
+#' @param magnitude A set of 3 periods used to smooth magnitude.
+#' @param stretch A set of 3 periods used to smooth stretch.
+#' @param exact.multiplier The weight applied to identical values in the window.
+#' See \code{runPercentRank}.
+#' @return A object of the same class as \code{price} or a vector (if
+#' \code{try.xts} fails) containing the DVI values.
+#' @author Joshua Ulrich
+#' @references The following site(s) were used to code/document this
+#' indicator:\cr
+#' \url{https://cssanalytics.wordpress.com/2009/12/13/what-is-the-dvi/}\cr
+#' \url{https://marketsci.wordpress.com/2010/07/27/css-analytics\%E2\%80\%99-dvi-indicator-revealed/}\cr
+#' @keywords ts
+#' @examples
 #'
-#' data(ttrc)
-#' dvi <- DVI(ttrc[,"Close"])
+#'  data(ttrc)
+#'  dvi <- DVI(ttrc[,"Close"])
 #'
 DVI <- function(price, n=252, wts=c(0.8,0.2), smooth=3,
   magnitude=c(5,100,5), stretch=c(10,100,2), exact.multiplier=1) {

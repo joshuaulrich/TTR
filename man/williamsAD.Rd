@@ -28,8 +28,8 @@ divergence in the direction of the indicator relative to price.
 }
 \examples{
 
-data(ttrc)
-ad <- williamsAD(ttrc[,c("High","Low","Close")])
+ data(ttrc)
+ ad <- williamsAD(ttrc[,c("High","Low","Close")])
 
 }
 \references{

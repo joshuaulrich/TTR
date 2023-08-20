@@ -47,9 +47,9 @@ isn't well-suited for use for systematic trading strategies.
 
 \examples{
 
-## Get Data and Indicator ##
-data(ttrc)
-zz <- ZigZag( ttrc[,c("High", "Low")], change=20 )
+ ## Get Data and Indicator ##
+ data(ttrc)
+ zz <- ZigZag( ttrc[,c("High", "Low")], change=20 )
 
 }
 \references{

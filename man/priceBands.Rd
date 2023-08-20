@@ -40,11 +40,11 @@ centering, default \code{FALSE}.}
 \value{
 A object of the same class as \code{prices} or a matrix (if
 \code{try.xts} fails) containing the columns:
-\describe{
-   \item{ dn }{ The lower price volatility Band. }
-   \item{ center }{ The smoothed centerline (see details). }
-   \item{ up }{ The upper price volatility Band. }
-}
+ \describe{
+    \item{ dn }{ The lower price volatility Band. }
+    \item{ center }{ The smoothed centerline (see details). }
+    \item{ up }{ The upper price volatility Band. }
+ }
 }
 \description{
 John Bollinger's famous adaptive volatility bands most often use the typical
@@ -67,8 +67,8 @@ this function, call this functions using \code{lapply(prices,PBands,...)}.
 }
 \examples{
 
-  data(ttrc)
-  pbands.close <- PBands( ttrc[,"Close"] )
+   data(ttrc)
+   pbands.close <- PBands( ttrc[,"Close"] )
 
 }
 \seealso{

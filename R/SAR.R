@@ -17,38 +17,38 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-#'Parabolic Stop-and-Reverse
+#' Parabolic Stop-and-Reverse
 #'
-#'The Parabolic Stop-and-Reverse calculates a trailing stop.  Developed by J.
-#'Welles Wilder.
+#' The Parabolic Stop-and-Reverse calculates a trailing stop.  Developed by J.
+#' Welles Wilder.
 #'
-#'The calculation for the SAR is quite complex.  See the URLs in the references
-#'section for calculation notes.
+#' The calculation for the SAR is quite complex.  See the URLs in the references
+#' section for calculation notes.
 #'
-#'The SAR assumes that you are always in the market, and calculates the Stop
-#'And Reverse point when you would close a long position and open a short
-#'position or vice versa.
+#' The SAR assumes that you are always in the market, and calculates the Stop
+#' And Reverse point when you would close a long position and open a short
+#' position or vice versa.
 #'
-#'@param HL Object that is coercible to xts or matrix and contains High-Low
-#'prices.
-#'@param accel accel[1]: Acceleration factor.\cr accel[2]: Maximum acceleration
-#'factor.
-#'@return A object of the same class as \code{HL} or a vector (if
-#'\code{try.xts} fails) containing the Parabolic Stop and Reverse values.
-#'@author Joshua Ulrich
-#'@seealso See \code{\link{ATR}} and \code{\link{ADX}}, which were also
-#'developed by Welles Wilder.
-#'@references The following site(s) were used to code/document this
-#'indicator:\cr
-#'\url{https://www.linnsoft.com/techind/parabolic-sar-sar}\cr
-#'\url{https://www.fmlabs.com/reference/SAR.htm}\cr
-#'\url{https://school.stockcharts.com/doku.php?id=technical_indicators:parabolic_sar}\cr
-#'\url{https://www.metastock.com/Customer/Resources/TAAZ/?p=87}
-#'@keywords ts
-#'@examples
+#' @param HL Object that is coercible to xts or matrix and contains High-Low
+#' prices.
+#' @param accel accel[1]: Acceleration factor.\cr accel[2]: Maximum acceleration
+#' factor.
+#' @return A object of the same class as \code{HL} or a vector (if
+#' \code{try.xts} fails) containing the Parabolic Stop and Reverse values.
+#' @author Joshua Ulrich
+#' @seealso See \code{\link{ATR}} and \code{\link{ADX}}, which were also
+#' developed by Welles Wilder.
+#' @references The following site(s) were used to code/document this
+#' indicator:\cr
+#' \url{https://www.linnsoft.com/techind/parabolic-sar-sar}\cr
+#' \url{https://www.fmlabs.com/reference/SAR.htm}\cr
+#' \url{https://school.stockcharts.com/doku.php?id=technical_indicators:parabolic_sar}\cr
+#' \url{https://www.metastock.com/Customer/Resources/TAAZ/?p=87}
+#' @keywords ts
+#' @examples
 #'
-#' data(ttrc)
-#' sar <- SAR(ttrc[,c("High","Low")])
+#'  data(ttrc)
+#'  sar <- SAR(ttrc[,c("High","Low")])
 #'
 "SAR" <-
 function(HL, accel=c(.02,.2)) {

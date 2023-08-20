@@ -19,10 +19,10 @@ return for an individual security}
 \value{
 A object of the same class as \code{Ra} (and \code{Rb}?) or a vector
 (if \code{try.xts} fails).
-\describe{
- \item{rollSFM}{returns single-factor model parameters and R-squared
-   over a n-period moving window.}
-}
+ \describe{
+  \item{rollSFM}{returns single-factor model parameters and R-squared
+    over a n-period moving window.}
+ }
 }
 \description{
 Various functions to analyze data over a moving window of periods.

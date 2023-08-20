@@ -63,11 +63,11 @@ respectively.
 }
 \examples{
 
-data(ttrc)
-kst <- KST(ttrc[,"Close"])
+ data(ttrc)
+ kst <- KST(ttrc[,"Close"])
 
-kst4MA <- KST(ttrc[,"Close"],
-  maType=list(list(SMA),list(EMA),list(DEMA),list(WMA)))
+ kst4MA <- KST(ttrc[,"Close"],
+   maType=list(list(SMA),list(EMA),list(DEMA),list(WMA)))
 
 }
 \references{

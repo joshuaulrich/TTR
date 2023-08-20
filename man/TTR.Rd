@@ -3,6 +3,7 @@
 \docType{package}
 \name{TTR}
 \alias{TTR}
+\alias{TTR-package}
 \title{Functions to create Technical Trading Rules (TTR)}
 \description{
 This package contains many of the most popular technical analysis functions,

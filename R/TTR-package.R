@@ -37,6 +37,7 @@ NULL
 #'
 #'@name TTR
 #'@docType package
+#'@aliases TTR-package
 #'@author Joshua Ulrich
 #'
 #'Maintainer: Joshua Ulrich

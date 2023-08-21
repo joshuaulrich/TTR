@@ -192,7 +192,8 @@ function(exchange = c("AMEX", "NASDAQ", "NYSE", "ARCA", "BATS", "IEX"),
       flush.console()
     }
     curl::curl_download(nasdaq.url, destfile = tmp)
-    nasdaq <- read.table(tmp, header = TRUE, sep = "|", quote = "", fill = TRUE)
+    nasdaq <- read.table(tmp, header = TRUE, sep = "|", quote = "",
+                         fill = TRUE, na.strings = NULL)
 
     # add symbols columns not in file
     nasdaq$Name <- nasdaq$Security.Name
@@ -217,7 +218,8 @@ function(exchange = c("AMEX", "NASDAQ", "NYSE", "ARCA", "BATS", "IEX"),
     }
 
     curl::curl_download(other.url, destfile = tmp)
-    other <- read.table(tmp, header = TRUE, sep = "|", quote = "", fill = TRUE)
+    other <- read.table(tmp, header = TRUE, sep = "|", quote = "",
+                        fill = TRUE, na.strings = NULL)
 
     # remove last row (File creation time)
     other <- other[-nrow(other),]

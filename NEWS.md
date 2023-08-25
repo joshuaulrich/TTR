@@ -53,7 +53,7 @@
   than the value for `n`. Thanks to Ian Fellows for the report. (#112)
 
 - `run*(x, n = 1, cumulative = TRUE)` functions would return NA for the
-  first value Thanks to Ethan B. Smith for the report and PR! (#111, #108, #88)
+  first value. Thanks to Ethan B. Smith for the report and PR! (#111, #108, #88)
 
 - Fix NA check off-by-one error in `aroon()` that caused it to fail if there
   were exactly enough non-NA values. (#102)

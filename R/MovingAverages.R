@@ -58,7 +58,6 @@
 #' @param n Number of periods to average over. Must be between 1 and
 #' \code{nrow(x)}, inclusive.
 #' @param v The 'volume factor' (a number in [0,1]).  See Notes.
-#' @param w Vector of weights (in [0,1]) the same length as \code{x}.
 #' @param wts Vector of weights.  Length of \code{wts} vector must equal the
 #' length of \code{x}, or \code{n} (the default).
 #' @param wilder logical; if \code{TRUE}, a Welles Wilder type EMA will be

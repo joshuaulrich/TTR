@@ -62,8 +62,6 @@ corresponds to price series, or a constant.  See Notes.}
 \item{offset}{Percentile at which the center of the distribution should occur.}
 
 \item{sigma}{Standard deviation of the distribution.}
-
-\item{w}{Vector of weights (in [0,1]) the same length as \code{x}.}
 }
 \value{
 A object of the same class as \code{x} or \code{price} or a vector

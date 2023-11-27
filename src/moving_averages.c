@@ -39,8 +39,7 @@ SEXP ema (SEXP x, SEXP n, SEXP ratio, SEXP wilder) {
 
     if(R_NilValue == n || i_n <= 0) {
       if(R_NilValue == ratio || d_ratio <= 0.0) {
-        error("either 'n' or 'ratio' must be specified and > 0\n",
-              "'n' is ", n, " 'ratio' is ", ratio);
+        error("either 'n' or 'ratio' must be specified and > 0\n'n' is %d and 'ratio' is %1.6f", i_n, d_ratio);
       } else {
         /* If ratio is specified, and n is not, set n to approx 'correct'
          * value backed out from ratio */
@@ -246,8 +245,7 @@ SEXP zlema (SEXP x, SEXP n, SEXP ratio) {
 
     if(R_NilValue == n || i_n <= 0) {
       if(R_NilValue == ratio || d_ratio <= 0.0) {
-        error("either 'n' or 'ratio' must be specified and > 0\n",
-              "'n' is ", n, " 'ratio' is ", ratio);
+        error("either 'n' or 'ratio' must be specified and > 0\n'n' is %d and 'ratio' is %1.6f", i_n, d_ratio);
       } else {
         /* If ratio is specified, and n is not, set n to approx 'correct'
          * value backed out from ratio */

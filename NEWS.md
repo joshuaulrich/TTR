@@ -1,4 +1,4 @@
-# Changes in 0.24.X
+# Changes in 0.24.4
 
 * Added Ethan B. Smith as a contributor. Thanks Ethan!
 
@@ -11,9 +11,13 @@
 
 ### BUG FIXES
 
+* Fix `stockSymbols()` for ticker "NA". `read.table()` converts the string "NA"
+  to a missing value (NA) because `na.strings = "NA"` by default. This causes
+  an issue because there's actually a company with "NA" for the ticker. (#128)
+
 - `CTI()` did not pad its result with leading NA when the input was not
   coerced to an xts object. This was different from other TTR functions
-  (e.g. `SMA()`, `RSI()`, `ROC()`). (#127).
+  (e.g. `SMA()`, `RSI()`, `ROC()`). (#127)
 
 - Removed the `VMA()` function, which was never correct because the
   results made no sense.

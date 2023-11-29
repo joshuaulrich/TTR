@@ -62,7 +62,7 @@ function(HL, volume, n=9, maType, vol.divisor=10000, ...) {
 
   # Arms' Ease of Movement Value
 
-  if( missing(HL) | missing(volume) )
+  if( missing(HL) || missing(volume) )
     stop("High-Low matrix (HL) and volume vector must be specified.")
 
   HL <- try.xts(HL, error=as.matrix)

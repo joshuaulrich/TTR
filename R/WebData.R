@@ -331,7 +331,7 @@ function(symbol, start, end, freq="daily", type="price", adjust=TRUE, quiet=FALS
   interval <- intervals[freq]
   type <- match.arg( type, c("price","split") )
   if(type!="price") {
-    if(freq!="daily" & !quiet)
+    if(freq!="daily" && !quiet)
       message("Only freq=\"daily\" data available for type=\"split\".\n",
               "Setting freq=\"daily\"...")
   }

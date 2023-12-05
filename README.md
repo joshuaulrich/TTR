@@ -33,7 +33,7 @@ remotes::install_github("joshuaulrich/TTR")
 devtools::install_github("joshuaulrich/TTR")
 ```
 
-You will need tools to compile C, C++, and Fortran code. See the relevant
+You will need tools to compile C/C++ code. See the relevant
 appendix in the [R Installation and Administration manual](https://cran.r-project.org/doc/manuals/r-release/R-admin.html)
 for your operating system:
 

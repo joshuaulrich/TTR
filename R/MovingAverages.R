@@ -348,11 +348,14 @@ function (x, n=10, ratio=NULL, ...) {
   # Call C routine
   ma <- .Call(C_zlema, x, n, ratio)
 
+  # Convert back to original class
+  ma <- reclass(ma,x)
+
   if(!is.null(dim(ma))) {
     colnames(ma) <- "ZLEMA"
   }
 
-  reclass(ma,x)
+  return(ma)
 }
 
 #-------------------------------------------------------------------------#

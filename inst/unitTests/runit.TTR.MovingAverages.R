@@ -161,3 +161,17 @@ test.EMA.non.na.eq.n.does.not.error <- function() {
   return(TRUE)
 }
 
+test.ma.on.xts.objects.have.colnames <- function() {
+  x <- xts::as.xts(ttrc)
+  p <- x[, "Close"]
+  v <- x[, "Volume"]
+  checkEquals("SMA",   colnames(SMA(p)))
+  checkEquals("EMA",   colnames(EMA(p)))
+  checkEquals("DEMA",  colnames(DEMA(p)))
+  checkEquals("WMA",   colnames(WMA(p)))
+  checkEquals("EVWMA", colnames(EVWMA(p, v)))
+  checkEquals("ZLEMA", colnames(ZLEMA(p)))
+  checkEquals("VWAP",  colnames(VWAP(p, v)))
+  checkEquals("HMA",   colnames(HMA(p)))
+  checkEquals("ALMA",  colnames(ALMA(p)))
+}

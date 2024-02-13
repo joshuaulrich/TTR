@@ -277,12 +277,14 @@ function(x, n=10, wts=1:n, ...) {
 
   # replace 1:(n-1) with NAs and prepend NAs from original data
   ma[1:(n-1)] <- NA
-
+  
+  ma <- reclass(ma,x)
+  
   if(!is.null(dim(ma))) {
     colnames(ma) <- "WMA"
   }
-
-  reclass(ma,x)
+  
+  return(ma)
 }
 
 #-------------------------------------------------------------------------#
@@ -313,13 +315,16 @@ function(price, volume, n=10, ...) {
 
   # Call C routine
   ma <- .Call(C_evwma, pv[,1], pv[,2], n)
-
+  
+  # Convert back to original class
+  ma <- reclass(ma, price)
+  
   if(!is.null(dim(ma))) {
     colnames(ma) <- "EVWMA"
   }
-
-  # Convert back to original class
-  reclass(ma, price)
+  
+  return(ma)
+  
 }
 
 #-------------------------------------------------------------------------#
@@ -380,7 +385,13 @@ function(x, n=20, ...) {
 
   hma <- WMA(madiff, n = trunc(sqrt(n)), ...)
 
-  reclass(hma, x)
+  if(!is.null(dim(hma))) {
+    colnames(hma) <- "HMA"
+  }
+  
+  return(
+    hma
+  )
 }
 
 #-------------------------------------------------------------------------#
@@ -406,8 +417,14 @@ function(x, n=9, offset=0.85, sigma=6, ...) {
     wts <- wts/sumWeights
 
   alma <- x * NA_real_
+  
   for(i in seq_len(NCOL(x))) {
     alma[,i] <- WMA(x[,i], n, wts)
   }
+  
+  if(!is.null(dim(alma))) {
+    colnames(alma) <- "ALMA"
+  }
+  
   reclass(alma, x)
 }

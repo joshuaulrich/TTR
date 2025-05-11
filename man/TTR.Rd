@@ -58,6 +58,14 @@ The following sites were used to code/document this package:\cr
 \url{https://www.linnsoft.com/indicators}\cr
 \url{https://school.stockcharts.com/doku.php?id=technical_indicators}\cr
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/joshuaulrich/TTR}
+  \item Report bugs at \url{https://github.com/joshuaulrich/TTR/issues}
+}
+
+}
 \author{
 Joshua Ulrich
 

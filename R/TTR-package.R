@@ -36,7 +36,6 @@ NULL
 #' \code{\link{WebData}}\cr
 #'
 #' @name TTR
-#' @docType package
 #' @aliases TTR-package
 #' @author Joshua Ulrich
 #'
@@ -81,4 +80,4 @@ NULL
 #'  }
 #'
 #' @rdname TTR
-NULL
+"_PACKAGE"

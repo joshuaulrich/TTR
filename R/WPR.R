@@ -29,12 +29,19 @@
 #' High-Low-Close prices.  If only a univariate series is given, it will be
 #' used.  See details.
 #' @param n Number of periods to use.
+#' @param scale Scale the result to be between 0 and -100.
 #' @return A object of the same class as \code{HLC} or a vector (if
 #' \code{try.xts} fails) containing the William's \%R values.
-#' @note The William's \%R calculation is similar to stochastics' fast \%K.
+#' @note The William's \%R calculation is similar to stochastics' fast \%K,
+#' and the result of \code{WPR} is equal to \code{1-fastK}.
 #'
 #' The value for William's \%R will be 0.5 whenever the highest high and
 #' lowest low are the same over the last \code{n} periods.
+#'
+#' William's \%R is usually scaled to be between 0 and -100, which is not what
+#' \code{WPR} returns by default. Set \code{scale = TRUE} to return the result
+#' with the usual scaling.
+#'
 #' @author Joshua Ulrich
 #' @seealso See \code{\link{stoch}}.
 #' @references The following site(s) were used to code/document this
@@ -47,8 +54,15 @@
 #' @examples
 #'
 #'  data(ttrc)
-#'  stochOsc <- stoch(ttrc[,c("High","Low","Close")])
-#'  stochWPR<- WPR(ttrc[,c("High","Low","Close")])
+#'  hlc <- ttrc[,c("High","Low","Close")]
+#'  stochOsc <- stoch(hlc)
+#'  stochWPR <- WPR(hlc)
+#'
+#'  # WPR is a transformation of stochastics' fastK
+#'  all.equal(stochWPR, 1-stochOsc[,'fastK'])  # TRUE
+#'
+#'  # WPR converted to the usual scaling between 0 and -100
+#'  scaledWPR <- WPR(hlc, scale=TRUE)
 #'
 #'  plot(tail(stochOsc[,"fastK"], 100), type="l",
 #'      main="Fast %K and Williams %R", ylab="",
@@ -57,7 +71,7 @@
 #'  lines(tail(1-stochWPR, 100), col="red", lty="dashed")
 #'
 "WPR" <-
-function(HLC, n=14) {
+function(HLC, n=14, scale=FALSE) {
 
   # William's Percent R (similar to Stochastics' fast %K)
 
@@ -84,6 +98,10 @@ function(HLC, n=14) {
 
   pctR <- (hmax - close) / (hmax - lmin)
   pctR[is.nan(pctR)] <- 0.5
+
+  if(isTRUE(scale)) {
+      pctR <- -100 * pctR
+  }
 
   reclass( pctR, HLC )
 }

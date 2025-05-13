@@ -42,6 +42,10 @@ SEXP sar (SEXP hi, SEXP lo, SEXP xl) {
     double *d_lo = REAL(lo);
     double *d_xl = REAL(xl);
 
+    /* check acceleration factors */
+    if(d_xl[0] <= 0) error("acceleration factor must be > 0");
+    if(d_xl[1] <= d_xl[0]) error("maximum acceleration must be > acceleration factor");
+
     /* Input object length */
     int nr = nrows(hi);
 

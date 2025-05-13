@@ -19,8 +19,9 @@
 
 #include <R.h>
 #include <Rinternals.h>
+#include <math.h>
 
-SEXP sar (SEXP hi, SEXP lo, SEXP xl, SEXP ig) {
+SEXP sar (SEXP hi, SEXP lo, SEXP xl) {
 
     /* Initialize loop and PROTECT counters */
     int i, P=0;
@@ -35,7 +36,6 @@ SEXP sar (SEXP hi, SEXP lo, SEXP xl, SEXP ig) {
     if(TYPEOF(xl) != REALSXP) {
       PROTECT(xl = coerceVector(xl, REALSXP)); P++;
     }
-    double initGap = asReal(ig);
 
     /* Pointers to function arguments */
     double *d_hi = REAL(hi);
@@ -65,6 +65,13 @@ SEXP sar (SEXP hi, SEXP lo, SEXP xl, SEXP ig) {
     double xpt0 = d_hi[beg-1], xpt1 = 0;
     double af0 = d_xl[0], af1 = 0;
     double lmin, lmax;
+
+    double hi1 = d_hi[beg-1];
+    double lo1 = d_lo[beg-1];
+    double mu1 = (hi1 + lo1) / 2.0;
+
+    /* Use stdev of first high and low as the initial gap */
+    double initGap = sqrt((hi1-mu1)*(hi1-mu1) + (lo1-mu1)*(lo1-mu1));
     d_sar[beg-1] = d_lo[beg-1]-initGap;
 
     for(i=beg; i < nr; i++) {

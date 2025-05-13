@@ -8,7 +8,7 @@ SEXP adjRatios(SEXP, SEXP, SEXP);
 SEXP aroon_max(SEXP, SEXP);
 SEXP ema(SEXP, SEXP, SEXP, SEXP);
 SEXP evwma(SEXP, SEXP, SEXP);
-SEXP sar(SEXP, SEXP, SEXP, SEXP);
+SEXP sar(SEXP, SEXP, SEXP);
 SEXP ttr_rollPercentRank(SEXP, SEXP, SEXP, SEXP);
 SEXP ttr_zigzag(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 SEXP wilderSum(SEXP, SEXP);

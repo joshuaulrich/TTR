@@ -42,44 +42,45 @@ Here are a few examples of some of the more well-known indicators:
 ```r
 # "TTR Composite" (simulated data)
 data(ttrc)
+hlc <- ttrc[, c("High", "Low", "Close")]
 
 # Bollinger Bands
-bbands <- BBands( ttrc[,c("High","Low","Close")] )
+bbands <- BBands(hlc)
 
 # Directional Movement Index
-adx <- ADX(ttrc[,c("High","Low","Close")])
+adx <- ADX(hlc)
 
 # Moving Averages
-ema <- EMA(ttrc[,"Close"], n=20)
-sma <- SMA(ttrc[,"Close"], n=20)
+ema <- EMA(ttrc[, "Close"], n = 20)
+sma <- SMA(ttrc[, "Close"], n = 20)
 
 # MACD
-macd <- MACD( ttrc[,"Close"] )
+macd <- MACD(ttrc[,"Close"])
 
 # RSI
 rsi <- RSI(ttrc[,"Close"])
 
 # Stochastics
-stochOsc <- stoch(ttrc[,c("High","Low","Close")])
+stochOsc <- stoch(hlc)
 ```
 
 TTR works with the `chartSeries()` function in [quantmod](https://github.com/joshuaulrich/quantmod). Here's an example that uses `chartSeries()` and adds TTR-calculated indicators and overlays to the chart.
 
 ```r
-# "TTR Composite" (simulated data)
+library(quantmod)
 data(ttrc)
 
-# Use quantmod's OHLCV extractor function to help create an xts object
-xttrc <- xts(OHLCV(ttrc), ttrc[["Date"]])
+# create an xts object
+x <- as.xts(ttrc)
 
-chartSeries(xttrc, subset = "2006-09/", theme = "white")
+chartSeries(x, subset = "2006-09/", theme = "white")
 addBBands()
 addRSI()
 ```
 
 ![](https://drive.google.com/uc?export=view&id=1TrgoZujgcI9GCMEWHlDgzkQQvBItyLwq)
 
-###### Have a question?
+### Have a question?
 
 Ask your question on [Stack Overflow](https://stackoverflow.com/questions/tagged/r)
 or the [R-SIG-Finance](https://stat.ethz.ch/mailman/listinfo/r-sig-finance)

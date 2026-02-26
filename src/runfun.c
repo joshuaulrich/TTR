@@ -84,32 +84,32 @@ SEXP runrange(SEXP _x, SEXP _n)
 
     /* allocate result: 2 columns (min, max) */
     SEXP _result = PROTECT(allocMatrix(REALSXP, nr, 2)); P++;
-    double *res = REAL(_result);
+    double *result = REAL(_result);
 
-    /* check for non-leading NAs */
+    
+    /* check for non-leading NAs and get first non-NA location */
     SEXP _first = PROTECT(xts_na_check(_x, ScalarLogical(TRUE))); P++;
     int first = INTEGER(_first)[0];
     if (n + first > nr) {
-        error("not enough non-NA values");
+      error("not enough non-NA values");
     }
 
     /* leading NAs */
     for (i = 0; i < first; i++) {
-        res[i] = NA_REAL;               /* min */
-        res[i + nr] = NA_REAL;          /* max */
+        result[i] = NA_REAL;               /* min */
+        result[i + nr] = NA_REAL;          /* max */
     }
 
     /* initialize first window */
-    double lmin = x[first];
-    double lmax = x[first];
+    double lmin = x[first],  lmax = x[first];
     for (i = first; i < first + n; i++) {
+        result[i] = NA_REAL;
+        result[i + nr] = NA_REAL;
         if (x[i] < lmin) lmin = x[i];
         if (x[i] > lmax) lmax = x[i];
-        res[i] = NA_REAL;
-        res[i + nr] = NA_REAL;
     }
-    res[first + n - 1] = lmin;
-    res[first + n - 1 + nr] = lmax;
+    result[first + n - 1] = lmin;
+    result[first + n - 1 + nr] = lmax;
 
     /* main loop */
     for (i = first + n; i < nr; i++) {
@@ -120,8 +120,8 @@ SEXP runrange(SEXP _x, SEXP _n)
             if (v < lmin) lmin = v;
             if (v > lmax) lmax = v;
         }
-        res[i] = lmin;
-        res[i + nr] = lmax;
+        result[i] = lmin;
+        result[i + nr] = lmax;
     }
 
     UNPROTECT(P);

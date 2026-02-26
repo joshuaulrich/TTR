@@ -129,7 +129,7 @@ function(x, n=10, cumulative=FALSE) {
     is.na(result) <- seq_len(n-1+NAs)
   } else {
     # Call C routine
-    result <- .Call(C_runrange, x, n)[, 1, drop=FALSE]
+    result <- .Call(C_runrange, x, n)[, 1]
   }
 
   # Convert back to original class
@@ -160,10 +160,6 @@ function(x, n=10, cumulative=FALSE) {
     }
     beg <- 1 + NAs
 
-    if(NCOL(x) > 1) {
-      stop("ncol(x) > 1. runMax only supports univariate 'x'")
-    }
-
     # Initialize result vector
     result <- double(NROW(x))
 
@@ -173,7 +169,7 @@ function(x, n=10, cumulative=FALSE) {
     is.na(result) <- seq_len(n-1+NAs)
   } else {
     # Call C routine
-    result <- .Call(C_runrange, x, n)[, 2, drop=FALSE]
+    result <- .Call(C_runrange, x, n)[, 2]
   }
 
   # Convert back to original class

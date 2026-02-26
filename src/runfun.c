@@ -68,116 +68,64 @@ SEXP runsum(SEXP _x, SEXP _n)
   return _result;
 }
 
-SEXP runmin(SEXP _x, SEXP _n)
+SEXP runrange(SEXP _x, SEXP _n)
 {
-  int i, j, P = 0;
+    int i, j, P = 0;
 
-  /* ensure that 'x' is double */
-  if (TYPEOF(_x) != REALSXP) {
-    _x = PROTECT(coerceVector(_x, REALSXP)); P++;
-  }
-  double *x = REAL(_x);
-  int n = asInteger(_n);
-
-  /* Input object length */
-  int nr = nrows(_x);
-
-  /* Initialize result R object */
-  SEXP _result = PROTECT(allocVector(REALSXP, nr)); P++;
-  double *result = REAL(_result);
-
-  /* check for non-leading NAs and get first non-NA location */
-  SEXP _first = PROTECT(xts_na_check(_x, ScalarLogical(TRUE))); P++;
-  int first = INTEGER(_first)[0];
-  if (n + first > nr) {
-    error("not enough non-NA values");
-  }
-
-  /* Set leading NAs in output */
-  for (i = 0; i < first; i++) {
-    result[i] = NA_REAL;
-  }
-
-  /* start running min */
-  double lmin = x[first];
-  for (i = first; i < first + n; i++) {
-    result[i] = NA_REAL;
-    if (x[i] < lmin) {
-      lmin = x[i];
+    /* ensure x is double */
+    if (TYPEOF(_x) != REALSXP) {
+        _x = PROTECT(coerceVector(_x, REALSXP)); P++;
     }
-  }
-  result[first + n - 1] = lmin;
+    double *x = REAL(_x);
+    int n = asInteger(_n);
 
-  /* Loop over non-NA input values */
-  for (i = first + n; i < nr; i++) {
-    lmin = x[i];
-    for (j = 1; j < n; j++) {
-      if (x[i-j] < lmin) {
-        lmin = x[i-j];
-      }
+    /* input length */
+    int nr = nrows(_x);
+
+    /* allocate result: 2 columns (min, max) */
+    SEXP _result = PROTECT(allocMatrix(REALSXP, nr, 2)); P++;
+    double *res = REAL(_result);
+
+    /* check for non-leading NAs */
+    SEXP _first = PROTECT(xts_na_check(_x, ScalarLogical(TRUE))); P++;
+    int first = INTEGER(_first)[0];
+    if (n + first > nr) {
+        error("not enough non-NA values");
     }
-    result[i] = lmin;
-  }
 
-  /* UNPROTECT R objects and return result */
-  UNPROTECT(P);
-  return _result;
-}
-
-SEXP runmax(SEXP _x, SEXP _n)
-{
-  int i, j, P = 0;
-
-  /* ensure that 'x' is double */
-  if (TYPEOF(_x) != REALSXP) {
-    _x = PROTECT(coerceVector(_x, REALSXP)); P++;
-  }
-  double *x = REAL(_x);
-  int n = asInteger(_n);
-
-  /* Input object length */
-  int nr = nrows(_x);
-
-  /* Initialize result R object */
-  SEXP _result = PROTECT(allocVector(REALSXP, nr)); P++;
-  double *result = REAL(_result);
-
-  /* check for non-leading NAs and get first non-NA location */
-  SEXP _first = PROTECT(xts_na_check(_x, ScalarLogical(TRUE))); P++;
-  int first = INTEGER(_first)[0];
-  if (n + first > nr) {
-    error("not enough non-NA values");
-  }
-
-  /* Set leading NAs in output */
-  for (i = 0; i < first; i++) {
-    result[i] = NA_REAL;
-  }
-
-  /* start running max */
-  double lmax = x[first];
-  for (i = first; i < first + n; i++) {
-    result[i] = NA_REAL;
-    if (x[i] > lmax) {
-      lmax = x[i];
+    /* leading NAs */
+    for (i = 0; i < first; i++) {
+        res[i] = NA_REAL;               /* min */
+        res[i + nr] = NA_REAL;          /* max */
     }
-  }
-  result[first + n - 1] = lmax;
 
-  /* Loop over non-NA input values */
-  for (i = first + n; i < nr; i++) {
-    lmax = x[i];
-    for (j = 1; j < n; j++) {
-      if (x[i-j] > lmax) {
-        lmax = x[i-j];
-      }
+    /* initialize first window */
+    double lmin = x[first];
+    double lmax = x[first];
+    for (i = first; i < first + n; i++) {
+        if (x[i] < lmin) lmin = x[i];
+        if (x[i] > lmax) lmax = x[i];
+        res[i] = NA_REAL;
+        res[i + nr] = NA_REAL;
     }
-    result[i] = lmax;
-  }
+    res[first + n - 1] = lmin;
+    res[first + n - 1 + nr] = lmax;
 
-  /* UNPROTECT R objects and return result */
-  UNPROTECT(P);
-  return _result;
+    /* main loop */
+    for (i = first + n; i < nr; i++) {
+        lmin = x[i];
+        lmax = x[i];
+        for (j = 1; j < n; j++) {
+            double v = x[i - j];
+            if (v < lmin) lmin = v;
+            if (v > lmax) lmax = v;
+        }
+        res[i] = lmin;
+        res[i + nr] = lmax;
+    }
+
+    UNPROTECT(P);
+    return _result;
 }
 
 typedef double (*tiebreaker)(const double, const double);

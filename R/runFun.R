@@ -103,6 +103,9 @@ function(x, n=10, cumulative=FALSE) {
 function(x, n=10, cumulative=FALSE) {
 
   x <- try.xts(x, error=as.matrix)
+  if(NCOL(x) > 1) {
+    stop("ncol(x) > 1. runMin only supports univariate 'x'")
+  }
   result <- runRange(x, n=n, cumulative=cumulative)[, 1]
   reclass(result, x)
 }
@@ -114,6 +117,9 @@ function(x, n=10, cumulative=FALSE) {
 function(x, n=10, cumulative=FALSE) {
 
   x <- try.xts(x, error=as.matrix)
+  if(NCOL(x) > 1) {
+    stop("ncol(x) > 1. runMax only supports univariate 'x'")
+  }
   result <- runRange(x, n=n, cumulative=cumulative)[, 2]
   reclass(result, x)
 }
@@ -128,7 +134,7 @@ function(x, n=10, cumulative=FALSE) {
     stop(sprintf("n = %d is outside valid range: [1, %d]", n, NROW(x)))
 
   if(NCOL(x) > 1) {
-    stop("ncol(x) > 1. runMax only supports univariate 'x'")
+    stop("ncol(x) > 1. runRange only supports univariate 'x'")
   }
 
   if(cumulative) {
@@ -139,10 +145,6 @@ function(x, n=10, cumulative=FALSE) {
       if( NAs + n > NROW(x) ) stop("not enough non-NA values")
     }
     beg <- 1 + NAs
-
-    if(NCOL(x) > 1) {
-      stop("ncol(x) > 1. runRange only supports univariate 'x'")
-    }
 
     # Initialize result matrix
     result <- matrix(NA_real_, nrow = NROW(x), ncol = 2)

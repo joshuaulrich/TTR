@@ -5,6 +5,7 @@
 \alias{runFun}
 \alias{runMin}
 \alias{runMax}
+\alias{runRange}
 \alias{runMean}
 \alias{runMedian}
 \alias{runCov}
@@ -20,6 +21,8 @@ runSum(x, n = 10, cumulative = FALSE)
 runMin(x, n = 10, cumulative = FALSE)
 
 runMax(x, n = 10, cumulative = FALSE)
+
+runRange(x, n = 10, cumulative = FALSE)
 
 runMean(x, n = 10, cumulative = FALSE)
 
@@ -79,6 +82,7 @@ A object of the same class as \code{x} and \code{y} or a vector (if
   \item{runSum}{returns sums over a n-period moving window.}
   \item{runMin}{returns minimums over a n-period moving window.}
   \item{runMax}{returns maximums over a n-period moving window.}
+  \item{runRange}{returns a maxtrix with min and max values for x over a n-period moving window.}
   \item{runMean}{returns means over a n-period moving window.}
   \item{runMedian}{returns medians over a n-period moving window.}
   \item{runCov}{returns covariances over a n-period moving window.}

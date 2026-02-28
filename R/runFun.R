@@ -103,36 +103,7 @@ function(x, n=10, cumulative=FALSE) {
 function(x, n=10, cumulative=FALSE) {
 
   x <- try.xts(x, error=as.matrix)
-
-  if( n < 1 || n > NROW(x) )
-    stop(sprintf("n = %d is outside valid range: [1, %d]", n, NROW(x)))
-
-  if(NCOL(x) > 1) {
-    stop("ncol(x) > 1. runMin only supports univariate 'x'")
-  }
-
-  if(cumulative) {
-    # Count NAs, ensure they're only at beginning of data, then remove.
-    NAs <- sum( is.na(x) )
-    if( NAs > 0 ) {
-      if( any( is.na(x[-(1:NAs)]) ) ) stop("Series contains non-leading NAs")
-      if( NAs + n > NROW(x) ) stop("not enough non-NA values")
-    }
-    beg <- 1 + NAs
-
-    # Initialize result vector
-    result <- double(NROW(x))
-
-    result[beg:NROW(x)] <- cummin(x[beg:NROW(x)])
-
-    # Replace 1:(n-1) with NAs
-    is.na(result) <- seq_len(n-1+NAs)
-  } else {
-    # Call C routine
-    result <- .Call(C_runmin, x, n)
-  }
-
-  # Convert back to original class
+  result <- runRange(x, n=n, cumulative=cumulative)[, 1]
   reclass(result, x)
 }
 
@@ -140,6 +111,15 @@ function(x, n=10, cumulative=FALSE) {
 
 #' @rdname runFun
 "runMax" <-
+function(x, n=10, cumulative=FALSE) {
+
+  x <- try.xts(x, error=as.matrix)
+  result <- runRange(x, n=n, cumulative=cumulative)[, 2]
+  reclass(result, x)
+}
+
+#' @rdname runFun
+"runRange" <-
 function(x, n=10, cumulative=FALSE) {
 
   x <- try.xts(x, error=as.matrix)
@@ -161,23 +141,24 @@ function(x, n=10, cumulative=FALSE) {
     beg <- 1 + NAs
 
     if(NCOL(x) > 1) {
-      stop("ncol(x) > 1. runMax only supports univariate 'x'")
+      stop("ncol(x) > 1. runRange only supports univariate 'x'")
     }
 
-    # Initialize result vector
-    result <- double(NROW(x))
-
-    result[beg:NROW(x)] <- cummax(x[beg:NROW(x)])
-
+    # Initialize result matrix
+    result <- matrix(NA_real_, nrow = NROW(x), ncol = 2)
+    sub <- beg:NROW(x)
+    result[sub,] <- cbind(cummin(x[sub]), cummax(x[sub]))
     # Replace 1:(n-1) with NAs and prepend NAs from original data
-    is.na(result) <- seq_len(n-1+NAs)
+    is.na(result[seq_len(n-1+NAs), ]) <- TRUE
   } else {
     # Call C routine
-    result <- .Call(C_runmax, x, n)
+    result <- .Call(C_runrange, x, n)
   }
 
   # Convert back to original class
-  reclass(result, x)
+  r <- reclass(result, x)
+  colnames(r) <- c("min", "max")
+  return(r)
 }
 
 #-------------------------------------------------------------------------#
